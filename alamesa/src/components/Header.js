@@ -46,20 +46,23 @@ const Anchor = styled.a`
   text-decoration: none;
   color: black;
   font-size: 18px;
+  font-weight: 700;
 `;
 
 const AnchorSingIn = styled(Anchor)`
-  background-color: #7741ff;
+  background-color: var(--color-primary);
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
+  font-weight: 400;
 `;
 
 const AnchorSingUp = styled(Anchor)`
-  background-color: #0f31dd;
+  background-color: var(--color-secundary);
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
+  font-weight: 400;
 `;
 
 function Header() {
