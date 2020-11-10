@@ -3,21 +3,21 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Switch,
-	Link,
 } 
 from 'react-router-dom'
-import Layout from './pages/Layout'
+import Header from './components/Header'
 import Home from './pages/Home'
+import FormSingUp from './pages/FormSingUp'
 
 function App () {
 		return (
-			<Layout>
+			<Router>
+			<Header></Header>
 				<Switch>
-					<Router>
-						<Route exact path='/' component={Home}/>
-					</Router>
+					<Route exact path='/' component={Home}/>
+					<Route exact path='/SingUp' component={FormSingUp}/>
 				</Switch>
-			</Layout>	
+			</Router>
 		)
 }
 

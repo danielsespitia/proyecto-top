@@ -42,7 +42,7 @@ const Navigation = styled.nav`
   padding: 5px 0;
 `;
 
-const Anchor = styled.a`
+const Anchor = styled(Link)`
   text-decoration: none;
   color: black;
   font-size: 18px;
@@ -50,7 +50,7 @@ const Anchor = styled.a`
 `;
 
 const AnchorSingIn = styled(Anchor)`
-  background-color: var(--color-primary);
+  background-color: ${props => props.theme.primaryColor};
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
@@ -58,7 +58,7 @@ const AnchorSingIn = styled(Anchor)`
 `;
 
 const AnchorSingUp = styled(Anchor)`
-  background-color: var(--color-secundary);
+  background-color: ${props => props.theme.secundaryColor};
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
@@ -79,13 +79,13 @@ function Header() {
       <Navigation className="navigation">
         <NavigationMenu>
           <NavigationMenuItem className="navigation__menu-item restaurant">
-            <Anchor href="./">Restaurantes</Anchor>
+            <Anchor to="./">Restaurantes</Anchor>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn href="./">Iniciar Sesion</AnchorSingIn>
+            <AnchorSingIn to="./">Iniciar Sesion</AnchorSingIn>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp href="./">Crear Cuenta</AnchorSingUp>
+            <AnchorSingUp to="./">Crear Cuenta</AnchorSingUp>
           </NavigationMenuItem>
         </NavigationMenu>
       </Navigation>
