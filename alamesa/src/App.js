@@ -1,18 +1,24 @@
-import React from 'react'
 import './App.css';
-import Header from './components/Header'
+import { 
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	Link,
+} 
+from 'react-router-dom'
+import Layout from './pages/Layout'
+import Home from './pages/Home'
 
-class App extends React.Component {
-
-	state:{
-
-	}
-
-	render(){
+function App () {
 		return (
-			<Header/>
+			<Layout>
+				<Switch>
+					<Router>
+						<Route exact path='/' component={Home}/>
+					</Router>
+				</Switch>
+			</Layout>	
 		)
-	}
 }
 
 export default App;
