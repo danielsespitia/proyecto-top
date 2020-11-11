@@ -28,7 +28,7 @@ function Restaurant ( { name }){
 						alt = 'Restaurant Logo'
 					/>
 					<RestaurantName>
-						<Restaurants name = { name }/>
+						<h1>{ name }</h1>
 						<button 
 							type = 'button'
 						>Reservar Ahora

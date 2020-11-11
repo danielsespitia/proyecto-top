@@ -2,7 +2,7 @@ import {
 	BrowserRouter as Router,
 	Route,
 	Switch,
-	Link,
+	//Link,
 } 
 from 'react-router-dom'
 import './App.css';
