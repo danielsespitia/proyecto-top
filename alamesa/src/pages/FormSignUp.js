@@ -36,6 +36,12 @@ const ContainerButton = styled.span `
 
 const Button = styled(ButtonPrimary)` 
 `
+const Error = styled.span `
+  font-size: 12px;
+  color: red;
+  font-style: italic;
+`
+
 
 class FormSignUp extends React.Component {
   state = {
@@ -136,7 +142,7 @@ class FormSignUp extends React.Component {
             name='password'
             value={password}
             onChange={this.handleChange}
-            placeholder='******'
+            placeholder='***********'
             required
           />
           <label
@@ -152,10 +158,10 @@ class FormSignUp extends React.Component {
             name='confirmPassword'
             value={confirmPassword}
             onChange={this.handleChange}
-            placeholder='******'
+            placeholder='***********'
             required
           />
-          <span>{this.state.errors.password}</span>
+          <Error>{this.state.errors.password}</Error>
           
           <label
             className='Form__userType-label'
