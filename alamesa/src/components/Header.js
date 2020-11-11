@@ -85,7 +85,7 @@ function Header() {
             <AnchorSingIn to="./">Iniciar Sesion</AnchorSingIn>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp to="./SingUp">Crear Cuenta</AnchorSingUp>
+            <AnchorSingUp to="./SignUp">Crear Cuenta</AnchorSingUp>
           </NavigationMenuItem>
         </NavigationMenu>
       </Navigation>

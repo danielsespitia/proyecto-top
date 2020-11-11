@@ -15,7 +15,7 @@ const Input = styled.input `
   border-radius: 4px;
   border: 1px solid #CED4DA;
   font-size: 16px;
-  color: #6c757d;
+  color: rgba(0, 0, 0, 0.5);
 `
 const Select = styled.select ` 
   padding: 10.5px;
@@ -37,7 +37,7 @@ const ContainerButton = styled.span `
 const Button = styled(ButtonPrimary)` 
 `
 
-class FormSingUp extends React.Component {
+class FormSignUp extends React.Component {
   state = {
     id: 1,
     name: '',
@@ -59,9 +59,13 @@ class FormSingUp extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
     if(this.validate()) {
+      console.log(this.state);
+
       this.setState({
         name: '',
+        password: '',
         confirm_password: '',
         email:'',
         userType: '',
@@ -83,7 +87,6 @@ class FormSingUp extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     const { name, email, password, confirm_password, userType, terms} = this.state
     return (
       <Main>
@@ -191,11 +194,11 @@ class FormSingUp extends React.Component {
           />
           </ContainerTerms>
           <ContainerButton className='Form__subtmit-span'>
-          <Button
-            className='Form__submit-input'
-            type='submit'
-            value='Crear una cuenta'
-          />
+            <Button
+              className='Form__submit-input'
+              type='submit'
+              value='Crear una cuenta'
+            />
           </ContainerButton>
         </Form>
       </Main>
@@ -203,4 +206,4 @@ class FormSingUp extends React.Component {
   }
 }
 
-export default FormSingUp
+export default FormSignUp

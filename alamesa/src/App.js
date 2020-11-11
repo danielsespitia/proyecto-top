@@ -7,7 +7,7 @@ import {
 from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
-import FormSingUp from './pages/FormSingUp'
+import FormSignUp from './pages/FormSignUp'
 
 function App () {
 		return (
@@ -15,7 +15,7 @@ function App () {
 			<Header></Header>
 				<Switch>
 					<Route exact path='/' component={Home}/>
-					<Route exact path='/SingUp' component={FormSingUp}/>
+					<Route exact path='/SignUp' component={FormSignUp}/>
 				</Switch>
 			</Router>
 		)
