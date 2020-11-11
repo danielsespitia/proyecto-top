@@ -1,4 +1,3 @@
-import './App.css';
 import { 
 	BrowserRouter as Router,
 	Route,
@@ -6,18 +5,22 @@ import {
 	Link,
 } 
 from 'react-router-dom'
-import Layout from './pages/Layout'
+import './App.css';
+//pages
 import Home from './pages/Home'
+import Restaurants from './components/Restaurants'
+//componenets
+import Header from './components/Header'
 
 function App () {
 		return (
-			<Layout>
+			<Router>
+				<Header/>
 				<Switch>
-					<Router>
 						<Route exact path='/' component={Home}/>
-					</Router>
+						<Route exact path = '/restaurants' component = { Restaurants }/>
 				</Switch>
-			</Layout>	
+			</Router>	
 		)
 }
 
