@@ -5,7 +5,7 @@ body {
   font-family: "Montserrat Alternates", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-gray-background);
+  background-color: #f5f7f9;
 }
 
 code {
