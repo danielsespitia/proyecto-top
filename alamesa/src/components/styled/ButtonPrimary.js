@@ -19,6 +19,6 @@ const ButtonPrimary = styled.input`
       props => props.theme.primaryColor
     };
   }
-`
+`;
 
 export default ButtonPrimary

@@ -10,15 +10,15 @@ import Home from './pages/Home'
 import FormSignUp from './pages/FormSignUp'
 
 function App () {
-		return (
-			<Router>
-			<Header></Header>
-				<Switch>
-					<Route exact path='/' component={Home}/>
-					<Route exact path='/SignUp' component={FormSignUp}/>
-				</Switch>
-			</Router>
-		)
+	return (
+		<Router>
+		<Header></Header>
+			<Switch>
+				<Route exact path='/' component={Home}/>
+				<Route exact path='/SignUp' component={FormSignUp}/>
+			</Switch>
+		</Router>
+	)
 }
 
 export default App;

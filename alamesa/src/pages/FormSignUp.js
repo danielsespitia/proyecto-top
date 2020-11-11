@@ -4,11 +4,11 @@ import ContainerContent from '../components/styled/ContainerContent'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 
 const Main = styled(ContainerContent)` 
-`
+`;
 const Form = styled.form ` 
   display: grid;
   grid-row-gap: 12px;
-`
+`;
 
 const Input = styled.input ` 
   padding: 10.5px;
@@ -16,32 +16,31 @@ const Input = styled.input `
   border: 1px solid #CED4DA;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
-`
+`;
 const Select = styled.select ` 
   padding: 10.5px;
   border-radius: 4px;
   border: 1px solid #CED4DA;
   font-size: 16px;
   color: #6c757d;
-`
+`;
 const ContainerTerms = styled.span ` 
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   font-size: 14px;
-`
+`;
 const ContainerButton = styled.span `
   text-align: center;
-`
+`;
 
 const Button = styled(ButtonPrimary)` 
-`
+`;
 const Error = styled.span `
   font-size: 12px;
   color: red;
   font-style: italic;
-`
-
+`;
 
 class FormSignUp extends React.Component {
   state = {
@@ -61,7 +60,7 @@ class FormSignUp extends React.Component {
     this.setState({
       [name]: type === 'checkbox' ? checked : value
     })
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -78,7 +77,7 @@ class FormSignUp extends React.Component {
         terms: false,
       })
     }
-  }
+  };
 
   validate() {
     const { password, confirmPassword, errors} = this.state;
@@ -89,7 +88,7 @@ class FormSignUp extends React.Component {
     }
 
     this.setState( {errors} );
-  }
+  };
 
   render () {
     const { name, email, password, confirmPassword, userType, terms} = this.state

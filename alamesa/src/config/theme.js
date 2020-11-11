@@ -6,7 +6,6 @@ const theme = {
   grayColorOverlay: '#f2f2f2',
   grayColorMore: '#e0e0e0',
   blueColorSan: 'rgba(86, 204, 242, 0.3)',
-  
 }
 
 export default theme
