@@ -4,16 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from 'styled-components'
-
-const theme = {
-  primaryColor: '#7741ff',
-  secundaryColor: '#0f31dd',
-  tertiaryColor: '#ecc30d',
-  primaryColorBlur: 'rgba(119, 65, 255, 0.5)',
-  grayColorOverlay: '#f2f2f2',
-  grayColorMore: '#e0e0e0',
-  blueColorSan: 'rgba(86, 204, 242, 0.3)',
-}
+import theme from './config/theme'
 
 ReactDOM.render(
   <React.StrictMode>
