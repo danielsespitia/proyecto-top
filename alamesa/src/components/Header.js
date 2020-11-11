@@ -79,13 +79,13 @@ function Header() {
       <Navigation className="navigation">
         <NavigationMenu>
           <NavigationMenuItem className="navigation__menu-item restaurant">
-            <Anchor to="./">Restaurantes</Anchor>
+            <Anchor to="/">Restaurantes</Anchor>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn to="./">Iniciar Sesion</AnchorSingIn>
+            <AnchorSingIn to="/">Iniciar Sesion</AnchorSingIn>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp to="./SignUp">Crear Cuenta</AnchorSingUp>
+            <AnchorSingUp to="/sign-up">Crear Cuenta</AnchorSingUp>
           </NavigationMenuItem>
         </NavigationMenu>
       </Navigation>

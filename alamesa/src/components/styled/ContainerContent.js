@@ -4,7 +4,7 @@ const ContainerContent = styled.div `
   width: 274px;
   margin: 50px auto;
   background-color: ${
-  props => props.theme.grayColorOverlay
+    props => props.theme.grayColorOverlay
   };
   padding: 10px;
   border-radius: 10px;

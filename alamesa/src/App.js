@@ -14,8 +14,8 @@ function App () {
 		<Router>
 		<Header></Header>
 			<Switch>
-				<Route exact path='/' component={Home}/>
-				<Route exact path='/SignUp' component={FormSignUp}/>
+				<Route exact path="/" component={Home}/>
+				<Route exact path="/sign-up" component={FormSignUp}/>
 			</Switch>
 		</Router>
 	)

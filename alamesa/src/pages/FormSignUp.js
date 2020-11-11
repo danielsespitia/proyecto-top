@@ -64,10 +64,8 @@ class FormSignUp extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
     if(this.validate()) {
       
-
       this.setState({
         name: '',
         password: '',
@@ -97,111 +95,112 @@ class FormSignUp extends React.Component {
         <h3>Bienvenido a #Alamesa</h3>
         <Form onSubmit={this.handleSubmit}>
           <label
-            className='Form__name-label'
-            htmlFor='name'
+            className="Form__name-label"
+            htmlFor="name"
           >
             Nombre
           </label>
           <Input
-            className='Form__name-input'
-            id='name'
-            type='text'
-            name='name'
+            className="Form__name-input"
+            id="name"
+            type="text"
+            name="name"
             value={name}
             onChange={this.handleChange}
-            placeholder='Nombre'
+            placeholder="Nombre"
             required
           />
           <label
-            className='Form__email-label'
-            htmlFor='email'
+            className="Form__email-label"
+            htmlFor="email"
           >
             Correo electrónico
           </label>
           <Input
-            className='Form__email-input'
-            id='email'
-            type='email'
-            name='email'
+            className="Form__email-input"
+            id="email"
+            type="email"
+            name="email"
             value={email}
             onChange={this.handleChange}
-            placeholder='Correo electronico'
+            placeholder="Correo electronico"
             required
           />
           <label
-            className='Form__password-label'
-            htmlFor='password'
+            className="Form__password-label"
+            htmlFor="password"
           >
             Contraseña
           </label>
           <Input
-            className='Form__password-input'
-            id='password'
-            type='password'
-            name='password'
+            className="Form__password-input"
+            id="password"
+            type="password"
+            name="password"
             value={password}
             onChange={this.handleChange}
-            placeholder='***********'
+            placeholder="***********"
             required
           />
           <label
-            className='Form__password-label'
-            htmlFor='password'
+            className="Form__password-label"
+            htmlFor="password"
           >
             Confirmar contraseña
           </label>
           <Input
-            className='Form__password-input'
-            id='confirmPassword'
-            type='password'
-            name='confirmPassword'
+            className="Form__password-input"
+            id="confirmPassword"
+            type="password"
+            name="confirmPassword"
             value={confirmPassword}
             onChange={this.handleChange}
-            placeholder='***********'
+            placeholder="***********"
             required
           />
           <Error>{this.state.errors.password}</Error>
           
           <label
-            className='Form__userType-label'
-          >Tipo de Usuario:
+            className="Form__userType-label"
+          >
+            Tipo de Usuario:
           </label>
           <Select
-            id='userType'
-            name='userType'
+            id="userType"
+            name="userType"
             value={userType}
             onChange={this.handleChange}
             required
           >
-            <option value='cliente'>
+            <option value="cliente">
               Cliente
             </option>
-            <option value='restaurante'>
+            <option value="restaurante">
               Restaurante
             </option>
           </Select>
           <ContainerTerms>
           <label
-            className='Form__terms-label'
-            htmlFor='terms'
+            className="Form__terms-label"
+            htmlFor="terms"
           >
             Acepto los Términos y Condiciones
           </label>
           <input
-            className='Form__terms-input'
-            id='terms'
-            type='checkbox'
-            name='terms'
+            className="Form__terms-input"
+            id="terms"
+            type="checkbox"
+            name="terms"
             value={terms}
             onChange={this.handleChange}
             required
           />
           </ContainerTerms>
-          <ContainerButton className='Form__subtmit-span'>
+          <ContainerButton className="Form__subtmit-span">
             <Button
-              className='Form__submit-input'
-              type='submit'
-              value='Crear una cuenta'
+              className="Form__submit-input"
+              type="submit"
+              value="Crear una cuenta"
             />
           </ContainerButton>
         </Form>
