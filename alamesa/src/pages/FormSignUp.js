@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import ContainerContent from '../components/styled/ContainerContent'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 
-const Main = styled(ContainerContent)` 
-`;
 const Form = styled.form ` 
   display: grid;
   grid-row-gap: 12px;
@@ -34,8 +32,6 @@ const ContainerButton = styled.span `
   text-align: center;
 `;
 
-const Button = styled(ButtonPrimary)` 
-`;
 const Error = styled.span `
   font-size: 12px;
   color: red;
@@ -91,7 +87,7 @@ class FormSignUp extends React.Component {
   render () {
     const { name, email, password, confirmPassword, userType, terms} = this.state
     return (
-      <Main>
+      <ContainerContent>
         <h3>Bienvenido a #Alamesa</h3>
         <Form onSubmit={this.handleSubmit}>
           <label
@@ -197,14 +193,14 @@ class FormSignUp extends React.Component {
           />
           </ContainerTerms>
           <ContainerButton className="Form__subtmit-span">
-            <Button
+            <ButtonPrimary
               className="Form__submit-input"
               type="submit"
               value="Crear una cuenta"
             />
           </ContainerButton>
         </Form>
-      </Main>
+      </ContainerContent>
     )
   }
 }
