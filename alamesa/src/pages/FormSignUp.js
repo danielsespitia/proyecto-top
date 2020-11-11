@@ -44,7 +44,7 @@ class FormSignUp extends React.Component {
     lastName: '',
     email:'',
     password: '',
-    confirm_password: '',
+    confirmPassword: '',
     userType: '',
     terms: false,
     errors: {},
@@ -59,14 +59,14 @@ class FormSignUp extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(this.state);
     if(this.validate()) {
-      console.log(this.state);
+      
 
       this.setState({
         name: '',
         password: '',
-        confirm_password: '',
+        confirmPassword: '',
         email:'',
         userType: '',
         terms: false,
@@ -75,19 +75,18 @@ class FormSignUp extends React.Component {
   }
 
   validate() {
-    let errors = {};
-    let input = this.state.name;
+    const { password, confirmPassword, errors} = this.state;
+    const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
-    if( typeof input['password'] !== undefined && typeof input['confirm_password'] !== undefined) {
-
-      if( input['password'] !== input['confirm_password']) {
-        errors['password'] = 'La contraseña no coincide';
-      }
+    if( !arePasswordEqual ) {
+      errors['password'] = 'La contraseña no coincide';
     }
+
+    this.setState( {errors} );
   }
 
   render () {
-    const { name, email, password, confirm_password, userType, terms} = this.state
+    const { name, email, password, confirmPassword, userType, terms} = this.state
     return (
       <Main>
         <h3>Bienvenido a #Alamesa</h3>
@@ -148,15 +147,15 @@ class FormSignUp extends React.Component {
           </label>
           <Input
             className='Form__password-input'
-            id='confirm_password'
+            id='confirmPassword'
             type='password'
-            name='confirm_password'
-            value={confirm_password}
+            name='confirmPassword'
+            value={confirmPassword}
             onChange={this.handleChange}
             placeholder='******'
             required
           />
-          <span>{this.state.errors.confirm_password}</span>
+          <span>{this.state.errors.password}</span>
           
           <label
             className='Form__userType-label'
