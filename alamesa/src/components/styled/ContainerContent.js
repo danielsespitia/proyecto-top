@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const ContainerContent = styled.div ` 
   width: 274px;
-  margin: 170px auto;
+  margin: 50px auto;
   background-color: ${
   props => props.theme.grayColorOverlay
   };
