@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import RestaurantLogo from '../image/RestaurantLogo.png'
-//import { Restaurants } from '../components/Restaurants'
 
 const Article = styled.article`
 	margin: 15px;
@@ -9,7 +8,6 @@ const Article = styled.article`
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-evenly;
-	
 `
 const Img = styled.img`
 	float: left;
@@ -19,7 +17,7 @@ const Img = styled.img`
 	padding: 0px 5px;
 	margin: 6px;
 `
-const RestaurantName = styled.section`
+const RestaurantName = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -35,18 +33,18 @@ const Button = styled.button`
 
 function Restaurant ( { name } ){
 	return (
-			<Article>
-				<Img 
-					src = {RestaurantLogo}
-					alt = 'Restaurant Logo'
-				/>
-				<RestaurantName>
-					<h1>{ name }</h1>
-					<Button>
-						Reservar Ahora
-					</Button>
-				</RestaurantName>
-			</Article>
+		<Article>
+			<Img 
+				src = {RestaurantLogo}
+				alt = 'Restaurant Logo'
+			/>
+			<RestaurantName>
+				<h1>{ name }</h1>
+				<Button>
+					Reservar Ahora
+				</Button>
+			</RestaurantName>
+		</Article>
 	)
 }
 export default Restaurant
