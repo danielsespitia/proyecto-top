@@ -1,24 +1,24 @@
 import './App.css';
 import { 
-	BrowserRouter as Router,
-	Route,
-	Switch,
-	Link,
+  BrowserRouter as Router,
+  Route,
+  Switch,
 } 
 from 'react-router-dom'
-import Layout from './pages/Layout'
+import Header from './components/Header'
 import Home from './pages/Home'
+import FormSignUp from './pages/FormSignUp'
 
 function App () {
-		return (
-			<Layout>
-				<Switch>
-					<Router>
-						<Route exact path='/' component={Home}/>
-					</Router>
-				</Switch>
-			</Layout>	
-		)
+  return (
+    <Router>
+    <Header></Header>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/sign-up" component={FormSignUp}/>
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
