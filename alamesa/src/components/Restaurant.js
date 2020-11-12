@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import RestaurantLogo from '../image/RestaurantLogo.png'
 
 const Article = styled.article`
-	margin: 15px;
+	margin: 5px;
 	border: 2px solid darkgray;
 	display: flex;
 	flex-direction: row;
@@ -22,7 +22,7 @@ const RestaurantName = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 20px 5px;
-	margin: 0px 15px;
+	margin: 0px 10px;
 `
 const Button = styled.button`
 	type: button;
@@ -30,16 +30,15 @@ const Button = styled.button`
 	color: #F8F8F8;
 	border-radius: 10px;
 `
-
-function Restaurant ( { name } ){
+function Restaurant ( { name } ) {
 	return (
 		<Article>
 			<Img 
-				src = {RestaurantLogo}
-				alt = 'Restaurant Logo'
+				src={RestaurantLogo}
+				alt='Restaurant Logo'
 			/>
 			<RestaurantName>
-				<h1>{ name }</h1>
+				<h1>{name}</h1>
 				<Button>
 					Reservar Ahora
 				</Button>
