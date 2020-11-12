@@ -8,6 +8,7 @@ from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
 import FormSignUp from './pages/FormSignUp'
+import FormSignIn from './pages/FormSignIn'
 
 function App () {
   return (
@@ -16,6 +17,7 @@ function App () {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/sign-up" component={FormSignUp}/>
+        <Route exact path="/sign-in" component={FormSignIn}/>
       </Switch>
     </Router>
   )
