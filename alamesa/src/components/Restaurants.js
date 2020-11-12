@@ -1,14 +1,29 @@
 import  Restaurant  from '../pages/Restaurant'
+import styled from 'styled-components'
+
+
+const ListRestaurantSection = styled.section`
+	display: grid;
+	grid-template-columns: repeat(3,1fr);
+	grid-gap: 10px;
+	margin: 40px;
+`
 
 const data = [
 	{
-		name: 'Pollito Bogota D.C',
+		name: 'Mister Wok',
 	},
 	{
-		name: 'Pollito Rico',
+		name: 'Tacos & Bar',
 	},
 	{
-		name: 'Pollito y algo mas',
+		name: 'Sandwich Cubano',
+	},
+	{
+		name: 'Buffalo Wings',
+	},
+	{
+		name: 'Archies',
 	},
 ]
 
@@ -16,7 +31,7 @@ const data = [
 export function Restaurants () {
 		//console.log(name)
 		return (
-			<div>
+			<ListRestaurantSection>
 					{data.map(({ name }) => {
 						return (
 						<Restaurant 
@@ -24,7 +39,7 @@ export function Restaurants () {
 						/>
 						)
 					})}
-			</div>
+			</ListRestaurantSection>
 		)
 	}
 export default Restaurants

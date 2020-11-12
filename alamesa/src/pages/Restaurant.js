@@ -1,41 +1,52 @@
 import styled from 'styled-components'
-import RestaurantLogo from '../image/RestaurantImage.png'
-import { Restaurants } from '../components/Restaurants'
+import RestaurantLogo from '../image/RestaurantLogo.png'
+//import { Restaurants } from '../components/Restaurants'
 
+const Article = styled.article`
+	margin: 15px;
+	border: 2px solid darkgray;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	
+`
 const Img = styled.img`
-	width: 170px
+	float: left;
+	width:  120px;
+  height: 120px;
+  object-fit: cover;
+	padding: 0px 5px;
+	margin: 6px;
+`
+const RestaurantName = styled.section`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 5px;
+	margin: 0px 15px;
 `
 const Button = styled.button`
-	background-color: #2F80ED
-	color: #F8F8F8
-	border-radius: 10px
-`
-const RestaurantName = styled.div`
-	padding: 17px 30px
-	margin: 0px 80px
+	type: button;
+	background-color: #2F80ED;
+	color: #F8F8F8;
+	border-radius: 10px;
 `
 
-const RestaurantStyle = styled.div`
-	display: flex
-`
-
-function Restaurant ( { name }){
-		return (
-			<div>
-				<RestaurantStyle>
-					<Img 
-						src = {RestaurantLogo}
-						alt = 'Restaurant Logo'
-					/>
-					<RestaurantName>
-						<h1>{ name }</h1>
-						<button 
-							type = 'button'
-						>Reservar Ahora
-						</button>
-					</RestaurantName>
-				</RestaurantStyle>
-			</div>
-		)
-	}
+function Restaurant ( { name } ){
+	return (
+			<Article>
+				<Img 
+					src = {RestaurantLogo}
+					alt = 'Restaurant Logo'
+				/>
+				<RestaurantName>
+					<h1>{ name }</h1>
+					<Button>
+						Reservar Ahora
+					</Button>
+				</RestaurantName>
+			</Article>
+	)
+}
 export default Restaurant
