@@ -9,7 +9,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import FormSignUp from './pages/FormSignUp'
 import RestaurantForm from './pages/RestaurantForm'
-import YourRprofile from './pages/YourRprofile'
+import RestaurantProfile from './pages/RestaurantProfile'
 
 function App () {
   return (
@@ -22,7 +22,7 @@ function App () {
         <Route
           exact path='/restaurant-profile' 
           component={RestaurantForm}/>
-        <Route path="/your-profile" component={YourRprofile}/>
+        <Route path="/your-profile" component={RestaurantProfile}/>
       </Switch>
     </Router>
   )

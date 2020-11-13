@@ -15,8 +15,7 @@ class RestaurantForm extends Component {
   handleChange = e => {
     const { name, value } = e.target;
 
-    this.setState({ [name]: value }, () => console.log('current', this.state))
-    console.log(this.state)
+    this.setState({ [name]: value } )
   };
 
   handleSubmit (e) {
