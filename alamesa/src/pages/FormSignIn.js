@@ -103,10 +103,10 @@ class FormSignIn extends React.Component {
   };
 
   validated(e) {
-    const { value, type, email, password } = e.target;
-    const { errors } = this.state;
-    const emailAreEqual = email === this.state.email
-    const passwordAreEqual = password === this.state.password;
+    const { email, password } = e.target;
+    const { errors, data } = this.state;
+    const emailAreEqual = email === data.filter(data1 => data1.email );
+    const passwordAreEqual = password === data.filter(data1 => data1.password );
 
     if(!emailAreEqual) {
       errors['email'] = 'Este correo no esta registrado';
