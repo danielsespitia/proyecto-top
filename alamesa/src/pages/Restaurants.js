@@ -22,31 +22,31 @@ const Section = styled.section`
 `;
 
 class Restaurants extends Component {
-	
-	state = {
-		restaurants: data
-	}
 
-	render () {
-		const { restaurants } = this.state
-		return (
-			<Container>
-				<ContainerList>
-					<Section>
-						{!!restaurants && restaurants.length > 0 && restaurants.map(({id, name, logo}) => {
-							return (
-								<Restaurant 
-									key={id}
-									name={name}
-									logo={logo}
-								/>
-							)
-						})}
-					</Section>
-				</ContainerList>
-			</Container>
-		)
-	}
+  state = {
+    restaurants: data
+  }
+
+  render () {
+    const { restaurants } = this.state
+    return (
+      <Container>
+        <ContainerList>
+          <Section>
+            {!!restaurants && restaurants.length > 0 && restaurants.map(({id, name, logo}) => {
+              return (
+                <Restaurant 
+                  key={id}
+                  name={name}
+                  logo={logo}
+                />
+              )
+            })}
+          </Section>
+        </ContainerList>
+      </Container>
+    )
+  }
 }
 
 export default Restaurants
