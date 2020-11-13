@@ -1,11 +1,30 @@
 import styled from "styled-components";
+import ContainerContent from '../styled/ContainerContent'
+import ButtonPrimary from '../styled/ButtonPrimary'
 
-const Label = styled.label`
+const RestLogo = styled.img`
+  width: 100px;
+  border-radius: 100%;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
-const Button = styled.button`
-  display: block;
+const Form = styled.form ` 
+  display: grid;
+  grid-row-gap: 12px;
+`;
+
+const Input = styled.input ` 
+  padding: 10.5px;
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+`;
+
+const ContainerButton = styled.span `
+  text-align: center;
 `;
 
 function RestProfileForm({
@@ -19,18 +38,23 @@ function RestProfileForm({
   handleChange,
 }) {
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="Form"
-    >
-      <span>
-        <Label
+    <ContainerContent>
+      <h3>Bienvenido a #Alamesa</h3>
+      <RestLogo 
+        src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
+        alt="logo"
+      />
+      <Form
+        onSubmit={handleSubmit}
+        className="Form"
+      >
+        <label
           className="Form__restaurantname-label"
           htmlFor="restaurantName"
         >
           Nombre del Restaurante 
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__restaurantname-input"
           id="restaurantName"
           type="text"
@@ -38,15 +62,13 @@ function RestProfileForm({
           onChange={handleChange}
           value={restaurantName}
         />
-      </span>
-      <span>
-        <Label
+        <label
           className="Form__address-label"
           htmlFor="address"
-         >
+        >
           Dirección 
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__address-input"
           id="address"
           type="text"
@@ -54,15 +76,13 @@ function RestProfileForm({
           onChange={handleChange}
           value={address}
         />
-      </span>
-      <span>
-        <Label
+        <label
           className="Form__phone-label"
           htmlFor="phone"
-         >
+        >
           Teléfono 
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__phone-input"
           id="phone"
           type="text"
@@ -70,15 +90,13 @@ function RestProfileForm({
           onChange={handleChange}
           value={phone}
         />
-      </span>
-      <span>
-        <Label
+        <label
           className="Form__schedulefrom-label"
           htmlFor="scheduleFrom"
         >
           Hora de Apertura
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__schedulefrom-input"
           id="scheduleFrom"
           type="time"
@@ -87,45 +105,49 @@ function RestProfileForm({
           name="scheduleFrom"
           onChange={handleChange}
           value={scheduleFrom}
-          />
-        <Label
+        />
+        <label
           className="Form__scheduleto-label"
           htmlFor="scheduleTo"
         >
           Hora de Cierre
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__scheduleto-input"
           id="scheduleTo"
           type="time"
-          min="18:00"
-          max="20:00"
+          min="20:00"
+          max="24:00"
           name="scheduleTo"
           onChange={handleChange}
           value={scheduleTo}
         />
-      </span>
-      <span>
-        <Label
+        <label
           className="Form__deposit-label"
           htmlFor="deposit"
         >
           Pago Mínimo 
-        </Label>
-        <input
+        </label>
+        <Input
           className="Form__deposit-input"
           id="deposit"
           type="number"
-          min="$20000"
-          max="$200000"
+          min="20000"
+          max="200000"
           step="10000"
           name="deposit"
           onChange={handleChange}
           value={deposit}
         />
-      </span>
-      <Button>Confirmar Cambios</Button>
-    </form>
+        <ContainerButton className="Form__subtmit-span">
+          <ButtonPrimary
+            className="Form__submit-input"
+            type="submit"
+            value="Guardar Cambios"
+          />
+        </ContainerButton>
+      </Form>
+    </ContainerContent>
   )
 }
 
