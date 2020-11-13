@@ -1,12 +1,20 @@
 import React from 'react' 
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import ContainerContent from '../components/styled/ContainerContent'
 
+
+const ContainerContentExtend = styled(ContainerContent)` 
+  display: grid;
+  grid-row-gap: 12px;
+`;
+
 const Form = styled.form ` 
   display: grid;
   grid-row-gap: 12px;
+  margin-top: 12px;
 `;
 
 const ContainerButton = styled.span `
@@ -28,17 +36,6 @@ const ButtonSecundary = styled(ButtonPrimary)`
   }
 `;
 
-const LinkCreateAccount = styled.a`
-  border-radius: 4px;
-  font-size: 16px;
-  background-color: ${
-    props => props.theme.primaryColor
-  };
-  color: white;
-  padding: 8px 14px;
-  font-weight: 400;
-`;
-
 const Input = styled.input ` 
   padding: 10.5px;
   border-radius: 4px;
@@ -46,24 +43,78 @@ const Input = styled.input `
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
 `;
+
+const ContainerContentLabel = styled(ContainerButton)`
+  display: block;
+  margin-bottom: 12px;
+`;
+
+const ContainerText = styled.p`
+  margin: 0;
+`;
+
+const Error = styled.span `
+  font-size: 12px;
+  color: red;
+  font-style: italic;
+`;
+
+const Message = styled.span `
+  font-size: 12px;
+  color: green;
+  font-style: italic;
+`;
 class FormSignIn extends React.Component {
+
   state = {
-    email: '',
-    password: '',
+    id: uuidv4(),
+    email: 'ejemplo@gmail.com',
+    password: '1234',
+    isLoggedIn: false,
+    errors: {},
+    message: {},
   };
 
   handleSubmit = (e) => {
+    e.preventDefaul();
 
+    if(this.validated()) {
+      this.setState({
+        [this.state.message]: 'Estas logueado correctamente'
+      })
+    }
   };
 
   handleChange = (e) => {
-
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    })
   };
+
+  validated(e) {
+    const { value, type, email, password } = e.target;
+    const { errors } = this.state;
+    const emailAreEqual = email === this.state.email
+    const passwordAreEqual = password === this.state.password;
+
+    if(!emailAreEqual) {
+      errors['email'] = 'Este correo no esta registrado';
+    }
+    if(!passwordAreEqual) {
+      errors['password'] = 'Esta contraseña no coincide con tu usuario';
+    }
+
+    this.setState({errors})
+  }
 
   render() {
     const { email, password } = this.state
     return(
-      <ContainerContent>
+      <ContainerContentExtend>
+        <h3>
+          Queremos volverte a reunir con tus seres queridos, alrededor de tus comidas favoritas.
+        </h3>
         <Form onSubmit={this.handleSubmit}>
           <label
             htmlFor="email"
@@ -79,6 +130,7 @@ class FormSignIn extends React.Component {
             placeholder="Correo electronico"
             required
           />
+          <Error>{this.state.errors.email}</Error>
           <label 
             htmlFor="password"
           >
@@ -93,6 +145,7 @@ class FormSignIn extends React.Component {
             placeholder="***********"
             required
           />
+          <Error>{this.state.errors.password}</Error>
           <ContainerButton className="Form__subtmit-span">
             <ButtonSecundary
               className="Form__submit-input"
@@ -101,12 +154,19 @@ class FormSignIn extends React.Component {
             />
           </ContainerButton>
         </Form>
-        <hr></hr>
-        <p>O</p>
-        <LinkCreateAccount to='/sing-up'>
-          Iniciar sesión
-        </LinkCreateAccount>
-      </ContainerContent>
+        <ContainerText>
+          <hr></hr>
+        </ContainerText>
+        <ContainerContentLabel>
+          <ContainerText>Ó</ContainerText>
+        </ContainerContentLabel>
+        <ContainerContentLabel>
+          <ButtonPrimary as= {Link} to="/sign-up">
+            Crear cuenta
+          </ButtonPrimary>
+        </ContainerContentLabel>
+        <Message>{this.state.message}</Message>
+      </ContainerContentExtend>
     )
   }
 }
