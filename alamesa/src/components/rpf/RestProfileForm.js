@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import ContainerContent from '../styled/ContainerContent'
-import ButtonPrimary from '../styled/ButtonPrimary'
+import ContainerContent from '../styled/ContainerContent';
+import ButtonPrimary from '../styled/ButtonPrimary';
 
-const RestLogo = styled.img`
+const RestLogo = styled.img `
   width: 100px;
   border-radius: 100%;
   display: block;

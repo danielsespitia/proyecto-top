@@ -17,13 +17,13 @@ class RestaurantForm extends Component {
 
     this.setState({ [name]: value }, () => console.log('current', this.state))
     console.log(this.state)
-  }
+  };
 
   handleSubmit (e) {
     e.preventDefault()
 
     this.props.history.push('/your-profile');
-  }
+  };
 
   render () {
     const { restaurantName, address, phone, scheduleFrom, scheduleTo, deposit } = this.state
@@ -45,4 +45,4 @@ class RestaurantForm extends Component {
   }
 }
 
-export default RestaurantForm;
+export default RestaurantForm
