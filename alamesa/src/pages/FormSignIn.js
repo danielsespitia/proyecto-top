@@ -1,23 +1,8 @@
 import React from 'react' 
 import { Link } from 'react-router-dom'
-import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import ContainerContent from '../components/styled/ContainerContent'
-
-const data = [
-  {
-    id: uuidv4(),
-    email: 'ejemplo@gmail.com',
-    password: '1234',
-  },
-
-  {
-    id: uuidv4(),
-    email: 'ejemplo2@gmail.com',
-    password: '12345',
-  },
-]
 
 const ContainerContentExtend = styled(ContainerContent)` 
   display: grid;
@@ -66,33 +51,24 @@ const ContainerText = styled.p`
   margin: 0;
 `;
 
-const Error = styled.span `
-  font-size: 12px;
-  color: red;
-  font-style: italic;
-`;
-
 const Message = styled.span `
-  font-size: 12px;
-  color: green;
+  font-size: 13px;
+  color: #0f31dd;
   font-style: italic;
 `;
 class FormSignIn extends React.Component {
 
   state = {
-    data: data,
-    errors: {},
-    message: {},
+    message: '',
+    email: '',
+    password: '',
   };
 
   handleSubmit = (e) => {
-    e.preventDefaul();
-
-    if(this.validated()) {
+    e.preventDefault();
       this.setState({
-        [this.state.message]: 'Estas logueado correctamente'
+        message: 'Estas Logueado correctamente'
       })
-    }
   };
 
   handleChange = (e) => {
@@ -101,22 +77,6 @@ class FormSignIn extends React.Component {
       [name]: value
     })
   };
-
-  validated(e) {
-    const { email, password } = e.target;
-    const { errors, data } = this.state;
-    const emailAreEqual = email === data.filter(data1 => data1.email );
-    const passwordAreEqual = password === data.filter(data1 => data1.password );
-
-    if(!emailAreEqual) {
-      errors['email'] = 'Este correo no esta registrado';
-    }
-    if(!passwordAreEqual) {
-      errors['password'] = 'Esta contraseña no coincide con tu usuario';
-    }
-
-    this.setState({errors})
-  }
 
   render() {
     const { email, password } = this.state
@@ -140,7 +100,6 @@ class FormSignIn extends React.Component {
             placeholder="Correo electronico"
             required
           />
-          <Error>{this.state.errors.email}</Error>
           <label 
             htmlFor="password"
           >
@@ -155,7 +114,6 @@ class FormSignIn extends React.Component {
             placeholder="***********"
             required
           />
-          <Error>{this.state.errors.password}</Error>
           <ContainerButton className="Form__subtmit-span">
             <ButtonSecundary
               className="Form__submit-input"
@@ -164,7 +122,7 @@ class FormSignIn extends React.Component {
             />
           </ContainerButton>
         </Form>
-        <ContainerText>
+        <ContainerText as= {"span"}>
           <hr></hr>
         </ContainerText>
         <ContainerContentLabel>
