@@ -2,7 +2,7 @@ import './App.css';
 import { 
   BrowserRouter as Router,
   Route,
-	Switch,
+  Switch,
 } 
 from 'react-router-dom'
 import Header from './components/Header'
@@ -18,10 +18,10 @@ function App () {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/sign-up" component={FormSignUp}/>
-				<Route exact path='/' component={Home}/>
-				<Route
-					exact path='/restaurant-profile' 
-					component={RestaurantForm}/>
+        <Route exact path='/' component={Home}/>
+        <Route
+          exact path='/restaurant-profile' 
+          component={RestaurantForm}/>
         <Route path="/your-profile" component={YourRprofile}/>
       </Switch>
     </Router>
