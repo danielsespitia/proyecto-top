@@ -5,6 +5,19 @@ import styled from 'styled-components'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import ContainerContent from '../components/styled/ContainerContent'
 
+const data = [
+  {
+    id: uuidv4(),
+    email: 'ejemplo@gmail.com',
+    password: '1234',
+  },
+
+  {
+    id: uuidv4(),
+    email: 'ejemplo2@gmail.com',
+    password: '12345',
+  },
+]
 
 const ContainerContentExtend = styled(ContainerContent)` 
   display: grid;
@@ -67,10 +80,7 @@ const Message = styled.span `
 class FormSignIn extends React.Component {
 
   state = {
-    id: uuidv4(),
-    email: 'ejemplo@gmail.com',
-    password: '1234',
-    isLoggedIn: false,
+    data: data,
     errors: {},
     message: {},
   };
