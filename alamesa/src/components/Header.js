@@ -50,7 +50,7 @@ const Anchor = styled(Link)`
 `;
 
 const AnchorSingIn = styled(Anchor)`
-  background-color: ${props => props.theme.primaryColor};
+  background-color: ${props => props.theme.secundaryColor};
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
@@ -58,7 +58,7 @@ const AnchorSingIn = styled(Anchor)`
 `;
 
 const AnchorSingUp = styled(Anchor)`
-  background-color: ${props => props.theme.secundaryColor};
+  background-color: ${props => props.theme.primaryColor};
   padding: 5px 20px;
   border-radius: 4px;
   color: white;
