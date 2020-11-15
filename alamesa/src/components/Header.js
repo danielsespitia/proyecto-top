@@ -10,21 +10,22 @@ const ContainerHeader = styled.header`
   justify-content: space-between;
 `;
 
-const HeaderHome = styled.div`
+const HeaderHome = styled(Link)`
   display: flex;
   width: 40vw;
   margin: 0 40px;
+  align-items: center;
 `;
 
 const Img = styled.img`
-  width: 50px;
+  width: 40px;
 `;
 
 const HeaderHomeLogo = styled.figure`
   margin: 5px;
 `;
 
-const HeaderHomeSlogan = styled.h1`
+const HeaderHomeSlogan = styled.h2`
   margin: 5px;
 `;
 
@@ -74,7 +75,7 @@ const AnchorSingUp = styled(ButtonPrimary)`
 function Header() {
   return (
     <ContainerHeader>
-      <HeaderHome>
+      <HeaderHome to="/">
         <HeaderHomeLogo className="header__home-logo">
           <Img src={Logo} alt="Logo" />
         </HeaderHomeLogo>
