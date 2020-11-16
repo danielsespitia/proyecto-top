@@ -9,6 +9,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import FormSignUp from './pages/FormSignUp'
 import SanitaryRegister from './pages/SanitaryRegister'
+import ClientProfile from './pages/ClientProfile'
 
 function App () {
   return (
@@ -17,7 +18,8 @@ function App () {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/sign-up" component={FormSignUp}/>
-        <Route exact parh="/sanitary-register" component={SanitaryRegister}/>
+        <Route exact path="/sanitary-register" component={SanitaryRegister}/>
+        <Route exact path="/client-profile" component={ClientProfile}/>
       </Switch>
     </Router>
   )

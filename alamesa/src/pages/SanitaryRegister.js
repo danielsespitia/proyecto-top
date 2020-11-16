@@ -9,11 +9,21 @@ const ContainerList = styled(ContainerContent)`
   display: grid;
   justify-content: center;
   grid-row-gap: 10px;
+`;
 
-`
 const H3 = styled.h3`
   text-align: center;
 `;
+
+const H4 = styled.h4`
+  font-size: 14px;
+`;
+
+const Paragraph = styled.p`
+  font-size: 11px;
+  color: #2F80ED
+`;
+
 const Span = styled.span ` 
   background-color: ${
     props => props.theme.blueColorSan
@@ -23,6 +33,7 @@ const Span = styled.span `
   justify-content: space-between;
   border-radius: 10px;  
 `;
+
 const Checkbox = styled.input`
   border: 1px solid #CED4DA;
   box-sizing: border-box;
@@ -53,7 +64,9 @@ const ButtonCancel = styled(ButtonPrimary)`
       border: 1px solid ${
         props => props.theme.tertiaryColor
       };
+  }
 `;
+
 
 class SanitaryRegister extends React.Component {
 
@@ -82,9 +95,9 @@ class SanitaryRegister extends React.Component {
     return (
       <ContainerList>
         <H3>Registro Sanitario</H3>
-        <p>Selecciona los recuadros según tu estado:</p>
+        <H4>Selecciona los recuadros según tu estado:</H4>
         <Span className="ContentQuestion">
-          <p>He presentado sintomas relacionados con Covid19</p>
+          <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
           <Checkbox
             className="response"
             id="response1"
@@ -96,7 +109,7 @@ class SanitaryRegister extends React.Component {
           </Checkbox>
         </Span>
         <Span className="ContentQuestion">
-          <p>He estado en contacto con personas con sintomas de Covid19</p>
+          <Paragraph>He estado en contacto con personas con sintomas de Covid19</Paragraph>
           <Checkbox
             className="response"
             id="response2"
@@ -108,7 +121,7 @@ class SanitaryRegister extends React.Component {
           </Checkbox>
         </Span>
         <Span className="ContentQuestion"> 
-          <p>Hice un viaje internacional en los ultimos 30 días</p>
+          <Paragraph>Hice un viaje internacional en los ultimos 30 días</Paragraph>
           <Checkbox
             className="response"
             id="response3"
@@ -120,7 +133,7 @@ class SanitaryRegister extends React.Component {
           </Checkbox>
         </Span>
         <Span className="ContentQuestion">
-          <p>Soy trabajador de la salud</p>
+          <Paragraph>Soy trabajador de la salud</Paragraph>
           <Checkbox
             className="response"
             id="response4"
