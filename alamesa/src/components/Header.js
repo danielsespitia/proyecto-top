@@ -1,6 +1,7 @@
-import Logo from "../image/Logo.png";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import Logo from '../image/Logo.png';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import ButtonPrimary from './styled/ButtonPrimary'
 
 const ContainerHeader = styled.header`
   display: flex;
@@ -9,21 +10,22 @@ const ContainerHeader = styled.header`
   justify-content: space-between;
 `;
 
-const HeaderHome = styled.div`
+const HeaderHome = styled(Link)`
   display: flex;
   width: 40vw;
   margin: 0 40px;
+  align-items: center;
 `;
 
 const Img = styled.img`
-  width: 50px;
+  width: 40px;
 `;
 
 const HeaderHomeLogo = styled.figure`
   margin: 5px;
 `;
 
-const HeaderHomeSlogan = styled.h1`
+const HeaderHomeSlogan = styled.h2`
   margin: 5px;
 `;
 
@@ -49,26 +51,31 @@ const Anchor = styled(Link)`
   font-weight: 700;
 `;
 
-const AnchorSingIn = styled(Anchor)`
-  background-color: ${props => props.theme.primaryColor};
-  padding: 5px 20px;
-  border-radius: 4px;
-  color: white;
-  font-weight: 400;
+const AnchorSingIn = styled(ButtonPrimary)`
+  background-color: ${
+  props => props.theme.secundaryColor
+  };
+
+  &:hover {
+    background-color: ${
+      props => props.theme.secundaryColorBlur
+    };
+    border: 1px solid ${
+      props => props.theme.secundaryColor
+    };
+  }
 `;
 
-const AnchorSingUp = styled(Anchor)`
-  background-color: ${props => props.theme.secundaryColor};
-  padding: 5px 20px;
-  border-radius: 4px;
-  color: white;
-  font-weight: 400;
+const AnchorSingUp = styled(ButtonPrimary)`
+  background-color: ${
+  props => props.theme.primaryColor
+  };
 `;
 
 function Header() {
   return (
     <ContainerHeader>
-      <HeaderHome>
+      <HeaderHome to="/">
         <HeaderHomeLogo className="header__home-logo">
           <Img src={Logo} alt="Logo" />
         </HeaderHomeLogo>
@@ -79,13 +86,13 @@ function Header() {
       <Navigation className="navigation">
         <NavigationMenu>
           <NavigationMenuItem className="navigation__menu-item restaurant">
-            <Anchor to="/">Restaurantes</Anchor>
+            <Anchor to="/restaurants">Restaurantes</Anchor>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn to="/">Iniciar Sesion</AnchorSingIn>
+            <AnchorSingIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSingIn>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp to="/sign-up">Crear Cuenta</AnchorSingUp>
+            <AnchorSingUp as= {Link} to="/sign-up">Crear cuenta</AnchorSingUp>
           </NavigationMenuItem>
         </NavigationMenu>
       </Navigation>
