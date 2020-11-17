@@ -42,13 +42,13 @@ const H3 = styled.h3`
   text-align: center;
 `;
 
-const Lnk = styled.p`
+const MyOffices = styled.p`
   margin-block-start: 0;
   margin-block-end: 0;
   text-align: center;
 `;
 
-const LnkA = styled.a`
+const MyOfficesAnchor = styled.a`
   font-size: 16px;
   color: #2F80ED;
   text-decoration-line: underline;
@@ -60,7 +60,8 @@ const ContentButtons = styled.div`
   padding-block-start: 40px;
 `;
 
-const profileData = [{
+const profileData = [
+  {
     id: uuidv4(),
     restaurantName: 'Burguer Mania',
     address: 'Calle 5a #45-32',
@@ -68,7 +69,8 @@ const profileData = [{
     scheduleFrom: '11:00',
     scheduleTo: '23:00',
     deposit: 30000,
-  }];
+  }
+];
 
 class RestaurantProfile extends Component {
 
@@ -90,9 +92,9 @@ class RestaurantProfile extends Component {
                   src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
                   alt="logo"
                 />
-                <Lnk>
-                  <LnkA>Sucursales</LnkA>
-                </Lnk>
+                <MyOffices>
+                  <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
+                </MyOffices>
               </BodyLeft>
               <BodyRight>
                 <YourProfile
