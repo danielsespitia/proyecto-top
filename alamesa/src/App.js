@@ -1,4 +1,5 @@
 import './App.css';
+import './components/fontAwesomeicons'
 import { 
   BrowserRouter as Router,
   Route,
