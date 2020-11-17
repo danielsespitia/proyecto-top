@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
-import ContainerContent from '../components/styled/ContainerContent';
+import Desktopstructure from '../components/styled/DesktopStructure';
 import ButtonPrimary from '../components/styled/ButtonPrimary';
 import YourProfile  from '../components/rpf/YourProfile';
-
-const ContainerProfile = styled(ContainerContent) `
-  text-align: center;
-`;
 
 const RestLogo = styled.img `
   width: 100px;
@@ -17,8 +13,51 @@ const RestLogo = styled.img `
   margin-right: auto;
 `;
 
-const ContainerButton = styled.span `
+const BodyLeft = styled.div ` 
+  grid-area: bodyLeft;
+  display: grid;
+  grid-row-gap: 25px; 
+  padding: 50px 0;
+  background-color: ${
+    props => props.theme.grayColorOverlay
+  };
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const BodyRight = styled.div ` 
+  grid-area: bodyRight;
   text-align: center;
+  padding: 50px 60px;
+  background-color: ${
+    props => props.theme.grayColorOverlay
+  };
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+
+const H3 = styled.h3`
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-align: center;
+`;
+
+const Lnk = styled.p`
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-align: center;
+`;
+
+const LnkA = styled.a`
+  font-size: 16px;
+  color: #2F80ED;
+  text-decoration-line: underline;
+`;
+
+const ContentButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-block-start: 40px;
 `;
 
 const profileData = [{
@@ -44,29 +83,36 @@ class RestaurantProfile extends Component {
       <>
         {!!profileData && profileData.map(({ id, restaurantName, address, phone, scheduleFrom, scheduleTo, deposit }) => {
           return (
-            <ContainerProfile>
-              <h1>Tu Perfil</h1>
-              <RestLogo 
-                src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
-                alt="logo"
-              />
-              <YourProfile
-                key={id}
-                restaurantName={restaurantName}
-                address={address}
-                phone={phone}
-                scheduleFrom={scheduleFrom}
-                scheduleTo={scheduleTo}
-                deposit={deposit}
-              />
-              <ContainerButton className="Profile__edit-span">
-                <ButtonPrimary
-                  className="Profile__edit-input"
-                  type="submit"
-                  value="Editar tu Perfil"
+            <Desktopstructure>
+              <BodyLeft>
+                <H3>Tu Perfil</H3>
+                <RestLogo 
+                  src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
+                  alt="logo"
                 />
-              </ContainerButton>
-            </ContainerProfile>
+                <Lnk>
+                  <LnkA>Sucursales</LnkA>
+                </Lnk>
+              </BodyLeft>
+              <BodyRight>
+                <YourProfile
+                  key={id}
+                  restaurantName={restaurantName}
+                  address={address}
+                  phone={phone}
+                  scheduleFrom={scheduleFrom}
+                  scheduleTo={scheduleTo}
+                  deposit={deposit}
+                />
+                <ContentButtons className="Profile__edit-span">
+                  <ButtonPrimary
+                    className="Profile__edit-input"
+                    type="submit"
+                    value="Editar tu Perfil"
+                  />
+                </ContentButtons>
+              </BodyRight>
+            </Desktopstructure>
             )
           })}
       </>

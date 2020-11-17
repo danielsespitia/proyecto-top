@@ -82,7 +82,7 @@ function Header() {
             <Anchor to="/restaurants">Restaurantes</Anchor>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn to="/">Iniciar Sesion</AnchorSingIn>
+            <AnchorSingIn to="/sign-in">Iniciar Sesion</AnchorSingIn>
           </NavigationMenuItem>
           <NavigationMenuItem className="navigation__menu-item sign-up">
             <AnchorSingUp to="/sign-up">Crear Cuenta</AnchorSingUp>
