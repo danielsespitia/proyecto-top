@@ -12,6 +12,16 @@ const ContainerTitleShopping = styled.span`
   border-bottom: 1px solid black;
   margin: auto;
 `
+const ContainerContentShoppingList = styled(ContainerContent)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+const LabelTable = styled.table`
+  border-spacing: 20px;
+  margin: auto;
+`
+
 const TextStrongTotal = styled.td`
   font-weight: 800;
 `
@@ -23,19 +33,19 @@ export function ListShoppingCart ( { deposit } ) {
         <h2>Mi carrito</h2>
         <FontAwesomeIcon icon={faShoppingCart}/>
       </ContainerTitleShopping>
-      <ContainerContent>
-        <table>
+      <ContainerContentShoppingList>
+        <LabelTable>
           <tr>
             <td>Pago minimo</td>
             <td>{deposit}</td>
           </tr>
           <tr>
             <TextStrongTotal>Total</TextStrongTotal>
-            <td>$48.000</td>
+            <td>{deposit}</td>
           </tr>
-          </table>
+          </LabelTable>
         <ButtonPrimary as="button">Finalizar tu orden</ButtonPrimary>
-      </ContainerContent>
+      </ContainerContentShoppingList>
     </section>
 
   )
