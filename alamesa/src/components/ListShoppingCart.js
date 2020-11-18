@@ -9,10 +9,12 @@ export function ListShoppingCart () {
         <FontAwesomeIcon icon={faShoppingCart}/>
         <hr></hr>
       </span>
-      <ul>
-        <p>Pago minimo</p>
-
-      </ul>
+      <table>
+        <tr>
+          <td>Pago minimo</td>
+          <td>$48.000</td>
+        </tr>
+      </table>
     </section>
 
   )
