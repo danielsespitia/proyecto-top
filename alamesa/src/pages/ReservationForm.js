@@ -134,7 +134,7 @@ class ReservationForm extends Component {
       agree,
     } = this.state
 
-    const { name, logo } = this.props.location.state.Restaurant
+    const { id, name, logo } = this.props.location.state.Restaurant
     return (
       <>
         <ContainerList>
@@ -178,7 +178,7 @@ class ReservationForm extends Component {
                   >
                     Seleccionar Sucursal
                   </option>
-                  {branchOption.map(({id, name})=>{
+                  {!!branchOption && branchOption.length > 0 && branchOption.map(({id, name})=>{
                     return (
                       <option key={id}>
                         {name}
@@ -249,7 +249,7 @@ class ReservationForm extends Component {
                   >
                     Seleccionar tiempo
                   </option>
-                  {timeRangeOption.map(({id,time})=>{
+                  {!!timeRangeOption && timeRangeOption.length > 0 && timeRangeOption.map(({id,time})=>{
                     return (
                       <option key={id}>
                         {time}
@@ -308,11 +308,18 @@ class ReservationForm extends Component {
                 </LinkSanitaryUpdate>
               </Span>
               <Span>
-                <ButtonPrimary
-                  className="Form__reservation-add-shoppingList"
-                  type="submit"
-                  value="Agregar mi Reserva al carrito"
-                />
+                <Link to={{
+                  pathname: `/restaurants/${id}/reservation/ShoppingCart`,
+                  state: {
+                    Restaurant: { id, name, logo},
+                  }
+                  }}>
+                  <ButtonPrimary
+                    className="Form__reservation-add-shoppingList"
+                    type="submit"
+                    value="Agregar mi reserva al carrito"
+                  />                  
+                </Link>
               </Span>
             </ReservationContainer>
           </ContainerList>

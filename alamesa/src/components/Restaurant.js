@@ -31,9 +31,7 @@ const Button = styled.button`
 `;
 
 
-function Restaurant ( { name, logo } ) {
-
-
+function Restaurant ( { id, name, logo } ) {
   return (
     <Article>
       <Img 
@@ -43,9 +41,9 @@ function Restaurant ( { name, logo } ) {
       <RestaurantName>
         <h1>{name}</h1>
         <Link to={{
-          pathname: '/reservation',
+          pathname: `/restaurants/${id}/reservation`,
           state: {
-            Restaurant: { name, logo},
+            Restaurant: { id, name, logo},
           }
           }}>
           <Button

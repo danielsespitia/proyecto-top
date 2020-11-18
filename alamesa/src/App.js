@@ -24,7 +24,7 @@ function App () {
         <Route exact path='/restaurant-profile' component={RestaurantForm}/>
         <Route path="/your-profile" component={RestaurantProfile}/>
         <Route exact path="/restaurants" component={Restaurants}/>
-        <Route exact path="/reservation" component={Reservation}/>
+        <Route exact path="/restaurants/:Restaurant_id/reservation" component={Reservation}/>
       </Switch>
     </Router>
   )
