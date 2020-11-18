@@ -3,22 +3,20 @@ import { ListShoppingCart } from '../components/ItemShoppingCart'
 import { data } from '../Data'
 
 const getRandomRestaurant = Math.round(Math.random()*(5-0) + 0)
+
+const idRandomRestaurant = data[getRandomRestaurant]
 class ShoppingCart extends React.Component {
   state = {
     restaurants: data,
   }
   render() {
-    const { restaurants } = this.state
+    console.log(idRandomRestaurant)
     return(
       <>
-      {restaurants.filter( restaurant => restaurant.length === getRandomRestaurant).map(({id, deposit}) => {
-        return (
-          <ListShoppingCart
-            key={id}
-            deposit={deposit}
-          />
-        )
-      })}
+      <ListShoppingCart
+        key={idRandomRestaurant.id}
+        deposit={idRandomRestaurant.deposit}
+      />
       </>
     )
   }
