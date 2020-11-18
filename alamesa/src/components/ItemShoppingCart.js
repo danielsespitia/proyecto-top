@@ -16,7 +16,7 @@ const TextStrongTotal = styled.td`
   font-weight: 800;
 `
 
-export function ListShoppingCart () {
+export function ListShoppingCart ( { deposit } ) {
   return(
     <section>
       <ContainerTitleShopping>
@@ -27,7 +27,7 @@ export function ListShoppingCart () {
         <table>
           <tr>
             <td>Pago minimo</td>
-            <td>$48.000</td>
+            <td>{deposit}</td>
           </tr>
           <tr>
             <TextStrongTotal>Total</TextStrongTotal>

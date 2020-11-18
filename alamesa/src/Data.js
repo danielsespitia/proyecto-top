@@ -6,31 +6,31 @@ export const data = [
     id: uuidv4(),
     name: 'Mister Wok',
     logo: RestaurantLogo,
-    deposit: 48000,
+    deposit: '$48.000',
   },
   {
     id: uuidv4(),
     name: 'Tacos & Bar',
     logo: RestaurantLogo,
-    deposit: 60000,
+    deposit: '$60.000',
   },
   {
     id: uuidv4(),
     name: 'Sandwich Cubano',
     logo: RestaurantLogo,
-    deposit: 45000,
+    deposit: '$45.000',
   },
   {
     id: uuidv4(),
     name: 'Buffalo Wings',
     logo: RestaurantLogo,
-    deposit: 30000,
+    deposit: '$30.000',
   },
   {
     id: uuidv4(),
     name: 'Archies',
     logo: RestaurantLogo,
-    deposit: 65000,
+    deposit: '$65.000',
   },
 ]
 
