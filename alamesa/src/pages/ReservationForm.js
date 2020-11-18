@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
 import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
-
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
@@ -76,6 +76,35 @@ const Span = styled.span`
   margin: 15px;
 `;
 
+const branchOption = [
+  {
+    id:uuidv4(),
+    name: 'chapinero',
+  },
+  {
+    id:uuidv4(),
+    name: 'centro',
+  },
+  {
+    id:uuidv4(),
+    name: 'norte',
+  },
+]
+const timeRangeOption = [
+  {
+    id:uuidv4(),
+    time: '1 hora',
+  },
+  {
+    id:uuidv4(),
+    time: '2 horas',
+  },
+  {
+    id:uuidv4(),
+    time: '3 horas',
+  },
+]
+
 class ReservationForm extends Component {
 
   state = {
@@ -131,7 +160,8 @@ class ReservationForm extends Component {
                 <Label
                   className="Form__reservation-branch-label"
                   htmlFor="branch"
-                >Sucursal
+                >
+                  Sucursal
                 </Label>
                 <SelectForm
                   className="Form__reservation-branch-select"
@@ -143,22 +173,19 @@ class ReservationForm extends Component {
                   autoFocus
                   required
                 > 
-                  <option 
+                  <option
                     value="" disabled selected
-                  >Selecciona sucursal
+                  >
+                    Seleccionar Sucursal
                   </option>
-                  <option 
-                    value="centro"
-                  >centro
-                  </option>
-                  <option 
-                    value="chapinero"
-                  >chapinero
-                  </option>
-                  <option 
-                    value="norte"
-                  >norte
-                  </option>
+                  {branchOption.map(({id, name})=>{
+                    return (
+                      <option key={id}>
+                        {name}
+                      </option>
+                    )
+                  })
+                  }
                 </SelectForm>
               </Article>
               <Article>
@@ -184,7 +211,8 @@ class ReservationForm extends Component {
                 <Label
                   className="Form__reservation-time-label"
                   htmlFor="time"
-                >Selecciona la hora de reserva
+                >
+                  Selecciona la hora de reserva
                 </Label>
                   <FontAwesomeIcon icon="clock" />
                 <Input
@@ -203,7 +231,8 @@ class ReservationForm extends Component {
                 <Label
                   className="Form__reservation-time-range-label"
                   htmlFor="time-range"
-                >Cuanto tiempo te reservamos
+                >
+                  Cuanto tiempo te reservamos
                 </Label>
                   <FontAwesomeIcon icon="clock" />
                 <SelectForm
@@ -215,29 +244,27 @@ class ReservationForm extends Component {
                   onChange={ this.handleChange }
                   required
                 > 
-                  <option 
+                  <option
                     value="" disabled selected
-                  >Tiempo de reserva
+                  >
+                    Seleccionar tiempo
                   </option>
-                  <option 
-                    value="1 hora"
-                  >1 hora
-                  </option>
-                  <option 
-                    value="2 horas"
-                  >2 horas
-                  </option>
-                  <option 
-                    value="3 horas"
-                  >3 horas
-                  </option>
+                  {timeRangeOption.map(({id,time})=>{
+                    return (
+                      <option key={id}>
+                        {time}
+                      </option>
+                    )
+                  })
+                  }
                 </SelectForm>
               </Article>
               <PeopleContainer>
                 <Label
                   className="Form__reservation-people-label"
                   htmlFor="people"
-                >Para cuantas personas te reservamos
+                >
+                  Para cuantas personas te reservamos
                 </Label>
                   <FontAwesomeIcon icon="user" />
                 <InputPeople
