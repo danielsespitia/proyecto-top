@@ -140,7 +140,7 @@ class FormSignUp extends React.Component {
           />
           <label
             className="Form__password-label"
-            htmlFor="password"
+            htmlFor="confirmPassword"
           >
             Confirmar contraseña
           </label>
