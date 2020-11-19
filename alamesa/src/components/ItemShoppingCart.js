@@ -11,20 +11,20 @@ const ContainerTitleShopping = styled.span`
   width: 80%;
   border-bottom: 1px solid black;
   margin: auto;
-`
+`;
 const ContainerContentShoppingList = styled(ContainerContent)`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 const LabelTable = styled.table`
   border-spacing: 20px;
   margin: auto;
-`
+`;
 
 const TextStrongTotal = styled.td`
   font-weight: 800;
-`
+`;
 
 export function ListShoppingCart ( { deposit } ) {
   return(
@@ -47,6 +47,5 @@ export function ListShoppingCart ( { deposit } ) {
         <ButtonPrimary as="button">Finalizar tu orden</ButtonPrimary>
       </ContainerContentShoppingList>
     </section>
-
   )
 }

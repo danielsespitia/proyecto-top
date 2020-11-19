@@ -10,7 +10,6 @@ class ShoppingCart extends React.Component {
     restaurants: data,
   }
   render() {
-    console.log(idRandomRestaurant)
     return(
       <>
       <ListShoppingCart
