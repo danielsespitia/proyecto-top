@@ -17,6 +17,7 @@ import ClientProfile from './pages/ClientProfile'
 import RestaurantForm from './pages/RestaurantForm'
 import RestaurantProfile from './pages/RestaurantProfile'
 import Restaurants from './pages/Restaurants'
+import ClientProfile from './pages/ClientProfile'
 
 
 function App () {
