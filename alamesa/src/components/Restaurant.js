@@ -32,6 +32,7 @@ const Button = styled.button`
 
 
 function Restaurant ( { id, name, logo } ) {
+  console.log(name)
   return (
     <Article>
       <Img 
@@ -42,9 +43,6 @@ function Restaurant ( { id, name, logo } ) {
         <h1>{name}</h1>
         <Link to={{
           pathname: `/restaurants/${id}/reservation`,
-          state: {
-            Restaurant: { id, name, logo},
-          }
           }}>
           <Button
             type='button'

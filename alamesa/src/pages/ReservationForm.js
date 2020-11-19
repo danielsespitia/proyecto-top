@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
 import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
+import { data } from '../Data'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
@@ -114,6 +115,7 @@ class ReservationForm extends Component {
     range: '',
     people: '',
     agree: false,
+    data,
   }
 
   handleChange = (e) => {
@@ -135,18 +137,21 @@ class ReservationForm extends Component {
       range,
       people,
       agree,
+      data,
     } = this.state
 
-    const { id, name, logo } = this.props.location.state.Restaurant
+    const { restaurantId } = this.props.match.params
+    console.log(restaurantId)
     return (
       <>
         <ContainerList>
           <SectionHeader>
             <RestaurantName>
-             {name} 
+              {console.log(data)}
+              {!!data && data.length > 0 && data.filter(e => e.id === restaurantId)[0].name}
             </RestaurantName>
             <RestaurantLogo
-            src={logo}
+              src={!!data && data.length > 0 && data.filter(e => e.id === restaurantId)[0].logo}
             />
           </SectionHeader>
         </ContainerList>
@@ -311,10 +316,7 @@ class ReservationForm extends Component {
               </Span>
               <Span>
                 <Link to={{
-                  pathname: `/restaurants/${id}/reservation/shopping-cart`,
-                  state: {
-                    Restaurant: { id, name, logo},
-                  }
+                  pathname: `/restaurants/${restaurantId}/reservation/shopping-cart`,
                 }}> 
                 <ButtonPrimary
                   type="submit"
