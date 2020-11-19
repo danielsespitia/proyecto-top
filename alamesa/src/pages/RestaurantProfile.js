@@ -57,7 +57,7 @@ const ContentButtons = styled.div`
   padding-block-start: 40px;
 `;
 
-const profileData = [
+const profileData =
   {
     id: uuidv4(),
     restaurantName: 'Burguer Mania',
@@ -67,7 +67,6 @@ const profileData = [
     scheduleTo: '23:00',
     deposit: 30000,
   }
-];
 
 class RestaurantProfile extends Component {
 
@@ -80,38 +79,34 @@ class RestaurantProfile extends Component {
 
     return (
       <>
-        {!!profileData && profileData.map(({ id, restaurantName, address, phone, scheduleFrom, scheduleTo, deposit }) => {
-          return (
-            <Desktopstructure>
-              <BodyLeft>
-                <H3>Tu Perfil</H3>
-                <RestLogo 
-                  src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
-                  alt="logo"
-                />
-                  <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
-              </BodyLeft>
-              <BodyRight>
-                <YourProfile
-                  key={id}
-                  restaurantName={restaurantName}
-                  address={address}
-                  phone={phone}
-                  scheduleFrom={scheduleFrom}
-                  scheduleTo={scheduleTo}
-                  deposit={deposit}
-                />
-                <ContentButtons className="Profile__edit-span">
-                  <ButtonPrimary
-                    className="Profile__edit-input"
-                    type="submit"
-                    value="Editar tu Perfil"
-                  />
-                </ContentButtons>
-              </BodyRight>
-            </Desktopstructure>
-            )
-          })}
+      <Desktopstructure>
+        <BodyLeft>
+          <H3>Tu Perfil</H3>
+          <RestLogo 
+            src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
+            alt="logo"
+          />
+          <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
+        </BodyLeft>
+        <BodyRight>
+          <YourProfile
+            key={profileData.id}
+            restaurantName={profileData.restaurantName}
+            address={profileData.address}
+            phone={profileData.phone}
+            scheduleFrom={profileData.scheduleFrom}
+            scheduleTo={profileData.scheduleTo}
+            deposit={profileData.deposit}
+          />
+          <ContentButtons className="Profile__edit-span">
+            <ButtonPrimary
+              className="Profile__edit-input"
+              type="submit"
+              value="Editar tu Perfil"
+            />
+          </ContentButtons>
+        </BodyRight>
+      </Desktopstructure>
       </>
     )
   }
