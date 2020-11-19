@@ -42,13 +42,10 @@ const H3 = styled.h3`
   text-align: center;
 `;
 
-const MyOffices = styled.p`
+const MyOfficesAnchor = styled.a`
   margin-block-start: 0;
   margin-block-end: 0;
   text-align: center;
-`;
-
-const MyOfficesAnchor = styled.a`
   font-size: 16px;
   color: #2F80ED;
   text-decoration-line: underline;
@@ -92,9 +89,7 @@ class RestaurantProfile extends Component {
                   src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
                   alt="logo"
                 />
-                <MyOffices>
                   <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
-                </MyOffices>
               </BodyLeft>
               <BodyRight>
                 <YourProfile
