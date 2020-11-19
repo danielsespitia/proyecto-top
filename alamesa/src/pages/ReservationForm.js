@@ -141,17 +141,15 @@ class ReservationForm extends Component {
     } = this.state
 
     const { restaurantId } = this.props.match.params
-    console.log(restaurantId)
     return (
       <>
         <ContainerList>
           <SectionHeader>
             <RestaurantName>
-              {console.log(data)}
-              {!!data && data.length > 0 && data.filter(e => e.id === restaurantId)[0].name}
+              {!!data && data.length > 0 && data.[0].name}
             </RestaurantName>
             <RestaurantLogo
-              src={!!data && data.length > 0 && data.filter(e => e.id === restaurantId)[0].logo}
+              src={!!data && data.length > 0 && data.[0].logo}
             />
           </SectionHeader>
         </ContainerList>

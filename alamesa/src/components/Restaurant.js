@@ -32,7 +32,6 @@ const Button = styled.button`
 
 
 function Restaurant ( { id, name, logo } ) {
-  console.log(name)
   return (
     <Article>
       <Img 
