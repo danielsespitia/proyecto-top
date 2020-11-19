@@ -90,18 +90,18 @@ const branchOption = [
     name: 'norte',
   },
 ]
-const timeRangeOption = [
+const rangeOption = [
   {
     id:uuidv4(),
-    time: '1 hora',
+    range: '1 hora',
   },
   {
     id:uuidv4(),
-    time: '2 horas',
+    range: '2 horas',
   },
   {
     id:uuidv4(),
-    time: '3 horas',
+    range: '3 horas',
   },
 ]
 
@@ -111,7 +111,7 @@ class ReservationForm extends Component {
     branch: '',
     date: '',
     time: '',
-    timeRange: '',
+    range: '',
     people: '',
     agree: false,
   }
@@ -123,13 +123,16 @@ class ReservationForm extends Component {
     })
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   render () {
     const {
       branch,
       date,
       time,
-      timeRange,
+      range,
       people,
       agree,
     } = this.state
@@ -222,37 +225,36 @@ class ReservationForm extends Component {
                   type="time"
                   value={time}
                   onChange={ this.handleChange }
-                  min="11:00"
-                  max="14:00"
+                  min="7:00"
+                  max="23:00"
                   required
                 />
               </Article>
               <Article>
                 <Label
-                  className="Form__reservation-time-range-label"
+                  className="Form__reservation-range-label"
                   htmlFor="time-range"
                 >
                   Cuanto tiempo te reservamos
                 </Label>
-                  <FontAwesomeIcon icon="clock" />
                 <SelectForm
-                  className="Form__reservation-time-range-select"
-                  name="time-range"
-                  id="time-range"
+                  className="Form__reservation-range-select"
+                  name="range"
+                  id="range"
                   form="reservation"
-                  value={timeRange}
+                  value={range}
                   onChange={ this.handleChange }
                   required
                 > 
                   <option
                     value="" disabled selected
                   >
-                    Seleccionar tiempo
+                    Tiempo de Reserva
                   </option>
-                  {!!timeRangeOption && timeRangeOption.length > 0 && timeRangeOption.map(({id,time})=>{
+                  {!!rangeOption && rangeOption.length > 0 && rangeOption.map(({id, range})=>{
                     return (
                       <option key={id}>
-                        {time}
+                        {range}
                       </option>
                     )
                   })
@@ -309,16 +311,15 @@ class ReservationForm extends Component {
               </Span>
               <Span>
                 <Link to={{
-                  pathname: `/restaurants/${id}/reservation/ShoppingCart`,
+                  pathname: `/restaurants/${id}/reservation/shopping-cart`,
                   state: {
                     Restaurant: { id, name, logo},
                   }
-                  }}>
-                  <ButtonPrimary
-                    className="Form__reservation-add-shoppingList"
-                    type="submit"
-                    value="Agregar mi reserva al carrito"
-                  />                  
+                }}> 
+                <ButtonPrimary
+                  type="submit"
+                  value="Agregar mi reserva al carrito"
+                />
                 </Link>
               </Span>
             </ReservationContainer>
