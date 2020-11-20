@@ -18,7 +18,6 @@ import RestaurantForm from './pages/RestaurantForm'
 import RestaurantProfile from './pages/RestaurantProfile'
 import Restaurants from './pages/Restaurants'
 import ShoppingCart from './pages/ShoppingCart'
-import ClientProfile from './pages/ClientProfile'
 
 function App () {
   return (
@@ -31,7 +30,7 @@ function App () {
         <Route exact path="/sanitary-register" component={SanitaryRegister}/>
         <Route exact path="/client-profile" component={ClientProfile}/>
         <Route exact path='/restaurant-profile' component={RestaurantForm}/>
-        <Route path="/your-profile" component={RestaurantProfile}/>
+        <Route exact path="/your-profile" component={RestaurantProfile}/>
         <Route exact path="/restaurants" component={Restaurants}/>
         <Route exact path="/restaurants/reservation/shopping-cart" component={ShoppingCart}/>
       </Switch>

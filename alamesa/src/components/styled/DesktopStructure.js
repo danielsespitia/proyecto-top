@@ -8,5 +8,4 @@ const DesktopStructure = styled.div `
     "bodyLeft bodyRight bodyRight bodyRight"
 `;
 
-
 export default DesktopStructure
