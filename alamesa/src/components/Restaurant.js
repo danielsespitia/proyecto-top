@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const Article = styled.article`
   margin: 5px;
@@ -29,7 +30,8 @@ const Button = styled.button`
   border-radius: 10px;
 `;
 
-function Restaurant ( { name, logo } ) {
+
+function Restaurant ( { id, name, logo } ) {
   return (
     <Article>
       <Img 
@@ -38,11 +40,15 @@ function Restaurant ( { name, logo } ) {
       />
       <RestaurantName>
         <h1>{name}</h1>
-        <Button
-          type='button'
-        >
-          Reservar Ahora
-        </Button>
+        <Link to={{
+          pathname: `/restaurants/${id}/reservation`,
+          }}>
+          <Button
+            type='button'
+          >
+            Reservar Ahora
+          </Button>
+        </Link>
       </RestaurantName>
     </Article>
   )

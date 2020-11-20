@@ -1,4 +1,5 @@
 import './App.css';
+import './components/fontAwesomeicons'
 import { 
   BrowserRouter as Router,
   Route,
@@ -7,16 +8,14 @@ import {
 from 'react-router-dom'
 import Header from './components/Header'
 import Home from './pages/Home'
-
 import FormSignUp from './pages/FormSignUp'
 import FormSignIn from './pages/FormSignIn'
 import SanitaryRegister from './pages/SanitaryRegister'
-
 import ClientProfile from './pages/ClientProfile'
-
 import RestaurantForm from './pages/RestaurantForm'
 import RestaurantProfile from './pages/RestaurantProfile'
 import Restaurants from './pages/Restaurants'
+import Reservation from './pages/ReservationForm'
 import ShoppingCart from './pages/ShoppingCart'
 
 function App () {
@@ -32,6 +31,7 @@ function App () {
         <Route exact path='/restaurant-profile' component={RestaurantForm}/>
         <Route exact path="/your-profile" component={RestaurantProfile}/>
         <Route exact path="/restaurants" component={Restaurants}/>
+        <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
         <Route exact path="/restaurants/reservation/shopping-cart" component={ShoppingCart}/>
       </Switch>
     </Router>

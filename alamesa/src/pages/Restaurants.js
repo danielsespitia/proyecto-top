@@ -26,7 +26,6 @@ class Restaurants extends Component {
   state = {
     restaurants: data
   }
-
   render () {
     const { restaurants } = this.state
     return (
@@ -37,6 +36,7 @@ class Restaurants extends Component {
               return (
                 <Restaurant 
                   key={id}
+                  id={id}
                   name={name}
                   logo={logo}
                 />
