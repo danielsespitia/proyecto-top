@@ -33,7 +33,7 @@ function App () {
         <Route exact path="/your-profile" component={RestaurantProfile}/>
         <Route exact path="/restaurants" component={Restaurants}/>
         <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
-        <Route exact path="/restaurants/reservation/shopping-cart" component={ShoppingCart}/>
+        <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
       </Switch>
     <Footer></Footer>
     </Router>
