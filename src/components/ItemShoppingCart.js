@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
 
@@ -31,7 +30,7 @@ export function ListShoppingCart ( { deposit } ) {
     <section>
       <ContainerTitleShopping>
         <h2>Mi carrito</h2>
-        <FontAwesomeIcon icon={faShoppingCart}/>
+        <FontAwesomeIcon icon="shopping-cart"/>
       </ContainerTitleShopping>
       <ContainerContentShoppingList>
         <LabelTable>
