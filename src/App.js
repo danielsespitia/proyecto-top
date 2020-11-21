@@ -7,6 +7,7 @@ import {
 } 
 from 'react-router-dom'
 import Header from './components/Header'
+import { Footer } from './components/Footer'
 import Home from './pages/Home'
 import FormSignUp from './pages/FormSignUp'
 import FormSignIn from './pages/FormSignIn'
@@ -34,6 +35,7 @@ function App () {
         <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
         <Route exact path="/restaurants/reservation/shopping-cart" component={ShoppingCart}/>
       </Switch>
+    <Footer></Footer>
     </Router>
   )
 }
