@@ -117,7 +117,7 @@ class ClientProfile extends React.Component{
       const { data } = await axios({
         method: 'GET',
         baseURL: 'http://localhost:8080',
-        url: '/clients/:clientsId',
+        url: '/clients/:clientId',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -125,7 +125,7 @@ class ClientProfile extends React.Component{
       this.setState({ data })
     } catch(err) {
       localStorage.removeItem('token');
-      this.props.history.push('/sign-up')
+      this.props.history.push('/')
     }
   }
 
