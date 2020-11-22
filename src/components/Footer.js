@@ -37,7 +37,7 @@ export function Footer() {
         © 2020 #ALAMESA, <strong>Todos los derechos reservados</strong>
       </TextLeft>
       <TextRight>
-        Diseñado con ♥ por <LinkTwitter href='/home'>@AlamesaTv7</LinkTwitter>
+        Diseñado con ♥ por <LinkTwitter href='/'>@AlamesaTv7</LinkTwitter>
       </TextRight>
     </FooterContainer>
   )
