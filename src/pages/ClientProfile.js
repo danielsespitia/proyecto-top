@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import Desktopstructure from '../components/styled/DesktopStructure'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
+import axios from 'axios'
 
 
 const BodyLeft = styled.div ` 
@@ -104,30 +105,34 @@ const ButtonCancel = styled(ButtonPrimary)`
   }
   margin-left: 50px;
 `;
-
-const profileData = [{
-  id: uuidv4(),
-  clientName: 'Pepito',
-  lastName: '',
-  email: "peperez@gmail.com",
-  address: "Calle falsa #1-2-3",
-  phone: '3205670231',
-  identification: "1091234567",
-  birthday: "28/02/1994",
-  payType: "payU",
-
-}];
-
 class ClientProfile extends React.Component{
 
   state = {
-    profileData: profileData
+    data: '',
+  }
+
+  async componentDidMount() {
+    try {
+      const token = localStorage.getItem('token')
+      const { data } = await axios({
+        method: 'GET',
+        baseURL: 'http://localhost:8080',
+        url: '/clients/:clientsId',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      this.setState({ data })
+    } catch(err) {
+      localStorage.removeItem('token');
+      this.props.history.push('/sign-up')
+    }
   }
 
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
-      [name]: value === '' ? '' : profileData
+      [name]: value === '' ? '' : this.state.data
     })
   };
 
@@ -136,11 +141,11 @@ class ClientProfile extends React.Component{
   };
 
   render(){
-    const { profileData } = this.state
+    const { data } = this.state
 
     return(
       <>
-        {!!profileData && profileData.map(({ id, clientName, lastName, email, address, phone, identification, birthday, payType }) => {
+        {!!data && data.map(({ _id, name, lastName, email }) => {
           return(
             <Desktopstructure>
               <BodyLeft>
@@ -162,7 +167,7 @@ class ClientProfile extends React.Component{
                       id="clientName"
                       type="text"
                       name="clientName"
-                      value={clientName}
+                      value={name}
                       autoComplete="on"
                       onChange={this.handleChange}
                       placeholder="Nombre*"
@@ -204,7 +209,7 @@ class ClientProfile extends React.Component{
                       id="address"
                       type="text"
                       name="address"
-                      value={address}
+                      value="{address}"
                       autoComplete="on"
                       onChange={this.handleChange}
                       placeholder="Dirección"
@@ -217,7 +222,7 @@ class ClientProfile extends React.Component{
                       id="phone"
                       type="text"
                       name="phone"
-                      value={phone}
+                      value="{phone}"
                       autoComplete="on"
                       onChange={this.handleChange}
                       placeholder="Número de telefono"
@@ -230,7 +235,7 @@ class ClientProfile extends React.Component{
                       id="identification"
                       type="text"
                       name="identification"
-                      value={identification}
+                      value="{identification}"
                       autoComplete="on"
                       onChange={this.handleChange}
                       placeholder="Número de identificación"
@@ -243,7 +248,7 @@ class ClientProfile extends React.Component{
                       id="birthday"
                       type="date"
                       name="birthday"
-                      value={birthday}
+                      value="{birthday}"
                       autoComplete="on"
                       onChange={this.handleChange}
                       required
@@ -257,10 +262,10 @@ class ClientProfile extends React.Component{
                       onChange={this.handleChange}
                       required
                 >   
-                      <option value={payType}>
+                      <option value="{payType}">
                         Efectivo
                       </option>
-                      <option value={payType}>
+                      <option value="{payType}">
                         PayU
                       </option>
                     </Select>
@@ -285,7 +290,6 @@ class ClientProfile extends React.Component{
                   </ButtonCancel>
                 </ContentButtons>
               </BodyRight>
-
             </Desktopstructure>
           )
         })}
