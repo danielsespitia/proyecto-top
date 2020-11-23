@@ -37,11 +37,22 @@ const Error = styled.span `
   font-style: italic;
 `;
 
-export function FormSignUp ({ name, email, password, confirmPassword, userType, terms }) {
+export function FormSignUp ({ 
+  name, 
+  email, 
+  password, 
+  confirmPassword, 
+  userType, 
+  terms,
+  handleChange,
+  handleSubmit,
+  errors,
+}) 
+{
   return (
     <ContainerContent>
       <h3>Bienvenido a #Alamesa</h3>
-      <Form onSubmit={this.handleSubmit.bind(this)}>
+      <Form onSubmit={handleSubmit}>
         <label
           className="Form__name-label"
           htmlFor="name"
@@ -54,7 +65,7 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           type="text"
           name="name"
           value={name}
-          onChange={this.handleChange}
+          onChange={handleChange}
           placeholder="Nombre"
           required
         />
@@ -70,7 +81,7 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           type="email"
           name="email"
           value={email}
-          onChange={this.handleChange}
+          onChange={handleChange}
           placeholder="Correo electronico"
           required
         />
@@ -86,7 +97,7 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           type="password"
           name="password"
           value={password}
-          onChange={this.handleChange}
+          onChange={handleChange}
           placeholder="***********"
           required
         />
@@ -102,11 +113,11 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           type="password"
           name="confirmPassword"
           value={confirmPassword}
-          onChange={this.handleChange}
+          onChange={handleChange}
           placeholder="***********"
           required
         />
-        <Error>{this.state.errors.password}</Error>
+        <Error>{errors}</Error>
         
         <label
           className="Form__userType-label"
@@ -117,7 +128,7 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           id="userType"
           name="userType"
           value={userType}
-          onChange={this.handleChange}
+          onChange={handleChange}
           required
         >
           <option value="clients">
@@ -140,7 +151,7 @@ export function FormSignUp ({ name, email, password, confirmPassword, userType, 
           type="checkbox"
           name="terms"
           value={terms}
-          onChange={this.handleChange}
+          onChange={handleChange}
           required
         />
         </ContainerTerms>

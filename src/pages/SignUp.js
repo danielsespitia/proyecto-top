@@ -1,9 +1,9 @@
 import React from 'react'
-import FormSignUp from '../components/FormSignUp'
+import { FormSignUp } from '../components/FormSignUp'
 import axios from 'axios'
 
 
-class FormSignUp extends React.Component {
+class SignUp extends React.Component {
   state = {
     id: 1,
     name: '',
@@ -13,7 +13,9 @@ class FormSignUp extends React.Component {
     confirmPassword: '',
     userType: 'clients',
     terms: false,
-    errors: {},
+    errors: {
+      account: '',
+    },
   };
 
   handleChange = (e) => {
@@ -36,7 +38,7 @@ class FormSignUp extends React.Component {
         terms: false,
       })
     }  
-    
+
     try {
       const { name, password, email, userType, terms } = this.state;
       const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
@@ -46,10 +48,11 @@ class FormSignUp extends React.Component {
         url: `/${isUserType}/sign-up`,
         data: { name, password, email, terms }
       });
-      console.log(token)
       localStorage.setItem('token', token);
     } catch(err) {
-      // this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
+        const { errors } = this.state
+        errors['account'] = 'Usuario invalido, no se creo cuenta'
+        this.setState({ errors });
     }
     
     const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
@@ -57,22 +60,25 @@ class FormSignUp extends React.Component {
   };
 
   validate() {
-    const { password, confirmPassword, errors} = this.state;
+    const { password, confirmPassword, errors } = this.state;
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
     if( !arePasswordEqual ) {
-      errors['password'] = 'La contraseña no coincide';
-    }
-
-    this.setState( {errors} );
+        errors['password'] = 'La contraseña no coincide'
+        }
+    this.setState({ errors });
   };
 
   render () {
-    const { name, email, password, confirmPassword, userType, terms} = this.state
+    const { errors } = this.state
     return(
-      <FormSignUp></FormSignUp>
+      <>
+        <FormSignUp
+          errors={errors.password}
+        />
+      </>
     )
   }
 }
 
-export default FormSignUp
+export default SignUp
