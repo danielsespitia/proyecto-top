@@ -29,8 +29,8 @@ function App () {
         <Route exact path="/sign-in" component={FormSignIn}/>
         <Route exact path="/sanitary-register" component={SanitaryRegister}/>
         <Route exact path="/client-profile" component={ClientProfile}/>
-        <Route exact path='/restaurant-profile' component={RestaurantForm}/>
-        <Route exact path="/your-profile" component={RestaurantProfile}/>
+        <Route exact path='/restaurant-profile/edit' component={RestaurantForm}/>
+        <Route exact path="/restaurant-profile" component={RestaurantProfile}/>
         <Route exact path="/restaurants" component={Restaurants}/>
         <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
         <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
