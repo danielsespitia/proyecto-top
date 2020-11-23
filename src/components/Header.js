@@ -1,7 +1,7 @@
 import Logo from '../image/Logo.png';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import ButtonPrimary from './styled/ButtonPrimary'
+import ButtonPrimary from './styled/ButtonPrimary';
 
 const ContainerHeader = styled.header`
   display: flex;
