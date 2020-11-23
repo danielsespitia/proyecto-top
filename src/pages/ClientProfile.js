@@ -111,24 +111,6 @@ class ClientProfile extends React.Component{
     data: '',
   }
 
-  async componentDidMount() {
-    try {
-      const token = localStorage.getItem('token')
-      const { data } = await axios({
-        method: 'GET',
-        baseURL: 'http://localhost:8080',
-        url: '/clients/',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      this.setState({ data })
-    } catch(err) {
-      localStorage.removeItem('token');
-      this.props.history.push('/')
-    }
-  }
-
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
