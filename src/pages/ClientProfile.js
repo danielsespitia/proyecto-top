@@ -117,7 +117,7 @@ class ClientProfile extends React.Component{
       const { data } = await axios({
         method: 'GET',
         baseURL: 'http://localhost:8080',
-        url: '/clients/:clientId',
+        url: '/clients/',
         headers: {
           Authorization: `Bearer ${token}`,
         },

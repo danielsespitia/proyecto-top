@@ -82,10 +82,10 @@ class FormSignUp extends React.Component {
         url: `/${isUserType}/sign-up`,
         data: { name, password, email, terms }
       });
-      
-      localStorage.setItem('token', token)
+      console.log(token)
+      localStorage.setItem('token', 123);
     } catch(err) {
-      this.state.errors['account'] = 'Usuario invalido, no se creo cuenta'
+      // this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
     }
     
     const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
