@@ -13,9 +13,7 @@ class SignUp extends React.Component {
     confirmPassword: '',
     userType: 'clients',
     terms: false,
-    errors: {
-      account: '',
-    },
+    errors: {},
   };
 
   handleChange = (e) => {
@@ -70,11 +68,20 @@ class SignUp extends React.Component {
   };
 
   render () {
-    const { errors } = this.state
+    const { name, password, confirmPassword, email, userType, terms, errors } = this.state
     return(
       <>
         <FormSignUp
-          errors={errors.password}
+          name={name}
+          password={password}
+          confirmPassword={confirmPassword}
+          email={email}
+          userType={userType}
+          terms={terms}
+          handleSubmit={this.handleSubmit.bind(this)}
+          handleChange={this.handleChange}
+          errorsPassword={errors.password}
+          errorsAcount={errors.account}
         />
       </>
     )

@@ -46,12 +46,14 @@ export function FormSignUp ({
   terms,
   handleChange,
   handleSubmit,
-  errors,
+  errorsPassword,
+  errorsAcount,
 }) 
 {
   return (
     <ContainerContent>
       <h3>Bienvenido a #Alamesa</h3>
+      <Error>{errorsAcount}</Error>
       <Form onSubmit={handleSubmit}>
         <label
           className="Form__name-label"
@@ -117,7 +119,7 @@ export function FormSignUp ({
           placeholder="***********"
           required
         />
-        <Error>{errors}</Error>
+        <Error>{errorsPassword}</Error>
         
         <label
           className="Form__userType-label"
