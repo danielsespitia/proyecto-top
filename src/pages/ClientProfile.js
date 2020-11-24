@@ -108,13 +108,14 @@ const ButtonCancel = styled(ButtonPrimary)`
 class ClientProfile extends React.Component{
 
   state = {
-    data: {},
+    name: '',
+    data: '',
   }
 
   async componentDidMount() {
     try {
       const token = localStorage.getItem('token')
-      const { data } = await axios({
+      const {data: {data}} = await axios({
         method: 'GET',
         baseURL: 'http://localhost:8080',
         url: '/clients/profile',
@@ -122,8 +123,10 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      this.setState({ data })
-      //console.log('data del component didmount', data)
+      //console.log('data del axios:', data)
+      //console.log('prueba', data.name)
+      this.setState({data})
+      //console.log('state:' ,this.state.data)
     } catch(err) {
       localStorage.removeItem('token');
       this.props.history.push('/')
@@ -133,7 +136,7 @@ class ClientProfile extends React.Component{
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
-      [name]: value === '' ? '' : this.state.data
+      [name]: value === '' ? '' : this.state
     })
   };
 
@@ -142,9 +145,9 @@ class ClientProfile extends React.Component{
   };
 
   render(){
-    const { name } = this.state
-    console.log('data en el render',name)
-    console.log('solo name::', name)
+    const { name, email } = this.state.data
+    //console.log('del render:', data)
+    //console.log(data.name)
 
     return(
       <>
@@ -169,7 +172,7 @@ class ClientProfile extends React.Component{
                       type="text"
                       name="clientName"
                       autoComplete="on"
-                      //value={data.name}
+                      value={name}
                       onChange={this.handleChange}
                       placeholder="Nombre*"
                       required
@@ -195,6 +198,7 @@ class ClientProfile extends React.Component{
                       id="email"
                       type="email"
                       name="email"
+                      value={email}
                       autoComplete="on"
                       onChange={this.handleChange}
                       placeholder="Correo electrónico*"
