@@ -83,7 +83,7 @@ class FormSignUp extends React.Component {
         data: { name, password, email, terms }
       });
       console.log(token)
-      localStorage.setItem('token', 123);
+      localStorage.setItem('token', token);
     } catch(err) {
       // this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
     }
