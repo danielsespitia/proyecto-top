@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import Desktopstructure from '../components/styled/DesktopStructure';
 import ButtonPrimary from '../components/styled/ButtonPrimary';
-import YourProfile  from '../components/rpf/YourProfile';
+import RestProfile  from '../components/RestProfile';
 
 const RestLogo = styled.img `
   width: 100px;
@@ -62,10 +62,12 @@ const profileData =
     id: uuidv4(),
     restaurantName: 'Burguer Mania',
     address: 'Calle 5a #45-32',
+    email: 'burguermania@test.com',
     phone: '3205670231',
     scheduleFrom: '11:00',
     scheduleTo: '23:00',
     deposit: 30000,
+    nit: '532674567',
   }
 
 class RestaurantProfile extends Component {
@@ -89,14 +91,16 @@ class RestaurantProfile extends Component {
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
         </BodyLeft>
         <BodyRight>
-          <YourProfile
+          <RestProfile
             key={profileData.id}
             restaurantName={profileData.restaurantName}
             address={profileData.address}
+            email={profileData.email}
             phone={profileData.phone}
             scheduleFrom={profileData.scheduleFrom}
             scheduleTo={profileData.scheduleTo}
             deposit={profileData.deposit}
+            nit={profileData.nit}
           />
           <ContentButtons className="Profile__edit-span">
             <ButtonPrimary
