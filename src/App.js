@@ -9,8 +9,8 @@ from 'react-router-dom'
 import Header from './components/Header'
 import { Footer } from './components/Footer'
 import Home from './pages/Home'
-import FormSignUp from './pages/FormSignUp'
-import FormSignIn from './pages/FormSignIn'
+import SignUp from './pages/SignUp'
+import SignIn from './pages/SignIn'
 import SanitaryRegister from './pages/SanitaryRegister'
 import ClientProfile from './pages/ClientProfile'
 import RestaurantForm from './pages/RestaurantForm'
@@ -25,8 +25,8 @@ function App () {
     <Header></Header>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/sign-up" component={FormSignUp}/>
-        <Route exact path="/sign-in" component={FormSignIn}/>
+        <Route exact path="/sign-up" component={SignUp}/>
+        <Route exact path="/sign-in" component={SignIn}/>
         <Route exact path="/sanitary-register" component={SanitaryRegister}/>
         <Route exact path="/client-profile" component={ClientProfile}/>
         <Route exact path='/restaurant-profile/edit' component={RestaurantForm}/>
