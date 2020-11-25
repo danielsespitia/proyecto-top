@@ -11,13 +11,6 @@ class SignIn extends React.Component {
     password: '',
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-      this.setState({
-        message: 'Estas Logueado correctamente'
-      })
-  };
-
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({

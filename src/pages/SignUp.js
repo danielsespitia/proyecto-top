@@ -1,8 +1,11 @@
 import React from 'react'
 import { FormSignUp } from '../components/FormSignUp'
+import { AuthContext } from '../store/AuthContext'
 import axios from 'axios'
 
 class SignUp extends React.Component {
+  static contextType = AuthContext;
+
   state = {
     id: 1,
     name: '',
