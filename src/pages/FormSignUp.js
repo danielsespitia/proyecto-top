@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ContainerContent from '../components/styled/ContainerContent'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
+import axios from 'axios'
 
 const Form = styled.form ` 
   display: grid;
@@ -46,7 +47,7 @@ class FormSignUp extends React.Component {
     email:'',
     password: '',
     confirmPassword: '',
-    userType: '',
+    userType: 'clients',
     terms: false,
     errors: {},
   };
@@ -58,11 +59,10 @@ class FormSignUp extends React.Component {
     })
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     if(this.validate()) {
-      
-      this.setState({
+        this.setState({
         name: '',
         password: '',
         confirmPassword: '',
@@ -71,6 +71,22 @@ class FormSignUp extends React.Component {
         terms: false,
       })
     }
+    try {
+      const { name, password, email, userType, terms } = this.state;
+      const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
+      const { data: { token } } = await axios({
+        method: 'POST',
+        baseURL: 'http://localhost:8080',
+        url: `/${isUserType}/sign-up`,
+        data: { name, password, email, terms }
+      });
+      localStorage.setItem('token', token);
+    } catch(err) {
+      this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
+    }
+    
+    const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+    this.props.history.push(`${pathUser}`);
   };
 
   validate() {
@@ -168,10 +184,10 @@ class FormSignUp extends React.Component {
             onChange={this.handleChange}
             required
           >
-            <option value="cliente">
+            <option value="clients">
               Cliente
             </option>
-            <option value="restaurante">
+            <option value="restaurants">
               Restaurante
             </option>
           </Select>
