@@ -9,6 +9,7 @@ export function AuthProvider({ children }) {
   const handleLogin = () => {
     setIsAuthenticated(true)
     setCurrentUser('Profile')
+    this.props.history.push('/client-profile');
   }
 
   // handleSubmit = (e) => {
