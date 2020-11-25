@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import Logo from '../image/Logo.png';
+import { AuthContext } from '../store/AuthContext';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ButtonPrimary from './styled/ButtonPrimary';
@@ -73,6 +75,8 @@ const AnchorSingUp = styled(ButtonPrimary)`
 `;
 
 function Header() {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <ContainerHeader>
       <HeaderHome to="/">
@@ -88,12 +92,25 @@ function Header() {
           <NavigationMenuItem className="navigation__menu-item restaurant">
             <Anchor to="/restaurants">Restaurantes</Anchor>
           </NavigationMenuItem>
-          <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSingIn>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp as= {Link} to="/sign-up">Crear cuenta</AnchorSingUp>
-          </NavigationMenuItem>
+          {isAuthenticated ? (
+            <>
+              <NavigationMenuItem className="navigation__menu-item sign-in">
+                <AnchorSingIn as= {Link} to="/sign-in">Perfil</AnchorSingIn>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="navigation__menu-item sign-up">
+                <AnchorSingUp as= {Link} to="/sign-up">Cerrar sesión</AnchorSingUp>
+              </NavigationMenuItem>
+            </>
+          ): (
+            <>
+              <NavigationMenuItem className="navigation__menu-item sign-in">
+                <AnchorSingIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSingIn>
+              </NavigationMenuItem>
+              <NavigationMenuItem className="navigation__menu-item sign-up">
+                <AnchorSingUp as= {Link} to="/sign-up">Crear cuenta</AnchorSingUp>
+              </NavigationMenuItem>
+            </>
+          )}
         </NavigationMenu>
       </Navigation>
     </ContainerHeader>

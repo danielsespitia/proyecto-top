@@ -1,7 +1,9 @@
 import React from 'react' 
+import { AuthContext } from '../store/AuthContext'
 import { FormSignIn } from '../components/FormSignIn'
 
 class SignIn extends React.Component {
+  static contextType = AuthContext;
 
   state = {
     message: '',
@@ -31,7 +33,7 @@ class SignIn extends React.Component {
         email={email}
         password={password}
         handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
+        handleSubmit={this.context.handleLogin}
       />
     )
   }

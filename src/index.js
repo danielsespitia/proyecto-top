@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {AuthContext } from './store/AuthContext';
 import { ThemeProvider } from 'styled-components'
 import theme from './config/theme'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <AuthContext.Consumer>
+        <App />
+      </AuthContext.Consumer>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
