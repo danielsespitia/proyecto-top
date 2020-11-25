@@ -1,5 +1,6 @@
 import React from 'react'
 import { FormSignUp } from '../components/FormSignUp'
+import axios from 'axios'
 
 class SignUp extends React.Component {
   state = {
@@ -34,6 +35,23 @@ class SignUp extends React.Component {
         terms: false,
       })
     }  
+
+    try {
+      const { name, password, email, userType, terms } = this.state;
+      const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
+      const { data: { token } } = await axios({
+        method: 'POST',
+        baseURL: 'http://localhost:8080',
+        url: `/${isUserType}/sign-up`,
+        data: { name, password, email, terms }
+      });
+      localStorage.setItem('token', token);
+    } catch(err) {
+      this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
+    }
+    
+    const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+    this.props.history.push(`${pathUser}`);
   };
 
   validate() {
