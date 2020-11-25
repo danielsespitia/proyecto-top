@@ -259,7 +259,7 @@ class ClientProfile extends React.Component{
                   name="payType"
                   onChange={this.handleChange}
                   required
-            >   
+                >   
                   <option value="payType">
                     Efectivo
                   </option>
