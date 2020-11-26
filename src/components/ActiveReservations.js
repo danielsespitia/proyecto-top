@@ -30,8 +30,8 @@ const ProfilePicture = styled.img `
 `;
 
 const TextContainer = styled.div `
-margin-top: 0.5rem;
-margin-right: 3rem;
+  margin-top: 0.5rem;
+  margin-right: 3rem;
 `;
 
 const TextItem = styled.p `
