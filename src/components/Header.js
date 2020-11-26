@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Logo from '../image/Logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../store/AuthContext';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -125,7 +126,7 @@ function Header() {
             <ContainerActions>
               <AnchorProfile as= {Link} to="/client-profile">
                 <HeaderHomeLogo className="header__home-logo">
-                  <Img src={Logo} alt="Perfil usuario" />
+                  <FontAwesomeIcon icon="user-circle"/>
                 </HeaderHomeLogo>
               </AnchorProfile>
               <AnchorLogout as= {Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
