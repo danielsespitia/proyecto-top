@@ -25,7 +25,6 @@ class SignUp extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     if(this.validate()) {
-      
       this.setState({
         name: '',
         password: '',
@@ -36,16 +35,15 @@ class SignUp extends React.Component {
       })
     }  
 
-    try {
-      const { name, password, email, userType, terms } = this.state;
-      const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
-      const { data: { token } } = await axios({
-        method: 'POST',
-        baseURL: 'http://localhost:8080',
-        url: `/${isUserType}/sign-up`,
-        data: { name, password, email, terms }
-      });
-      localStorage.setItem('token', token);
+  try {
+    const { name, password, email, userType, terms } = this.state;
+    const { data: { token } } = await axios({
+      method: 'POST',
+      baseURL: 'http://localhost:8080',
+      url: `/${userType}/sign-up`,
+      data: { name, password, email, userType, terms }
+    });
+    localStorage.setItem('token', token);
     } catch(err) {
       this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
     }
@@ -59,8 +57,8 @@ class SignUp extends React.Component {
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
     if( !arePasswordEqual ) {
-        errors['password'] = 'La contraseña no coincide'
-        }
+      errors['password'] = 'La contraseña no coincide'
+    }
     this.setState({ errors });
   };
 
