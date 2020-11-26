@@ -7,7 +7,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [currentUser, setCurrentUser] = useState('')
   const [message, setMessage] = useState('')
-  const [errors, setErrors] = useState({})
+  const [token, setToken] = useState(false)
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -16,40 +16,9 @@ export function AuthProvider({ children }) {
     setMessage('Estas Logueado correctamente')
   };
 
-  // const handleRegister = async (e) => {
-  //   e.preventDefault();
-  //   if(validate()) {
-      
-  //     try {
-  //       const { name, password, email, userType, terms } = this.state;
-  //       const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
-  //       const { data: { token } } = await axios({
-  //         method: 'POST',
-  //         baseURL: 'http://localhost:8080',
-  //         url: `/${isUserType}/sign-up`,
-  //         data: { name, password, email, terms }
-  //       });
-  //       localStorage.setItem('token', token);
-        
-  //       const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
-  //       this.props.history.push(`${pathUser}`);
-  //     } catch(err) {
-  //       setErrors['account'] = 'Usuario invalido, no se creo cuenta'
-  //     }
-  //   }  
-  // };
-
-  
-  // const validate = () => {
-  //   const { password, confirmPassword } = this.state;
-  //   const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
-
-  //   if( !arePasswordEqual ) {
-  //     setErrors['password'] = 'La contraseña no coincide'
-  //     return false
-  //   }
-  //   return true
-  // };
+  const handleRegister = async (e) => {
+    setToken(true)
+  };
 
   const logout = () => {
     setIsAuthenticated(false)
@@ -62,8 +31,9 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         currentUser,
         message,
-        errors,
+        token,
         handleLogin,
+        handleRegister,
         logout,
       }}
     >

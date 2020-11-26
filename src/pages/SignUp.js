@@ -50,7 +50,9 @@ class SignUp extends React.Component {
       });
       localStorage.setItem('token', token);
     } catch(err) {
-      this.setState.errors['account'] = 'Usuario invalido, no se creo cuenta'
+      const { errors } = this.state
+      errors['account'] = 'Usuario invalido, no se creo cuenta'
+      this.setState({errors})
     }
     
     const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';

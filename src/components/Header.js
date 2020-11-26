@@ -120,25 +120,25 @@ function Header() {
             </NavigationMenuItem>
           </NavigationMenu>
         </Navigation>
-            {isAuthenticated ? (
-              <>
-                <ContainerActions>
-                  <AnchorProfile as= {Link} to="/client-profile">
-                    <HeaderHomeLogo className="header__home-logo">
-                      <Img src={Logo} alt="Perfil usuario" />
-                    </HeaderHomeLogo>
-                  </AnchorProfile>
-                  <AnchorLogout as= {Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
-                </ContainerActions>
-              </>
-            ): (
-              <>
-                <ContainerActions>
-                  <AnchorSignIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSignIn>
-                  <AnchorSignUp as= {Link} to="/sign-up">Crear cuenta</AnchorSignUp>
-                </ContainerActions>
-              </>
-            )}
+        {isAuthenticated ? (
+          <>
+            <ContainerActions>
+              <AnchorProfile as= {Link} to="/client-profile">
+                <HeaderHomeLogo className="header__home-logo">
+                  <Img src={Logo} alt="Perfil usuario" />
+                </HeaderHomeLogo>
+              </AnchorProfile>
+              <AnchorLogout as= {Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
+            </ContainerActions>
+          </>
+        ): (
+          <>
+            <ContainerActions>
+              <AnchorSignIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSignIn>
+              <AnchorSignUp as= {Link} to="/sign-up">Crear cuenta</AnchorSignUp>
+            </ContainerActions>
+          </>
+        )}
       </ContainerNavActions>
     </ContainerHeader>
   );
