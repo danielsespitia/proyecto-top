@@ -27,37 +27,29 @@ class SignUp extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    const { errors } = this.state
     if (this.validate()) {
 
-      this.setState({
-        name: '',
-        password: '',
-        confirmPassword: '',
-        email: '',
-        userType: '',
-        terms: false,
-      })
+      try {
+        const { name, password, email, userType, terms } = this.state;
+        const isUserType = userType === 'clients' ? 'clients' : 'restaurants';
+        const { data: { token } } = await axios({
+          method: 'POST',
+          baseURL: 'http://localhost:8080',
+          url: `/${isUserType}/sign-up`,
+          data: { name, password, email, terms }
+        });
+        localStorage.setItem('token', token);
+        this.context.handleRegister(token);
+        const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+        this.props.history.push(`${pathUser}`);
+      } catch (err) {
+        const { errors } = this.state
+        errors['account'] = 'Usuario invalido, no se creo cuenta'
+        this.setState({ errors })
+      }
     }
-
-    try {
-      const { name, password, email, userType, terms } = this.state;
-      const isUserType = userType === 'clients' ? 'clients' : 'restaurants';
-      const { data: { token } } = await axios({
-        method: 'POST',
-        baseURL: 'http://localhost:8080',
-        url: `/${isUserType}/sign-up`,
-        data: { name, password, email, terms }
-      });
-      localStorage.setItem('token', token);
-      this.context.handleRegister(token)
-    } catch (err) {
-      const { errors } = this.state
-      errors['account'] = 'Usuario invalido, no se creo cuenta'
-      this.setState({ errors })
-    }
-
-    const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
-    this.props.history.push(`${pathUser}`);
+    this.setState({ errors });
   };
 
   validate() {
@@ -68,7 +60,6 @@ class SignUp extends React.Component {
       errors['password'] = 'La contraseña no coincide'
       return false
     }
-    this.setState({ errors });
     return true
   };
 
