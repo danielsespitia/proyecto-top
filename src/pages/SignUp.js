@@ -10,7 +10,7 @@ class SignUp extends React.Component {
     id: 1,
     name: '',
     lastName: '',
-    email:'',
+    email: '',
     password: '',
     confirmPassword: '',
     userType: 'clients',
@@ -19,7 +19,7 @@ class SignUp extends React.Component {
   };
 
   handleChange = (e) => {
-    const { name, value, type, checked} = e.target;
+    const { name, value, type, checked } = e.target;
     this.setState({
       [name]: type === 'checkbox' ? checked : value
     })
@@ -27,21 +27,21 @@ class SignUp extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    if(this.validate()) {
-      
+    if (this.validate()) {
+
       this.setState({
         name: '',
         password: '',
         confirmPassword: '',
-        email:'',
+        email: '',
         userType: '',
         terms: false,
       })
-    }  
+    }
 
     try {
       const { name, password, email, userType, terms } = this.state;
-      const isUserType = userType === 'clients' ? 'clients' : 'restaurants'; 
+      const isUserType = userType === 'clients' ? 'clients' : 'restaurants';
       const { data: { token } } = await axios({
         method: 'POST',
         baseURL: 'http://localhost:8080',
@@ -49,12 +49,13 @@ class SignUp extends React.Component {
         data: { name, password, email, terms }
       });
       localStorage.setItem('token', token);
-    } catch(err) {
+      this.context.handleRegister(token)
+    } catch (err) {
       const { errors } = this.state
       errors['account'] = 'Usuario invalido, no se creo cuenta'
-      this.setState({errors})
+      this.setState({ errors })
     }
-    
+
     const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
     this.props.history.push(`${pathUser}`);
   };
@@ -63,15 +64,17 @@ class SignUp extends React.Component {
     const { password, confirmPassword, errors } = this.state;
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
-    if( !arePasswordEqual ) {
-        errors['password'] = 'La contraseña no coincide'
-        }
+    if (!arePasswordEqual) {
+      errors['password'] = 'La contraseña no coincide'
+      return false
+    }
     this.setState({ errors });
+    return true
   };
 
-  render () {
+  render() {
     const { name, password, confirmPassword, email, userType, terms, errors } = this.state
-    return(
+    return (
       <>
         <FormSignUp
           name={name}

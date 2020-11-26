@@ -4,34 +4,31 @@ import axios from 'axios'
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [token, setToken] = useState(false)
   const [currentUser, setCurrentUser] = useState('')
   const [message, setMessage] = useState('')
-  const [token, setToken] = useState(false)
 
   const handleLogin = (e) => {
     e.preventDefault()
-    setIsAuthenticated(true)
+    setToken(true)
     setCurrentUser('Profile')
     setMessage('Estas Logueado correctamente')
   };
 
-  const handleRegister = async (e) => {
-    setToken(true)
+  const handleRegister = (token) => {
+    setToken(token)
   };
 
   const logout = () => {
-    setIsAuthenticated(false)
-    setCurrentUser(null)
+    setToken(null)
   };
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated,
+        token,
         currentUser,
         message,
-        token,
         handleLogin,
         handleRegister,
         logout,

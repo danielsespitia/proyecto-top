@@ -60,25 +60,21 @@ const Anchor = styled(Link)`
 `;
 
 const AnchorSignIn = styled(ButtonPrimary)`
-  background-color: ${
-  props => props.theme.secundaryColor
+  background-color: ${props => props.theme.secundaryColor
   };
   
   margin-right: 17px;
 
   &:hover {
-    background-color: ${
-      props => props.theme.secundaryColorBlur
-    };
-    border: 1px solid ${
-      props => props.theme.secundaryColor
-    };
+    background-color: ${props => props.theme.secundaryColorBlur
+  };
+    border: 1px solid ${props => props.theme.secundaryColor
+  };
   }
 `;
 
 const AnchorSignUp = styled(ButtonPrimary)`
-  background-color: ${
-  props => props.theme.primaryColor
+  background-color: ${props => props.theme.primaryColor
   };
 
   margin-right: 40px;
@@ -94,14 +90,13 @@ const AnchorProfile = styled(Anchor)`
 `;
 
 const AnchorLogout = styled(ButtonPrimary)`
-  background-color: ${
-    props => props.theme.primaryColorBlur
+  background-color: ${props => props.theme.primaryColorBlur
   };
   margin-right: 40px;
 `;
 
 function Header() {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
 
   return (
     <ContainerHeader>
@@ -121,25 +116,25 @@ function Header() {
             </NavigationMenuItem>
           </NavigationMenu>
         </Navigation>
-        {isAuthenticated ? (
+        {token ? (
           <>
             <ContainerActions>
-              <AnchorProfile as= {Link} to="/client-profile">
+              <AnchorProfile as={Link} to="/client-profile">
                 <HeaderHomeLogo className="header__home-logo">
-                  <FontAwesomeIcon icon="user-circle"/>
+                  <FontAwesomeIcon icon="user-circle" />
                 </HeaderHomeLogo>
               </AnchorProfile>
-              <AnchorLogout as= {Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
+              <AnchorLogout as={Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
             </ContainerActions>
           </>
-        ): (
-          <>
-            <ContainerActions>
-              <AnchorSignIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSignIn>
-              <AnchorSignUp as= {Link} to="/sign-up">Crear cuenta</AnchorSignUp>
-            </ContainerActions>
-          </>
-        )}
+        ) : (
+            <>
+              <ContainerActions>
+                <AnchorSignIn as={Link} to="/sign-in">Iniciar sesión</AnchorSignIn>
+                <AnchorSignUp as={Link} to="/sign-up">Crear cuenta</AnchorSignUp>
+              </ContainerActions>
+            </>
+          )}
       </ContainerNavActions>
     </ContainerHeader>
   );
