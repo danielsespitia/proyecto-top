@@ -110,7 +110,9 @@ export function ClientProfileForm({
   phone,
   identification,
   birthday,
-  parType,
+  payType,
+  handleChange,
+  handleSummit,
 })
 {
     return(
@@ -126,7 +128,7 @@ export function ClientProfileForm({
             />
           </BodyLeft>
           <BodyRight>
-            <Form>
+            <Form onSubmit={handleSummit}>
               <Form__item>
                 <label>Nombre</label>
                 <Input
@@ -136,7 +138,7 @@ export function ClientProfileForm({
                   name="clientName"
                   value={name}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Nombre*"
                   required
                 />
@@ -148,9 +150,9 @@ export function ClientProfileForm({
                   id="lastName"
                   type="text"
                   name="lastName"
-                  value="lastName"
+                  value={lastName}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Apellido*"
                   required
                 />
@@ -164,7 +166,7 @@ export function ClientProfileForm({
                   name="email"
                   value={email}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Correo electrónico*"
                   required
                 />
@@ -176,9 +178,9 @@ export function ClientProfileForm({
                   id="address"
                   type="text"
                   name="address"
-                  value="address"
+                  value={address}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Dirección"
                 />
               </Form__item>
@@ -189,9 +191,9 @@ export function ClientProfileForm({
                   id="phone"
                   type="text"
                   name="phone"
-                  value="phone"
+                  value={phone}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Número de telefono"
                 />
               </Form__item>
@@ -202,9 +204,9 @@ export function ClientProfileForm({
                   id="identification"
                   type="text"
                   name="identification"
-                  value="identification"
+                  value={identification}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   placeholder="Número de identificación"
                 />
               </Form__item>
@@ -215,9 +217,9 @@ export function ClientProfileForm({
                   id="birthday"
                   type="date"
                   name="birthday"
-                  value="birthday"
+                  value={birthday}
                   autoComplete="on"
-                  onChange={this.handleChange}
+                  onChange={handleChange}
                   required
                 />
               </Form__item>
@@ -244,7 +246,6 @@ export function ClientProfileForm({
                 className="ButtonUpdate"
                 id="ButtonUpdate"
                 type="submit"
-                onSubmit={handleSubmit}
                 value="Actualizar"
               >
               </ButtonUpdate>
@@ -252,7 +253,6 @@ export function ClientProfileForm({
                 className="ButtonCancel"
                 id="ButtonCancel"
                 type="submit"
-                onSubmit={handleSubmit}
                 value="Cancelar"
               >
               </ButtonCancel>
