@@ -13,6 +13,13 @@ const Form = styled.form `
   grid-row-gap: 12px;
   margin-top: 12px;
 `;
+const Select = styled.select ` 
+  padding: 10.5px;
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  font-size: 16px;
+  color: #6c757d;
+`;
 
 const ContainerButton = styled.span `
   text-align: center;
@@ -58,6 +65,7 @@ const Message = styled.span `
 export function FormSignIn ({
   email, 
   password,
+  userType, 
   handleSubmit,
   handleChange,
   message
@@ -97,6 +105,25 @@ export function FormSignIn ({
           placeholder="***********"
           required
         />
+        <label
+          className="Form__userType-label-signIn"
+        >
+          Tipo de usuario:
+        </label>
+        <Select
+          id="userType"
+          name="userType"
+          value={userType}
+          onChange={handleChange}
+          required
+        >
+          <option value="clients">
+            Cliente
+          </option>
+          <option value="restaurants">
+            Restaurante
+          </option>
+        </Select>
         <ContainerButton className="Form__subtmit-span">
           <ButtonSecundary
             className="Form__submit-input"
