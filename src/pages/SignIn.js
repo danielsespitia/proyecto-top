@@ -13,9 +13,7 @@ class SignIn extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefatult()
-    const token = true
     this.context.isAuthenticated(token)
-    console.log(token)
   }
 
   handleChange = (e) => {
