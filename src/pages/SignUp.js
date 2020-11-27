@@ -26,7 +26,6 @@ class SignUp extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { errors } = this.state
     if (this.validate()) {
       try {
         const { name, password, email, userType, terms } = this.state;
@@ -38,16 +37,15 @@ class SignUp extends React.Component {
           data: { name, password, email, terms }
         });
         localStorage.setItem('token', token);
-        this.context.register(token);
+        this.context.isAuthenticated(token);
         const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
         this.props.history.push(`${pathUser}`);
       } catch (err) {
         const { errors } = this.state
-        errors['account'] = 'Usuario invalido, no se creo cuenta'
-        this.setState({ errors })
+        const newError = { ...errors, account: 'Usuario invalido, no se creo cuenta' }
+        this.setState({ errors: newError })
       }
     }
-    this.setState({ errors });
   };
 
   validate() {
@@ -55,7 +53,8 @@ class SignUp extends React.Component {
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
     if (!arePasswordEqual) {
-      errors['password'] = 'La contraseña no coincide'
+      const newError = { ...errors, password: 'La contraseña no coincide'}
+      this.setState({ errors: newError })
       return false
     }
     return true

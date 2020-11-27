@@ -14,7 +14,7 @@ class SignIn extends React.Component {
   handleSubmit = (e) => {
     e.preventDefatult()
     const token = true
-    this.context.handleLogin(token)
+    this.context.isAuthenticated(token)
     console.log(token)
   }
 
@@ -33,7 +33,7 @@ class SignIn extends React.Component {
         email={email}
         password={password}
         handleChange={this.handleChange}
-        handleSubmit={this.context.handleSubmit}
+        handleSubmit={this.handleSubmit}
       />
     )
   }
