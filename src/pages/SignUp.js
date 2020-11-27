@@ -29,11 +29,10 @@ class SignUp extends React.Component {
     if (this.validate()) {
       try {
         const { name, password, email, userType, terms } = this.state;
-        const isUserType = userType === 'clients' ? 'clients' : 'restaurants';
         const { data: { token } } = await axios({
           method: 'POST',
           baseURL: 'http://localhost:8080',
-          url: `/${isUserType}/sign-up`,
+          url: `/${userType}/sign-up`,
           data: { name, password, email, terms }
         });
         localStorage.setItem('token', token);
