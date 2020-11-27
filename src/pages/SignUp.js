@@ -7,7 +7,6 @@ class SignUp extends React.Component {
   static contextType = AuthContext;
 
   state = {
-    id: 1,
     name: '',
     lastName: '',
     email: '',

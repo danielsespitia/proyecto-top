@@ -1,31 +1,33 @@
-import { createContext, useState } from 'react'
-import axios from 'axios'
+import { createContext, useState, useEffect, } from 'react'
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(false)
+  const [isToken, setIsToken] = useState('')
   const [message, setMessage] = useState('')
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    setToken(true)
+  const handleLogin = (token) => {
+    setIsToken(token)
     setMessage('Estas logueado correctamente')
   };
 
   const handleRegister = (token) => {
-    setToken(token)
+    setIsToken(token)
     setMessage('Estas logueado correctamente')
   };
 
+  useEffect((handleRegister) => {
+    localStorage.setItem('token', isToken)
+  }, []);
+
   const logout = () => {
-    setToken(null)
+    setIsToken(null)
   };
 
   return (
     <AuthContext.Provider
       value={{
-        token,
+        isToken,
         message,
         handleLogin,
         handleRegister,

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {AuthContext, AuthProvider } from './store/AuthContext';
+import { AuthProvider } from './store/AuthContext';
 import { ThemeProvider } from 'styled-components'
 import theme from './config/theme'
 

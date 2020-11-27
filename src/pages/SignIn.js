@@ -1,4 +1,4 @@
-import React from 'react' 
+import React from 'react'
 import { AuthContext } from '../store/AuthContext'
 import { FormSignIn } from '../components/FormSignIn'
 
@@ -11,6 +11,13 @@ class SignIn extends React.Component {
     password: '',
   };
 
+  handleSubmit = (e) => {
+    e.preventDefatult()
+    const token = true
+    this.context.handleLogin(token)
+    console.log(token)
+  }
+
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
@@ -20,13 +27,13 @@ class SignIn extends React.Component {
 
   render() {
     const { message, email, password } = this.state
-    return(
+    return (
       <FormSignIn
         message={message}
         email={email}
         password={password}
         handleChange={this.handleChange}
-        handleSubmit={this.context.handleLogin}
+        handleSubmit={this.context.handleSubmit}
       />
     )
   }

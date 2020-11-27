@@ -96,7 +96,7 @@ const AnchorLogout = styled(ButtonPrimary)`
 `;
 
 function Header() {
-  const { token, logout } = useContext(AuthContext);
+  const { isToken, logout } = useContext(AuthContext);
 
   return (
     <ContainerHeader>
@@ -116,7 +116,7 @@ function Header() {
             </NavigationMenuItem>
           </NavigationMenu>
         </Navigation>
-        {token ? (
+        {isToken ? (
           <>
             <ContainerActions>
               <AnchorProfile as={Link} to="/client-profile">
