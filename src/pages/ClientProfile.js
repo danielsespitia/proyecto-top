@@ -5,7 +5,16 @@ import { ClientProfileForm } from '../components/ClientProfileForm'
 class ClientProfile extends React.Component{
 
   state = {
-    profileData: {}
+    _id: '',
+    name: '',
+    lastName: '',
+    email: '',
+    address: '',
+    phone: '',
+    identification: '',
+    birthday: '', 
+    payType: '', 
+    //profileData: {}
   }
 
   async componentDidMount() {
@@ -19,7 +28,8 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      this.setState({ profileData: data })
+      const { name, email, _id } = data
+      this.setState( {name, email, _id} )
     } catch(err) {
       localStorage.removeItem('token');
       this.props.history.push('/')
@@ -35,9 +45,53 @@ class ClientProfile extends React.Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log('onSubmit')
+
+    // try {
+    //   console.log("aquí voy")
+    //   const { 
+    //     name,
+    //     lastName,
+    //     email,
+    //     address,
+    //     phone,
+    //     identification,
+    //     birthday, 
+    //     payType 
+    //   } = this.state
+    //   await axios({
+    //     method: 'PUT',
+    //     baseURL: 'http://localhost:8080',
+    //     url: `/clients`,
+    //     data: {
+    //       name,
+    //       lastName,
+    //       email,
+    //       address,
+    //       phone,
+    //       identification,
+    //       birthday, 
+    //       payType,
+    //     }
+    //   });
+    //   console.log('Actualización exitosa')
+    // }catch(err) {
+    //   console.log('Actualización fallida')
+    // }
+  };
+  handleUpdate = (e) => {
+    e.preventDefault();
+    console.log('Actualizar')
+  };
+
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log('onClick')
   };
 
   render(){
+    console.log(this.state)
+
     const { 
       name,
       lastName,
@@ -47,7 +101,8 @@ class ClientProfile extends React.Component{
       identification,
       birthday, 
       payType 
-    } = this.state.profileData
+    } = this.state
+
 
     return(
      <ClientProfileForm
@@ -60,7 +115,9 @@ class ClientProfile extends React.Component{
       birthday = {birthday}
       payType = {payType}
       handleChange = {this.handleChange}
-      handleSummit = {this.handleSubmit}
+      handleSubmit = {this.handleSubmit.bind(this)}
+      handleUpdate = {this.handleUpdate.bind(this)}
+      handleClick = {this.handleClick.bind(this)}
       >
      </ClientProfileForm>
     )
