@@ -123,7 +123,6 @@ class ClientProfile extends React.Component{
         },
       });
       this.setState({ profileData: data })
-      localStorage.removeItem('token');
     } catch(err) {
       localStorage.removeItem('token');
       this.props.history.push('/')

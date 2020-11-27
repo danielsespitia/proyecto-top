@@ -19,14 +19,13 @@ class SignIn extends React.Component {
         method: 'POST',
         baseURL: 'http://localhost:8080',
         url: `/${userType}/sign-in`,
-        data: { email, password }
+        data: { email, password, userType }
       });
       localStorage.setItem( 'token', token )
     }catch(error){
       this.setState({message: 'usuario invalido'})
-      console.log(this.state.message)
 
-      //this.setState.error['accounts'] = 'Usuario invalido, no se creo cuenta'
+      this.setState.error['accounts'] = 'Usuario invalido, no se creo cuenta'
     }
 
     const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile'
