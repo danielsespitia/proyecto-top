@@ -1,7 +1,9 @@
-import React from 'react' 
+import React from 'react'
+import { AuthContext } from '../store/AuthContext'
 import { FormSignIn } from '../components/FormSignIn'
 
 class SignIn extends React.Component {
+  static contextType = AuthContext;
 
   state = {
     message: '',
@@ -10,10 +12,8 @@ class SignIn extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-      this.setState({
-        message: 'Estas Logueado correctamente'
-      })
+    e.preventDefatult()
+    this.context.isAuthenticated(token)
   };
 
   handleChange = (e) => {
@@ -25,7 +25,7 @@ class SignIn extends React.Component {
 
   render() {
     const { message, email, password } = this.state
-    return(
+    return (
       <FormSignIn
         message={message}
         email={email}
