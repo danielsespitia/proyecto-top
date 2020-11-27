@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     setMessage('Estas logueado correctamente')
   };
 
-  const handleRegister = (token) => {
+  const register = (token) => {
     setIsToken(token)
     setMessage('Estas logueado correctamente')
   };
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
         isToken,
         message,
         handleLogin,
-        handleRegister,
+        register,
         logout,
       }}
     >

@@ -28,7 +28,6 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { errors } = this.state
     if (this.validate()) {
-
       try {
         const { name, password, email, userType, terms } = this.state;
         const isUserType = userType === 'clients' ? 'clients' : 'restaurants';
@@ -39,7 +38,7 @@ class SignUp extends React.Component {
           data: { name, password, email, terms }
         });
         localStorage.setItem('token', token);
-        this.context.handleRegister(token);
+        this.context.register(token);
         const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
         this.props.history.push(`${pathUser}`);
       } catch (err) {
