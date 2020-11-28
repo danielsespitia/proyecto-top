@@ -93,7 +93,7 @@ export function FormSignIn ({
         <Input
           id="email"
           name="email"
-          type="text"
+          type="email"
           onChange={handleChange}
           value={email}
           placeholder="Correo electronico"

@@ -34,7 +34,7 @@ class SignIn extends React.Component {
     }catch(error){
       localStorage.removeItem('token')
       const { errors } = this.state
-      const newError = { ...errors, signin: 'Usuario o password incorrectos'}
+      const newError = { ...errors, signin: 'Usuario o contraseña incorrectos'}
       this.setState({ errors: newError })
     }
   };
