@@ -1,8 +1,10 @@
 import React from 'react'
 import axios from 'axios'
 import { ClientProfileForm } from '../components/ClientProfileForm'
+import { AuthContext } from '../store/AuthContext'
 
 class ClientProfile extends React.Component{
+  static contextType = AuthContext;
 
   state = {
     _id: '',
@@ -13,9 +15,8 @@ class ClientProfile extends React.Component{
     phone: '',
     identification: '',
     birthday: '', 
-    payType: '', 
-    //profileData: {}
-  }
+    payType: '',
+  };
 
   async componentDidMount() {
     try {
@@ -62,7 +63,7 @@ class ClientProfile extends React.Component{
       phone,
       identification,
       birthday, 
-      payType 
+      payType,
     } = this.state
 
 

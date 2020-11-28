@@ -2,13 +2,15 @@ import React from 'react'
 import ReactDom from 'react-dom'
 
 function Modal(props) {
-  if(!props.isOpen){
+  if(!props.IsOpen){
     return null
   }
   return ReactDom.createPortal(
     <div>
       <div>
-        <button>
+        <button 
+          onClick={props.OnCloseModal}
+        >
           X
         </button>
         {props.children}
