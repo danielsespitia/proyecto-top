@@ -45,17 +45,14 @@ class ClientProfile extends React.Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulario enviado')
   };
 
 
   handleDeleteClient = (e) => {
     e.preventDefault();
-    console.log('Cliente eliminado')
   };
 
   render(){
-    console.log(this.state)
 
     const { 
       name,
