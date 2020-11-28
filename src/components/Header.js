@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import Logo from '../image/Logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AuthContext } from '../store/AuthContext';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ButtonPrimary from './styled/ButtonPrimary';
@@ -15,6 +18,7 @@ const HeaderHome = styled(Link)`
   width: 40vw;
   margin: 0 40px;
   align-items: center;
+  justify-content: flex-start;
 `;
 
 const Img = styled.img`
@@ -36,11 +40,15 @@ const NavigationMenu = styled.ul`
 `;
 
 const NavigationMenuItem = styled.li`
-  margin-right: 17px;
+  margin-right: 0px;
+`;
+
+const ContainerNavActions = styled.div` 
+  display: flex;
 `;
 
 const Navigation = styled.nav`
-  margin-right: 40px;
+  margin-right: 17px;
   padding: 5px 0;
 `;
 
@@ -51,28 +59,45 @@ const Anchor = styled(Link)`
   font-weight: 700;
 `;
 
-const AnchorSingIn = styled(ButtonPrimary)`
-  background-color: ${
-  props => props.theme.secundaryColor
+const AnchorSignIn = styled(ButtonPrimary)`
+  background-color: ${props => props.theme.secundaryColor
   };
+  
+  margin-right: 17px;
 
   &:hover {
-    background-color: ${
-      props => props.theme.secundaryColorBlur
-    };
-    border: 1px solid ${
-      props => props.theme.secundaryColor
-    };
+    background-color: ${props => props.theme.secundaryColorBlur
+  };
+    border: 1px solid ${props => props.theme.secundaryColor
+  };
   }
 `;
 
-const AnchorSingUp = styled(ButtonPrimary)`
-  background-color: ${
-  props => props.theme.primaryColor
+const AnchorSignUp = styled(ButtonPrimary)`
+  background-color: ${props => props.theme.primaryColor
   };
+
+  margin-right: 40px;
+`;
+
+const ContainerActions = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+const AnchorProfile = styled(Anchor)`
+  margin-right: 17px;
+`;
+
+const AnchorLogout = styled(ButtonPrimary)`
+  background-color: ${props => props.theme.primaryColorBlur
+  };
+  margin-right: 40px;
 `;
 
 function Header() {
+  const { isToken, logout } = useContext(AuthContext);
+
   return (
     <ContainerHeader>
       <HeaderHome to="/">
@@ -83,19 +108,34 @@ function Header() {
           # Alamesa
         </HeaderHomeSlogan>
       </HeaderHome>
-      <Navigation className="navigation">
-        <NavigationMenu>
-          <NavigationMenuItem className="navigation__menu-item restaurant">
-            <Anchor to="/restaurants">Restaurantes</Anchor>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="navigation__menu-item sign-in">
-            <AnchorSingIn as= {Link} to="/sign-in">Iniciar sesión</AnchorSingIn>
-          </NavigationMenuItem>
-          <NavigationMenuItem className="navigation__menu-item sign-up">
-            <AnchorSingUp as= {Link} to="/sign-up">Crear cuenta</AnchorSingUp>
-          </NavigationMenuItem>
-        </NavigationMenu>
-      </Navigation>
+      <ContainerNavActions>
+        <Navigation className="navigation">
+          <NavigationMenu>
+            <NavigationMenuItem className="navigation__menu-item restaurant">
+              <Anchor to="/restaurants">Restaurantes</Anchor>
+            </NavigationMenuItem>
+          </NavigationMenu>
+        </Navigation>
+        {isToken ? (
+          <>
+            <ContainerActions>
+              <AnchorProfile as={Link} to="/client-profile">
+                <HeaderHomeLogo className="header__home-logo">
+                  <FontAwesomeIcon icon="user-circle" />
+                </HeaderHomeLogo>
+              </AnchorProfile>
+              <AnchorLogout as={Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
+            </ContainerActions>
+          </>
+        ) : (
+            <>
+              <ContainerActions>
+                <AnchorSignIn as={Link} to="/sign-in">Iniciar sesión</AnchorSignIn>
+                <AnchorSignUp as={Link} to="/sign-up">Crear cuenta</AnchorSignUp>
+              </ContainerActions>
+            </>
+          )}
+      </ContainerNavActions>
     </ContainerHeader>
   );
 }
