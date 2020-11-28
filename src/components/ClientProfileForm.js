@@ -113,7 +113,6 @@ export function ClientProfileForm({
   payType,
   handleChange,
   handleSubmit,
-  handleUpdate,
   handleClick,
 })
 {
@@ -130,7 +129,7 @@ export function ClientProfileForm({
             />
           </BodyLeft>
           <BodyRight>
-            <form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
               <FormItem>
                 <label>Nombre</label>
                 <Input
@@ -242,14 +241,13 @@ export function ClientProfileForm({
                   </option>
                 </Select>
               </FormItem>
-            </form>
+            </Form>
             <ContentButtons>
               <ButtonUpdate
                 className="ButtonUpdate"
                 id="ButtonUpdate"
                 type="submit"
-                value="Actualizar"
-                onClick={handleUpdate}                
+                value="Actualizar"             
               >
               </ButtonUpdate>
               <ButtonCancel

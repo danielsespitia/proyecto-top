@@ -14,7 +14,6 @@ class ClientProfile extends React.Component{
     identification: '',
     birthday: '', 
     payType: '', 
-    //profileData: {}
   }
 
   async componentDidMount() {
@@ -45,49 +44,8 @@ class ClientProfile extends React.Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('onSubmit')
-
-    // try {
-    //   console.log("aquí voy")
-    //   const { 
-    //     name,
-    //     lastName,
-    //     email,
-    //     address,
-    //     phone,
-    //     identification,
-    //     birthday, 
-    //     payType 
-    //   } = this.state
-    //   await axios({
-    //     method: 'PUT',
-    //     baseURL: 'http://localhost:8080',
-    //     url: `/clients`,
-    //     data: {
-    //       name,
-    //       lastName,
-    //       email,
-    //       address,
-    //       phone,
-    //       identification,
-    //       birthday, 
-    //       payType,
-    //     }
-    //   });
-    //   console.log('Actualización exitosa')
-    // }catch(err) {
-    //   console.log('Actualización fallida')
-    // }
-  };
-  handleUpdate = (e) => {
-    e.preventDefault();
-    console.log('Actualizar')
   };
 
-  handleClick = (e) => {
-    e.preventDefault();
-    console.log('onClick')
-  };
 
   render(){
     console.log(this.state)
@@ -116,8 +74,6 @@ class ClientProfile extends React.Component{
       payType = {payType}
       handleChange = {this.handleChange}
       handleSubmit = {this.handleSubmit.bind(this)}
-      handleUpdate = {this.handleUpdate.bind(this)}
-      handleClick = {this.handleClick.bind(this)}
       >
      </ClientProfileForm>
     )
