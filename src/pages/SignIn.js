@@ -1,8 +1,10 @@
-import React from 'react' 
+import React from 'react'
+import { AuthContext } from '../store/AuthContext'
 import { FormSignIn } from '../components/FormSignIn'
 import axios from 'axios'
 
 class SignIn extends React.Component {
+  static contextType = AuthContext;
 
   state = {
     message: '',
@@ -27,6 +29,7 @@ class SignIn extends React.Component {
       this.setState({
         message: 'Estas Logueado correctamente'
       })
+      this.context.isAuthenticated(token)
       this.props.history.push(`${pathUser}`)
     }catch(error){
       localStorage.removeItem('token')

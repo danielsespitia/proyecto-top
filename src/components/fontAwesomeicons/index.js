@@ -4,7 +4,8 @@ import {
   faClock, 
   faUser,
   faShoppingCart,
+  faUserCircle,
 } 
 from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCalendarAlt, faClock, faUser, faShoppingCart)
+library.add(faCalendarAlt, faClock, faUser, faShoppingCart, faUserCircle)
