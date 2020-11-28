@@ -90,7 +90,6 @@ class SanitaryRegister extends React.Component {
   };
 
   render() {
-    console.log(this.state)
     const { response1, response2, response3, response4, temperature } = this.state
     return (
       <ContainerList>
@@ -120,6 +119,12 @@ class SanitaryRegister extends React.Component {
           >
           </Checkbox>
         </Span>
+        <Span className="ContentQuestion"> 
+      <Span className="ContentQuestion"> 
+        <Span className="ContentQuestion"> 
+      <Span className="ContentQuestion"> 
+        <Span className="ContentQuestion"> 
+      <Span className="ContentQuestion"> 
         <Span className="ContentQuestion"> 
           <Paragraph>Hice un viaje internacional en los ultimos 30 días</Paragraph>
           <Checkbox
