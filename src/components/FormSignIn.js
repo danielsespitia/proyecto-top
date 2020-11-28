@@ -25,6 +25,12 @@ const ContainerButton = styled.span `
   text-align: center;
 `;
 
+const Error = styled.span `
+  font-size: 12px;
+  color: red;
+  font-style: italic;
+`;
+
 const ButtonSecundary = styled(ButtonPrimary)`
   background-color: ${
     props => props.theme.secundaryColor
@@ -68,7 +74,8 @@ export function FormSignIn ({
   userType, 
   handleSubmit,
   handleChange,
-  message
+  message, 
+  errorsSignin
 }) 
 {
   return(
@@ -77,6 +84,7 @@ export function FormSignIn ({
         Queremos volverte a reunir con tus seres queridos, alrededor de tus comidas favoritas.
       </h3>
       <Form onSubmit={handleSubmit}>
+        <Error>{ errorsSignin }</Error>
         <label
           htmlFor="email"
         >

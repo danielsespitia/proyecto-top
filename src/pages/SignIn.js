@@ -9,6 +9,7 @@ class SignIn extends React.Component {
     email: '',
     password: '',
     userType: 'clients',
+    errors: {},
   };
 
   handleSubmit = async (e) => {
@@ -22,18 +23,17 @@ class SignIn extends React.Component {
         data: { email, password, userType }
       });
       localStorage.setItem( 'token', token )
-    }catch(error){
-      this.setState({message: 'usuario invalido'})
-
-      this.setState.error['accounts'] = 'Usuario invalido, no se creo cuenta'
-    }
-
-    const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile'
-    this.props.history.push(`${pathUser}`)
-
+      const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile'
       this.setState({
         message: 'Estas Logueado correctamente'
       })
+      this.props.history.push(`${pathUser}`)
+    }catch(error){
+      localStorage.removeItem('token')
+      const { errors } = this.state
+      const newError = { ...errors, signin: 'Usuario o password incorrectos'}
+      this.setState({ errors: newError })
+    }
   };
 
   handleChange = (e) => {
@@ -44,13 +44,14 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { message, email, password, userType } = this.state
+    const { message, email, password, userType, errors } = this.state
     return(
       <FormSignIn
         message={message}
         email={email}
         password={password}
         userType={userType}
+        errorsSignin={errors.signin}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
       />
