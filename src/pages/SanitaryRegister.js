@@ -20,15 +20,12 @@ class SanitaryRegister extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Esta haciendo el Submit')
   };
 
   handleCancel = (e) => {
     e.preventDefault()
-    console.log('Esta cancelando')
   }
   render() {
-    console.log(this.state)
     const {
       question1SymptomsCovid,
       question2ContactWithPeople,
