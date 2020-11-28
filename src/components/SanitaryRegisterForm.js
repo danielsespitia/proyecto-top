@@ -2,10 +2,6 @@ import styled from 'styled-components'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
 
-const ContainerList = styled(ContainerContent)`
-
-`;
-
 const Form = styled.form`
   display: grid;
   justify-content: center;
@@ -81,7 +77,7 @@ export function SanitaryRegisterForm({
 })
 {
   return(
-    <ContainerList>
+    <ContainerContent>
       <H3>Registro Sanitario</H3>
       <H4>Selecciona los recuadros según tu estado:</H4>
       <Form onSubmit={handleSubmit}>
@@ -161,6 +157,6 @@ export function SanitaryRegisterForm({
           </ButtonCancel>
         </ContentButtons>
       </Form>
-    </ContainerList>
+    </ContainerContent>
   )
 }
