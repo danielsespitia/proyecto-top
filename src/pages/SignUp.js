@@ -33,7 +33,7 @@ class SignUp extends React.Component {
           method: 'POST',
           baseURL: 'http://localhost:8080',
           url: `/${userType}/sign-up`,
-          data: { name, password, email, terms }
+          data: { name, password, email, userType, terms }
         });
         localStorage.setItem('token', token);
         this.context.isAuthenticated(token);
