@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Desktopstructure from '../components/styled/DesktopStructure';
-import ButtonPrimary from '../components/styled/ButtonPrimary';
 import RestProfile  from '../components/RestProfile';
 
 const RestLogo = styled.img `
@@ -84,9 +83,14 @@ class RestaurantProfile extends Component {
     }
   }
 
-  handleDeleteClient = (e) => {
+  handleUpdateRestaurant = (e) => {
     e.preventDefault();
-    console.log('Cliente eliminado')
+    console.log('Restaurante eliminado')
+  };
+
+  handleDeleteRestaurant = (e) => {
+    e.preventDefault();
+    console.log('Restaurante eliminado')
   };
 
   render () {
@@ -126,7 +130,7 @@ class RestaurantProfile extends Component {
             scheduleTo={scheduleTo}
             deposit={deposit}
             nit={nit}
-            handleDeleteClient = {this.handleDeleteClient.bind(this)}
+            handleDeleteRestaurant = {this.handleDeleteRestaurant.bind(this)}
           />
         </BodyRight>
       </Desktopstructure>

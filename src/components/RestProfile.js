@@ -70,7 +70,7 @@ function RestProfile ({
   nit,
   handleChange,
   handleSubmit,
-  handleDeleteClient,
+  handleDeleteRestaurant,
 })
 {
   return (
@@ -182,7 +182,7 @@ function RestProfile ({
             id="ButtonCancel"
             type="button"
             value="Eliminar Cuenta"
-            onClick={handleDeleteClient}
+            onClick={handleDeleteRestaurant}
           >
           </ButtonCancel>
         </ContentButtons>
