@@ -2,8 +2,6 @@ import styled from 'styled-components'
 import Desktopstructure from '../components/styled/DesktopStructure'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import Modal from './Modal'
-import { AuthContext } from '../store/AuthContext'
-import { useContext } from 'react'
 
 const BodyLeft = styled.div ` 
   grid-area: bodyLeft;
@@ -118,10 +116,9 @@ export function ClientProfileForm({
   handleChange,
   handleSubmit,
   handleDeleteClient,
+  handleOnOpenModal,
 })
 {
-
-  const { modalIsOpen, OnOpenModal, OnCloseModal } = useContext(AuthContext);
 
   return(
     <Desktopstructure>
@@ -130,11 +127,9 @@ export function ClientProfileForm({
         <TextSanitaryRegister> 
           <LinkToSanitaryRegister 
             type='button'
-            onClick={OnOpenModal}
+            onClick={handleOnOpenModal}
           >Registro Sanitario</LinkToSanitaryRegister>
           <Modal
-            IsOpen={modalIsOpen}
-            OnCloseModal={OnCloseModal}
           />
         </TextSanitaryRegister>
         <PhotoClient 

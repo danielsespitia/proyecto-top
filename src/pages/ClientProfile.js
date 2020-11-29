@@ -4,7 +4,7 @@ import { ClientProfileForm } from '../components/ClientProfileForm'
 import { AuthContext } from '../store/AuthContext'
 
 class ClientProfile extends React.Component{
-  static contextType = AuthContext;
+  static contextType = AuthContext
 
   state = {
     _id: '',
@@ -68,7 +68,7 @@ class ClientProfile extends React.Component{
 
 
     return(
-     <ClientProfileForm
+    <ClientProfileForm
       name = {name}
       lastName = {lastName}
       email = {email}
@@ -80,8 +80,9 @@ class ClientProfile extends React.Component{
       handleChange = {this.handleChange}
       handleSubmit = {this.handleSubmit.bind(this)}
       handleDeleteClient = {this.handleDeleteClient.bind(this)}
+      handleOnOpenModal = {this.context.OnOpenModal}
       >
-     </ClientProfileForm>
+    </ClientProfileForm>
     )
   }
 }

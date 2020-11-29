@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [isToken, setIsToken] = useState(null)
   const [message, setMessage] = useState('')
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(true)
 
   const onCloseModal = () => {
     setModalIsOpen(false)

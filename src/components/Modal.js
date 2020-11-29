@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDom from 'react-dom'
+import { AuthContext } from '../store/AuthContext'
 
 function Modal(props) {
-  if(!props.IsOpen){
+  const { onCloseModal, modalIsOpen } = useContext(AuthContext)
+
+  if(!modalIsOpen){
     return null
   }
   return ReactDom.createPortal(
     <div>
       <div>
         <button 
-          onClick={props.OnCloseModal}
+          onClick={onCloseModal}
         >
           X
         </button>
