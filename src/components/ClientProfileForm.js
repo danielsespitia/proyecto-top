@@ -1,7 +1,9 @@
+import { AuthContext } from '../store/AuthContext'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import Desktopstructure from '../components/styled/DesktopStructure'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
-import Modal from './Modal'
+import SanitaryRegister from '../pages/SanitaryRegister'
 
 const BodyLeft = styled.div ` 
   grid-area: bodyLeft;
@@ -40,7 +42,15 @@ const TextSanitaryRegister = styled.p`
 const LinkToSanitaryRegister = styled.button`
   font-size: 16px;
   color: #2F80ED;
-  text-decoration-line: underline;
+  border: 0px;
+  text-decoration: underline;
+  
+  &:focus {
+    background-color: white;
+    border-radius: 4px;
+    padding: 7px;
+    outline: none;
+  };
 `;
 
 const PhotoClient = styled.img `
@@ -119,6 +129,7 @@ export function ClientProfileForm({
   handleOnOpenModal,
 })
 {
+  const register = useContext(AuthContext)
 
   return(
     <Desktopstructure>
@@ -127,9 +138,9 @@ export function ClientProfileForm({
         <TextSanitaryRegister> 
           <LinkToSanitaryRegister 
             type='button'
-            onClick={handleOnOpenModal}
+            onClick={register.onOpenModal}
           >Registro Sanitario</LinkToSanitaryRegister>
-          <Modal
+          <SanitaryRegister
           />
         </TextSanitaryRegister>
         <PhotoClient 

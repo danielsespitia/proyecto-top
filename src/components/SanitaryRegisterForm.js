@@ -1,7 +1,11 @@
-import Modal from '../components/Modal'
 import styled from 'styled-components'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
+
+const ContainerRegisterForm = styled(ContainerContent)`
+  width: 280px;
+  padding: 30px;
+`;
 
 const Form = styled.form`
   display: grid;
@@ -13,17 +17,19 @@ const H3 = styled.h3`
   text-align: center;
 `;
 
-const H4 = styled.h4`
+const ParagraphInstruction = styled.p`
   font-size: 14px;
 `;
 
 const Paragraph = styled.p`
-  font-size: 16px;
-  color: #2F80ED
+  font-size: 11px;
+  color: #2F80ED;
+  width: 150px;
 `;
 
 const Span = styled.span ` 
-  padding: 10px;
+  width: 274px;
+  padding: 20px;
   background-color: ${
     props => props.theme.blueColorSan
   };
@@ -40,7 +46,8 @@ const Checkbox = styled.input`
 `;
 
 const Temperature = styled.input`
-  padding: 5px;
+  margin: 15px 0;
+  padding: 9px;
   border-radius: 4px;
   border: 1px solid #CED4DA;
   border-color: ${
@@ -75,18 +82,12 @@ export function SanitaryRegisterForm({
   handleChange,
   handleSubmit,
   handleCancel,
-  modalIsOpen,
-  handleOnCloseModal,
 })
 {
   return(
-    <Modal
-      modalIsOpen={modalIsOpen}
-      handleOnCloseModal={handleOnCloseModal}
-    >
-      <ContainerContent>
-        <H3>Registro Sanitario</H3>
-        <H4>Selecciona los recuadros según tu estado:</H4>
+      <ContainerRegisterForm>
+        <H3>Autoevaluación para registro sanitario Covid19</H3>
+        <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
         <Form onSubmit={handleSubmit}>
           <Span className="ContentQuestion">
             <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
@@ -164,7 +165,6 @@ export function SanitaryRegisterForm({
             </ButtonCancel>
           </ContentButtons>
         </Form>
-      </ContainerContent>
-    </Modal>
+      </ContainerRegisterForm>
   )
 }

@@ -1,10 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { ClientProfileForm } from '../components/ClientProfileForm'
-import { AuthContext } from '../store/AuthContext'
 
 class ClientProfile extends React.Component{
-  static contextType = AuthContext
 
   state = {
     _id: '',
@@ -80,7 +78,6 @@ class ClientProfile extends React.Component{
       handleChange = {this.handleChange}
       handleSubmit = {this.handleSubmit.bind(this)}
       handleDeleteClient = {this.handleDeleteClient.bind(this)}
-      handleOnOpenModal = {this.context.OnOpenModal}
       >
     </ClientProfileForm>
     )
