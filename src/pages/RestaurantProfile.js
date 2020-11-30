@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
+import axios from 'axios';
 import Desktopstructure from '../components/styled/DesktopStructure';
-import ButtonPrimary from '../components/styled/ButtonPrimary';
 import RestProfile  from '../components/RestProfile';
 
 const RestLogo = styled.img `
@@ -51,33 +50,52 @@ const MyOfficesAnchor = styled.a`
   text-decoration-line: underline;
 `;
 
-const ContentButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-block-start: 40px;
-`;
-
-const profileData =
-  {
-    id: uuidv4(),
-    restaurantName: 'Burguer Mania',
-    address: 'Calle 5a #45-32',
-    email: 'burguermania@test.com',
-    phone: '3205670231',
-    scheduleFrom: '11:00',
-    scheduleTo: '23:00',
-    deposit: 30000,
-    nit: '532674567',
-  }
-
 class RestaurantProfile extends Component {
 
   state = {
-    profileData: profileData
+    _id: '',
+    restaurantName: '',
+    email: '',
+    address: '',
+    phone: '',
+    scheduleFrom: '',
+    scheduleTo: '',
+    deposit: 0,
+    nit: '',
+  }
+
+  async componentDidMount() {
+    try {
+      const token = localStorage.getItem('token')
+      const {data: {data}} = await axios({
+        method: 'GET',
+        baseURL: 'http://localhost:8080',
+        url: '/restaurants/profile',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { name, email, _id } = data
+      this.setState( {name, email, _id} )
+    } catch(err) {
+      localStorage.removeItem('token');
+      this.props.history.push('/')
+    }
   }
 
   render () {
-    const { profileData } = this.state
+
+    const { 
+      _id,
+      name,
+      email,
+      address,
+      phone,
+      scheduleFrom,
+      scheduleTo,
+      deposit,
+      nit,
+     } = this.state
 
     return (
       <>
@@ -92,23 +110,17 @@ class RestaurantProfile extends Component {
         </BodyLeft>
         <BodyRight>
           <RestProfile
-            key={profileData.id}
-            restaurantName={profileData.restaurantName}
-            address={profileData.address}
-            email={profileData.email}
-            phone={profileData.phone}
-            scheduleFrom={profileData.scheduleFrom}
-            scheduleTo={profileData.scheduleTo}
-            deposit={profileData.deposit}
-            nit={profileData.nit}
+            key={_id}
+            restaurantName={name}
+            email={email}
+            address={address}
+            phone={phone}
+            scheduleFrom={scheduleFrom}
+            scheduleTo={scheduleTo}
+            deposit={deposit}
+            nit={nit}
+            handleDeleteRestaurant = {this.handleDeleteRestaurant.bind(this)}
           />
-          <ContentButtons className="Profile__edit-span">
-            <ButtonPrimary
-              className="Profile__edit-input"
-              type="submit"
-              value="Editar tu Perfil"
-            />
-          </ContentButtons>
         </BodyRight>
       </Desktopstructure>
       </>
