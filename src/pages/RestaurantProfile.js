@@ -94,7 +94,6 @@ class RestaurantProfile extends Component {
   };
 
   render () {
-    console.log(this.state)
 
     const { 
       _id,
