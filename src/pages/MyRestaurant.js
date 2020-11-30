@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Desktopstructure from '../components/styled/DesktopStructure';
-import RestProfile  from '../components/RestProfile';
+import MyRest from '../components/MyRest';
 
 const RestLogo = styled.img `
   width: 100px;
@@ -83,52 +83,10 @@ class RestaurantProfile extends Component {
     }
   }
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value === '' ? '' : value
-    })
-  };
-
-  handleSubmit = async (e) => {
+  handleClick = e => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('token')
-      const {
-        _id,
-        name,
-        email,
-        address,
-        phone,
-        scheduleFrom,
-        scheduleTo,
-        deposit,
-        nit,
-      } = this.state
-      await axios({
-        method: 'PUT',
-        baseURL: 'http://localhost:8080',
-        url: '/restaurants',
-        data: {
-          _id,
-          name,
-          email,
-          address,
-          phone,
-          scheduleFrom,
-          scheduleTo,
-          deposit,
-          nit,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      this.props.history.push('/my-restaurant')
-      }
-      catch(err){
-      }
-    }
+    this.props.history.push('/restaurant-profile-edit')
+  }
 
   handleDeleteRestaurant = e => {
     e.preventDefault();
@@ -160,7 +118,7 @@ class RestaurantProfile extends Component {
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
         </BodyLeft>
         <BodyRight>
-          <RestProfile
+          <MyRest
             key={_id}
             restaurantName={name}
             email={email}
@@ -170,8 +128,7 @@ class RestaurantProfile extends Component {
             scheduleTo={scheduleTo}
             deposit={deposit}
             nit={nit}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit.bind(this)}
+            handleClick={this.handleClick}
             handleDeleteRestaurant={this.handleDeleteRestaurant.bind(this)}
           />
         </BodyRight>

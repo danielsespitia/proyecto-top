@@ -118,8 +118,10 @@ function RestProfile ({
           <Input
             className="Form__restaurantScheduleFrom-input"
             id="scheduleFrom"
-            type="text"
-            name="name"
+            type="time"
+            min="11:00"
+            max="14:00"
+            name="scheduleFrom"
             value={scheduleFrom}
             autoComplete="on"
             onChange={handleChange}
@@ -132,7 +134,9 @@ function RestProfile ({
           <Input
             className="Form__scheduleTo-input"
             id="scheduleTo"
-            type="text"
+            type="time"
+            min="20:00"
+            max="24:00"
             name="scheduleTo"
             value={scheduleTo}
             autoComplete="on"
@@ -161,11 +165,13 @@ function RestProfile ({
             className="Form__deposit-input"
             id="deposit"
             type="number"
+            min="20000"
+            max="200000"
+            step="10000"
             name="deposit"
             value={deposit}
             autoComplete="on"
             onChange={handleChange}
-            placeholder="Mínimo $20.000"
             required
           />
         </div>
