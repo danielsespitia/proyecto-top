@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect} from 'react'
 import Restaurant  from '../components/Restaurant'
 import styled from 'styled-components'
-import { data } from '../Data'
 import ContainerContent from '../components/styled/ContainerContent'  
+import logo from '../image/RestaurantLogo.png'
+import axios from 'axios'
 
 const Container = styled.div`
   display: grid;
@@ -21,22 +22,41 @@ const Section = styled.section`
   grid-gap: 10px;
 `;
 
-class Restaurants extends Component {
+function Restaurants () {
 
-  state = {
-    restaurants: data
-  }
-  render () {
-    const { restaurants } = this.state
+  const [restaurants, setRestaurants] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    axios({
+      method:'GET',
+      baseURL:'http://localhost:8080',
+      url:'/restaurants/',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then(({ data: { data } }) => {
+      setRestaurants(data)
+      setLoading(false)
+    })
+    .catch(err => {
+      setError(err)
+      setLoading(false)
+    })
+  }, []) 
+
     return (
       <Container>
         <ContainerList>
           <Section>
-            {!!restaurants && restaurants.length > 0 && restaurants.map(({id, name, logo}) => {
+            {!!restaurants && restaurants.length > 0 && restaurants.map(({ _id, name }) => {
               return (
                 <Restaurant 
-                  key={id}
-                  id={id}
+                  key={_id}
+                  id={_id}
                   name={name}
                   logo={logo}
                 />
@@ -46,7 +66,6 @@ class Restaurants extends Component {
         </ContainerList>
       </Container>
     )
-  }
 }
 
 export default Restaurants
