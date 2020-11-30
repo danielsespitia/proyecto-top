@@ -1,5 +1,6 @@
 import React from 'react'
 import { SanitaryRegisterForm } from '../components/SanitaryRegisterForm'
+import Modal from '../components/Modal'
 
 class SanitaryRegister extends React.Component {
 
@@ -34,17 +35,20 @@ class SanitaryRegister extends React.Component {
       temperature,
     } = this.state
     return (
-      <SanitaryRegisterForm
-        question1SymptomsCovid = {question1SymptomsCovid} 
-        question2ContactWithPeople = {question2ContactWithPeople}
-        question3InternationalTravel  =  {question3InternationalTravel}
-        question4HealthWorker = {question4HealthWorker}
-        temperature = {temperature}
-        handleChange = {this.handleChange}
-        handleSubmit = {this.handleSubmit.bind(this)}
-        handleCancel = {this.handleCancel.bind(this)}
-      >
-      </SanitaryRegisterForm>
+      <Modal>
+        <SanitaryRegisterForm
+          question1SymptomsCovid = {question1SymptomsCovid} 
+          question2ContactWithPeople = {question2ContactWithPeople}
+          question3InternationalTravel  =  {question3InternationalTravel}
+          question4HealthWorker = {question4HealthWorker}
+          temperature = {temperature}
+          handleChange = {this.handleChange}
+          handleSubmit = {this.handleSubmit.bind(this)}
+          handleCancel = {this.handleCancel.bind(this)}
+          
+        >
+        </SanitaryRegisterForm>
+      </Modal>
     )
   }
 }

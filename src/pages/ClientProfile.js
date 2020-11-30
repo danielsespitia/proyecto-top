@@ -13,9 +13,8 @@ class ClientProfile extends React.Component{
     phone: '',
     identification: '',
     birthday: '', 
-    payType: '', 
-    //profileData: {}
-  }
+    payType: '',
+  };
 
   async componentDidMount() {
     try {
@@ -62,12 +61,12 @@ class ClientProfile extends React.Component{
       phone,
       identification,
       birthday, 
-      payType 
+      payType,
     } = this.state
 
 
     return(
-     <ClientProfileForm
+    <ClientProfileForm
       name = {name}
       lastName = {lastName}
       email = {email}
@@ -80,7 +79,7 @@ class ClientProfile extends React.Component{
       handleSubmit = {this.handleSubmit.bind(this)}
       handleDeleteClient = {this.handleDeleteClient.bind(this)}
       >
-     </ClientProfileForm>
+    </ClientProfileForm>
     )
   }
 }
