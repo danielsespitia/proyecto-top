@@ -126,7 +126,6 @@ export function ClientProfileForm({
   handleChange,
   handleSubmit,
   handleDeleteClient,
-  handleOnOpenModal,
 })
 {
   const register = useContext(AuthContext)
