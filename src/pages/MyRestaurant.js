@@ -85,7 +85,7 @@ class RestaurantProfile extends Component {
 
   handleClick = e => {
     e.preventDefault();
-    this.props.history.push('/restaurant-profile-edit')
+    this.props.history.push('/restaurant-profile')
   }
 
   handleDeleteRestaurant = e => {

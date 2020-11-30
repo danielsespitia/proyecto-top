@@ -17,7 +17,6 @@ const DataItem = styled.div`
   grid-row-gap: 5px;
 `;
 
-
 const ContentButtons = styled.div`
   grid-column: 1/3;
   display: flex;
