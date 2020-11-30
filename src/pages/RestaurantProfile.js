@@ -83,18 +83,7 @@ class RestaurantProfile extends Component {
     }
   }
 
-  handleUpdateRestaurant = (e) => {
-    e.preventDefault();
-    console.log('Restaurante eliminado')
-  };
-
-  handleDeleteRestaurant = (e) => {
-    e.preventDefault();
-    console.log('Restaurante eliminado')
-  };
-
   render () {
-    console.log(this.state)
 
     const { 
       _id,

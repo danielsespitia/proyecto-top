@@ -64,7 +64,7 @@ const ContentButtons = styled.div`
 `;
 
 const ButtonUpdate = styled(ButtonPrimary)`
-      margin-right: 50px;
+  margin-right: 50px;
 `;
 
 const ButtonCancel = styled(ButtonPrimary)`
