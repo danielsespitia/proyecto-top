@@ -13,9 +13,22 @@ const Form = styled.form `
   grid-row-gap: 12px;
   margin-top: 12px;
 `;
+const Select = styled.select ` 
+  padding: 10.5px;
+  border-radius: 4px;
+  border: 1px solid #CED4DA;
+  font-size: 16px;
+  color: #6c757d;
+`;
 
 const ContainerButton = styled.span `
   text-align: center;
+`;
+
+const Error = styled.span `
+  font-size: 12px;
+  color: red;
+  font-style: italic;
 `;
 
 const ButtonSecundary = styled(ButtonPrimary)`
@@ -58,9 +71,11 @@ const Message = styled.span `
 export function FormSignIn ({
   email, 
   password,
+  userType, 
   handleSubmit,
   handleChange,
-  message
+  message, 
+  errorsSignin
 }) 
 {
   return(
@@ -69,6 +84,7 @@ export function FormSignIn ({
         Queremos volverte a reunir con tus seres queridos, alrededor de tus comidas favoritas.
       </h3>
       <Form onSubmit={handleSubmit}>
+        <Error>{ errorsSignin }</Error>
         <label
           htmlFor="email"
         >
@@ -77,7 +93,7 @@ export function FormSignIn ({
         <Input
           id="email"
           name="email"
-          type="text"
+          type="email"
           onChange={handleChange}
           value={email}
           placeholder="Correo electronico"
@@ -97,6 +113,25 @@ export function FormSignIn ({
           placeholder="***********"
           required
         />
+        <label
+          className="Form__userType-label-signIn"
+        >
+          Tipo de usuario:
+        </label>
+        <Select
+          id="userType"
+          name="userType"
+          value={userType}
+          onChange={handleChange}
+          required
+        >
+          <option value="clients">
+            Cliente
+          </option>
+          <option value="restaurants">
+            Restaurante
+          </option>
+        </Select>
         <ContainerButton className="Form__subtmit-span">
           <ButtonSecundary
             className="Form__submit-input"
