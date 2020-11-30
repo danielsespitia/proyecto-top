@@ -5,7 +5,6 @@ import { ClientProfileForm } from '../components/ClientProfileForm'
 class ClientProfile extends React.Component{
 
   state = {
-    _id: '',
     name: '',
     lastName: '',
     email: '',
@@ -13,8 +12,7 @@ class ClientProfile extends React.Component{
     phone: '',
     identification: '',
     birthday: '', 
-    payType: '', 
-    //profileData: {}
+    payType: 'cash',
   }
 
   async componentDidMount() {
@@ -28,8 +26,8 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      const { name, email, _id } = data
-      this.setState( {name, email, _id} )
+      const date = !data.birthday ? '' : data.birthday.split('T')[0];
+      this.setState({ ...data, birthday: date })
     } catch(err) {
       localStorage.removeItem('token');
       this.props.history.push('/')
@@ -43,17 +41,66 @@ class ClientProfile extends React.Component{
     })
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const token = localStorage.getItem('token')
+      const { 
+        name,
+        lastName,
+        email,
+        address,
+        phone,
+        identification,
+        birthday, 
+        payType 
+      } = this.state
+      const resp = await axios({
+        method: 'PUT',
+        baseURL: 'http://localhost:8080',
+        url: `/clients`,
+        data: {
+          name,
+          lastName,
+          email,
+          address,
+          phone,
+          identification,
+          birthday, 
+          payType,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert(resp.data.message);
+    }catch(err) {
+      alert('Los datos no se actualizarón');
+    }
   };
 
-
-  handleDeleteClient = (e) => {
+  handleDeleteClient = async (e) => {
     e.preventDefault();
+    try{
+      const token = localStorage.getItem('token')
+      const resp = await axios({
+        method: 'DELETE',
+        baseURL: 'http://localhost:8080',
+        url: `/clients`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert('Usuario eliminado');
+      console.log(resp.data.message)
+      localStorage.removeItem('token');
+      this.props.history.push('/')
+    }catch(err){
+      alert('El usuario no fue eliminado');
+    }
   };
 
   render(){
-
     const { 
       name,
       lastName,
@@ -64,7 +111,6 @@ class ClientProfile extends React.Component{
       birthday, 
       payType 
     } = this.state
-
 
     return(
      <ClientProfileForm
