@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import swal from 'sweetalert';
 import Desktopstructure from '../components/styled/DesktopStructure';
 import RestProfile  from '../components/RestProfile';
 
@@ -124,14 +125,56 @@ class RestaurantProfile extends Component {
           Authorization: `Bearer ${token}`,
         },
       });
+      swal("Perfil actualizado exitosamente", "", "success");
       this.props.history.push('/my-restaurant')
       }
       catch(err){
+        swal("Tu perfil no pudo ser actualizado", "", "error");
       }
     }
 
-  handleDeleteRestaurant = e => {
+  handleDeleteRestaurant = async (e) => {
     e.preventDefault();
+
+    await swal("¿Estás seguro que quieres eliminar tu cuenta?", {
+      buttons: {
+        regret: "No, quiero quedarme otro rato",
+        destroy: {
+          text: "Sí",
+          value: "destroy",
+        },
+      },
+    })
+    .then((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Nos alegra que sigas con nosotros");
+          break;
+     
+          case "destroy":
+          try{
+            const token = localStorage.getItem('token')
+              axios({
+              method: 'DELETE',
+              baseURL: 'http://localhost:8080',
+              url: '/restaurants',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            swal("Perfil eliminado exitosamente", "", "success");
+            localStorage.removeItem('token');
+            this.props.history.push('/')
+          }catch(err){
+            swal("Tu perfil no pudo ser eliminado", "", "error");
+          }
+          break;
+     
+        default:
+          swal("Nos alegra que sigas con nosotros");
+      }
+        
+    });
   };
 
   render () {
