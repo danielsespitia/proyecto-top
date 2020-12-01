@@ -1,10 +1,11 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import swal from 'sweetalert';
 import Desktopstructure from '../components/styled/DesktopStructure';
 import RestProfile  from '../components/RestProfile';
-
+ 
 const RestLogo = styled.img `
   width: 100px;
   border-radius: 100%;
@@ -50,6 +51,12 @@ const MyOfficesAnchor = styled.a`
   color: #2F80ED;
   text-decoration-line: underline;
 `;
+
+function mapStateToProps(state) {
+  return { deposit: state.deposit }
+}
+
+console.log(mapStateToProps())
 
 class RestaurantProfile extends Component {
 
@@ -224,4 +231,4 @@ class RestaurantProfile extends Component {
   }
 }
 
-export default RestaurantProfile
+export default connect(mapStateToProps)(RestaurantProfile);
