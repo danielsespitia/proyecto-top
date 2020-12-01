@@ -25,20 +25,6 @@ const ContentButtons = styled.div`
 `;
 
 const ButtonUpdate = styled(ButtonPrimary)`
-  margin-right: 50px;
-`;
-
-const ButtonCancel = styled(ButtonPrimary)`
-  background-color: ${
-    props => props.theme.tertiaryColor
-  };
-  &:hover {
-    background-color: #E2DE5B;
-    border: 1px solid ${
-      props => props.theme.tertiaryColor
-    };
-  }
-  margin-left: 50px;
 `;
 
 function RestProfile ({ 
@@ -51,7 +37,6 @@ function RestProfile ({
   deposit,
   nit,
   handleClick,
-  handleDeleteRestaurant,
 })
 {
   return (
@@ -98,14 +83,6 @@ function RestProfile ({
             onClick={handleClick}        
           >
           </ButtonUpdate>
-          <ButtonCancel
-            className="ButtonCancel"
-            id="ButtonCancel"
-            type="button"
-            value="Eliminar Cuenta"
-            onClick={handleDeleteRestaurant}
-          >
-          </ButtonCancel>
         </ContentButtons>
       </SignUpData>
     </Container>

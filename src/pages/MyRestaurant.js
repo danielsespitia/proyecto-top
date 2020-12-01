@@ -88,10 +88,6 @@ class RestaurantProfile extends Component {
     this.props.history.push('/restaurant-profile')
   }
 
-  handleDeleteRestaurant = e => {
-    e.preventDefault();
-  };
-
   render () {
 
     const { 
@@ -129,7 +125,6 @@ class RestaurantProfile extends Component {
             deposit={deposit}
             nit={nit}
             handleClick={this.handleClick}
-            handleDeleteRestaurant={this.handleDeleteRestaurant.bind(this)}
           />
         </BodyRight>
       </Desktopstructure>
