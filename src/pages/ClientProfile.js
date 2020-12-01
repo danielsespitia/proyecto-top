@@ -91,8 +91,7 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      alert('Usuario eliminado');
-      console.log(resp.data.message)
+      alert(resp.data.message)
       localStorage.removeItem('token');
       this.props.history.push('/')
     }catch(err){
