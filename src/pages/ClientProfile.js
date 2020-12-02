@@ -1,8 +1,13 @@
-import React from 'react'
-import axios from 'axios'
-import { ClientProfileForm } from '../components/ClientProfileForm'
+import React from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { AuthContext } from '../store/AuthContext';
+import { ClientProfileForm } from '../components/ClientProfileForm';
+import { ThemeConsumer } from 'styled-components';
 
 class ClientProfile extends React.Component{
+
+  static contextType = AuthContext;
 
   state = {
     name: '',
@@ -74,30 +79,53 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      alert(resp.data.message);
+      swal("Perfil actualizado exitosamente", "", "success");
     }catch(err) {
-      alert('Los datos no se actualizarón');
+      swal("Tu perfil no pudo ser actualizado", "", "error");
     }
   };
 
   handleDeleteClient = async (e) => {
     e.preventDefault();
-    try{
-      const token = localStorage.getItem('token')
-      const resp = await axios({
-        method: 'DELETE',
-        baseURL: 'http://localhost:8080',
-        url: `/clients`,
-        headers: {
-          Authorization: `Bearer ${token}`,
+
+    await swal("Estas seguro que quieres eliminar tu cuenta?", {
+      buttons: {
+        regret: "No, quiero quedamer otro rato",
+        destroy: {
+          text: "Si",
+          value: "destroy",
         },
-      });
-      alert(resp.data.message)
-      localStorage.removeItem('token');
-      this.props.history.push('/')
-    }catch(err){
-      alert('El usuario no fue eliminado');
-    }
+      },
+    })
+    .then ((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Nos alegra que sigas con nosotros");
+          break;
+
+          case "destroy":
+            try{
+              const token = localStorage.getItem('token')
+              axios({
+                method: 'DELETE',
+                baseURL: 'http://localhost:8080',
+                url: `/clients`,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+              swal("Perfil eliminado exitosamente","","success");
+              localStorage.removeItem('token');
+              this.context.isAuthenticated();
+              this.props.history.push('/');
+            }catch(err){
+              swal("Tu perfil no pudo ser eliminado", "", "error");
+            }
+            break;
+          default:
+            swal("Nos alegra que sigas con nosotros");
+      }
+    });
   };
 
   render(){
