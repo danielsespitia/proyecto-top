@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { AuthContext } from '../store/AuthContext'
 import Desktopstructure from '../components/styled/DesktopStructure';
 import RestProfile  from '../components/RestProfile';
 
@@ -52,6 +53,8 @@ const MyOfficesAnchor = styled.a`
 `;
 
 class RestaurantProfile extends Component {
+
+  static contextType = AuthContext;
 
   state = {
     _id: '',
@@ -164,6 +167,7 @@ class RestaurantProfile extends Component {
             });
             swal("Perfil eliminado exitosamente", "", "success");
             localStorage.removeItem('token');
+            this.context.isAuthenticated()
             this.props.history.push('/')
           }catch(err){
             swal("Tu perfil no pudo ser eliminado", "", "error");
