@@ -53,10 +53,13 @@ const MyOfficesAnchor = styled.a`
 `;
 
 function mapStateToProps(state) {
-  return { deposit: state.deposit }
+  return { deposito: state.deposito, niti: state.niti  }
 }
 
-console.log(mapStateToProps())
+
+function mapDispatchToProps(dispatch) {
+  return { cambio: (data) => dispatch ({ type: 'cambio', payload: data }) }
+}
 
 class RestaurantProfile extends Component {
 
@@ -71,6 +74,7 @@ class RestaurantProfile extends Component {
     deposit: 0,
     nit: '',
   }
+
 
   async componentDidMount() {
     try {
@@ -186,6 +190,9 @@ class RestaurantProfile extends Component {
 
   render () {
 
+    // console.log('deposit antes', this.props.deposit)
+    // console.log('deposit despues', this.props.deposit)
+
     const { 
       _id,
       name,
@@ -198,10 +205,14 @@ class RestaurantProfile extends Component {
       nit,
      } = this.state
 
+    const data = 20;
     return (
       <>
       <Desktopstructure>
         <BodyLeft>
+          <button onClick={() => this.props.cambio(data)}></button>
+          <h1>{this.props.deposito}</h1>
+          <h1>{this.props.niti}</h1>
           <H3>Tu Perfil</H3>
           <RestLogo 
             src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
@@ -231,4 +242,4 @@ class RestaurantProfile extends Component {
   }
 }
 
-export default connect(mapStateToProps)(RestaurantProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(RestaurantProfile);
