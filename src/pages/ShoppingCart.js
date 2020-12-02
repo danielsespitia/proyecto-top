@@ -1,31 +1,18 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
 import { ListShoppingCart } from '../components/ItemShoppingCart'
-import { data } from '../Data'
 
-
-class ShoppingCart extends React.Component {
-  state = {
-    restaurants: data,
-  }
+function ShoppingCart () {
   
-  render() {
-    const { restaurantId } = this.props.match.params
-    
-    const getRestaurant = (restaurant) => {
-      return restaurant.id === restaurantId
-    }
+  const restaurantId = useSelector(state => state.restaurantId)
+  const reservationDeposit = useSelector(state => state.reservationDeposit)
 
-    const restaurantData = data.find(getRestaurant)
-    
-    const { id, deposit } = restaurantData
-    return(
-      <>
-      <ListShoppingCart
-        key={id}
-        deposit={deposit}
-      />
-      </>
-    )
-  }
+  return(
+    <>
+    <ListShoppingCart
+      key={restaurantId}
+      deposit={reservationDeposit}
+    />
+    </>
+  )
 }
 export default ShoppingCart

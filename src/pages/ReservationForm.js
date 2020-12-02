@@ -1,11 +1,22 @@
-import React, { Component } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
 import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
-import { data } from '../Data'
+import logo from '../image/RestaurantLogo.png'
+import { 
+  RESERVATION_BRANCH, 
+  RESERVATION_DATE,
+  RESERVATION_TIME,
+  RESERVATION_RANGE,
+  RESERVATION_PEOPLE,
+  RESERVATION_AGREE
+}
+  from '../store'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
@@ -106,64 +117,76 @@ const rangeOption = [
   },
 ]
 
-class ReservationForm extends Component {
+function ReservationForm (){
 
-  state = {
-    branch: '',
-    date: '',
-    time: '',
-    range: '',
-    people: '',
-    agree: false,
-    data,
-  }
+  const [branch, setBranch] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+  const [range, setRange] = useState('')
+  const [people, setPeople] = useState('')
+  const [agree, setAgree] = useState('')
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
-    this.setState({
-      [name]: type === 'checkbox' ? checked : value
-    })
+    switch (name) {
+      case 'branch':
+          setBranch(value)
+        break
+      case 'date':
+          setDate(value)
+        break
+      case 'time':
+          setTime(value)
+        break
+      case 'range':
+          setRange(value)
+        break
+      case 'people':
+          setPeople(value)
+        break
+      case 'agree':
+        if(type==='checkbox'){
+          setAgree(checked)
+        }
+        break
+    }
   };
 
-  handleSubmit = (e) => {
+  let history = useHistory()
+  const dispatch = useDispatch()
+  const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch({ type: RESERVATION_BRANCH, payload: branch})
+    dispatch({ type: RESERVATION_DATE, payload: date})
+    dispatch({ type: RESERVATION_TIME, payload: time})
+    dispatch({ type: RESERVATION_RANGE, payload: range})
+    dispatch({ type: RESERVATION_PEOPLE, payload: people})
+    dispatch({ type: RESERVATION_AGREE, payload: agree})
+    history.push(`/restaurants/${id}/reservation/shopping-cart`)
   };
 
-  render () {
-    const {
-      branch,
-      date,
-      time,
-      range,
-      people,
-      agree,
-      data,
-    } = this.state
-
-    const { restaurantId } = this.props.match.params
+  const name = useSelector(state => state.restaurantName)
+  const id = useSelector(state => state.restaurantId)
     return (
       <>
         <ContainerList>
           <SectionHeader>
             <RestaurantName>
-              {!!data && data.length > 0 && data.[0].name}
+              {name}
             </RestaurantName>
             <RestaurantLogo
-              src={!!data && data.length > 0 && data.[0].logo}
+              src={logo}
             />
           </SectionHeader>
         </ContainerList>
         <form
-          onSubmit={this.handleSubmit}
+          onSubmit={handleSubmit}
           id="reservation"
         >
           <ContainerList>
             <ReservationContainer>
               <Span>
-                puedes seleccionar tu menu antes de llegar si deseas
-              </Span>
-              <Article>
-                <Label
+                puedes seleccionar tu menu antes de llegar si deseas </Span> <Article> <Label
                   className="Form__reservation-branch-label"
                   htmlFor="branch"
                 >
@@ -175,7 +198,7 @@ class ReservationForm extends Component {
                   id="branch"
                   form="reservation"
                   value={branch}
-                  onChange={ this.handleChange }
+                  onChange={ handleChange }
                   autoFocus
                   required
                 > 
@@ -208,8 +231,7 @@ class ReservationForm extends Component {
                     name="date"
                     type='date'
                     value={date}
-                    placeHolder={this.iconDate}
-                    onChange={ this.handleChange }
+                    onChange={ handleChange }
                     required
                     />
               </Article>
@@ -227,7 +249,7 @@ class ReservationForm extends Component {
                   name="time"
                   type="time"
                   value={time}
-                  onChange={ this.handleChange }
+                  onChange={ handleChange }
                   min="7:00"
                   max="23:00"
                   required
@@ -246,7 +268,7 @@ class ReservationForm extends Component {
                   id="range"
                   form="reservation"
                   value={range}
-                  onChange={ this.handleChange }
+                  onChange={ handleChange }
                   required
                 > 
                   <option
@@ -280,7 +302,7 @@ class ReservationForm extends Component {
                   value={people}
                   min="1"
                   form="reservation"
-                  onChange={ this.handleChange}
+                  onChange={ handleChange}
                   required/>
               </PeopleContainer>
               <Span>
@@ -297,7 +319,7 @@ class ReservationForm extends Component {
                     name="agree"
                     type="checkbox"
                     checked={agree}
-                    onChange={this.handleChange}
+                    onChange={handleChange}
                     required
                   />
                 </ArticleCheck>
@@ -313,21 +335,16 @@ class ReservationForm extends Component {
                 </LinkSanitaryUpdate>
               </Span>
               <Span>
-                <Link to={{
-                  pathname: `/restaurants/${restaurantId}/reservation/shopping-cart`,
-                }}> 
                 <ButtonPrimary
                   type="submit"
                   value="Agregar mi reserva al carrito"
                 />
-                </Link>
               </Span>
             </ReservationContainer>
           </ContainerList>
         </form>
       </>
     )
-  }
 }
 
 export default ReservationForm
