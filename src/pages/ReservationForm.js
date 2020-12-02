@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,6 +8,15 @@ import ContainerContent from '../components/styled/ContainerContent'
 import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import logo from '../image/RestaurantLogo.png'
+import { 
+  RESERVATION_BRANCH, 
+  RESERVATION_DATE,
+  RESERVATION_TIME,
+  RESERVATION_RANGE,
+  RESERVATION_PEOPLE,
+  RESERVATION_AGREE
+}
+  from '../store'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
@@ -144,12 +153,20 @@ function ReservationForm (){
   };
 
   let history = useHistory()
+  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push('/')
+    dispatch({ type: RESERVATION_BRANCH, payload: branch})
+    dispatch({ type: RESERVATION_DATE, payload: date})
+    dispatch({ type: RESERVATION_TIME, payload: time})
+    dispatch({ type: RESERVATION_RANGE, payload: range})
+    dispatch({ type: RESERVATION_PEOPLE, payload: people})
+    dispatch({ type: RESERVATION_AGREE, payload: agree})
+    history.push(`/restaurants/${id}/reservation/shopping-cart`)
   };
 
   const name = useSelector(state => state.restaurantName)
+  const id = useSelector(state => state.restaurantId)
     return (
       <>
         <ContainerList>
