@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import swal from 'sweetalert';
-import { AuthContext } from '../store/AuthContext'
 import Desktopstructure from '../components/styled/DesktopStructure';
-import RestProfile  from '../components/RestProfile';
+import MyRest from '../components/MyRest';
 
 const RestLogo = styled.img `
   width: 100px;
@@ -54,8 +52,6 @@ const MyOfficesAnchor = styled.a`
 
 class RestaurantProfile extends Component {
 
-  static contextType = AuthContext;
-
   state = {
     _id: '',
     restaurantName: '',
@@ -87,99 +83,10 @@ class RestaurantProfile extends Component {
     }
   }
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value === '' ? '' : value
-    })
-  };
-
-  handleSubmit = async (e) => {
+  handleClick = e => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('token')
-      const {
-        _id,
-        name,
-        email,
-        address,
-        phone,
-        scheduleFrom,
-        scheduleTo,
-        deposit,
-        nit,
-      } = this.state
-      await axios({
-        method: 'PUT',
-        baseURL: 'http://localhost:8080',
-        url: '/restaurants',
-        data: {
-          _id,
-          name,
-          email,
-          address,
-          phone,
-          scheduleFrom,
-          scheduleTo,
-          deposit,
-          nit,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      swal("Perfil actualizado exitosamente", "", "success");
-      this.props.history.push('/my-restaurant')
-      }
-      catch(err){
-        swal("Tu perfil no pudo ser actualizado", "", "error");
-      }
-    }
-
-  handleDeleteRestaurant = async (e) => {
-    e.preventDefault();
-
-    await swal("¿Estás seguro que quieres eliminar tu cuenta?", {
-      buttons: {
-        regret: "No, quiero quedarme otro rato",
-        destroy: {
-          text: "Sí",
-          value: "destroy",
-        },
-      },
-    })
-    .then((value) => {
-      switch (value) {
-        case "regret":
-          swal("Nos alegra que sigas con nosotros");
-          break;
-     
-          case "destroy":
-          try{
-            const token = localStorage.getItem('token')
-              axios({
-              method: 'DELETE',
-              baseURL: 'http://localhost:8080',
-              url: '/restaurants',
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            swal("Perfil eliminado exitosamente", "", "success");
-            localStorage.removeItem('token');
-            this.context.isAuthenticated()
-            this.props.history.push('/')
-          }catch(err){
-            swal("Tu perfil no pudo ser eliminado", "", "error");
-          }
-          break;
-     
-        default:
-          swal("Nos alegra que sigas con nosotros");
-      }
-        
-    });
-  };
+    this.props.history.push('/restaurant-profile')
+  }
 
   render () {
 
@@ -207,7 +114,7 @@ class RestaurantProfile extends Component {
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
         </BodyLeft>
         <BodyRight>
-          <RestProfile
+          <MyRest
             key={_id}
             restaurantName={name}
             email={email}
@@ -217,9 +124,7 @@ class RestaurantProfile extends Component {
             scheduleTo={scheduleTo}
             deposit={deposit}
             nit={nit}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit.bind(this)}
-            handleDeleteRestaurant={this.handleDeleteRestaurant.bind(this)}
+            handleClick={this.handleClick}
           />
         </BodyRight>
       </Desktopstructure>
