@@ -150,7 +150,7 @@ class RestaurantProfile extends Component {
     })
     .then((value) => {
       switch (value) {
-        case "cancel":
+        case "regret":
           swal("Nos alegra que sigas con nosotros");
           break;
      
