@@ -149,6 +149,8 @@ function ReservationForm (){
           setAgree(checked)
         }
         break
+      default:
+        return null
     }
   };
 
