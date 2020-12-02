@@ -6,13 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './store/AuthContext';
 import { ThemeProvider } from 'styled-components'
 import theme from './config/theme'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

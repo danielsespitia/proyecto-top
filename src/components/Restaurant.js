@@ -1,5 +1,8 @@
+import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import {RESTAURANT_TO_RESERVATION} from '../store'
 
 const Article = styled.article`
   margin: 5px;
@@ -30,8 +33,10 @@ const Button = styled.button`
   border-radius: 10px;
 `;
 
+function Restaurant ({ id, name, logo }) {
 
-function Restaurant ( { id, name, logo } ) {
+  const dispatch = useDispatch()
+
   return (
     <Article>
       <Img 
@@ -45,6 +50,7 @@ function Restaurant ( { id, name, logo } ) {
           }}>
           <Button
             type='button'
+            onClick={() => dispatch({type: RESTAURANT_TO_RESERVATION , payload: name})}
           >
             Reservar Ahora
           </Button>
@@ -53,4 +59,5 @@ function Restaurant ( { id, name, logo } ) {
     </Article>
   )
 }
+
 export default Restaurant

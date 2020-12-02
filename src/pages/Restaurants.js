@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import { useState, useEffect} from 'react'
 import Restaurant  from '../components/Restaurant'
 import styled from 'styled-components'
 import ContainerContent from '../components/styled/ContainerContent'  
@@ -28,6 +28,7 @@ function Restaurants () {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+
   useEffect(() => {
     const token = localStorage.getItem('token')
     axios({
@@ -48,24 +49,24 @@ function Restaurants () {
     })
   }, []) 
 
-    return (
-      <Container>
-        <ContainerList>
-          <Section>
-            {!!restaurants && restaurants.length > 0 && restaurants.map(({ _id, name }) => {
-              return (
-                <Restaurant 
-                  key={_id}
-                  id={_id}
-                  name={name}
-                  logo={logo}
-                />
-              )
-            })}
-          </Section>
-        </ContainerList>
-      </Container>
-    )
+  return (
+    <Container>
+      <ContainerList>
+        <Section>
+          {!!restaurants && restaurants.length > 0 && restaurants.map(({ _id, name }) => {
+            return (
+              <Restaurant 
+                key={_id}
+                id={_id}
+                name={name}
+                logo={logo}
+              />
+            )
+          })}
+        </Section>
+      </ContainerList>
+    </Container>
+  )
 }
 
 export default Restaurants
