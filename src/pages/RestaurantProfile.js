@@ -1,11 +1,13 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
+import { useDispatch } from 'react-redux';
+import { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext'
 import Desktopstructure from '../components/styled/DesktopStructure';
 import RestProfile  from '../components/RestProfile';
+import { GET_RESTAURANT_NAME, GET_RESTAURANT_EMAIL, GET_RESTAURANT_ADDRESS, GET_RESTAURANT_PHONE, GET_RESTAURANT_SCHEDULEFROM, GET_RESTAURANT_SCHEDULETO, GET_RESTAURANT_DEPOSIT, GET_RESTAURANT_NIT } from '../store';
  
 const RestLogo = styled.img `
   width: 100px;
@@ -52,83 +54,82 @@ const MyOfficesAnchor = styled.a`
   color: #2F80ED;
   text-decoration-line: underline;
 `;
+  
+function RestaurantProfile() {
+    
+  const [ id, setId ] = useState(''); 
+  const [ restaurantName, setRestaurantName ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ address, setAddress ] = useState('');
+  const [ phone, setPhone ] = useState('');
+  const [ scheduleFrom, setScheduleFrom ] = useState('');
+  const [ scheduleTo, setScheduleTo ] = useState('');
+  const [ deposit, setDeposit ] = useState(20000)
+  const [ nit, setNit ] = useState('');
+  const { logout } = useContext(AuthContext);
 
-function mapStateToProps(state) {
-  return { deposito: state.deposito, niti: state.niti  }
-}
+  const dispatch = useDispatch();
+  const history = useHistory();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
 
-function mapDispatchToProps(dispatch) {
-  return { 
-    cambio: (data) => dispatch ({ type: 'cambio', payload: data }), 
-    cambio2: (data) => dispatch ({ type: '2', payload: data})}
-}
-
-class RestaurantProfile extends Component {
-
-  static contextType = AuthContext;
-
-  state = {
-    _id: '',
-    restaurantName: '',
-    email: '',
-    address: '',
-    phone: '',
-    scheduleFrom: '',
-    scheduleTo: '',
-    deposit: 0,
-    nit: '',
-  }
-
-
-  async componentDidMount() {
-    try {
-      const token = localStorage.getItem('token')
-      const {data: {data}} = await axios({
-        method: 'GET',
-        baseURL: 'http://localhost:8080',
-        url: '/restaurants/profile',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { _id, name, email, address, phone, scheduleFrom, scheduleTo, deposit, nit } = data
-      this.setState( {_id, name, email, address, phone, scheduleFrom, scheduleTo, deposit, nit} )
-    } catch(err) {
-      localStorage.removeItem('token');
-      this.props.history.push('/')
-    }
-  }
-
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value === '' ? '' : value
+    axios({ 
+      method: 'GET',
+      baseURL: 'http://localhost:8080',
+      url: '/restaurants/profile',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
+    .then(( {data: {data}} ) => {
+      setRestaurantName(data.name)
+      setEmail(data.email) 
+      console.log(data.email)
+    })
+    .catch((err) => {
+      localStorage.removeItem('token');
+      history.push('/');
+    })
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    switch(name) {
+      case 'address':
+        setAddress(value)
+        break;
+      case 'phone':
+        setPhone(value)
+        break; 
+      case 'scheduleFrom':
+        setScheduleFrom(value)
+        break;
+      case 'scheduleTo':
+        setScheduleTo(value)
+        break;
+      case 'deposit':
+        setDeposit(value)
+        break;
+      case 'nit':
+        setNit(value)
+        break;
+      default: break;
+    }
   };
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const token = localStorage.getItem('token')
-      const {
-        _id,
-        name,
-        email,
-        address,
-        phone,
-        scheduleFrom,
-        scheduleTo,
-        deposit,
-        nit,
-      } = this.state
-      await axios({
+  function useHandleSubmit() {
+    
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+      axios({
         method: 'PUT',
         baseURL: 'http://localhost:8080',
         url: '/restaurants',
         data: {
-          _id,
-          name,
+          id,
+          restaurantName,
           email,
           address,
           phone,
@@ -140,16 +141,28 @@ class RestaurantProfile extends Component {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      swal("Perfil actualizado exitosamente", "", "success");
-      this.props.history.push('/my-restaurant')
-      }
-      catch(err){
+      })
+      .then(() => {
+        dispatch(
+          { type: GET_RESTAURANT_NAME, payload: restaurantName }, 
+          { type: GET_RESTAURANT_EMAIL, payload: email },
+          { type: GET_RESTAURANT_ADDRESS, payload: address },
+          { type: GET_RESTAURANT_PHONE, payload: phone },
+          { type: GET_RESTAURANT_SCHEDULEFROM, payload: scheduleFrom },
+          { type: GET_RESTAURANT_SCHEDULETO, payload: scheduleTo },
+          { type: GET_RESTAURANT_DEPOSIT, payload: deposit },
+          { type: GET_RESTAURANT_NIT, payload: nit },
+          )
+          swal("Perfil actualizado exitosamente", "", "success");
+          history.push('/my-restaurant')
+      })
+      .catch((err) => {
         swal("Tu perfil no pudo ser actualizado", "", "error");
       }
-    }
+    )}, [])
+  }
 
-  handleDeleteRestaurant = async (e) => {
+  const handleDeleteRestaurant = async (e) => {
     e.preventDefault();
 
     await swal("¿Estás seguro que quieres eliminar tu cuenta?", {
@@ -180,7 +193,7 @@ class RestaurantProfile extends Component {
             });
             swal("Perfil eliminado exitosamente", "", "success");
             localStorage.removeItem('token');
-            this.context.isAuthenticated()
+            logout()
             this.props.history.push('/')
           }catch(err){
             swal("Tu perfil no pudo ser eliminado", "", "error");
@@ -190,35 +203,13 @@ class RestaurantProfile extends Component {
         default:
           swal("Nos alegra que sigas con nosotros");
       }
-        
     });
   };
 
-  render () {
-
-    // console.log('deposit antes', this.props.deposit)
-    // console.log('deposit despues', this.props.deposit)
-
-    const { 
-      _id,
-      name,
-      email,
-      address,
-      phone,
-      scheduleFrom,
-      scheduleTo,
-      deposit,
-      nit,
-     } = this.state
-
-    const data = 20;
     return (
       <>
       <Desktopstructure>
         <BodyLeft>
-          <button onClick={() => this.props.cambio(data)}></button>
-          <h1>{this.props.deposito}</h1>
-          <h1>{this.props.niti}</h1>
           <H3>Tu Perfil</H3>
           <RestLogo 
             src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
@@ -228,8 +219,8 @@ class RestaurantProfile extends Component {
         </BodyLeft>
         <BodyRight>
           <RestProfile
-            key={_id}
-            restaurantName={name}
+            key={id}
+            restaurantName={restaurantName}
             email={email}
             address={address}
             phone={phone}
@@ -237,15 +228,14 @@ class RestaurantProfile extends Component {
             scheduleTo={scheduleTo}
             deposit={deposit}
             nit={nit}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit.bind(this)}
-            handleDeleteRestaurant={this.handleDeleteRestaurant.bind(this)}
+            handleChange={handleChange}
+            handleSubmit={useHandleSubmit}
+            handleDeleteRestaurant={handleDeleteRestaurant}
           />
         </BodyRight>
       </Desktopstructure>
       </>
     )
   }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(RestaurantProfile);
+export default RestaurantProfile;

@@ -9,6 +9,15 @@ export const RESERVATION_RANGE = 'RESERVATION_RANGE'
 export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE' 
 export const RESERVATION_AGREE = 'RESERVATION_AGREE' 
 
+export const GET_RESTAURANT_NAME = 'GET_RESTAURANT_NAME'
+export const GET_RESTAURANT_EMAIL = 'GET_RESTAURANT_EMAIL'
+export const GET_RESTAURANT_ADDRESS = 'GET_RESTAURANT_ADDRESS'
+export const GET_RESTAURANT_PHONE = 'GET_RESTAURANT_PHONE'
+export const GET_RESTAURANT_SCHEDULEFROM = 'GET_RESTAURANT_SCHEDULEFROM'
+export const GET_RESTAURANT_SCHEDULETO = 'GET_RESTAURANT_SCHEDULETO'
+export const GET_RESTAURANT_DEPOSIT = 'GET_RESTAURANT_DEPOSIT'
+export const GET_RESTAURANT_NIT = 'GET_RESTAURANT_NIT'
+
 function reducer (state, action ) {
   switch (action.type) {
     case RESTAURANT_ID_RESERVATION:
@@ -51,6 +60,48 @@ function reducer (state, action ) {
         ...state,
         reservationAgree: action.payload
       }
+
+
+    case GET_RESTAURANT_NAME:
+      return {
+        ...state,
+        name: action.payload
+      }
+    case GET_RESTAURANT_EMAIL:
+      return {
+        ...state,
+        email: action.payload
+      }
+    case GET_RESTAURANT_ADDRESS:
+      return {
+        ...state,
+        address: action.payload
+      }
+    case GET_RESTAURANT_PHONE:
+      return {
+        ...state,
+        phone: action.payload
+      }
+    case GET_RESTAURANT_SCHEDULEFROM:
+      return {
+        ...state,
+        scheduleFrom: action.payload
+      }
+    case GET_RESTAURANT_SCHEDULETO:
+      return {
+        ...state,
+        scheduleTo: action.payload
+      }
+    case GET_RESTAURANT_DEPOSIT:
+      return {
+        ...state,
+        deposit: action.payload
+      }
+    case GET_RESTAURANT_NIT:
+      return {
+        ...state,
+        nit: action.payload
+      }
     default:
       return state
   }
@@ -66,6 +117,15 @@ const initialState = {
   reservationPeople: '',
   reservationAgree: '',
   reservationDeposit: '20.000',
+
+  name: '',
+  email: '',
+  address: '',
+  phone: '',
+  scheduleFrom: '',
+  scheduleTo: '',
+  deposit: 20000,
+  nit: '',
 }
 
 export const store = createStore(reducer, initialState)
