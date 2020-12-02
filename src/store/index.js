@@ -11,6 +11,10 @@ const reducer = (state = initialState, action) => {
       return { 
         ...state,
         deposito: action.payload,
+      }
+    case '2':
+      return {
+        ...state,
         niti: action.payload,
       }
       default: return state

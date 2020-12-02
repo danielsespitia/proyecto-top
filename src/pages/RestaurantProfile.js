@@ -58,7 +58,9 @@ function mapStateToProps(state) {
 
 
 function mapDispatchToProps(dispatch) {
-  return { cambio: (data) => dispatch ({ type: 'cambio', payload: data }) }
+  return { 
+    cambio: (data) => dispatch ({ type: 'cambio', payload: data }), 
+    cambio2: (data) => dispatch ({ type: '2', payload: data})}
 }
 
 class RestaurantProfile extends Component {
