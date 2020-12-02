@@ -1,11 +1,15 @@
-import React from 'react'
-import axios from 'axios'
-import { ClientProfileForm } from '../components/ClientProfileForm'
+import React from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { AuthContext } from '../store/AuthContext';
+import { ClientProfileForm } from '../components/ClientProfileForm';
+import { ThemeConsumer } from 'styled-components';
 
 class ClientProfile extends React.Component{
 
+  static contextType = AuthContext;
+
   state = {
-    _id: '',
     name: '',
     lastName: '',
     email: '',
@@ -13,8 +17,9 @@ class ClientProfile extends React.Component{
     phone: '',
     identification: '',
     birthday: '', 
-    payType: '',
+    payType: 'cash',
   };
+
 
   async componentDidMount() {
     try {
@@ -27,8 +32,8 @@ class ClientProfile extends React.Component{
           Authorization: `Bearer ${token}`,
         },
       });
-      const { name, email, _id } = data
-      this.setState( {name, email, _id} )
+      const date = !data.birthday ? '' : data.birthday.split('T')[0];
+      this.setState({ ...data, birthday: date })
     } catch(err) {
       localStorage.removeItem('token');
       this.props.history.push('/')
@@ -42,17 +47,88 @@ class ClientProfile extends React.Component{
     })
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const token = localStorage.getItem('token')
+      const { 
+        name,
+        lastName,
+        email,
+        address,
+        phone,
+        identification,
+        birthday, 
+        payType 
+      } = this.state
+      const resp = await axios({
+        method: 'PUT',
+        baseURL: 'http://localhost:8080',
+        url: `/clients`,
+        data: {
+          name,
+          lastName,
+          email,
+          address,
+          phone,
+          identification,
+          birthday, 
+          payType,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      swal("Perfil actualizado exitosamente", "", "success");
+    }catch(err) {
+      swal("Tu perfil no pudo ser actualizado", "", "error");
+    }
   };
 
-
-  handleDeleteClient = (e) => {
+  handleDeleteClient = async (e) => {
     e.preventDefault();
+
+    await swal("Estas seguro que quieres eliminar tu cuenta?", {
+      buttons: {
+        regret: "No, quiero quedamer otro rato",
+        destroy: {
+          text: "Si",
+          value: "destroy",
+        },
+      },
+    })
+    .then ((value) => {
+      switch (value) {
+        case "cancel":
+          swal("Nos alegra que sigas con nosotros");
+          break;
+
+          case "destroy":
+            try{
+              const token = localStorage.getItem('token')
+              axios({
+                method: 'DELETE',
+                baseURL: 'http://localhost:8080',
+                url: `/clients`,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
+              swal("Perfil eliminado exitosamente","","success");
+              localStorage.removeItem('token');
+              this.context.isAuthenticated();
+              this.props.history.push('/');
+            }catch(err){
+              swal("Tu perfil no pudo ser eliminado", "", "error");
+            }
+            break;
+          default:
+            swal("Nos alegra que sigas con nosotros");
+      }
+    });
   };
 
   render(){
-
     const { 
       name,
       lastName,
@@ -63,7 +139,6 @@ class ClientProfile extends React.Component{
       birthday, 
       payType,
     } = this.state
-
 
     return(
     <ClientProfileForm

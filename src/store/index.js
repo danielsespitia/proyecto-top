@@ -1,24 +1,71 @@
-import { createStore } from "redux";
+import { createStore } from 'redux'
 
-const initialState = {
-  deposito: 2,
-  niti: '10',
-};
+export const RESTAURANT_ID_RESERVATION = 'RESTAURANT_ID_RESERVATION'
+export const RESTAURANT_NAME_RESERVATION = 'RESTAURANT_NAME_RESERVATION'
+export const RESERVATION_BRANCH = 'RESERVATION_BRANCH' 
+export const RESERVATION_DATE = 'RESERVATION_DATE' 
+export const RESERVATION_TIME = 'RESERVATION_TIME' 
+export const RESERVATION_RANGE = 'RESERVATION_RANGE' 
+export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE' 
+export const RESERVATION_AGREE = 'RESERVATION_AGREE' 
 
-const reducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'cambio':
-      return { 
-        ...state,
-        deposito: action.payload,
-      }
-    case '2':
+function reducer (state, action ) {
+  switch (action.type) {
+    case RESTAURANT_ID_RESERVATION:
       return {
         ...state,
-        niti: action.payload,
+        restaurantId: action.payload 
       }
-      default: return state
+    case RESTAURANT_NAME_RESERVATION:
+      return {
+        ...state,
+        restaurantName: action.payload 
+      }
+    case RESERVATION_BRANCH:
+      return {
+        ...state,
+        reservationBranch: action.payload
+      }
+    case RESERVATION_DATE:
+      return {
+        ...state,
+        reservationDate: action.payload
+      }
+    case RESERVATION_TIME:
+      return {
+        ...state,
+        reservationTime: action.payload
+      }
+    case RESERVATION_RANGE:
+      return {
+        ...state,
+        reservationRange: action.payload
+      }
+    case RESERVATION_PEOPLE:
+      return {
+        ...state,
+        reservationPeople: action.payload
+      }
+    case RESERVATION_AGREE:
+      return {
+        ...state,
+        reservationAgree: action.payload
+      }
+    default:
+      return state
   }
-};
+}
 
-export const store = createStore(reducer);
+const initialState = {
+  restaurantId: '',
+  restaurantName: '',
+  reservationBranch: '',
+  reservationDate: '',
+  reservationTime: '',
+  reservationRange: '',
+  reservationPeople: '',
+  reservationAgree: '',
+  reservationDeposit: '20.000',
+}
+
+export const store = createStore(reducer, initialState)
