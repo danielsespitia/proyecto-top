@@ -66,6 +66,7 @@ const initialState = {
   reservationPeople: '',
   reservationAgree: '',
   reservationDeposit: '20.000',
+  formValuesSanitaryRegister: {},
 }
 
 export const store = createStore(reducer, initialState)
