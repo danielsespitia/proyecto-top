@@ -1,22 +1,35 @@
-import React from 'react'
+import { useState } from 'react'
 import { SanitaryRegisterForm } from '../components/SanitaryRegisterForm'
 import Modal from '../components/Modal'
 
-class SanitaryRegister extends React.Component {
+function SanitaryRegister() {
 
-  state = {
-    question1SymptomsCovid: false,
-    question2ContactWithPeople: false,
-    question3InternationalTravel: false,
-    question4HealthWorker: false,
-    temperature: '',
-  }
+  const [question1SymptomsCovid, setQuestion1SymptomsCovid] = useState(false)
+  const [question2ContactWithPeople, setQuestion2ContactWithPeople] = useState(false)
+  const [question3InternationalTravel, setQuestion3InternationTravel] = useState(false)
+  const [question4HealthWorker, setQuestion4HealthWorker] = useState(false)
+  const [temperature, setTemperature] = useState('')
 
-  handleChange = (e) => {
-    const { name, type, value, checked} = e.target
-      this.setState({
-        [name]: type === 'checkbox' ? checked : value
-      })
+  const handleChange = (e) => {
+    const { name, value, checked} = e.target
+    switch (name) {
+      case 'question1SymptomsCovid':
+        setQuestion1SymptomsCovid(checked)
+        break;
+      case 'question2ContactWithPeople':
+        setQuestion2ContactWithPeople(checked)
+        break;
+      case 'question3InternationalTravel':
+        setQuestion3InternationTravel(checked)
+        break;
+      case 'question4HealthWorker':
+        setQuestion4HealthWorker(checked)
+        break;
+      case 'temperature':
+        setTemperature(value)
+        break;
+      default: break;
+    }
   };
 
   handleSubmit = (e) => {
