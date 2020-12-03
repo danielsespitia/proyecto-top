@@ -1,6 +1,7 @@
-import styled from 'styled-components'
-import ContainerContent from './styled/ContainerContent'
-import ButtonPrimary from './styled/ButtonPrimary'
+import styled from 'styled-components';
+import ContainerContent from './styled/ContainerContent';
+import ButtonPrimary from './styled/ButtonPrimary';
+import { reduxForm, Field } from 'redux-form';
 
 const ContainerRegisterForm = styled(ContainerContent)`
   width: 280px;
@@ -73,7 +74,7 @@ const ButtonCancel = styled(ButtonPrimary)`
   };
 `;
 
-export function SanitaryRegisterForm({
+function SanitaryRegisterForm({
   question1SymptomsCovid,
   question2ContactWithPeople,
   question3InternationalTravel,
@@ -168,3 +169,7 @@ export function SanitaryRegisterForm({
       </ContainerRegisterForm>
   )
 }
+
+export default reduxForm({
+  form: 'my-sanitary-register-form',
+})(SanitaryRegisterForm)

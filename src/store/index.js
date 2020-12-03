@@ -1,4 +1,6 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
+import { reducer as reduxFormReducer } from 'redux-form'
+
 
 export const RESTAURANT_ID_RESERVATION = 'RESTAURANT_ID_RESERVATION'
 export const RESTAURANT_NAME_RESERVATION = 'RESTAURANT_NAME_RESERVATION'
@@ -7,7 +9,7 @@ export const RESERVATION_DATE = 'RESERVATION_DATE'
 export const RESERVATION_TIME = 'RESERVATION_TIME' 
 export const RESERVATION_RANGE = 'RESERVATION_RANGE' 
 export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE' 
-export const RESERVATION_AGREE = 'RESERVATION_AGREE' 
+export const RESERVATION_AGREE = 'RESERVATION_AGREE'
 
 function reducer (state, action ) {
   switch (action.type) {
@@ -16,12 +18,12 @@ function reducer (state, action ) {
         ...state,
         restaurantId: action.payload 
       }
-    case RESTAURANT_NAME_RESERVATION:
+      case RESTAURANT_NAME_RESERVATION:
       return {
         ...state,
         restaurantName: action.payload 
       }
-    case RESERVATION_BRANCH:
+      case RESERVATION_BRANCH:
       return {
         ...state,
         reservationBranch: action.payload
@@ -41,19 +43,19 @@ function reducer (state, action ) {
         ...state,
         reservationRange: action.payload
       }
-    case RESERVATION_PEOPLE:
-      return {
-        ...state,
-        reservationPeople: action.payload
-      }
+      case RESERVATION_PEOPLE:
+        return {
+          ...state,
+          reservationPeople: action.payload
+        }
     case RESERVATION_AGREE:
       return {
         ...state,
         reservationAgree: action.payload
       }
-    default:
+      default:
       return state
-  }
+    }
 }
 
 const initialState = {
@@ -66,7 +68,11 @@ const initialState = {
   reservationPeople: '',
   reservationAgree: '',
   reservationDeposit: '20.000',
-  formValuesSanitaryRegister: {},
 }
 
-export const store = createStore(reducer, initialState)
+const rootReducer = combineReducers({
+  form: reduxFormReducer,
+  reducer,
+});
+
+export const store = createStore(rootReducer, initialState)

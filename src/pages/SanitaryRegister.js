@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import { SanitaryRegisterForm } from '../components/SanitaryRegisterForm'
+import SanitaryRegisterForm from '../components/SanitaryRegisterForm'
 import Modal from '../components/Modal'
 
 function SanitaryRegister() {
-
+  
   const [question1SymptomsCovid, setQuestion1SymptomsCovid] = useState(false)
   const [question2ContactWithPeople, setQuestion2ContactWithPeople] = useState(false)
   const [question3InternationalTravel, setQuestion3InternationTravel] = useState(false)
   const [question4HealthWorker, setQuestion4HealthWorker] = useState(false)
   const [temperature, setTemperature] = useState('')
+
 
   const handleChange = (e) => {
     const { name, value, checked} = e.target
@@ -33,7 +34,7 @@ function SanitaryRegister() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
   };
 
   const handleCancel = (e) => {
