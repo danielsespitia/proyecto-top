@@ -131,24 +131,26 @@ function ReservationForm (){
     switch (name) {
       case 'branch':
           setBranch(value)
-        break
+        break;
       case 'date':
           setDate(value)
-        break
+        break;
       case 'time':
           setTime(value)
-        break
+        break;
       case 'range':
           setRange(value)
-        break
+        break;
       case 'people':
           setPeople(value)
-        break
+        break;
       case 'agree':
         if(type==='checkbox'){
           setAgree(checked)
         }
-        break
+        break;
+      default:
+        break;
     }
   };
 
