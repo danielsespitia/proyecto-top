@@ -32,38 +32,30 @@ function SanitaryRegister() {
     }
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
   };
 
-  handleCancel = (e) => {
+  const handleCancel = (e) => {
     e.preventDefault()
-  }
-  render() {
-    const {
-      question1SymptomsCovid,
-      question2ContactWithPeople,
-      question3InternationalTravel,
-      question4HealthWorker,
-      temperature,
-    } = this.state
-    return (
-      <Modal>
-        <SanitaryRegisterForm
-          question1SymptomsCovid = {question1SymptomsCovid} 
-          question2ContactWithPeople = {question2ContactWithPeople}
-          question3InternationalTravel  =  {question3InternationalTravel}
-          question4HealthWorker = {question4HealthWorker}
-          temperature = {temperature}
-          handleChange = {this.handleChange}
-          handleSubmit = {this.handleSubmit.bind(this)}
-          handleCancel = {this.handleCancel.bind(this)}
-          
-        >
-        </SanitaryRegisterForm>
-      </Modal>
-    )
-  }
+  };
+
+  return (
+    <Modal>
+      <SanitaryRegisterForm
+        question1SymptomsCovid = {question1SymptomsCovid} 
+        question2ContactWithPeople = {question2ContactWithPeople}
+        question3InternationalTravel  =  {question3InternationalTravel}
+        question4HealthWorker = {question4HealthWorker}
+        temperature = {temperature}
+        handleChange = {handleChange}
+        handleSubmit = {handleSubmit}
+        handleCancel = {handleCancel}
+        
+      >
+      </SanitaryRegisterForm>
+    </Modal>
+  )
 }
 
 export default SanitaryRegister
