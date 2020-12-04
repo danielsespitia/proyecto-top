@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ContainerContent from './styled/ContainerContent';
 import ButtonPrimary from './styled/ButtonPrimary';
-import { reduxForm, Field } from 'redux-form';
+import { Field } from 'redux-form';
 
 const ContainerRegisterForm = styled(ContainerContent)`
   width: 280px;
@@ -40,13 +40,13 @@ const Span = styled.span `
   border-radius: 10px;  
 `;
 
-const Checkbox = styled.input`
+const Checkbox = styled(Field)`
   border: 1px solid #CED4DA;
   box-sizing: border-box;
   border-radius: 2px;
 `;
 
-const Temperature = styled.input`
+const Temperature = styled(Field)`
   margin: 15px 0;
   padding: 9px;
   border-radius: 4px;
@@ -74,6 +74,8 @@ const ButtonCancel = styled(ButtonPrimary)`
   };
 `;
 
+
+
 function SanitaryRegisterForm({
   question1SymptomsCovid,
   question2ContactWithPeople,
@@ -81,7 +83,7 @@ function SanitaryRegisterForm({
   question4HealthWorker,
   temperature,
   handleChange,
-  handleSubmit,
+  onSubmit,
   handleCancel,
 })
 {
@@ -89,7 +91,7 @@ function SanitaryRegisterForm({
       <ContainerRegisterForm>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
         <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={onSubmit}>
           <Span className="ContentQuestion">
             <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
             <Checkbox
@@ -99,6 +101,7 @@ function SanitaryRegisterForm({
               name="question1SymptomsCovid"
               value={question1SymptomsCovid}
               onChange={handleChange}
+              component="input"
             >
             </Checkbox>
           </Span>
@@ -111,6 +114,7 @@ function SanitaryRegisterForm({
               name="question2ContactWithPeople"
               value={question2ContactWithPeople}
               onChange={handleChange}
+              component="input"
             >
             </Checkbox>
           </Span>
@@ -123,6 +127,7 @@ function SanitaryRegisterForm({
               name="question3InternationalTravel"
               value={question3InternationalTravel}
               onChange={handleChange}
+              component="input"
             >
             </Checkbox>
           </Span>
@@ -135,6 +140,7 @@ function SanitaryRegisterForm({
               name="question4HealthWorker"
               value={question4HealthWorker}
               onChange={handleChange}
+              component="input"
             >
             </Checkbox>
           </Span>
@@ -146,6 +152,7 @@ function SanitaryRegisterForm({
             value={temperature}
             onChange={handleChange}
             placeholder="Cual es mi temperatura"
+            component="input"
           >
           </Temperature>
           <ContentButtons>
@@ -170,6 +177,4 @@ function SanitaryRegisterForm({
   )
 }
 
-export default reduxForm({
-  form: 'my-sanitary-register-form',
-})(SanitaryRegisterForm)
+export default SanitaryRegisterForm

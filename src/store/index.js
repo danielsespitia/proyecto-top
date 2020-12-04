@@ -11,7 +11,7 @@ export const RESERVATION_RANGE = 'RESERVATION_RANGE'
 export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE' 
 export const RESERVATION_AGREE = 'RESERVATION_AGREE'
 
-function reducer (state, action ) {
+function reducer (state = initialState, action ) {
   switch (action.type) {
     case RESTAURANT_ID_RESERVATION:
       return {
@@ -75,4 +75,4 @@ const rootReducer = combineReducers({
   reducer,
 });
 
-export const store = createStore(rootReducer, initialState)
+export const store = createStore(rootReducer)

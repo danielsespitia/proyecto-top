@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import { reduxForm } from 'redux-form'
 import SanitaryRegisterForm from '../components/SanitaryRegisterForm'
 import Modal from '../components/Modal'
 
-function SanitaryRegister() {
+const onSubmit = values => {
+  alert(JSON.stringify(values))
+};
+
+function SanitaryRegister({handleSubmit}) {
   
   const [question1SymptomsCovid, setQuestion1SymptomsCovid] = useState(false)
   const [question2ContactWithPeople, setQuestion2ContactWithPeople] = useState(false)
@@ -33,10 +38,6 @@ function SanitaryRegister() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const handleCancel = (e) => {
     e.preventDefault()
   };
@@ -50,13 +51,15 @@ function SanitaryRegister() {
         question4HealthWorker = {question4HealthWorker}
         temperature = {temperature}
         handleChange = {handleChange}
-        handleSubmit = {handleSubmit}
+        onSubmit = {handleSubmit}
         handleCancel = {handleCancel}
-        
       >
       </SanitaryRegisterForm>
     </Modal>
   )
 }
 
-export default SanitaryRegister
+export default reduxForm({
+  form: 'my-sanitary-register-form',
+  onSubmit,
+})(SanitaryRegister)
