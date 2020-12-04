@@ -51,8 +51,7 @@ const ArticleCheck = styled.article`
 const PeopleContainer = styled.article`
   display: inline;  
   grid-column: 1/5; 
-  margin-top: 50px
-
+  margin-top: 50px;
 `;
 const InputPeople = styled.input`
   width: 50px;
