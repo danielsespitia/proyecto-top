@@ -62,6 +62,7 @@ function SanitaryRegister() {
       setLoading(false)
     } catch (err) {
       setErrorSubmittion('No pudimos envíar tu formulario')
+      setLoading(false)
     }
   };
 
