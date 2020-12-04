@@ -1,5 +1,5 @@
-import { useDispatch } from 'react-redux';
-import { useState, useContext, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 import axios from 'axios';
@@ -7,7 +7,15 @@ import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext'
 import Desktopstructure from '../components/styled/DesktopStructure';
 import RestProfile  from '../components/RestProfile';
-import { GET_RESTAURANT_NAME, GET_RESTAURANT_EMAIL, GET_RESTAURANT_ADDRESS, GET_RESTAURANT_PHONE, GET_RESTAURANT_SCHEDULEFROM, GET_RESTAURANT_SCHEDULETO, GET_RESTAURANT_DEPOSIT, GET_RESTAURANT_NIT } from '../store';
+import { 
+  getAddress,
+  getPhone,
+  getScheduleFrom,
+  getScheduleTo,
+  getNit,
+  getDeposit,
+  //postRestaurantProfile, getRestaurantProfile
+} from '../store/restaurantReducer';
  
 const RestLogo = styled.img `
   width: 100px;
@@ -56,110 +64,138 @@ const MyOfficesAnchor = styled.a`
 `;
   
 function RestaurantProfile() {
-    
-  const [ id, setId ] = useState(''); 
-  const [ restaurantName, setRestaurantName ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ address, setAddress ] = useState('');
-  const [ phone, setPhone ] = useState('');
-  const [ scheduleFrom, setScheduleFrom ] = useState('');
-  const [ scheduleTo, setScheduleTo ] = useState('');
-  const [ deposit, setDeposit ] = useState(20000)
-  const [ nit, setNit ] = useState('');
-  const { logout } = useContext(AuthContext);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
 
-    axios({ 
-      method: 'GET',
-      baseURL: 'http://localhost:8080',
-      url: '/restaurants/profile',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  //const [ address, setAddress ] = useState('address valr inicial');
+  //console.log(address)
+
+  const { 
+    loading,
+    error, 
+    address, 
+    phone,
+    scheduleFrom,
+    scheduleTo,
+    nit,
+    deposit,
+  } = useSelector(
+    ({restaurantReducer: { 
+      loading, 
+      error, 
+      address,
+      phone,
+      scheduleFrom,
+      scheduleTo,
+      nit,
+      deposit,
+    }}) => {
+      return { loading, error, address, phone, scheduleFrom, scheduleTo, nit, deposit }
     })
-    .then(( {data: {data}} ) => {
-      setRestaurantName(data.name)
-      setEmail(data.email) 
-      console.log(data.email)
-    })
-    .catch((err) => {
-      localStorage.removeItem('token');
-      history.push('/');
-    })
-  }, []);
+  console.log( 'lo que recibo del useSelector:',loading, error, address, phone, scheduleFrom, scheduleTo, nit, deposit )
+
+  //useEffect(() => {
+    //dispatch(getRestaurantProfile())
+  //},[])
+
+  if(loading) return <p>Loading...</p>
+  if(error) return <p>Something went wrong</p>
+
+  //swal("Perfil actualizado exitosamente", "", "success");
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('cmoponentet:',name, value )
     switch(name) {
       case 'address':
-        setAddress(value)
+        dispatch(getAddress(value))
         break;
       case 'phone':
-        setPhone(value)
-        break; 
+        dispatch(getPhone(value))
+        break;
       case 'scheduleFrom':
-        setScheduleFrom(value)
+        dispatch(getScheduleFrom(value))
         break;
       case 'scheduleTo':
-        setScheduleTo(value)
-        break;
-      case 'deposit':
-        setDeposit(value)
+        dispatch(getScheduleTo(value))
         break;
       case 'nit':
-        setNit(value)
+        dispatch(getNit(value))
+        break;
+      case 'deposit':
+        dispatch(getDeposit(value))
         break;
       default: break;
     }
   };
 
-  function useHandleSubmit() {
-    
-    const token = localStorage.getItem('token');
+  function handleSubmit() {
 
-    useEffect(() => {
-      axios({
-        method: 'PUT',
-        baseURL: 'http://localhost:8080',
-        url: '/restaurants',
-        data: {
-          id,
-          restaurantName,
-          email,
-          address,
-          phone,
-          scheduleFrom,
-          scheduleTo,
-          deposit,
-          nit,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(() => {
-        dispatch(
-          { type: GET_RESTAURANT_NAME, payload: restaurantName }, 
-          { type: GET_RESTAURANT_EMAIL, payload: email },
-          { type: GET_RESTAURANT_ADDRESS, payload: address },
-          { type: GET_RESTAURANT_PHONE, payload: phone },
-          { type: GET_RESTAURANT_SCHEDULEFROM, payload: scheduleFrom },
-          { type: GET_RESTAURANT_SCHEDULETO, payload: scheduleTo },
-          { type: GET_RESTAURANT_DEPOSIT, payload: deposit },
-          { type: GET_RESTAURANT_NIT, payload: nit },
-          )
-          swal("Perfil actualizado exitosamente", "", "success");
-          history.push('/my-restaurant')
-      })
-      .catch((err) => {
-        swal("Tu perfil no pudo ser actualizado", "", "error");
-      }
-    )}, [])
+    const data = {
+      //id,
+      //restaurantName,
+      //email,
+      address,
+      //phone,
+      //scheduleFrom,
+      //scheduleTo,
+      //deposit,
+      //nit,
+    }
+
+      //dispatch(postRestaurantProfile(data))
+
+    if(loading) return <p>Loading...</p>
+    if(error) return <p>Something went wrong</p>
+
+    //swal("Perfil actualizado exitosamente", "", "success");
+   //history.push('/my-restaurant')
+
+
+
+    //const token = localStorage.getItem('token');
+
+    //useEffect(() => {
+      //axios({
+        //method: 'PUT',
+        //baseURL: 'http://localhost:8080',
+        //url: '/restaurants',
+        //data: {
+          //id,
+          //restaurantName,
+          //email,
+          //address,
+          //phone,
+          //scheduleFrom,
+          //scheduleTo,
+          //deposit,
+          //nit,
+        //},
+        //headers: {
+          //Authorization: `Bearer ${token}`,
+        //},
+      //})
+      //.then(() => {
+        //dispatch(
+          //{ type: GET_RESTAURANT_NAME, payload: restaurantName }, 
+          //{ type: GET_RESTAURANT_EMAIL, payload: email },
+          //{ type: GET_RESTAURANT_ADDRESS, payload: address },
+          //{ type: GET_RESTAURANT_PHONE, payload: phone },
+          //{ type: GET_RESTAURANT_SCHEDULEFROM, payload: scheduleFrom },
+          //{ type: GET_RESTAURANT_SCHEDULETO, payload: scheduleTo },
+          //{ type: GET_RESTAURANT_DEPOSIT, payload: deposit },
+          //{ type: GET_RESTAURANT_NIT, payload: nit },
+          //)
+          //swal("Perfil actualizado exitosamente", "", "success");
+          //history.push('/my-restaurant')
+      //})
+      //.catch((err) => {
+        //swal("Tu perfil no pudo ser actualizado", "", "error");
+      //}
+    //)}, [])
   }
 
   const handleDeleteRestaurant = async (e) => {
@@ -193,7 +229,7 @@ function RestaurantProfile() {
             });
             swal("Perfil eliminado exitosamente", "", "success");
             localStorage.removeItem('token');
-            logout()
+            //logout()
             this.props.history.push('/')
           }catch(err){
             swal("Tu perfil no pudo ser eliminado", "", "error");
@@ -219,9 +255,9 @@ function RestaurantProfile() {
         </BodyLeft>
         <BodyRight>
           <RestProfile
-            key={id}
-            restaurantName={restaurantName}
-            email={email}
+            //key={id}
+            //restaurantName={restaurantName}
+            //email={email}
             address={address}
             phone={phone}
             scheduleFrom={scheduleFrom}
@@ -229,8 +265,8 @@ function RestaurantProfile() {
             deposit={deposit}
             nit={nit}
             handleChange={handleChange}
-            handleSubmit={useHandleSubmit}
-            handleDeleteRestaurant={handleDeleteRestaurant}
+            //handleSubmit={handleSubmit}
+            //handleDeleteRestaurant={handleDeleteRestaurant}
           />
         </BodyRight>
       </Desktopstructure>

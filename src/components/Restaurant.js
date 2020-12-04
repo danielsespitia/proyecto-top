@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {
   RESTAURANT_ID_RESERVATION,
   RESTAURANT_NAME_RESERVATION,
-  } from '../store'
+  } from '../store/reservationReducer'
 
 const Article = styled.article`
   margin: 5px;
