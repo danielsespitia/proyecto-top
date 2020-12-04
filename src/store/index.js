@@ -1,5 +1,4 @@
 import { createStore, combineReducers } from 'redux'
-import { reducer as reduxFormReducer } from 'redux-form'
 
 
 export const RESTAURANT_ID_RESERVATION = 'RESTAURANT_ID_RESERVATION'
@@ -71,7 +70,6 @@ const initialState = {
 }
 
 const rootReducer = combineReducers({
-  form: reduxFormReducer,
   reducer,
 });
 

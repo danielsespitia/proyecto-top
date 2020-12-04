@@ -1,19 +1,18 @@
 import { useState } from 'react'
-import { reduxForm } from 'redux-form'
-import SanitaryRegisterForm from '../components/SanitaryRegisterForm'
+import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
+import axios from 'axios'
 
-const onSubmit = values => {
-  alert(JSON.stringify(values))
-};
 
-function SanitaryRegister({handleSubmit}) {
+function SanitaryRegister() {
   
   const [question1SymptomsCovid, setQuestion1SymptomsCovid] = useState(false)
   const [question2ContactWithPeople, setQuestion2ContactWithPeople] = useState(false)
   const [question3InternationalTravel, setQuestion3InternationTravel] = useState(false)
   const [question4HealthWorker, setQuestion4HealthWorker] = useState(false)
   const [temperature, setTemperature] = useState('')
+  const [errorSubmittion, setErrorSubmittion] = useState('')
+  const [message, setMessage] = useState('')
 
 
   const handleChange = (e) => {
@@ -38,6 +37,32 @@ function SanitaryRegister({handleSubmit}) {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token')
+      const response = await axios({
+        method: 'POST',
+        baseURL: 'http://localhost:8000',
+        url: '/sanitary-register/',
+        data: { 
+          question1SymptomsCovid, 
+          question2ContactWithPeople,
+          question3InternationalTravel,
+          question4HealthWorker,
+          temperature
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data)
+      setMessage('Registro sanitario actualizado exitosamente')
+    } catch (err) {
+      setErrorSubmittion('No pudimos envíar tu formulario')
+    }
+  };
+
   const handleCancel = (e) => {
     e.preventDefault()
   };
@@ -51,15 +76,14 @@ function SanitaryRegister({handleSubmit}) {
         question4HealthWorker = {question4HealthWorker}
         temperature = {temperature}
         handleChange = {handleChange}
-        onSubmit = {handleSubmit}
+        handleSubmit = {handleSubmit}
         handleCancel = {handleCancel}
+        errorSubmittion = {errorSubmittion}
+        message = {message}
       >
       </SanitaryRegisterForm>
     </Modal>
   )
 }
 
-export default reduxForm({
-  form: 'my-sanitary-register-form',
-  onSubmit,
-})(SanitaryRegister)
+export default SanitaryRegister
