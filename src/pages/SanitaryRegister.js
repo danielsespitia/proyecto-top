@@ -39,18 +39,21 @@ function SanitaryRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('traigo temperatura', temperature)
     try {
       const token = localStorage.getItem('token')
+      console.log(token)
+      console.log('acá traigo temperatura dentro del try', temperature)
       const response = await axios({
         method: 'POST',
-        baseURL: 'http://localhost:8000',
-        url: '/sanitary-register/',
+        baseURL: 'http://localhost:8080',
+        url: '/sanitary-register',
         data: { 
+          temperature,
           question1SymptomsCovid, 
           question2ContactWithPeople,
           question3InternationalTravel,
           question4HealthWorker,
-          temperature
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -65,6 +68,7 @@ function SanitaryRegister() {
 
   const handleCancel = (e) => {
     e.preventDefault()
+    console.log('Yo cancelo')
   };
 
   return (

@@ -77,9 +77,10 @@ export const ErrorSubmittion = styled.span`
   font-size: 12px;
   color: red;
   font-style: italic;
-`
+`;
 export const Message = styled.span`
   font-size: 12px;
-  color: green;
+  color: #0f31dd;
   font-style: italic;
-` 
+  font-weight: 800;
+` ;
