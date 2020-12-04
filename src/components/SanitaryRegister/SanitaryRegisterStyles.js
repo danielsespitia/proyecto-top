@@ -83,4 +83,4 @@ export const Message = styled.span`
   color: #0f31dd;
   font-style: italic;
   font-weight: 800;
-` ;
+`;

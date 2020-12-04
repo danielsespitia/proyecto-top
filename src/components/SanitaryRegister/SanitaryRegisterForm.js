@@ -26,8 +26,12 @@ function SanitaryRegisterForm({
   handleCancel,
   errorSubmittion,
   message,
+  loading,
 })
 {
+  if(loading === true){
+    return <h1>Cargando...</h1>
+  }
   return(
     <ContainerRegisterForm>
         <Message>{message}</Message>
@@ -91,6 +95,7 @@ function SanitaryRegisterForm({
             value={temperature}
             onChange={handleChange}
             placeholder="Cual es mi temperatura"
+            required
           >
           </Temperature>
           <ContentButtons>
@@ -104,7 +109,7 @@ function SanitaryRegisterForm({
             <ButtonCancel
               className="ButtonCancel"
               id="ButtonCancel"
-              type="button"
+              type="reset"
               onClick={handleCancel}
               value="Cancelar"
             >

@@ -13,6 +13,7 @@ function SanitaryRegister() {
   const [temperature, setTemperature] = useState('')
   const [errorSubmittion, setErrorSubmittion] = useState('')
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
 
   const handleChange = (e) => {
@@ -39,11 +40,9 @@ function SanitaryRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('traigo temperatura', temperature)
+    setLoading(true)
     try {
       const token = localStorage.getItem('token')
-      console.log(token)
-      console.log('acá traigo temperatura dentro del try', temperature)
       const response = await axios({
         method: 'POST',
         baseURL: 'http://localhost:8080',
@@ -59,16 +58,20 @@ function SanitaryRegister() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data)
       setMessage('Registro sanitario actualizado exitosamente')
+      setLoading(false)
     } catch (err) {
       setErrorSubmittion('No pudimos envíar tu formulario')
     }
   };
 
   const handleCancel = (e) => {
-    e.preventDefault()
-    console.log('Yo cancelo')
+    setTemperature('')
+    setQuestion1SymptomsCovid(false)
+    setQuestion2ContactWithPeople(false)
+    setQuestion3InternationTravel(false)
+    setQuestion4HealthWorker(false)
+    setMessage('Recuerda diligenciar tu temperatura actual')
   };
 
   return (
@@ -84,6 +87,7 @@ function SanitaryRegister() {
         handleCancel = {handleCancel}
         errorSubmittion = {errorSubmittion}
         message = {message}
+        loading = {loading}
       >
       </SanitaryRegisterForm>
     </Modal>
