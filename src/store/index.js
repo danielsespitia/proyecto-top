@@ -1,5 +1,4 @@
-import { createStore, combineReducers } from 'redux'
-
+import { createStore } from 'redux'
 
 export const RESTAURANT_ID_RESERVATION = 'RESTAURANT_ID_RESERVATION'
 export const RESTAURANT_NAME_RESERVATION = 'RESTAURANT_NAME_RESERVATION'
@@ -8,21 +7,21 @@ export const RESERVATION_DATE = 'RESERVATION_DATE'
 export const RESERVATION_TIME = 'RESERVATION_TIME' 
 export const RESERVATION_RANGE = 'RESERVATION_RANGE' 
 export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE' 
-export const RESERVATION_AGREE = 'RESERVATION_AGREE'
+export const RESERVATION_AGREE = 'RESERVATION_AGREE' 
 
-function reducer (state = initialState, action ) {
+function reducer (state, action ) {
   switch (action.type) {
     case RESTAURANT_ID_RESERVATION:
       return {
         ...state,
         restaurantId: action.payload 
       }
-      case RESTAURANT_NAME_RESERVATION:
+    case RESTAURANT_NAME_RESERVATION:
       return {
         ...state,
         restaurantName: action.payload 
       }
-      case RESERVATION_BRANCH:
+    case RESERVATION_BRANCH:
       return {
         ...state,
         reservationBranch: action.payload
@@ -42,19 +41,19 @@ function reducer (state = initialState, action ) {
         ...state,
         reservationRange: action.payload
       }
-      case RESERVATION_PEOPLE:
-        return {
-          ...state,
-          reservationPeople: action.payload
-        }
+    case RESERVATION_PEOPLE:
+      return {
+        ...state,
+        reservationPeople: action.payload
+      }
     case RESERVATION_AGREE:
       return {
         ...state,
         reservationAgree: action.payload
       }
-      default:
+    default:
       return state
-    }
+  }
 }
 
 const initialState = {
@@ -69,8 +68,4 @@ const initialState = {
   reservationDeposit: '20.000',
 }
 
-const rootReducer = combineReducers({
-  reducer,
-});
-
-export const store = createStore(rootReducer)
+export const store = createStore(reducer, initialState)
