@@ -119,8 +119,8 @@ function RestProfile ({
             className="Form__restaurantScheduleFrom-input"
             id="scheduleFrom"
             type="time"
-            min="11:00"
-            max="14:00"
+            //min="11:00"
+            //max="14:00"
             name="scheduleFrom"
             value={scheduleFrom}
             autoComplete="on"
@@ -135,8 +135,8 @@ function RestProfile ({
             className="Form__scheduleTo-input"
             id="scheduleTo"
             type="time"
-            min="20:00"
-            max="24:00"
+            //min="20:00"
+            //max="24:00"
             name="scheduleTo"
             value={scheduleTo}
             autoComplete="on"
