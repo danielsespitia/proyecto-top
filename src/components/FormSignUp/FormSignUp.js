@@ -1,41 +1,14 @@
-import styled from 'styled-components'
-import ContainerContent from '../components/styled/ContainerContent'
-import ButtonPrimary from '../components/styled/ButtonPrimary'
+import {
+  Error,
+  Form,
+  Input,
+  Select,
+  ContainerTerms,
+  ContainerButton,
+} from './FormSignUpStyles'
+import ContainerContent from '../styled/ContainerContent'
+import ButtonPrimary from '../styled/ButtonPrimary'
 
-const Form = styled.form ` 
-  display: grid;
-  grid-row-gap: 12px;
-`;
-
-const Input = styled.input ` 
-  padding: 10.5px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.5);
-`;
-const Select = styled.select ` 
-  padding: 10.5px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  font-size: 16px;
-  color: #6c757d;
-`;
-const ContainerTerms = styled.span ` 
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  font-size: 14px;
-`;
-const ContainerButton = styled.span `
-  text-align: center;
-`;
-
-const Error = styled.span `
-  font-size: 12px;
-  color: red;
-  font-style: italic;
-`;
 
 export function FormSignUp ({ 
   name, 
