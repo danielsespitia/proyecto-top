@@ -1,118 +1,22 @@
-import { AuthContext } from '../store/AuthContext'
+import { AuthContext } from '../../store/AuthContext'
 import { useContext } from 'react'
-import styled from 'styled-components'
-import Desktopstructure from '../components/styled/DesktopStructure'
-import ButtonPrimary from '../components/styled/ButtonPrimary'
-import SanitaryRegister from '../pages/SanitaryRegister'
-
-const BodyLeft = styled.div ` 
-  grid-area: bodyLeft;
-  display: grid;
-  grid-row-gap: 25px; 
-  padding: 50px 0;
-  background-color: ${
-    props => props.theme.grayColorOverlay
-  };
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-const BodyRight = styled.div ` 
-  grid-area: bodyRight;
-  padding: 50px 60px;
-  background-color: ${
-    props => props.theme.grayColorOverlay
-  };
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-const H3 = styled.h3`
-  margin-block-start: 0;
-  margin-block-end: 0;
-  text-align: center;
-`;
-
-const TextSanitaryRegister = styled.p`
-  margin-block-start: 0;
-  margin-block-end: 0;
-  text-align: center;
-`;
-
-const LinkToSanitaryRegister = styled.button`
-  font-size: 16px;
-  color: #2F80ED;
-  border: 0px;
-  text-decoration: underline;
-  
-  &:focus {
-    background-color: white;
-    border-radius: 4px;
-    padding: 7px;
-    outline: none;
-  };
-`;
-
-const PhotoClient = styled.img `
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const Form = styled.form `
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px 60px;
-`;
-
-const FormItem = styled.div`
-  display: grid;
-  grid-row-gap: 5px;
-`;
-
-const Input = styled.input ` 
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.5);
-`;
-
-const Select = styled.select ` 
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  font-size: 16px;
-  color: #6c757d;
-`;
-
-const ContentButtons = styled.div`
-  grid-column: 1/3;
-  display: flex;
-  justify-content: center;
-  padding-block-start: 40px;
-`;
-
-const ButtonUpdate = styled(ButtonPrimary)`
-  margin-right: 50px;
-`;
-
-const ButtonCancel = styled(ButtonPrimary)`
-  background-color: ${
-    props => props.theme.tertiaryColor
-  };
-  &:hover {
-    background-color: #E2DE5B;
-    border: 1px solid ${
-      props => props.theme.tertiaryColor
-    };
-  }
-  margin-left: 50px;
-`;
+import Desktopstructure from '../styled/DesktopStructure'
+import SanitaryRegister from '../../pages/SanitaryRegister'
+import { 
+  BodyLeft,
+  BodyRight,
+  H3,
+  TextSanitaryRegister,
+  LinkToSanitaryRegister,
+  PhotoClient,
+  Form,
+  FormItem,
+  Input,
+  Select,
+  ContentButtons,
+  ButtonUpdate,
+  ButtonCancel,
+} from './ClientProfileFormStyles'
 
 export function ClientProfileForm({
   name,

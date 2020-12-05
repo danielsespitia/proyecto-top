@@ -1,66 +1,82 @@
-import React from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext';
-import { ClientProfileForm } from '../components/ClientProfileForm';
-import { ThemeConsumer } from 'styled-components';
+import { ClientProfileForm } from '../components/ClientProfileForm/ClientProfileForm';
 
-class ClientProfile extends React.Component{
+function ClientProfile () {
 
-  static contextType = AuthContext;
+  const history = useHistory();
+  const {logout} = useContext(AuthContext);
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [identification, setIdentification] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [payType, setPayType] = useState('payU');
 
-  state = {
-    name: '',
-    lastName: '',
-    email: '',
-    address: '',
-    phone: '',
-    identification: '',
-    birthday: '', 
-    payType: 'cash',
-  };
-
-
-  async componentDidMount() {
-    try {
-      const token = localStorage.getItem('token')
-      const {data: {data}} = await axios({
-        method: 'GET',
-        baseURL: 'http://localhost:8080',
-        url: '/clients/profile',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const date = !data.birthday ? '' : data.birthday.split('T')[0];
-      this.setState({ ...data, birthday: date })
-    } catch(err) {
-      localStorage.removeItem('token');
-      this.props.history.push('/')
-    }
-  }
-
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value === '' ? '' : value
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    axios({
+      method: 'GET',
+      baseURL: 'http://localhost:8080',
+      url: '/clients/profile',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
     })
+    .then(( {data: {data} }) => {
+      const date = !data.birthday ? '' : data.birthday.split('T')[0];
+      setName(data.name);
+      setLastName(data.lastName);
+      setEmail(data.email);
+      setAddress(data.address);
+      setPhone(data.phone);
+      setIdentification(data.identification);
+      setBirthday(data.birthday);
+      setPayType(data.payType);
+    })
+    .catch(err => {
+    localStorage.removeItem('token');
+    history.push('/');
+    })
+  },[])
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    switch(name) {
+      case 'name':
+        setName(value)
+        break;
+      case 'lastName':
+        setLastName(value)
+        break;
+      case 'email':
+        setEmail(value)
+        break;
+      case 'address':
+        setAddress(value)
+        break;
+      case 'phone':
+        setPhone(value)
+        break;
+      case 'identification':
+        setIdentification(value)
+        break;
+      case 'birthday':
+        setBirthday(value)
+        break;
+      default: break;
+    }
   };
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token')
-      const { 
-        name,
-        lastName,
-        email,
-        address,
-        phone,
-        identification,
-        birthday, 
-        payType 
-      } = this.state
       const resp = await axios({
         method: 'PUT',
         baseURL: 'http://localhost:8080',
@@ -85,7 +101,7 @@ class ClientProfile extends React.Component{
     }
   };
 
-  handleDeleteClient = async (e) => {
+  const handleDeleteClient = async (e) => {
     e.preventDefault();
 
     await swal("Estas seguro que quieres eliminar tu cuenta?", {
@@ -116,8 +132,8 @@ class ClientProfile extends React.Component{
               });
               swal("Perfil eliminado exitosamente","","success");
               localStorage.removeItem('token');
-              this.context.isAuthenticated();
-              this.props.history.push('/');
+              logout();
+              history.push('/');
             }catch(err){
               swal("Tu perfil no pudo ser eliminado", "", "error");
             }
@@ -127,18 +143,6 @@ class ClientProfile extends React.Component{
       }
     });
   };
-
-  render(){
-    const { 
-      name,
-      lastName,
-      email,
-      address,
-      phone,
-      identification,
-      birthday, 
-      payType,
-    } = this.state
 
     return(
     <ClientProfileForm
@@ -150,13 +154,12 @@ class ClientProfile extends React.Component{
       identification = {identification}
       birthday = {birthday}
       payType = {payType}
-      handleChange = {this.handleChange}
-      handleSubmit = {this.handleSubmit.bind(this)}
-      handleDeleteClient = {this.handleDeleteClient.bind(this)}
+      handleChange = {handleChange}
+      handleSubmit = {handleSubmit}
+      handleDeleteClient = {handleDeleteClient}
       >
     </ClientProfileForm>
     )
-  }
 }
 
 export default ClientProfile
