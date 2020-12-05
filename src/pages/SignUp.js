@@ -1,34 +1,50 @@
-import React from 'react'
-import { FormSignUp } from '../components/FormSignUp'
+import { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import { FormSignUp } from '../components/FormSignUp/FormSignUp'
 import { AuthContext } from '../store/AuthContext'
 import axios from 'axios'
 
-class SignUp extends React.Component {
-  static contextType = AuthContext;
+function SignUp () {
+  
+  const history = useHistory();
+  const { isAuthenticated } = useContext(AuthContext);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [userType, setUserType] = useState('clients');
+  const [terms, setTerms] = useState('');
+  const [errors, setErrors] = useState({});
 
-  state = {
-    name: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    userType: 'clients',
-    terms: false,
-    errors: {},
+  const handleChange = (e) => {
+    const { name, value, checked } = e.target;
+    switch(name) {
+      case 'name':
+        setName(value)
+        break;
+      case 'email':
+        setEmail(value)
+        break;
+      case 'password':
+        setPassword(value)
+        break;
+      case 'confirmPassword':
+        setConfirmPassword(value)
+        break;
+      case 'userType':
+        setUserType(value)
+        break;
+      case 'terms':
+        setTerms(checked)
+        break;
+      default: break;
+    }
   };
 
-  handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    this.setState({
-      [name]: type === 'checkbox' ? checked : value
-    })
-  };
-
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (this.validate()) {
+    if (validate()) {
       try {
-        const { name, password, email, userType, terms } = this.state;
         const { data: { token } } = await axios({
           method: 'POST',
           baseURL: 'http://localhost:8080',
@@ -36,48 +52,43 @@ class SignUp extends React.Component {
           data: { name, password, email, userType, terms }
         });
         localStorage.setItem('token', token);
-        this.context.isAuthenticated(token);
-        const pathUser = this.state.userType === 'clients' ? 'client-profile' : 'restaurant-profile';
-        this.props.history.push(`${pathUser}`);
+        isAuthenticated(token);
+        const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+        history.push(`${pathUser}`);
       } catch (err) {
-        const { errors } = this.state
         const newError = { ...errors, account: 'Usuario invalido, no se creo cuenta' }
-        this.setState({ errors: newError })
+        setErrors({ errors: newError })
       }
     }
   };
 
-  validate() {
-    const { password, confirmPassword, errors } = this.state;
+  const validate = () => {
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
     if (!arePasswordEqual) {
       const newError = { ...errors, password: 'La contraseña no coincide'}
-      this.setState({ errors: newError })
+      setErrors({ errors: newError })
       return false
     }
     return true
   };
 
-  render() {
-    const { name, password, confirmPassword, email, userType, terms, errors } = this.state
-    return (
-      <>
-        <FormSignUp
-          name={name}
-          password={password}
-          confirmPassword={confirmPassword}
-          email={email}
-          userType={userType}
-          terms={terms}
-          handleSubmit={this.handleSubmit.bind(this)}
-          handleChange={this.handleChange}
-          errorsPassword={errors.password}
-          errorsAcount={errors.account}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      <FormSignUp
+        name={name}
+        password={password}
+        confirmPassword={confirmPassword}
+        email={email}
+        userType={userType}
+        terms={terms}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        errorsPassword={errors.password}
+        errorsAcount={errors.account}
+      />
+    </>
+  )
 }
 
 export default SignUp
