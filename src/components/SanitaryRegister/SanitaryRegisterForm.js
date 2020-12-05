@@ -1,79 +1,21 @@
-import styled from 'styled-components'
-import ContainerContent from './styled/ContainerContent'
-import ButtonPrimary from './styled/ButtonPrimary'
+import ButtonPrimary from '../styled/ButtonPrimary';
+import { 
+  ContainerRegisterForm,  
+  H3,
+  ParagraphInstruction,
+  Form,
+  Span,
+  Paragraph,
+  Checkbox,
+  Temperature,
+  ContentButtons,
+  ButtonCancel,
+  ErrorSubmittion,
+  Message,
+} from './SanitaryRegisterStyles'
 
-const ContainerRegisterForm = styled(ContainerContent)`
-  width: 280px;
-  padding: 30px;
-`;
 
-const Form = styled.form`
-  display: grid;
-  justify-content: center;
-  grid-row-gap: 10px;
-`;
-
-const H3 = styled.h3`
-  text-align: center;
-`;
-
-const ParagraphInstruction = styled.p`
-  font-size: 14px;
-`;
-
-const Paragraph = styled.p`
-  font-size: 11px;
-  color: #2F80ED;
-  width: 150px;
-`;
-
-const Span = styled.span ` 
-  width: 274px;
-  padding: 20px;
-  background-color: ${
-    props => props.theme.blueColorSan
-  };
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;  
-`;
-
-const Checkbox = styled.input`
-  border: 1px solid #CED4DA;
-  box-sizing: border-box;
-  border-radius: 2px;
-`;
-
-const Temperature = styled.input`
-  margin: 15px 0;
-  padding: 9px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  border-color: ${
-    props => props.theme.grayColorMore
-  };
-`;
-
-const ContentButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ButtonCancel = styled(ButtonPrimary)`
-  background-color: ${
-    props => props.theme.tertiaryColor
-  };
-
-  &:hover {
-      background-color: #E2DE5B;
-      border: 1px solid ${
-        props => props.theme.tertiaryColor
-      };
-  };
-`;
-
-export function SanitaryRegisterForm({
+function SanitaryRegisterForm({
   question1SymptomsCovid,
   question2ContactWithPeople,
   question3InternationalTravel,
@@ -82,10 +24,18 @@ export function SanitaryRegisterForm({
   handleChange,
   handleSubmit,
   handleCancel,
+  errorSubmittion,
+  message,
+  loading,
 })
 {
+  if(loading === true){
+    return <h1>Cargando...</h1>
+  }
   return(
-      <ContainerRegisterForm>
+    <ContainerRegisterForm>
+        <Message>{message}</Message>
+        <ErrorSubmittion>{errorSubmittion}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
         <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
         <Form onSubmit={handleSubmit}>
@@ -145,6 +95,7 @@ export function SanitaryRegisterForm({
             value={temperature}
             onChange={handleChange}
             placeholder="Cual es mi temperatura"
+            required
           >
           </Temperature>
           <ContentButtons>
@@ -158,7 +109,7 @@ export function SanitaryRegisterForm({
             <ButtonCancel
               className="ButtonCancel"
               id="ButtonCancel"
-              type="button"
+              type="reset"
               onClick={handleCancel}
               value="Cancelar"
             >
@@ -168,3 +119,5 @@ export function SanitaryRegisterForm({
       </ContainerRegisterForm>
   )
 }
+
+export default SanitaryRegisterForm
