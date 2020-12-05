@@ -56,8 +56,7 @@ function SignUp () {
         const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile';
         history.push(`${pathUser}`);
       } catch (err) {
-        const newError = { ...errors, account: 'Usuario invalido, no se creo cuenta' }
-        setErrors({ errors: newError })
+        setErrors({ account: 'Usuario invalido, no se creo cuenta' })
       }
     }
   };
@@ -66,8 +65,7 @@ function SignUp () {
     const arePasswordEqual = !!password && !!confirmPassword && password === confirmPassword;
 
     if (!arePasswordEqual) {
-      const newError = { ...errors, password: 'La contraseña no coincide'}
-      setErrors({ errors: newError })
+      setErrors({password: 'La contraseña no coincide'})
       return false
     }
     return true
