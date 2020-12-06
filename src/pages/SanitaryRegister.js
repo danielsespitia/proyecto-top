@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
 import axios from 'axios'
@@ -14,6 +14,7 @@ function SanitaryRegister() {
   const [errorSubmittion, setErrorSubmittion] = useState('')
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(false)
+  const [idSanitary, setIdSanitary] = useState('')
 
 
   const handleChange = (e) => {
@@ -60,6 +61,8 @@ function SanitaryRegister() {
       });
       setMessage('Registro sanitario actualizado exitosamente')
       setLoading(false)
+      setIdSanitary(response.data.id)
+      console.log(idSanitary)
     } catch (err) {
       setErrorSubmittion('No pudimos envíar tu formulario')
       setLoading(false)
@@ -74,6 +77,28 @@ function SanitaryRegister() {
     setQuestion4HealthWorker(false)
     setMessage('Recuerda diligenciar tu temperatura actual')
   };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token')
+  //   axios({
+  //     method:'GET',
+  //     baseURL:'http://localhost:8080',
+  //     url: '/sanitary-register/:sanitaryRegisterId',
+  //     headers:{
+  //       Authorization: `Baerer ${token}`,
+  //     }
+  //   })
+  //   .then(( {data: {data} }) => {
+  //     setTemperature(data.temperature);
+  //     setQuestion1SymptomsCovid(data.question1SymptomsCovid);
+  //     setQuestion2ContactWithPeople(data.question2ContactWithPeople);
+  //     setQuestion3InternationTravel(data.question3InternationalTravel);
+  //     setQuestion4HealthWorker(data.question4HealthWorker);
+  //   })
+  //   .catch(err => {
+  //     setErrorSubmittion('Estamos teniendo problemas de conexión')
+  //   })
+  // })
 
   return (
     <Modal>
