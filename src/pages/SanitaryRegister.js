@@ -12,7 +12,7 @@ function SanitaryRegister() {
   const [question4HealthWorker, setQuestion4HealthWorker] = useState(false)
   const [temperature, setTemperature] = useState('')
   const [errorSubmittion, setErrorSubmittion] = useState('')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({})
   const [loading, setLoading] = useState(false)
   const [idSanitary, setIdSanitary] = useState('')
 
@@ -59,7 +59,7 @@ function SanitaryRegister() {
           Authorization: `Bearer ${token}`,
         },
       });
-      setMessage('Registro sanitario actualizado exitosamente')
+      setMessage({ successfully: 'Registro sanitario actualizado exitosamente' })
       setLoading(false)
       setIdSanitary(response.data.id)
       console.log(idSanitary)
@@ -75,7 +75,7 @@ function SanitaryRegister() {
     setQuestion2ContactWithPeople(false)
     setQuestion3InternationTravel(false)
     setQuestion4HealthWorker(false)
-    setMessage('Recuerda diligenciar tu temperatura actual')
+    setMessage({ temperature: 'Recuerda diligenciar tu temperatura actual' })
   };
 
   // useEffect(() => {
@@ -112,7 +112,8 @@ function SanitaryRegister() {
         handleSubmit = {handleSubmit}
         handleCancel = {handleCancel}
         errorSubmittion = {errorSubmittion}
-        message = {message}
+        messageSuccessfully = {message.successfully}
+        messageTemperature = {message.temperature}
         loading = {loading}
       >
       </SanitaryRegisterForm>
