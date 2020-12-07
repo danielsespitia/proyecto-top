@@ -160,7 +160,7 @@ function RestaurantProfile() {
             swal("Perfil eliminado exitosamente", "", "success");
             localStorage.removeItem('token');
             logout()
-            this.props.history.push('/')
+            history.push('/')
         }catch(err){
             swal("Tu perfil no pudo ser eliminado", "", "error");
           }
