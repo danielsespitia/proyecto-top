@@ -60,7 +60,7 @@ const ButtonCancel = styled(ButtonPrimary)`
 `;
 
 function RestProfile ({ 
-  restaurantName, 
+  name, 
   address,
   email,
   phone,
@@ -76,15 +76,34 @@ function RestProfile ({
   return (
     <Container>
       <SignUpData>
-        <DataItem>
-          <p><strong>Nombre:</strong></p>
-          <p>{restaurantName}</p></DataItem>
-        <DataItem>
-          <p><strong>Correo Electrónico:</strong></p>
-          <p>{email}</p>
-        </DataItem>
       </SignUpData>
       <Form onSubmit={handleSubmit}>
+        <div>
+          <Label><strong>Nombre</strong></Label>
+          <Input
+            className="Form__name-input"
+            id="name"
+            type="text"
+            name="name"
+            value={name}
+            autoComplete="on"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <Label><strong>Correo Electrónico</strong></Label>
+          <Input
+            className="Form__email-input"
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            autoComplete="on"
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div>
           <Label><strong>Dirección</strong></Label>
           <Input
