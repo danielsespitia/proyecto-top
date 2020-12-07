@@ -16,7 +16,7 @@ import {
   RESERVATION_PEOPLE,
   RESERVATION_AGREE
 }
-  from '../store'
+  from '../store/reservationReducer'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
