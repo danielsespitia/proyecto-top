@@ -82,7 +82,6 @@ function RestaurantProfile() {
     }}) => {
       return { ...state }
     })
-  console.log(data.name)
 
   if(data.loading) return <p>Loading...</p>
   if(data.error) return <p>Something went wrong</p>
@@ -185,7 +184,6 @@ function RestaurantProfile() {
         </BodyLeft>
         <BodyRight>
           <RestProfile
-            //key={id}
             name={data.name}
             email={data.email}
             address={data.address}
