@@ -67,6 +67,29 @@ export function getListRestaurants() {
   }
 }
 
+const token = localStorage.getItem('token')
+export function getListRestaurants() {
+  return async function ( dispatch ) {
+    dispatch({ type: RESERVATION_LOADING})
+    try {
+      const { data: {data} } = await axios ({
+        method: 'GET',
+        baseURL: 'http://localhost:8080',
+        url: '/restaurants/',
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
+      dispatch({ type: RESERVATION_SUCCESS})
+      dispatch({ type: RESERVATION_DATA, payload: data})
+    }catch(error) {
+      dispatch({ type: RESERVATION_FAILURE, payload: error})
+    }finally {
+      dispatch({ type: RESERVATION_FINISHED})
+    }
+  }
+}
+
 const initialState = {
   loading: false,
   error: null,
@@ -119,6 +142,26 @@ function reservationReducer (state = initialState, action ) {
       return {
         ...state,
         agree: action.payload
+      }
+    case RESERVATION_LOADING:
+      return {
+        ...state,
+        loading: true
+      }
+    case RESERVATION_SUCCESS:
+      return {
+        ...state,
+        loading: action.payload
+      }
+    case RESERVATION_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      }
+    case RESERVATION_FINISHED:
+      return{
+        ...state,
+        loading: false
       }
     case RESERVATION_LOADING:
       return {
