@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom'
-import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
@@ -9,12 +8,12 @@ import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import logo from '../image/RestaurantLogo.png'
 import { 
-  RESERVATION_BRANCH, 
-  RESERVATION_DATE,
-  RESERVATION_TIME,
-  RESERVATION_RANGE,
-  RESERVATION_PEOPLE,
-  RESERVATION_AGREE
+  setBranch, 
+  setDate,
+  setTime,
+  setRange,
+  setPeople,
+  setAgree
 }
   from '../store/reservationReducer'
 
@@ -118,34 +117,38 @@ const rangeOption = [
 
 function ReservationForm (){
 
-  const [branch, setBranch] = useState('')
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
-  const [range, setRange] = useState('')
-  const [people, setPeople] = useState('')
-  const [agree, setAgree] = useState('')
+  const dispatch = useDispatch()
+  
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state
+    }}) => {
+      return {
+        ...state
+      }
+  })
 
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
     switch (name) {
       case 'branch':
-          setBranch(value)
+        dispatch(setBranch(value))
         break;
       case 'date':
-          setDate(value)
+        dispatch(setDate(value))
         break;
       case 'time':
-          setTime(value)
+        dispatch(setTime(value))
         break;
       case 'range':
-          setRange(value)
+        dispatch(setRange(value))
         break;
       case 'people':
-          setPeople(value)
+        dispatch(setPeople(value))
         break;
       case 'agree':
         if(type==='checkbox'){
-          setAgree(checked)
+        dispatch(setAgree(checked))
         }
         break;
       default:
@@ -154,26 +157,23 @@ function ReservationForm (){
   };
 
   let history = useHistory()
-  const dispatch = useDispatch()
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: RESERVATION_BRANCH, payload: branch})
-    dispatch({ type: RESERVATION_DATE, payload: date})
-    dispatch({ type: RESERVATION_TIME, payload: time})
-    dispatch({ type: RESERVATION_RANGE, payload: range})
-    dispatch({ type: RESERVATION_PEOPLE, payload: people})
-    dispatch({ type: RESERVATION_AGREE, payload: agree})
-    history.push(`/restaurants/${id}/reservation/shopping-cart`)
+    dispatch(setBranch(data.branch))
+    dispatch(setDate(data.branch))
+    dispatch(setTime(data.time))
+    dispatch(setRange(data.rante))
+    dispatch(setPeople(data.people))
+    dispatch(setAgree(data.agree))
+    history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
   };
 
-  const name = useSelector(state => state.restaurantName)
-  const id = useSelector(state => state.restaurantId)
     return (
       <>
         <ContainerList>
           <SectionHeader>
             <RestaurantName>
-              {name}
+              {data.name}
             </RestaurantName>
             <RestaurantLogo
               src={logo}
@@ -198,7 +198,7 @@ function ReservationForm (){
                   name="branch"
                   id="branch"
                   form="reservation"
-                  value={branch}
+                  value={data.branch}
                   onChange={ handleChange }
                   autoFocus
                   required
@@ -231,7 +231,7 @@ function ReservationForm (){
                     id="date"
                     name="date"
                     type='date'
-                    value={date}
+                    value={data.date}
                     onChange={ handleChange }
                     required
                     />
@@ -249,7 +249,7 @@ function ReservationForm (){
                   id="time"
                   name="time"
                   type="time"
-                  value={time}
+                  value={data.time}
                   onChange={ handleChange }
                   min="7:00"
                   max="23:00"
@@ -268,7 +268,7 @@ function ReservationForm (){
                   name="range"
                   id="range"
                   form="reservation"
-                  value={range}
+                  value={data.range}
                   onChange={ handleChange }
                   required
                 > 
@@ -300,7 +300,7 @@ function ReservationForm (){
                   name="people"
                   id="people"
                   type="number"
-                  value={people}
+                  value={data.people}
                   min="1"
                   form="reservation"
                   onChange={ handleChange}
@@ -319,7 +319,7 @@ function ReservationForm (){
                     id="agree"
                     name="agree"
                     type="checkbox"
-                    checked={agree}
+                    checked={data.agree}
                     onChange={handleChange}
                     required
                   />
