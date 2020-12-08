@@ -1,9 +1,10 @@
-import { useState, useEffect} from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Restaurant  from '../components/Restaurant'
 import styled from 'styled-components'
 import ContainerContent from '../components/styled/ContainerContent'  
 import logo from '../image/RestaurantLogo.png'
-import axios from 'axios'
+import {getListRestaurants} from '../store/reservationReducer'
 
 const Container = styled.div`
   display: grid;
@@ -24,36 +25,24 @@ const Section = styled.section`
 
 function Restaurants () {
 
-  const [restaurants, setRestaurants] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    axios({
-      method:'GET',
-      baseURL:'http://localhost:8080',
-      url:'/restaurants/',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-    .then(({ data: { data } }) => {
-      setRestaurants(data)
-      setLoading(false)
-    })
-    .catch(err => {
-      setError(err)
-      setLoading(false)
-    })
+    dispatch(getListRestaurants())
   }, []) 
+
+  const data = useSelector(
+    ({reservationReducer: {
+    ...state
+  }}) => {
+    return { ...state } 
+  })
 
   return (
     <Container>
       <ContainerList>
         <Section>
-          {!!restaurants && restaurants.length > 0 && restaurants.map(({ _id, name }) => {
+          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name }) => {
             return (
               <Restaurant 
                 key={_id}
