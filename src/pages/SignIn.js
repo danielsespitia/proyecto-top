@@ -20,7 +20,7 @@ class SignIn extends React.Component {
       const { email, password, userType } = this.state
       const { data: { token } } = await axios ({
         method: 'POST',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/${userType}/sign-in`,
         data: { email, password, userType }
       });

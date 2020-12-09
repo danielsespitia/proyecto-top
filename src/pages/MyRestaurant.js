@@ -69,7 +69,7 @@ class RestaurantProfile extends Component {
       const token = localStorage.getItem('token')
       const {data: {data}} = await axios({
         method: 'GET',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/restaurants/profile',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ class RestaurantProfile extends Component {
       scheduleTo,
       deposit,
       nit,
-     } = this.state
+    } = this.state
 
     return (
       <>
