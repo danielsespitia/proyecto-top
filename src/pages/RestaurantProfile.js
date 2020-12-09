@@ -151,7 +151,7 @@ function RestaurantProfile() {
             const token = localStorage.getItem('token')
               axios({
               method: 'DELETE',
-              baseURL: 'http://localhost:8080',
+              baseURL: process.env.REACT_APP_SERVER_URL,
               url: '/restaurants',
               headers: {
                 Authorization: `Bearer ${token}`,

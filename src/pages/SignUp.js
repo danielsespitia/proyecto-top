@@ -47,7 +47,7 @@ function SignUp () {
       try {
         const { data: { token } } = await axios({
           method: 'POST',
-          baseURL: 'http://localhost:8080',
+          baseURL: process.env.REACT_APP_SERVER_URL,
           url: `/${userType}/sign-up`,
           data: { name, password, email, userType, terms }
         });

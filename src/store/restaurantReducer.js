@@ -63,7 +63,7 @@ export function getProfile() {
     try {
       const { data: {data} } = await axios({
         method: 'GET',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/restaurants/profile',
         headers: {
           Authorization: `Bearer ${token}`
@@ -91,7 +91,7 @@ export function postRestaurantProfile( data ) {
     try {
       const { data: {data} } = await axios({
         method: 'PUT',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/restaurants',
         headers: {
           Authorization: `Bearer ${token}`
