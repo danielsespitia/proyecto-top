@@ -46,7 +46,7 @@ function SanitaryRegister() {
       const token = localStorage.getItem('token')
       const response = await axios({
         method: 'POST',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/sanitary-register',
         data: { 
           temperature,

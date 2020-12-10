@@ -22,7 +22,7 @@ function ClientProfile () {
     const token = localStorage.getItem('token')
     axios({
       method: 'GET',
-      baseURL: 'http://localhost:8080',
+      baseURL: process.env.REACT_APP_SERVER_URL,
       url: '/clients/profile',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ function ClientProfile () {
       const token = localStorage.getItem('token')
       const resp = await axios({
         method: 'PUT',
-        baseURL: 'http://localhost:8080',
+        baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/clients`,
         data: {
           name,
@@ -124,7 +124,7 @@ function ClientProfile () {
               const token = localStorage.getItem('token')
               axios({
                 method: 'DELETE',
-                baseURL: 'http://localhost:8080',
+                baseURL: process.env.REACT_APP_SERVER_URL,
                 url: `/clients`,
                 headers: {
                   Authorization: `Bearer ${token}`,
