@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import ButtonPrimary from './styled/ButtonPrimary';
 
 const ContainerHeader = styled.header`
-  display: flex;
+  display: grid;
+  grid-template-columns: 20vw 80vw;
   box-shadow: 0px 0px 4px 4px #707070;
   background-color: #f8f8f8;
-  justify-content: space-between;
 `;
 
 const HeaderHome = styled(Link)`
@@ -45,6 +45,7 @@ const NavigationMenuItem = styled.li`
 
 const ContainerNavActions = styled.div` 
   display: flex;
+  justify-content: flex-end;
 `;
 
 const Navigation = styled.nav`
