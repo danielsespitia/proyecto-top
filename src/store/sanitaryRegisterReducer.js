@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const CREATE_SANITARY_REGISTER = 'CREATE_SANITARY_REGISTER'
+const FAILURED_SANITARY_REGISTER = 'FAILURED_SANITARY_REGISTER'
 const CHANGE_QUESTION1 = 'CHANGE_QUESTION1'
 const CHANGE_QUESTION2 = 'CHANGE_QUESTION2'
 const CHANGE_QUESTION3 = 'CHANGE_QUESTION3'
@@ -34,18 +35,31 @@ export function handleChange({ target: { value, checked }}) {
 
 export function createSanitaryRegister(data) {
   return async function (dispatch) {
-    const token = localStorage.getItem('token');
-    await axios({
-      method: 'POST',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: '/sanitary-register',
-      data,
-    });
-    dispatch({
-      message: 'Registro sanitario actualizado exitosamente'
-    })
+    try {
+      const token = localStorage.getItem('token');
+      await axios({
+        method: 'POST',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/sanitary-register',
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+      dispatch({
+        type: CREATE_SANITARY_REGISTER,
+        message: {successfully: 'Registro sanitario actualizado exitosamente'}
+      })
+    } catch (err) {
+      dispatch({
+        type: FAILURED_SANITARY_REGISTER,
+        errorSubmittion: 'No pudimos envíar tu formulario'
+      })
+    }
   }
 }
+
+// export function cancelSendForm()
 
 export const initialState = {
   question1SymptomsCovid: false,
@@ -55,7 +69,6 @@ export const initialState = {
   temperature: '',
   errorSubmittion: '',
   message: {},
-  loading: false,
 }
 
 export function sanitaryRegisterReducer( state = initialState, { type, payload }) {
@@ -64,8 +77,12 @@ export function sanitaryRegisterReducer( state = initialState, { type, payload }
       return {
         ...state,
         message: payload,
-        errorSubmittion: payload,
       };
+    case FAILURED_SANITARY_REGISTER:
+      return {
+        ...state,
+        errorSubmittion: payload,
+      }
     case CHANGE_QUESTION1:
       return {
         ...state,

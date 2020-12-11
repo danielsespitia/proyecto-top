@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import restaurantReducer from './restaurantReducer'
 import reservationReducer from './reservationReducer'
-import sanitaryRegisterReducer from './sanitaryRegisterReducer'
+import { sanitaryRegisterReducer } from './sanitaryRegisterReducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({ restaurantReducer, reservationReducer, sanitaryRegisterReducer})
