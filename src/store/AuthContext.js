@@ -6,6 +6,7 @@ export function AuthProvider({ children }) {
   const [isToken, setIsToken] = useState(null)
   const [message, setMessage] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [user, setUser] = useState('')
 
   const onCloseModal = () => {
     setModalIsOpen(false)
@@ -15,8 +16,9 @@ export function AuthProvider({ children }) {
     setModalIsOpen(true)
   };
 
-  const isAuthenticated = (token) => {
+  const isAuthenticated = (token, pathUser) => {
     setIsToken(token)
+    setUser(pathUser)
     setMessage('Estas logueado correctamente')
   };
 
@@ -34,6 +36,7 @@ export function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         isToken,
+        user,
         message,
         isAuthenticated,
         logout,

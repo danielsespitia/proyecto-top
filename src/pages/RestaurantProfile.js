@@ -124,7 +124,7 @@ function RestaurantProfile() {
     if(data.loading) return <p>Loading...</p>
     if(data.error) return <p>Something went wrong</p>
       if(update){
-        history.push('/my-restaurant')
+        history.push('/restaurant-profile')
       }
 
   }

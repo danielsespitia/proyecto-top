@@ -97,8 +97,7 @@ const AnchorLogout = styled(ButtonPrimary)`
 `;
 
 function Header() {
-  const { isToken, logout } = useContext(AuthContext);
-
+  const { isToken, logout, user } = useContext(AuthContext);
   return (
     <ContainerHeader>
       <HeaderHome to="/">
@@ -120,7 +119,7 @@ function Header() {
         {isToken ? (
           <>
             <ContainerActions>
-              <AnchorProfile as={Link} to="/client-profile">
+              <AnchorProfile as={Link} to={user}>
                 <HeaderHomeLogo className="header__home-logo">
                   <FontAwesomeIcon icon="user-circle" />
                 </HeaderHomeLogo>
