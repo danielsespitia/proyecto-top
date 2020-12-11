@@ -52,8 +52,8 @@ function SignUp () {
           data: { name, password, email, userType, terms }
         });
         localStorage.setItem('token', token);
-        isAuthenticated(token);
         const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+        isAuthenticated(token, pathUser);
         history.push(`${pathUser}`);
       } catch (err) {
         setErrors({ account: 'Usuario invalido, no se creo cuenta' })

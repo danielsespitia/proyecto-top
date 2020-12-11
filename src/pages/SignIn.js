@@ -26,10 +26,10 @@ class SignIn extends React.Component {
       });
       localStorage.setItem( 'token', token )
       const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile'
+      this.context.isAuthenticated(token, pathUser)
       this.setState({
         message: 'Estas Logueado correctamente'
       })
-      this.context.isAuthenticated(token)
       this.props.history.push(`${pathUser}`)
     }catch(error){
       localStorage.removeItem('token')
