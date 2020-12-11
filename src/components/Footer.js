@@ -10,6 +10,7 @@ const FooterContainer = styled.footer`
   box-shadow: 1px 0px 2px 2px #707070;
   color: white;
   flex-wrap: wrap;
+  position: relative;
   bottom: 0;
   width: 100vw;
   left: 0;
