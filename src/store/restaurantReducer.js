@@ -129,7 +129,7 @@ export function postRestaurantProfile( data ) {
 const initialState = {
   
   loading: false,
-  error: null,
+  error: '',
 
 }
 
