@@ -1,7 +1,8 @@
-import { useState, useDispatch } from 'react'
+import { useState } from 'react'
 import { createSanitaryRegister, handleChange } from '../store/sanitaryRegisterReducer'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
+import { connect } from 'react-redux'
 
 
 function SanitaryRegister({
@@ -15,20 +16,18 @@ function SanitaryRegister({
 }) {
 
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
 
   function handleSubmit (e) {
     e.preventDefault();
     setLoading(true)
-    const created = dispatch(createSanitaryRegister({ 
-      question1SymptomsCovid, 
+    createSanitaryRegister({
+      question1SymptomsCovid,
       question2ContactWithPeople,
-      question3InternationalTravel, 
-      question4HealthWorker, 
-      temperature }))
-    if(created) {
-      setLoading(false)
-    }
+      question3InternationalTravel,
+      question4HealthWorker,
+      temperature,
+    })
+    setLoading(false)
     console.log(temperature)
   };
 
@@ -84,4 +83,21 @@ function SanitaryRegister({
   )
 }
 
-export default SanitaryRegister
+const mapStateToProps = state => {
+  return {
+    question1SymptomsCovid: state.question1SymptomsCovid,
+    question2ContactWithPeople: state.question2ContactWithPeople,
+    question3InternationalTravel: state.question3InternationalTravel,
+    question4HealthWorker: state.question4HealthWorker,
+    temperature: state.temperature,
+    message: state.message,
+    errorSubmittion: state.errorSubmittion,
+  }
+}
+
+const mapDispacthToProps = {
+  createSanitaryRegister,
+  handleChange,
+}
+
+export default connect(mapStateToProps, mapDispacthToProps)(SanitaryRegister)
