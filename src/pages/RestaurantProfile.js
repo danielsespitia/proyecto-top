@@ -82,7 +82,6 @@ function RestaurantProfile() {
     }}) => {
       return { ...state }
     })
-  console.log(profile)
 
   if(profile.loading) return <p>Loading...</p>
   if(profile.error) return <p>Something went wrong</p>

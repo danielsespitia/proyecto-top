@@ -69,7 +69,6 @@ export function getProfile() {
           Authorization: `Bearer ${token}`
         },
       })
-      console.log('se ejecuto el get del reducer:', data)
       dispatch({ type: RESTAURANT_NAME, payload: data.name})
       dispatch({ type: RESTAURANT_EMAIL, payload: data.email})
       dispatch({ type: RESTAURANT_ADDRESS, payload: data.address})
