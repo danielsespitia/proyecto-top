@@ -76,15 +76,16 @@ function RestaurantProfile() {
     dispatch(getProfile())
   },[])
 
-  const data = useSelector(
+  const profile = useSelector(
     ({restaurantReducer: { 
       ...state
     }}) => {
       return { ...state }
     })
+  console.log(profile)
 
-  if(data.loading) return <p>Loading...</p>
-  if(data.error) return <p>Something went wrong</p>
+  if(profile.loading) return <p>Loading...</p>
+  if(profile.error) return <p>Something went wrong</p>
 
 
   const handleChange = (e) => {
@@ -120,9 +121,9 @@ function RestaurantProfile() {
 
   function handleSubmit() {
 
-    const update = dispatch( postRestaurantProfile ( data ))
-    if(data.loading) return <p>Loading...</p>
-    if(data.error) return <p>Something went wrong</p>
+    const update = dispatch( postRestaurantProfile ( profile ))
+    if(profile.loading) return <p>Loading...</p>
+    if(profile.error) return <p>Something went wrong</p>
       if(update){
         history.push('/restaurant-profile')
       }
@@ -184,14 +185,14 @@ function RestaurantProfile() {
         </BodyLeft>
         <BodyRight>
           <RestProfile
-            name={data.name}
-            email={data.email}
-            address={data.address}
-            phone={data.phone}
-            scheduleFrom={data.scheduleFrom}
-            scheduleTo={data.scheduleTo}
-            deposit={data.deposit}
-            nit={data.nit}
+            name={profile.name}
+            email={profile.email}
+            address={profile.address}
+            phone={profile.phone}
+            scheduleFrom={profile.scheduleFrom}
+            scheduleTo={profile.scheduleTo}
+            deposit={profile.deposit}
+            nit={profile.nit}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             handleDeleteRestaurant={handleDeleteRestaurant}
