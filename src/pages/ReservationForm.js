@@ -34,7 +34,6 @@ const RestaurantName = styled.span`
   border-bottom: 2px solid darkgray;
   padding: 5px 0px;
 `;
-
 const RestaurantLogo = styled.img`
   float: left;
   width:  120px;
@@ -50,6 +49,11 @@ const ReservationContainer = styled.main`
   padding: 15px 0px;
   justify-items: center;
 `;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Article = styled.article`
   display: block;  
   margin-top: 20px;
@@ -58,17 +62,19 @@ const ArticleCheck = styled.article`
   display: inline;  
   direction: rtl;
 `;
-const PeopleContainer = styled.article`
-  display: inline;  
-  grid-column: 1/5; 
-  margin-top: 50px;
+const PeopleContainer = styled.div`
+  display: flex;  
+  flex-direction: column;
+  align-items: center;
 `;
 const InputPeople = styled.input`
   width: 50px;
   display: inline;
+  border: none;
 `;
 const Label = styled.label`
   display: block;
+  margin-top: 30px;
 `;
 const LabelCheck = styled.label`
   display: inline;
@@ -76,16 +82,15 @@ const LabelCheck = styled.label`
 const SelectForm = styled.select`
   display: inline;
 `;
-
 const Input = styled.input`
   display: inline;
+  border: none;
 `;
 const Span = styled.span`
   display: inline;
   grid-column: 1/5;
   margin: 15px;
 `;
-
 const branchOption = [
   {
     id:uuidv4(),
@@ -168,31 +173,35 @@ function ReservationForm (){
     history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
   };
 
-    return (
-      <>
+  return (
+    <>
+      <ContainerList>
+        <SectionHeader>
+          <RestaurantName>
+            {data.name}
+          </RestaurantName>
+          <RestaurantLogo
+            src={logo}
+          />
+        </SectionHeader>
+      </ContainerList>
+      <form
+        onSubmit={handleSubmit}
+        id="reservation"
+      >
         <ContainerList>
-          <SectionHeader>
-            <RestaurantName>
-              {data.name}
-            </RestaurantName>
-            <RestaurantLogo
-              src={logo}
-            />
-          </SectionHeader>
-        </ContainerList>
-        <form
-          onSubmit={handleSubmit}
-          id="reservation"
-        >
-          <ContainerList>
-            <ReservationContainer>
-              <Span>
-                puedes seleccionar tu menu antes de llegar si deseas </Span> <Article> <Label
-                  className="Form__reservation-branch-label"
-                  htmlFor="branch"
-                >
-                  Sucursal
-                </Label>
+          <ReservationContainer>
+            <Span>
+              puedes seleccionar tu menu antes de llegar si deseas 
+            </Span>
+            <InputContainer>
+              <Label
+                className="Form__reservation-branch-label"
+                htmlFor="branch"
+              >
+                Sucursal
+              </Label>
+              <Article>
                 <SelectForm
                   className="Form__reservation-branch-select"
                   name="branch"
@@ -218,75 +227,85 @@ function ReservationForm (){
                   }
                 </SelectForm>
               </Article>
+            </InputContainer>
+            <InputContainer>
+              <Label 
+                className="Form__reservation-date-label"
+                htmlFor="date"
+              >
+                Selecciona el dia de reserva
+              </Label>
+            <div>
               <Article>
-                <Label 
-                  className="Form__reservation-date-label"
-                  htmlFor="date"
-                >
-                  Selecciona el dia de reserva
-                </Label>
-                  <FontAwesomeIcon icon="calendar-alt" />
-                  <Input
-                    className="Form__reservation-date-input"
-                    id="date"
-                    name="date"
-                    type='date'
-                    value={data.date}
-                    onChange={ handleChange }
-                    required
-                    />
-              </Article>
-              <Article>
-                <Label
-                  className="Form__reservation-time-label"
-                  htmlFor="time"
-                >
-                  Selecciona la hora de reserva
-                </Label>
-                  <FontAwesomeIcon icon="clock" />
-                <Input
-                  className="Form__reservation-time-input"
-                  id="time"
-                  name="time"
-                  type="time"
-                  value={data.time}
-                  onChange={ handleChange }
-                  min="7:00"
-                  max="23:00"
-                  required
+              <FontAwesomeIcon icon="calendar-alt" />
+              <Input
+                className="Form__reservation-date-input"
+                id="date"
+                name="date"
+                type='date'
+                value={data.date}
+                onChange={ handleChange }
+                required
                 />
-              </Article>
+            </Article>
+            </div>
+            </InputContainer>
+            <InputContainer>
+              <Label
+                className="Form__reservation-time-label"
+                htmlFor="time"
+              >
+                Selecciona la hora de reserva
+              </Label>
               <Article>
-                <Label
-                  className="Form__reservation-range-label"
-                  htmlFor="time-range"
+                <FontAwesomeIcon icon="clock" />
+              <Input
+                className="Form__reservation-time-input"
+                id="time"
+                name="time"
+                type="time"
+                value={data.time}
+                onChange={ handleChange }
+                min="7:00"
+                max="23:00"
+                required
+              />
+            </Article>
+            </InputContainer>
+            <InputContainer>
+              <Label
+                className="Form__reservation-range-label"
+                htmlFor="time-range"
+              >
+                Cuanto tiempo te reservamos
+              </Label>
+              <Article>
+              <SelectForm
+                className="Form__reservation-range-select"
+                name="range"
+                id="range"
+                form="reservation"
+                value={data.range}
+                onChange={ handleChange }
+                required
+              > 
+                <option
+                  value="" disabled selected
                 >
-                  Cuanto tiempo te reservamos
-                </Label>
-                <SelectForm
-                  className="Form__reservation-range-select"
-                  name="range"
-                  id="range"
-                  form="reservation"
-                  value={data.range}
-                  onChange={ handleChange }
-                  required
-                > 
-                  <option
-                    value="" disabled selected
-                  >
-                    Tiempo de Reserva
-                  </option>
-                  {!!rangeOption && rangeOption.length > 0 && rangeOption.map(({id, range})=>{
-                    return (
-                      <option key={id}>
-                        {range}
-                      </option>
-                    )
-                  })
-                  }
-                </SelectForm>
-              </Article>
+                  Tiempo de Reserva
+                </option>
+                {!!rangeOption && rangeOption.length > 0 && rangeOption.map(({id, range})=>{
+                  return (
+                    <option key={id}>
+                      {range}
+                    </option>
+                  )
+                })
+                }
+              </SelectForm>
+            </Article>
+            </InputContainer>
+            <Span>
               <PeopleContainer>
                 <Label
                   className="Form__reservation-people-label"
@@ -294,58 +313,61 @@ function ReservationForm (){
                 >
                   Para cuantas personas te reservamos
                 </Label>
+                <Article>
                   <FontAwesomeIcon icon="user" />
-                <InputPeople
-                  className="Form__reservation-people-input"
-                  name="people"
-                  id="people"
-                  type="number"
-                  value={data.people}
-                  min="1"
-                  form="reservation"
-                  onChange={ handleChange}
-                  required/>
+                  <InputPeople
+                    className="Form__reservation-people-input"
+                    name="people"
+                    id="people"
+                    type="number"
+                    value={data.people}
+                    min="1"
+                    form="reservation"
+                    onChange={ handleChange}
+                    required/>
+                </Article>
               </PeopleContainer>
-              <Span>
-                <ArticleCheck>
-                  <LabelCheck 
-                    className="Form__reservation-checkbox"
-                    htmlFor="agree"
-                  >
-                    Acepto el tiempo limite que el restaurante establece
-                  </LabelCheck>
-                  <Input
-                    className="Form__reservation-checkbox"
-                    id="agree"
-                    name="agree"
-                    type="checkbox"
-                    checked={data.agree}
-                    onChange={handleChange}
-                    required
-                  />
-                </ArticleCheck>
-              </Span>
-              <Span>
-                <LinkSanitaryUpdate to="/sanitary-register">
-                  Actualizar registro sanitario
-                </LinkSanitaryUpdate>
-              </Span>
-              <Span>
-                <LinkSanitaryUpdate to="/sanitary-register">
-                  Agregar registro sanitario de mis compañeros
-                </LinkSanitaryUpdate>
-              </Span>
-              <Span>
-                <ButtonPrimary
-                  type="submit"
-                  value="Agregar mi reserva al carrito"
+            </Span>
+            <Span>
+              <ArticleCheck>
+                <LabelCheck 
+                  className="Form__reservation-checkbox"
+                  htmlFor="agree"
+                >
+                  Acepto el tiempo limite que el restaurante establece
+                </LabelCheck>
+                <Input
+                  className="Form__reservation-checkbox"
+                  id="agree"
+                  name="agree"
+                  type="checkbox"
+                  checked={data.agree}
+                  onChange={handleChange}
+                  required
                 />
-              </Span>
-            </ReservationContainer>
-          </ContainerList>
-        </form>
-      </>
-    )
+              </ArticleCheck>
+            </Span>
+            <Span>
+              <LinkSanitaryUpdate to="/sanitary-register">
+                Actualizar registro sanitario
+              </LinkSanitaryUpdate>
+            </Span>
+            <Span>
+              <LinkSanitaryUpdate to="/sanitary-register">
+                Agregar registro sanitario de mis compañeros
+              </LinkSanitaryUpdate>
+            </Span>
+            <Span>
+              <ButtonPrimary
+                type="submit"
+                value="Agregar mi reserva al carrito"
+              />
+            </Span>
+          </ReservationContainer>
+        </ContainerList>
+      </form>
+    </>
+  )
 }
 
 export default ReservationForm
