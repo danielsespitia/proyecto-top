@@ -1,34 +1,55 @@
 import { useState } from 'react'
-import { createSanitaryRegister, handleChange } from '../store/sanitaryRegisterReducer'
+import { 
+  getQuestionOne,
+  getQuestionTwo,
+  getQuestionThree,
+  getQuestionFour,
+  getTemperature,
+  createSanitaryRegister, 
+  handleChange 
+} from '../store/sanitaryRegisterReducer'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 
-function SanitaryRegister({
-  question1SymptomsCovid,
-  question2ContactWithPeople,
-  question3InternationalTravel,
-  question4HealthWorker,
-  temperature,
-  message,
-  errorSubmittion,
-}) {
+function SanitaryRegister() {
 
   const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  
+  const dataSanitary = useSelector((
+    { sanitaryRegisterReducer: { 
+      ...state 
+    }}) => {
+    return { ...state }
+  })
 
-  function handleSubmit (e) {
+  const handleChange = (e) => {
+    const { name, value, checked } = e.target;
+    switch(name) {
+      case 'question1SymptomsCovid': 
+        dispatch(getQuestionOne(checked))
+        break;
+      case 'question2ContactWithPeople':
+        dispatch(getQuestionTwo(checked))
+        break;
+      case 'question3InternationalTravel':
+        dispatch(getQuestionThree(checked))
+        break;
+      case 'question4HealthWorker':
+        dispatch(getQuestionFour(checked))
+        break;
+      case 'temperature':
+        dispatch(getTemperature(value))
+        break;
+      default: break;
+    }
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
-    createSanitaryRegister({
-      question1SymptomsCovid,
-      question2ContactWithPeople,
-      question3InternationalTravel,
-      question4HealthWorker,
-      temperature,
-    })
-    setLoading(false)
-    console.log(temperature)
+    dispatch(createSanitaryRegister( dataSanitary ))
   };
 
   // const handleCancel = (e) => {
@@ -65,17 +86,17 @@ function SanitaryRegister({
   return (
     <Modal>
       <SanitaryRegisterForm
-        question1SymptomsCovid = {question1SymptomsCovid} 
-        question2ContactWithPeople = {question2ContactWithPeople}
-        question3InternationalTravel  =  {question3InternationalTravel}
-        question4HealthWorker = {question4HealthWorker}
-        temperature = {temperature}
+        question1SymptomsCovid = {dataSanitary.question1SymptomsCovid} 
+        question2ContactWithPeople = {dataSanitary.question2ContactWithPeople}
+        question3InternationalTravel  =  {dataSanitary.question3InternationalTravel}
+        question4HealthWorker = {dataSanitary.question4HealthWorker}
+        temperature = {dataSanitary.temperature}
         handleChange = {handleChange}
         handleSubmit = {handleSubmit}
         handleCancel = "{handleCancel}"
-        errorSubmittion = {errorSubmittion}
-        messageSuccessfully = {message}
-        messageTemperature = {message}
+        errorSubmittion = {dataSanitary.errorSubmittion}
+        messageSuccessfully = {dataSanitary.message}
+        messageTemperature = {dataSanitary.message}
         loading = {loading}
       >
       </SanitaryRegisterForm>
@@ -83,21 +104,4 @@ function SanitaryRegister({
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    question1SymptomsCovid: state.question1SymptomsCovid,
-    question2ContactWithPeople: state.question2ContactWithPeople,
-    question3InternationalTravel: state.question3InternationalTravel,
-    question4HealthWorker: state.question4HealthWorker,
-    temperature: state.temperature,
-    message: state.message,
-    errorSubmittion: state.errorSubmittion,
-  }
-}
-
-const mapDispacthToProps = {
-  createSanitaryRegister,
-  handleChange,
-}
-
-export default connect(mapStateToProps, mapDispacthToProps)(SanitaryRegister)
+export default SanitaryRegister

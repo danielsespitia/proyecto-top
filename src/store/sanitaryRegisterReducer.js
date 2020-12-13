@@ -41,6 +41,7 @@ export function getTemperature( payload ) {
 }
 
 export function createSanitaryRegister(data) {
+  const { question1SymptomsCovid, question2ContactWithPeople, question3InternationalTravel, question4HealthWorker, temperature } = data
   return async function (dispatch) {
     try {
       const token = localStorage.getItem('token');
