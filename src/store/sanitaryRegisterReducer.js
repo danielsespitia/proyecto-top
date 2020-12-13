@@ -10,6 +10,8 @@ const CHANGE_QUESTION3 = 'CHANGE_QUESTION3'
 const CHANGE_QUESTION4 = 'CHANGE_QUESTION4'
 const CHANGE_TEMPERATURE = 'CHANGE_TEMPERATURE'
 
+const CANCEL_TEMPERATURE = 'CANCEL_TEMPERATURE'
+
 export function getQuestionOne( payload ) {
   return function( dispatch ) {
     dispatch({ type: CHANGE_QUESTION1, payload})
@@ -62,18 +64,25 @@ export function createSanitaryRegister(data) {
       });
       dispatch({
         type: CREATE_SANITARY_REGISTER,
-        message: {successfully: 'Registro sanitario actualizado exitosamente'}
+        payload: 'Registro sanitario actualizado exitosamente'
       })
     } catch (err) {
       dispatch({
         type: FAILURED_SANITARY_REGISTER,
-        errorSubmittion: 'No pudimos envíar tu formulario'
+        payload: false,
       })
     }
   }
 }
 
-// export function cancelSendForm()
+export function cancelSendForm(payload) {
+  return function(dispatch) {
+    dispatch({ 
+      type: CANCEL_TEMPERATURE, 
+      payload: ''
+    })
+  }
+}
 
 export const initialState = {
   question1SymptomsCovid: false,
@@ -82,7 +91,8 @@ export const initialState = {
   question4HealthWorker: false,
   temperature: '',
   errorSubmittion: '',
-  message: {},
+  message: '',
+  messageTemperature: '',
 }
 
 export function sanitaryRegisterReducer( state = initialState, action) {
@@ -100,7 +110,7 @@ export function sanitaryRegisterReducer( state = initialState, action) {
     case CHANGE_QUESTION1:
       return {
         ...state,
-        question2ContactWithPeople: action.payload,
+        question1SymptomsCovid: action.payload,
       };
     case CHANGE_QUESTION2:
       return {
@@ -122,6 +132,11 @@ export function sanitaryRegisterReducer( state = initialState, action) {
         ...state,
         temperature: action.payload,
       };
+    case CANCEL_TEMPERATURE:
+      return {
+        ...state,
+        question1SymptomsCovid: action.payload,
+      }
     default:
       return state;
   }

@@ -25,7 +25,7 @@ function SanitaryRegisterForm({
   handleSubmit,
   handleCancel,
   errorSubmittion,
-  messageSuccessfully,
+  message,
   messageTemperature,
   loading,
 })
@@ -35,7 +35,7 @@ function SanitaryRegisterForm({
   }
   return(
     <ContainerRegisterForm>
-        <Message>{messageSuccessfully}</Message>
+        <Message>{message}</Message>
         <Message>{messageTemperature}</Message>
         <ErrorSubmittion>{errorSubmittion}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>

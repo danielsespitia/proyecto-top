@@ -6,7 +6,7 @@ import {
   getQuestionFour,
   getTemperature,
   createSanitaryRegister, 
-  handleChange 
+  cancelSendForm,
 } from '../store/sanitaryRegisterReducer'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
@@ -45,21 +45,22 @@ function SanitaryRegister() {
         break;
       default: break;
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createSanitaryRegister( dataSanitary ))
   };
 
-  // const handleCancel = (e) => {
-  //   setTemperature('')
-  //   setQuestion1SymptomsCovid(false)
-  //   setQuestion2ContactWithPeople(false)
-  //   setQuestion3InternationTravel(false)
-  //   setQuestion4HealthWorker(false)
-  //   setMessage({ temperature: 'Recuerda diligenciar tu temperatura actual' })
-  // };
+  const handleCancel = (e) => {
+    const { name, value, checked } = e.target;
+    switch(name) {
+      case 'question1SymptomsCovid':
+        dispatch(cancelSendForm( checked ))
+        break;
+      default: break;
+    }
+  };
 
   // useEffect(() => {
   //   const token = localStorage.getItem('token')
@@ -93,10 +94,10 @@ function SanitaryRegister() {
         temperature = {dataSanitary.temperature}
         handleChange = {handleChange}
         handleSubmit = {handleSubmit}
-        handleCancel = "{handleCancel}"
+        handleCancel = {handleCancel}
         errorSubmittion = {dataSanitary.errorSubmittion}
-        messageSuccessfully = {dataSanitary.message}
-        messageTemperature = {dataSanitary.message}
+        message = {dataSanitary.message}
+        messageTemperature = {dataSanitary.messageTemperature}
         loading = {loading}
       >
       </SanitaryRegisterForm>
