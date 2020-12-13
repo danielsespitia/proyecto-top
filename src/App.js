@@ -31,8 +31,8 @@ function App () {
             <Route exact path="/client-profile" component={ClientProfile}/>
             <Route exact path="/restaurant-profile" component={MyRestaurant}/>
             <Route exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
-            <Route exact path="/restaurant-profile/reservations" component={RestaurantReservations}/>
             <Route exact path="/restaurants" component={Restaurants}/>
+            <Route exact path="/restaurant-profile/:restaurantId/reservations" component={RestaurantReservations}/>
             <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
             <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
           </Switch>
