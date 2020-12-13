@@ -1,50 +1,53 @@
 import axios from 'axios'
 
-const CREATE_SANITARY_REGISTER = 'CREATE_SANITARY_REGISTER'
-const FAILURED_SANITARY_REGISTER = 'FAILURED_SANITARY_REGISTER'
+const CREATE_SANITARY_REGISTER = 'CREATE_SANITARY_REGISTER';
+const FAILURED_SANITARY_REGISTER = 'FAILURED_SANITARY_REGISTER';
+const LOADING = 'LOADING';
+const FINISHED_LOADING = 'FINISHED_LOADING';
+const GET_DATA_FORM = 'GET_DATA_FORM';
 
+const QUESTION1 = 'QUESTION1';
+const QUESTION2 = 'QUESTION2';
+const QUESTION3 = 'QUESTION3';
+const QUESTION4 = 'QUESTION4';
+const TEMPERATURE = 'TEMPERATURE';
 
-const CHANGE_QUESTION1 = 'CHANGE_QUESTION1'
-const CHANGE_QUESTION2 = 'CHANGE_QUESTION2'
-const CHANGE_QUESTION3 = 'CHANGE_QUESTION3'
-const CHANGE_QUESTION4 = 'CHANGE_QUESTION4'
-const CHANGE_TEMPERATURE = 'CHANGE_TEMPERATURE'
-
-const CANCEL_TEMPERATURE = 'CANCEL_TEMPERATURE'
+const CANCEL_QUESTION1 = 'CANCEL_QUESTION1';
 
 export function getQuestionOne( payload ) {
   return function( dispatch ) {
-    dispatch({ type: CHANGE_QUESTION1, payload})
+    dispatch({ type: QUESTION1, payload})
   }
-}
+};
 
 export function getQuestionTwo( payload ) {
   return function( dispatch ) {
-    dispatch({ type: CHANGE_QUESTION2, payload})
+    dispatch({ type: QUESTION2, payload})
   }
-}
+};
 
 export function getQuestionThree( payload ) {
   return function( dispatch ) {
-    dispatch({ type: CHANGE_QUESTION3, payload})
+    dispatch({ type: QUESTION3, payload})
   }
-}
+};
 
 export function getQuestionFour( payload ) {
   return function( dispatch ) {
-    dispatch({ type: CHANGE_QUESTION4, payload})
+    dispatch({ type: QUESTION4, payload})
   }
-}
+};
 
 export function getTemperature( payload ) {
   return function( dispatch ) {
-    dispatch({ type: CHANGE_TEMPERATURE, payload})
+    dispatch({ type: TEMPERATURE, payload})
   }
-}
+};
 
 export function createSanitaryRegister(data) {
   const { question1SymptomsCovid, question2ContactWithPeople, question3InternationalTravel, question4HealthWorker, temperature } = data
   return async function (dispatch) {
+    dispatch({ type: LOADING })
     try {
       const token = localStorage.getItem('token');
       await axios({
@@ -66,23 +69,57 @@ export function createSanitaryRegister(data) {
         type: CREATE_SANITARY_REGISTER,
         payload: 'Registro sanitario actualizado exitosamente'
       })
+      dispatch({
+        type: GET_DATA_FORM, payload: data._id
+      })
     } catch (err) {
       dispatch({
         type: FAILURED_SANITARY_REGISTER,
-        payload: false,
+        payload: 'Lo sentimos, no pudimos enviar tu información',
       })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
     }
   }
-}
+};
 
-export function cancelSendForm(payload) {
+export function cancelSendForm(onClick) {
   return function(dispatch) {
     dispatch({ 
-      type: CANCEL_TEMPERATURE, 
-      payload: ''
+      type: CANCEL_QUESTION1, 
+      payload: false
     })
   }
-}
+};
+
+export function getData(id) {
+  return async function(dispatch) {
+    dispatch({ type: LOADING})
+    const token = localStorage.getItem('token')
+    try {
+      const { data: {data} } = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/sanitary-register/${id}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
+      dispatch({ type: QUESTION1, payload: data.question1SymptomsCovid })
+      dispatch({ type: QUESTION2, payload: data.question2ContactWithPeople })
+      dispatch({ type: QUESTION3, payload: data.question3InternationalTravel })
+      dispatch({ type: QUESTION4, payload: data.question4HealthWorker })
+      dispatch({ type: TEMPERATURE, payload: data.temperature })
+    } catch(err) {
+      dispatch({ 
+        type: FAILURED_SANITARY_REGISTER,
+        payload: 'Lo sentimos, vuelve a recargar la página para cargar la información'
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING})
+    }
+  }
+};
 
 export const initialState = {
   question1SymptomsCovid: false,
@@ -93,10 +130,22 @@ export const initialState = {
   errorSubmittion: '',
   message: '',
   messageTemperature: '',
-}
+  loading: false,
+  id: '',
+};
 
 export function sanitaryRegisterReducer( state = initialState, action) {
   switch (action.type) {
+    case LOADING: 
+      return {
+        ...state,
+        loading: true,
+      }
+    case FINISHED_LOADING:
+      return {
+        ...state,
+        loading: false,
+      }
     case CREATE_SANITARY_REGISTER:
       return {
         ...state,
@@ -107,37 +156,42 @@ export function sanitaryRegisterReducer( state = initialState, action) {
         ...state,
         errorSubmittion: action.payload,
       }
-    case CHANGE_QUESTION1:
+    case QUESTION1:
       return {
         ...state,
         question1SymptomsCovid: action.payload,
       };
-    case CHANGE_QUESTION2:
+    case QUESTION2:
       return {
         ...state,
         question2ContactWithPeople: action.payload,
       };
-    case CHANGE_QUESTION3:
+    case QUESTION3:
       return {
         ...state,
         question3InternationalTravel: action.payload,
       };
-    case CHANGE_QUESTION4:
+    case QUESTION4:
       return {
         ...state,
         question4HealthWorker: action.payload,
       };
-    case CHANGE_TEMPERATURE:
+    case TEMPERATURE:
       return {
         ...state,
         temperature: action.payload,
       };
-    case CANCEL_TEMPERATURE:
+    case CANCEL_QUESTION1:
       return {
         ...state,
         question1SymptomsCovid: action.payload,
       }
+    case GET_DATA_FORM:
+      return {
+        ...state,
+        id: action.payload
+      }
     default:
       return state;
   }
-}
+};

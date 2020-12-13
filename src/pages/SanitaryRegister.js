@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { 
   getQuestionOne,
   getQuestionTwo,
@@ -7,6 +7,7 @@ import {
   getTemperature,
   createSanitaryRegister, 
   cancelSendForm,
+  getData,
 } from '../store/sanitaryRegisterReducer'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
@@ -15,7 +16,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 function SanitaryRegister() {
 
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
   
   const dataSanitary = useSelector((
@@ -62,27 +62,9 @@ function SanitaryRegister() {
     }
   };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   axios({
-  //     method:'GET',
-  //     baseURL:'http://localhost:8080',
-  //     url: '/sanitary-register/:sanitaryRegisterId',
-  //     headers:{
-  //       Authorization: `Baerer ${token}`,
-  //     }
-  //   })
-  //   .then(( {data: {data} }) => {
-  //     setTemperature(data.temperature);
-  //     setQuestion1SymptomsCovid(data.question1SymptomsCovid);
-  //     setQuestion2ContactWithPeople(data.question2ContactWithPeople);
-  //     setQuestion3InternationTravel(data.question3InternationalTravel);
-  //     setQuestion4HealthWorker(data.question4HealthWorker);
-  //   })
-  //   .catch(err => {
-  //     setErrorSubmittion('Estamos teniendo problemas de conexión')
-  //   })
-  // })
+  useEffect(() => {
+    dispatch(getData(dataSanitary.id))
+  }, [])
 
   return (
     <Modal>
@@ -98,7 +80,7 @@ function SanitaryRegister() {
         errorSubmittion = {dataSanitary.errorSubmittion}
         message = {dataSanitary.message}
         messageTemperature = {dataSanitary.messageTemperature}
-        loading = {loading}
+        loading = {dataSanitary.loading}
       >
       </SanitaryRegisterForm>
     </Modal>
