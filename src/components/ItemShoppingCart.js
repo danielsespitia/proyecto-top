@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
+import { Link } from 'react-router-dom'
 
 const ContainerTitleShopping = styled.span`
   display: flex;
@@ -26,6 +28,16 @@ const TextStrongTotal = styled.td`
 `;
 
 export function ListShoppingCart ( { deposit } ) {
+  
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state 
+    }}) => {
+    return { ...state }
+  })
+  console.log('reservation confirm:', data)
+
+
   return(
     <section>
       <ContainerTitleShopping>
@@ -36,14 +48,18 @@ export function ListShoppingCart ( { deposit } ) {
         <LabelTable>
           <tr>
             <td>Pago minimo</td>
-            <td>{deposit}</td>
+            <td>{data.deposit}</td>
           </tr>
           <tr>
             <TextStrongTotal>Total</TextStrongTotal>
-            <td>{deposit}</td>
+            <td>{data.deposit}</td>
           </tr>
           </LabelTable>
+        <Link to={{
+          pathname: `/restaurants/${data.id}/reservation/confirm`
+        }}>
         <ButtonPrimary as="button">Finalizar tu orden</ButtonPrimary>
+        </Link>
       </ContainerContentShoppingList>
     </section>
   )

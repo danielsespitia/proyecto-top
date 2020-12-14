@@ -16,6 +16,7 @@ import RestaurantProfile from './pages/RestaurantProfile'
 import MyRestaurant from './pages/MyRestaurant'
 import Restaurants from './pages/Restaurants'
 import Reservation from './pages/ReservationForm'
+import ReservationConfirm from './pages/ReservationConfirm'
 import ShoppingCart from './pages/ShoppingCart'
 import RestaurantReservations from './pages/RestaurantReservations'
 
@@ -35,6 +36,7 @@ function App () {
             <Route exact path="/restaurants" component={Restaurants}/>
             <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
             <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
+            <Route exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
           </Switch>
         <Footer></Footer>
         </Router>

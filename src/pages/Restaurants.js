@@ -42,12 +42,13 @@ function Restaurants () {
     <Container>
       <ContainerList>
         <Section>
-          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name }) => {
+          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit }) => {
             return (
               <Restaurant 
                 key={_id}
                 id={_id}
                 name={name}
+                deposit={deposit}
                 logo={logo}
               />
             )
