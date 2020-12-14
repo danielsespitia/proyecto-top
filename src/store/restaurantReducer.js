@@ -56,9 +56,9 @@ export function getDeposit( payload ) {
   }
 }
 
-const token = localStorage.getItem('token')
 export function getProfile() {
   return async function (dispatch) {
+    const token = localStorage.getItem('token')
     dispatch({ type: RESTAURANT_LOADING})
     try {
       const { data: {data} } = await axios({
@@ -84,9 +84,11 @@ export function getProfile() {
   }
   }
 }
+
 export function postRestaurantProfile( data ) {
   const { name, email, address, phone, scheduleFrom, scheduleTo, nit, deposit} = data
   return async function(dispatch){
+    const token = localStorage.getItem('token')
     dispatch({ type: RESTAURANT_LOADING})
     try {
       const { data: {data} } = await axios({
