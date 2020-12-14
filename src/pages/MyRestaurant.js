@@ -124,7 +124,7 @@ class RestaurantProfile extends Component {
           />
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
           <Link to={{
-              pathname: `/restaurant-profile/${_id}/reservations`}}
+              pathname: `/restaurant-profile/reservations`}}
               style={{ textAlign: 'center' }}>
             <MyReservationAnchor>Mis reservas</MyReservationAnchor>
           </Link>
