@@ -50,7 +50,7 @@ export function createSanitaryRegister(data) {
     dispatch({ type: LOADING })
     try {
       const token = localStorage.getItem('token');
-      await axios({
+      const { data } = await axios({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/sanitary-register',
@@ -70,7 +70,8 @@ export function createSanitaryRegister(data) {
         payload: 'Registro sanitario actualizado exitosamente'
       })
       dispatch({
-        type: GET_DATA_FORM, payload: data._id
+        type: GET_DATA_FORM, 
+        payload: data._id
       })
     } catch (err) {
       dispatch({
@@ -94,10 +95,11 @@ export function cancelSendForm(onClick) {
 
 export function getData(id) {
   return async function(dispatch) {
-    dispatch({ type: LOADING})
+    // dispatch({ type: LOADING})
     const token = localStorage.getItem('token')
+    if(!id){ console.log('no existe') }
     try {
-      const { data: {data} } = await axios({
+      const response = await axios({
         method: 'GET',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/sanitary-register/${id}`,
@@ -105,11 +107,12 @@ export function getData(id) {
           Authorization: `Bearer ${token}`
         },
       })
-      dispatch({ type: QUESTION1, payload: data.question1SymptomsCovid })
-      dispatch({ type: QUESTION2, payload: data.question2ContactWithPeople })
-      dispatch({ type: QUESTION3, payload: data.question3InternationalTravel })
-      dispatch({ type: QUESTION4, payload: data.question4HealthWorker })
-      dispatch({ type: TEMPERATURE, payload: data.temperature })
+      dispatch({ type: CREATE_SANITARY_REGISTER, payload: ''})
+      dispatch({ type: QUESTION1, payload: response.question1SymptomsCovid })
+      dispatch({ type: QUESTION2, payload: response.question2ContactWithPeople })
+      dispatch({ type: QUESTION3, payload: response.question3InternationalTravel })
+      dispatch({ type: QUESTION4, payload: response.question4HealthWorker })
+      dispatch({ type: TEMPERATURE, payload: response.temperature })
     } catch(err) {
       dispatch({ 
         type: FAILURED_SANITARY_REGISTER,

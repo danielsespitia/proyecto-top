@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
 import { 
   getQuestionOne,
@@ -15,16 +16,21 @@ import { useDispatch, useSelector } from 'react-redux'
 
 
 function SanitaryRegister() {
-
-  const dispatch = useDispatch()
   
+  const dispatch = useDispatch()
+  const history = useHistory()
+
   const dataSanitary = useSelector((
     { sanitaryRegisterReducer: { 
       ...state 
     }}) => {
-    return { ...state }
-  })
+      return { ...state }
+    })
 
+  useEffect(() => {
+    dispatch(getData( dataSanitary.id ))
+  }, [])
+    
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     switch(name) {
@@ -48,7 +54,7 @@ function SanitaryRegister() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     dispatch(createSanitaryRegister( dataSanitary ))
   };
 
@@ -61,10 +67,6 @@ function SanitaryRegister() {
       default: break;
     }
   };
-
-  useEffect(() => {
-    dispatch(getData(dataSanitary.id))
-  }, [])
 
   return (
     <Modal>
