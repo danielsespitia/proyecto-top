@@ -28,7 +28,7 @@ function SanitaryRegister() {
     })
 
   useEffect(() => {
-    dispatch(getData( dataSanitary.id ))
+    dispatch(getData())
   }, [])
     
   const handleChange = (e) => {
