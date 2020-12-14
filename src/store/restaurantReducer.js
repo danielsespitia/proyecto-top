@@ -128,8 +128,16 @@ export function postRestaurantProfile( data ) {
 
 const initialState = {
   
+  name: '',
+  email: '',
+  address: '',
+  phone: '',
+  scheduleFrom: '',
+  scheduleTo:'',
+  nit: '',
+  deposit: '',
   loading: false,
-  error: null,
+  error: '',
 
 }
 
