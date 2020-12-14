@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import {
   RESTAURANT_ID_RESERVATION,
   RESTAURANT_NAME_RESERVATION,
+  RESTAURANT_DEPOSIT_RESERVATION,
   } from '../store/reservationReducer'
 
 const Article = styled.article`
@@ -36,13 +37,14 @@ const Button = styled.button`
 `;
 
 
-function Restaurant ({ id, name, logo }) {
+function Restaurant ({ id, name, deposit, logo }) {
 
   const dispatch = useDispatch()
 
   const handleClick = () => {
     dispatch({type: RESTAURANT_ID_RESERVATION , payload: id})
     dispatch({type: RESTAURANT_NAME_RESERVATION , payload: name})
+    dispatch({type: RESTAURANT_DEPOSIT_RESERVATION , payload: deposit})
   }
 
   return (

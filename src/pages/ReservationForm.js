@@ -167,7 +167,7 @@ function ReservationForm (){
     dispatch(setBranch(data.branch))
     dispatch(setDate(data.branch))
     dispatch(setTime(data.time))
-    dispatch(setRange(data.rante))
+    dispatch(setRange(data.range))
     dispatch(setPeople(data.people))
     dispatch(setAgree(data.agree))
     history.push(`/restaurants/${data.id}/reservation/shopping-cart`)

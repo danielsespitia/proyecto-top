@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Desktopstructure from '../components/styled/DesktopStructure';
 import MyRest from '../components/MyRest';
+import { Link } from 'react-router-dom'
 
 const RestLogo = styled.img `
   width: 100px;
@@ -42,6 +43,16 @@ const H3 = styled.h3`
 `;
 
 const MyOfficesAnchor = styled.a`
+  margin-block-start: 0;
+  margin-block-end: 0;
+  text-align: center;
+  font-size: 16px;
+  color: #2F80ED;
+  text-decoration-line: underline;
+`;
+
+
+const MyReservationAnchor = styled.a`
   margin-block-start: 0;
   margin-block-end: 0;
   text-align: center;
@@ -112,6 +123,11 @@ class RestaurantProfile extends Component {
             alt="logo"
           />
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
+          <Link to={{
+              pathname: `/restaurant-profile/reservations`}}
+              style={{ textAlign: 'center' }}>
+            <MyReservationAnchor>Mis reservas</MyReservationAnchor>
+          </Link>
         </BodyLeft>
         <BodyRight>
           <MyRest
