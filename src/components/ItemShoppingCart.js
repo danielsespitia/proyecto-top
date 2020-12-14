@@ -35,8 +35,8 @@ export function ListShoppingCart ( { deposit } ) {
     }}) => {
     return { ...state }
   })
-  console.log('reservation confirm:', data)
 
+  const paymentConfirm = `/restaurants/${data.id}/reservation/confirm`;
 
   return(
     <section>
@@ -55,11 +55,7 @@ export function ListShoppingCart ( { deposit } ) {
             <td>{data.deposit}</td>
           </tr>
           </LabelTable>
-        <Link to={{
-          pathname: `/restaurants/${data.id}/reservation/confirm`
-        }}>
-        <ButtonPrimary as="button">Finalizar tu orden</ButtonPrimary>
-        </Link>
+        <ButtonPrimary as={Link} to={paymentConfirm}>Finalizar tu orden</ButtonPrimary>
       </ContainerContentShoppingList>
     </section>
   )
