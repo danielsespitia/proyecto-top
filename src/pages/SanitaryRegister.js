@@ -1,4 +1,3 @@
-import { useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
 import { 
   getQuestionOne,
@@ -9,7 +8,7 @@ import {
   createSanitaryRegister, 
   cancelSendForm,
   getData,
-} from '../store/sanitaryRegisterReducer'
+} from '../store/actions/SanitaryRegister.actions'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 function SanitaryRegister() {
   
   const dispatch = useDispatch()
-  const history = useHistory()
 
   const dataSanitary = useSelector((
     { sanitaryRegisterReducer: { 
@@ -27,9 +25,9 @@ function SanitaryRegister() {
       return { ...state }
     })
 
-  useEffect(() => {
+  useEffect((e) => {
     dispatch(getData())
-  }, [])
+  }, [getData])
     
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
