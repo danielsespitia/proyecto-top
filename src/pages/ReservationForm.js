@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
-import { Link } from 'react-router-dom'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
 import logo from '../image/RestaurantLogo.png'
 import { 
@@ -15,15 +14,27 @@ import {
   setPeople,
   setAgree
 }
-  from '../store/reservationReducer'
+from '../store/reservationReducer'
+import { AuthContext } from '../store/AuthContext'
+import { useContext } from 'react'
+import SanitaryRegister from './SanitaryRegister'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
   margin: 20px;
 `;
-const LinkSanitaryUpdate = styled(Link)`
-  color: #005cc5;
+const LinkSanitaryUpdate = styled.button`
+  font-size: 16px;
+  color: #2F80ED;
+  border: 0px;
   text-decoration: underline;
+  
+  &:focus {
+    background-color: white;
+    border-radius: 4px;
+    padding: 7px;
+    outline: none;
+  };
 `;
 const SectionHeader = styled.section`
   display: grid;
@@ -172,6 +183,8 @@ function ReservationForm (){
     dispatch(setAgree(data.agree))
     history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
   };
+
+  const register = useContext(AuthContext)
 
   return (
     <>
@@ -348,9 +361,13 @@ function ReservationForm (){
               </ArticleCheck>
             </Span>
             <Span>
-              <LinkSanitaryUpdate to="/sanitary-register">
+              <LinkSanitaryUpdate 
+                type='button'
+                onClick={register.onOpenModal}
+              >
                 Actualizar registro sanitario
               </LinkSanitaryUpdate>
+              <SanitaryRegister/>
             </Span>
             <Span>
               <LinkSanitaryUpdate to="/sanitary-register">
