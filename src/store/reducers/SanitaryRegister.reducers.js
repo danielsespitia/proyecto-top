@@ -2,7 +2,6 @@ export const CREATE_SANITARY_REGISTER = 'CREATE_SANITARY_REGISTER';
 export const FAILURED_SANITARY_REGISTER = 'FAILURED_SANITARY_REGISTER';
 export const LOADING = 'LOADING';
 export const FINISHED_LOADING = 'FINISHED_LOADING';
-export const GET_DATA_FORM = 'GET_DATA_FORM';
 
 export const QUESTION1 = 'QUESTION1';
 export const QUESTION2 = 'QUESTION2';
@@ -11,6 +10,11 @@ export const QUESTION4 = 'QUESTION4';
 export const TEMPERATURE = 'TEMPERATURE';
 
 export const CANCEL_QUESTION1 = 'CANCEL_QUESTION1';
+export const CANCEL_QUESTION2 = 'CANCEL_QUESTION2';
+export const CANCEL_QUESTION3 = 'CANCEL_QUESTION3';
+export const CANCEL_QUESTION4 = 'CANCEL_QUESTION4';
+export const CANCEL_TEMPERATURE = 'CANCEL_TEMPERATURE';
+export const MESSAGE_TEMPERATURE = 'MESSAGE_TEMPERATURE';
 
 export const initialState = {
   question1SymptomsCovid: false,
@@ -75,13 +79,33 @@ export function sanitaryRegisterReducer( state = initialState, action) {
     case CANCEL_QUESTION1:
       return {
         ...state,
-        question1SymptomsCovid: action.payload,
+        question1SymptomsCovid: false,
       }
-    case GET_DATA_FORM:
-      return {
-        ...state,
-        id: action.payload
-      }
+    case CANCEL_QUESTION2:
+    return {
+      ...state,
+      question2ContactWithPeople: false,
+    }
+    case CANCEL_QUESTION3:
+    return {
+      ...state,
+      question3InternationalTravel: false,
+    }
+    case CANCEL_QUESTION4:
+    return {
+      ...state,
+      question4HealthWorker: false,
+    }
+    case CANCEL_TEMPERATURE:
+    return {
+      ...state,
+      temperature: '',
+    }
+    case MESSAGE_TEMPERATURE:
+    return {
+      ...state,
+      messageTemperature: action.payload,
+    }
     default:
       return state;
   }

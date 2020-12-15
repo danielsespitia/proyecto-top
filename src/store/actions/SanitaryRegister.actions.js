@@ -4,13 +4,17 @@ import {
   FAILURED_SANITARY_REGISTER,
   LOADING,
   FINISHED_LOADING,
-  GET_DATA_FORM,
   QUESTION1,
   QUESTION2,
   QUESTION3,
   QUESTION4,
   TEMPERATURE,
   CANCEL_QUESTION1,
+  CANCEL_QUESTION2,
+  CANCEL_QUESTION3,
+  CANCEL_QUESTION4,
+  CANCEL_TEMPERATURE,
+  MESSAGE_TEMPERATURE,
 } from '../reducers/SanitaryRegister.reducers'
 
 export function getQuestionOne( payload ) {
@@ -46,10 +50,10 @@ export function getTemperature( payload ) {
 export function createSanitaryRegister(data) {
   const { question1SymptomsCovid, question2ContactWithPeople, question3InternationalTravel, question4HealthWorker, temperature } = data
   return async function (dispatch) {
-    // dispatch({ type: LOADING })
+    dispatch({ type: LOADING })
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios({
+      await axios({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/sanitary-register',
@@ -64,13 +68,11 @@ export function createSanitaryRegister(data) {
           Authorization: `Bearer ${token}`
         },
       });
+      dispatch({ type: MESSAGE_TEMPERATURE, 
+        payload: '' })
       dispatch({
         type: CREATE_SANITARY_REGISTER,
         payload: 'Registro sanitario actualizado exitosamente'
-      })
-      dispatch({
-        type: GET_DATA_FORM, 
-        payload: data._id
       })
     } catch (err) {
       dispatch({
@@ -83,20 +85,22 @@ export function createSanitaryRegister(data) {
   }
 };
 
-export function cancelSendForm(onClick) {
+export function cancelSendForm() {
   return function(dispatch) {
-    dispatch({ 
-      type: CANCEL_QUESTION1, 
-      payload: false
+    dispatch({ type: CANCEL_QUESTION1 })
+    dispatch({ type: CANCEL_QUESTION2 })
+    dispatch({ type: CANCEL_QUESTION3 })
+    dispatch({ type: CANCEL_QUESTION4 })
+    dispatch({ type: CANCEL_TEMPERATURE })
+    dispatch({ type: MESSAGE_TEMPERATURE, 
+      payload: 'Por favor diligencia por lo menos tu temperatura actual'
     })
   }
 };
 
 export function getData() {
   return function(dispatch) {
-    // dispatch({ type: LOADING})
     const token = localStorage.getItem('token')
-    // if(!id){ console.log('no existe') }
     axios({
       method: 'GET',
       baseURL: process.env.REACT_APP_SERVER_URL,

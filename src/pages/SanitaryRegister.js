@@ -56,14 +56,8 @@ function SanitaryRegister() {
     dispatch(createSanitaryRegister( dataSanitary ))
   };
 
-  const handleCancel = (e) => {
-    const { name, value, checked } = e.target;
-    switch(name) {
-      case 'question1SymptomsCovid':
-        dispatch(cancelSendForm( checked ))
-        break;
-      default: break;
-    }
+  const handleCancel = () => {
+    dispatch(cancelSendForm())
   };
 
   return (
