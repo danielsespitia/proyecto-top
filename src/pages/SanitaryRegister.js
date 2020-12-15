@@ -8,6 +8,7 @@ import {
   createSanitaryRegister, 
   cancelSendForm,
   getData,
+  updateData,
 } from '../store/actions/SanitaryRegister.actions'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
 import Modal from '../components/Modal'
@@ -25,7 +26,7 @@ function SanitaryRegister() {
       return { ...state }
     })
 
-  useEffect((e) => {
+  useEffect(() => {
     dispatch(getData())
   }, [getData])
     
@@ -53,7 +54,11 @@ function SanitaryRegister() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(createSanitaryRegister( dataSanitary ))
+    if(!dataSanitary.canExistData) {
+      dispatch(createSanitaryRegister( dataSanitary ))
+    } else {
+      dispatch(updateData( dataSanitary ))
+    }
   };
 
   const handleCancel = () => {

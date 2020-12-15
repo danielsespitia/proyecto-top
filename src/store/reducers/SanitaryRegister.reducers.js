@@ -8,6 +8,7 @@ export const QUESTION2 = 'QUESTION2';
 export const QUESTION3 = 'QUESTION3';
 export const QUESTION4 = 'QUESTION4';
 export const TEMPERATURE = 'TEMPERATURE';
+export const CAN_EXIST_DATA = 'CAN_EXIST_DATA'
 
 export const CANCEL_QUESTION1 = 'CANCEL_QUESTION1';
 export const CANCEL_QUESTION2 = 'CANCEL_QUESTION2';
@@ -26,7 +27,7 @@ export const initialState = {
   message: '',
   messageTemperature: '',
   loading: false,
-  id: '',
+  canExistData: false,
 };
 
 export function sanitaryRegisterReducer( state = initialState, action) {
@@ -106,6 +107,11 @@ export function sanitaryRegisterReducer( state = initialState, action) {
       ...state,
       messageTemperature: action.payload,
     }
+    case CAN_EXIST_DATA:
+      return {
+        ...state,
+        canExistData: action.payload,
+      }
     default:
       return state;
   }
