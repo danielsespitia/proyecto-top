@@ -26,6 +26,7 @@ function SanitaryRegisterForm({
   handleCancel,
   errorSubmittion,
   message,
+  messageTemperature,
   loading,
 })
 {
@@ -35,6 +36,7 @@ function SanitaryRegisterForm({
   return(
     <ContainerRegisterForm>
         <Message>{message}</Message>
+        <Message>{messageTemperature}</Message>
         <ErrorSubmittion>{errorSubmittion}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
         <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
@@ -47,6 +49,7 @@ function SanitaryRegisterForm({
               type="checkbox"
               name="question1SymptomsCovid"
               value={question1SymptomsCovid}
+              checked={question1SymptomsCovid}
               onChange={handleChange}
             >
             </Checkbox>
@@ -59,6 +62,7 @@ function SanitaryRegisterForm({
               type="checkbox"
               name="question2ContactWithPeople"
               value={question2ContactWithPeople}
+              checked={question2ContactWithPeople}
               onChange={handleChange}
             >
             </Checkbox>
@@ -71,6 +75,7 @@ function SanitaryRegisterForm({
               type="checkbox"
               name="question3InternationalTravel"
               value={question3InternationalTravel}
+              checked={question3InternationalTravel}
               onChange={handleChange}
             >
             </Checkbox>
@@ -83,6 +88,7 @@ function SanitaryRegisterForm({
               type="checkbox"
               name="question4HealthWorker"
               value={question4HealthWorker}
+              checked={question4HealthWorker}
               onChange={handleChange}
             >
             </Checkbox>
