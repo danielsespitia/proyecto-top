@@ -1,4 +1,5 @@
 import axios from 'axios'
+import swal from 'sweetalert';
 const RESERVATION_LOADING = 'RESERVATION_LOADING'
 const RESERVATION_SUCCESS = 'RESERVATION_SUCCESS'
 const RESERVATION_FAILURE = 'RESERVATION_FAILURE'
@@ -104,9 +105,11 @@ export function createReservation(data) {
         },
         data: { branch, date, time, range, people }
       })
-      
+        dispatch({ type: RESERVATION_SUCCESS})
+        swal('Reserva creda exitosamente!', '', 'success')
     } catch(error){
-      dispatch({ type: RESERVATION_FAILURE, payload: error})
+        dispatch({ type: RESERVATION_FAILURE, payload: error})
+        swal('Reserva creda exitosamente!', '', 'error')
     }finally{
       dispatch({ type: RESERVATION_FINISHED})
     }
