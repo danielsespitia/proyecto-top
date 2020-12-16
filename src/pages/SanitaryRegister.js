@@ -59,7 +59,6 @@ function SanitaryRegister() {
     } else {
       dispatch(updateData( dataSanitary ))
     }
-    console.log("🚀 ~ file: SanitaryRegister.js ~ line 64 ~ submitDataSanitary ~ submitDataSanitary", submitDataSanitary)
   };
 
   const handleCancel = () => {
@@ -77,9 +76,8 @@ function SanitaryRegister() {
         handleChange = {handleChange}
         submitDataSanitary = {submitDataSanitary}
         handleCancel = {handleCancel}
-        errorSubmittion = {dataSanitary.errorSubmittion}
+        errorSubmittion = {dataSanitary.errorMessage}
         message = {dataSanitary.message}
-        messageTemperature = {dataSanitary.messageTemperature}
         loading = {dataSanitary.loading}
       >
       </SanitaryRegisterForm>
