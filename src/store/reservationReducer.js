@@ -45,9 +45,9 @@ export function setAgree( payload ) {
   }
 }
 
-const token = localStorage.getItem('token')
 export function getListRestaurants() {
   return async function ( dispatch ) {
+    const token = localStorage.getItem('token')
     dispatch({ type: RESERVATION_LOADING})
     try {
       const { data: {data} } = await axios ({
@@ -69,6 +69,7 @@ export function getListRestaurants() {
 }
 export function getRestaurant() {
   return async function (dispatch ) {
+    const token = localStorage.getItem('token')
     dispatch({ type: RESERVATION_LOADING })
     try {
       const restaurant = await axios ({
@@ -87,6 +88,31 @@ export function getRestaurant() {
     }
   }
 } 
+
+export function createReservation(data) {
+  const { id, branch, date, time, range, people } = data
+  return async function (dispatch) {
+    const token = localStorage.getItem('token')
+    dispatch({ type: RESERVATION_LOADING})
+    try {
+      await axios ({
+        method: 'POST',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url:`/reservations/${id}`, 
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        data: { branch, date, time, range, people }
+      })
+      
+    } catch(error){
+      dispatch({ type: RESERVATION_FAILURE, payload: error})
+    }finally{
+      dispatch({ type: RESERVATION_FINISHED})
+    }
+  }
+}
+
 
 const initialState = {
   id: '',
