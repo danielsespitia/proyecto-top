@@ -109,7 +109,7 @@ export function createReservation(data) {
         swal('Reserva creda exitosamente!', '', 'success')
     } catch(error){
         dispatch({ type: RESERVATION_FAILURE, payload: error})
-        swal('Reserva creda exitosamente!', '', 'error')
+        swal('Hubo un error tu reserva no pudo ser creada', '', 'error')
     }finally{
       dispatch({ type: RESERVATION_FINISHED})
     }
