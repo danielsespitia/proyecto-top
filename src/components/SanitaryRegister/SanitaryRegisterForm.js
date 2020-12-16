@@ -22,7 +22,7 @@ function SanitaryRegisterForm({
   question4HealthWorker,
   temperature,
   handleChange,
-  handleSubmit,
+  submitDataSanitary,
   handleCancel,
   errorSubmittion,
   message,
@@ -40,7 +40,7 @@ function SanitaryRegisterForm({
         <ErrorSubmittion>{errorSubmittion}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
         <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={submitDataSanitary}>
           <Span className="ContentQuestion">
             <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
             <Checkbox
