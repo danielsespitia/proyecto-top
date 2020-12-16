@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../styled/ButtonPrimary'
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,6 +41,7 @@ export function ReservationConfirmPayment({
   const handleClick = (e) => {
     e.preventDefault()
     dispatch(createReservation(data))
+    swal('Reserva creda exitosamente!', '', 'success')
     history.push('/client-profile')
 
   }
