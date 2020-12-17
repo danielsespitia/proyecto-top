@@ -52,7 +52,7 @@ function SanitaryRegister() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const submitDataSanitary = (e) => {
     e.preventDefault()
     if(!dataSanitary.canExistData) {
       dispatch(createSanitaryRegister( dataSanitary ))
@@ -74,11 +74,10 @@ function SanitaryRegister() {
         question4HealthWorker = {dataSanitary.question4HealthWorker}
         temperature = {dataSanitary.temperature}
         handleChange = {handleChange}
-        handleSubmit = {handleSubmit}
+        submitDataSanitary = {submitDataSanitary}
         handleCancel = {handleCancel}
-        errorSubmittion = {dataSanitary.errorSubmittion}
+        errorSubmittion = {dataSanitary.errorMessage}
         message = {dataSanitary.message}
-        messageTemperature = {dataSanitary.messageTemperature}
         loading = {dataSanitary.loading}
       >
       </SanitaryRegisterForm>
