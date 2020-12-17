@@ -4,7 +4,8 @@ import Restaurant  from '../components/Restaurant'
 import styled from 'styled-components'
 import ContainerContent from '../components/styled/ContainerContent'  
 import logo from '../image/RestaurantLogo.png'
-import {getListRestaurants} from '../store/reservationReducer'
+import {getListRestaurants} from '../store/actions/Reservation.actions'
+import { reservationReducer } from '../store/reducers/Reservation.reducer'
 
 const Container = styled.div`
   display: grid;

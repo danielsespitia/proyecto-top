@@ -5,7 +5,7 @@ import {
   RESTAURANT_ID_RESERVATION,
   RESTAURANT_NAME_RESERVATION,
   RESTAURANT_DEPOSIT_RESERVATION,
-  } from '../store/reservationReducer'
+  } from '../store/reducers/Reservation.reducer'
 
 const Article = styled.article`
   margin: 5px;

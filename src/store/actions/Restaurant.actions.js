@@ -1,19 +1,19 @@
 import  axios from 'axios'
 import swal from 'sweetalert'
-const RESTAURANT_LOADING = 'RESTAURANT_LOADING' 
-const RESTAURANT_SUCCESS = 'RESTAURANT_SUCCESS'
-const RESTAURANT_FAILURE = "RESTAURANT_FAILURE"
-const RESTAURANT_FINISHED = "RESTAURANT_FINISHED"
-
-const RESTAURANT_NAME = 'RESTAURANT_NAME'
-const RESTAURANT_EMAIL = 'RESTAURANT_EMAIL'
-const RESTAURANT_ADDRESS = 'RESTAURANT_ADDRESS'
-const RESTAURANT_PHONE = 'RESTAURANT_PHONE'
-const RESTAURANT_SCHEDULE_FROM = 'RESTAURANT_SCHEDULE_FROM'
-const RESTAURANT_SCHEDULE_TO = 'RESTAURANT_SCHEDULE_TO'
-const RESTAURANT_NIT = 'RESTAURANT_NIT'
-const RESTAURANT_DEPOSIT = 'RESTAURANT_DEPOSIT'
-
+import {
+  RESTAURANT_LOADING,
+  RESTAURANT_SUCCESS,
+  RESTAURANT_FAILURE,
+  RESTAURANT_FINISHED,
+  RESTAURANT_NAME,
+  RESTAURANT_EMAIL,
+  RESTAURANT_ADDRESS,
+  RESTAURANT_PHONE,
+  RESTAURANT_SCHEDULE_FROM,
+  RESTAURANT_SCHEDULE_TO,
+  RESTAURANT_NIT,
+  RESTAURANT_DEPOSIT
+} from '../reducers/Restaurant.reducer'
 
 export function getName( payload ) {
   return function ( dispatch ) {
@@ -127,87 +127,3 @@ export function postRestaurantProfile( data ) {
     }
   }
 }
-
-const initialState = {
-  
-  name: '',
-  email: '',
-  address: '',
-  phone: '',
-  scheduleFrom: '',
-  scheduleTo:'',
-  nit: '',
-  deposit: '',
-  loading: false,
-  error: '',
-
-}
-
-
-function restaurantReducer (state = initialState, action ) {
-  switch (action.type) {
-    case RESTAURANT_NAME:
-      return {
-        ...state, 
-        name: action.payload
-      }
-    case RESTAURANT_EMAIL:
-      return {
-        ...state, 
-        email: action.payload
-      }
-    case RESTAURANT_ADDRESS:
-      return {
-        ...state, 
-        address: action.payload
-      }
-    case RESTAURANT_PHONE:
-      return {
-        ...state, 
-        phone: action.payload
-      }
-    case RESTAURANT_SCHEDULE_FROM:
-      return {
-        ...state, 
-        scheduleFrom: action.payload
-      }
-    case RESTAURANT_SCHEDULE_TO:
-      return {
-        ...state, 
-        scheduleTo: action.payload
-      }
-    case RESTAURANT_NIT:
-      return {
-        ...state, 
-        nit: action.payload
-      }
-    case RESTAURANT_DEPOSIT:
-      return {
-        ...state, 
-        deposit: action.payload
-      }
-    case RESTAURANT_LOADING:
-      return {
-        ...state,
-        loading: true
-      }
-    case RESTAURANT_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-      }
-    case RESTAURANT_FAILURE:
-      return {
-        ...state,
-        error: action.payload
-      }
-    case RESTAURANT_FINISHED:
-      return {
-        ...state,
-        loading: false
-      }
-    default:
-      return state
-  }
-}
-export default restaurantReducer

@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import restaurantReducer from './restaurantReducer'
-import reservationReducer from './reservationReducer'
+import { reservationReducer } from './reducers/Reservation.reducer'
+import { restaurantReducer } from './reducers/Restaurant.reducer'
 import { sanitaryRegisterReducer } from './reducers/SanitaryRegister.reducers'
 import thunk from 'redux-thunk'
 
