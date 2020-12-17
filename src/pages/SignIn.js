@@ -25,7 +25,8 @@ class SignIn extends React.Component {
         data: { email, password, userType }
       });
       localStorage.setItem( 'token', token )
-      const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile'
+      const pathUser = userType === 'clients' ? '/client-profile' : '/restaurant-profile'
+      localStorage.setItem( 'pathUser', pathUser )
       this.context.isAuthenticated(token, pathUser)
       this.setState({
         message: 'Estas Logueado correctamente'

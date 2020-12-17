@@ -24,12 +24,16 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    const pathUser = localStorage.getItem('pathUser')
     setIsToken(token)
+    setUser(pathUser)
   }, []);
 
   const logout = () => {
     setIsToken(null)
+    setUser(null)
     localStorage.removeItem('token')
+    localStorage.removeItem('pathUser')
   };
 
   return (
