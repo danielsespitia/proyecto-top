@@ -22,6 +22,7 @@ import SanitaryRegister from './SanitaryRegister'
 const ContainerList = styled(ContainerContent)`
   width: auto;
   margin: 20px;
+  text-align: center;
 `;
 const LinkSanitaryUpdate = styled.button`
   font-size: 16px;
@@ -97,8 +98,17 @@ const Input = styled.input`
   display: inline;
   border: none;
 `;
+const TitleParagraph = styled.span`
+  border-bottom: 1px #828282 solid;
+  width: 1035px;
+  padding-bottom: 50px;
+  text-align: start;
+  display: block;
+  grid-column: 1/5;
+  margin: 15px;
+`;
 const Span = styled.span`
-  display: inline;
+  display: block;
   grid-column: 1/5;
   margin: 15px;
 `;
@@ -180,12 +190,6 @@ function ReservationForm (){
   let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setBranch(data.branch))
-    dispatch(setDate(data.date))
-    dispatch(setTime(data.time))
-    dispatch(setRange(data.range))
-    dispatch(setPeople(data.people))
-    dispatch(setAgree(data.agree))
     history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
   };
 
@@ -203,15 +207,15 @@ function ReservationForm (){
           />
         </SectionHeader>
       </ContainerList>
-      <form
-        onSubmit={handleSubmit}
-        id="reservation"
-      >
-        <ContainerList>
+      <ContainerList>
+        <form
+          onSubmit={handleSubmit}
+          id="reservation"
+        >
           <ReservationContainer>
-            <Span>
+            <TitleParagraph>
               puedes seleccionar tu menu antes de llegar si deseas 
-            </Span>
+            </TitleParagraph>
             <InputContainer>
               <Label
                 className="Form__reservation-branch-label"
@@ -366,28 +370,28 @@ function ReservationForm (){
               </ArticleCheck>
             </Span>
             <Span>
-              <LinkSanitaryUpdate 
-                type='button'
-                onClick={register.onOpenModal}
-              >
-                Actualizar registro sanitario
-              </LinkSanitaryUpdate>
-              <SanitaryRegister/>
-            </Span>
-            <Span>
-              <LinkSanitaryUpdate to="/sanitary-register">
-                Agregar registro sanitario de mis compañeros
-              </LinkSanitaryUpdate>
-            </Span>
-            <Span>
               <ButtonPrimary
                 type="submit"
                 value="Agregar mi reserva al carrito"
               />
             </Span>
           </ReservationContainer>
-        </ContainerList>
-      </form>
+        </form>
+        <Span>
+          <LinkSanitaryUpdate 
+            type='button'
+            onClick={register.onOpenModal}
+          >
+            Actualizar registro sanitario
+          </LinkSanitaryUpdate>
+          <SanitaryRegister/>
+        </Span>
+        <Span>
+          <LinkSanitaryUpdate to="/sanitary-register">
+            Agregar registro sanitario de mis compañeros
+          </LinkSanitaryUpdate>
+        </Span>
+      </ContainerList>
     </>
   )
 }
