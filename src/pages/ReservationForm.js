@@ -144,6 +144,11 @@ function ReservationForm (){
       }
   })
 
+  const toNumber = (range) => {
+    let splited = range.split(' ')
+    return Number(splited[0])
+  }
+
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
     switch (name) {
@@ -157,7 +162,7 @@ function ReservationForm (){
         dispatch(setTime(value))
         break;
       case 'range':
-        dispatch(setRange(value))
+        dispatch(setRange(toNumber(value)))
         break;
       case 'people':
         dispatch(setPeople(value))
@@ -176,7 +181,7 @@ function ReservationForm (){
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(setBranch(data.branch))
-    dispatch(setDate(data.branch))
+    dispatch(setDate(data.date))
     dispatch(setTime(data.time))
     dispatch(setRange(data.range))
     dispatch(setPeople(data.people))
