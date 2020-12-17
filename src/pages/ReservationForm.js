@@ -14,7 +14,7 @@ import {
   setPeople,
   setAgree
 }
-from '../store/reservationReducer'
+from '../store/actions/Reservation.actions'
 import { AuthContext } from '../store/AuthContext'
 import { useContext } from 'react'
 import SanitaryRegister from './SanitaryRegister'

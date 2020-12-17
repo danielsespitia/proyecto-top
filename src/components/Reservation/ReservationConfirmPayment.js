@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../styled/ButtonPrimary'
 import { useDispatch, useSelector } from 'react-redux'
-import { createReservation } from '../../store/reservationReducer'
+import { createReservation } from '../../store/actions/Reservation.actions'
 import {
   ContainerReserve,
   ContainerPaymentZone,

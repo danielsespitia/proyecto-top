@@ -18,7 +18,7 @@ import {
   getDeposit,
   getProfile,
   postRestaurantProfile,
-} from '../store/restaurantReducer';
+} from '../store/actions/Restaurant.actions';
  
 const RestLogo = styled.img `
   width: 100px;
