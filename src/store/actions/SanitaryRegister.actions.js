@@ -52,6 +52,10 @@ export function createSanitaryRegister(data) {
   const { question1SymptomsCovid, question2ContactWithPeople, question3InternationalTravel, question4HealthWorker, temperature } = data
   return async function (dispatch) {
     dispatch({ type: LOADING })
+    dispatch({ 
+      type: FAILURED_SANITARY_REGISTER,
+      payload: '',
+    })
     try {
       const token = localStorage.getItem('token');
       await axios({
@@ -69,8 +73,6 @@ export function createSanitaryRegister(data) {
           Authorization: `Bearer ${token}`
         },
       });
-      dispatch({ type: MESSAGE_TEMPERATURE, 
-        payload: '' })
       dispatch({
         type: CREATE_SANITARY_REGISTER,
         payload: 'Registro sanitario actualizado exitosamente',
@@ -86,10 +88,6 @@ export function createSanitaryRegister(data) {
       })
     } finally {
       dispatch({ type: FINISHED_LOADING })
-      dispatch({
-        type: CREATE_SANITARY_REGISTER,
-        payload: '',
-      })
     }
   }
 };

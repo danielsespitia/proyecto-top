@@ -23,9 +23,8 @@ export const initialState = {
   question3InternationalTravel: false,
   question4HealthWorker: false,
   temperature: '',
-  errorSubmittion: '',
   message: '',
-  messageTemperature: '',
+  errorMessage: '',
   loading: false,
   canExistData: false,
 };
@@ -50,7 +49,7 @@ export function sanitaryRegisterReducer( state = initialState, action) {
     case FAILURED_SANITARY_REGISTER:
       return {
         ...state,
-        errorSubmittion: action.payload,
+        errorMessage: action.payload,
       }
     case QUESTION1:
       return {
@@ -105,7 +104,7 @@ export function sanitaryRegisterReducer( state = initialState, action) {
     case MESSAGE_TEMPERATURE:
     return {
       ...state,
-      messageTemperature: action.payload,
+      message: action.payload,
     }
     case CAN_EXIST_DATA:
       return {
