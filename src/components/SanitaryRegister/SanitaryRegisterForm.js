@@ -21,6 +21,7 @@ function SanitaryRegisterForm({
   question3InternationalTravel,
   question4HealthWorker,
   temperature,
+  isUser,
   companionName,
   handleChange,
   submitDataSanitary,
@@ -103,16 +104,20 @@ function SanitaryRegisterForm({
             required
           >
           </InputText>
-          <InputText
-            className="Companion__name"
-            id="companionName"
-            type="text"
-            name="companionName"
-            value={companionName}
-            onChange={handleChange}
-            placeholder="Nombre de mi acompañante"
-          >
-          </InputText>
+          {isUser 
+            ? ( null )
+          : (
+            <InputText
+              className="Companion__name"
+              id="companionName"
+              type="text"
+              name="companionName"
+              value={companionName}
+              onChange={handleChange}
+              placeholder="Nombre de mi acompañante"
+            >
+            </InputText>
+          )}
           <ContentButtons>
             <ButtonPrimary
               className="ButtonUpdate"

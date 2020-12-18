@@ -11,7 +11,7 @@ import {
   updateData,
 } from '../store/actions/SanitaryRegister.actions'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm'
-import Modal from '../components/Modal'
+import Modal from '../components/Modals/Modal'
 import { useDispatch, useSelector } from 'react-redux'
 
 
@@ -79,7 +79,7 @@ function SanitaryRegister() {
         errorSubmittion = {dataSanitary.errorMessage}
         message = {dataSanitary.message}
         loading = {dataSanitary.loading}
-        isUser = "Soy cliente de la app"
+        isUser
       >
       </SanitaryRegisterForm>
     </Modal>
