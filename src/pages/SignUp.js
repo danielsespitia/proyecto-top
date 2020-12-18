@@ -52,7 +52,8 @@ function SignUp () {
           data: { name, password, email, userType, terms }
         });
         localStorage.setItem('token', token);
-        const pathUser = userType === 'clients' ? 'client-profile' : 'restaurant-profile';
+        const pathUser = userType === 'clients' ? '/client-profile' : '/restaurant-profile';
+        localStorage.setItem('pathUser', pathUser);
         isAuthenticated(token, pathUser);
         history.push(`${pathUser}`);
       } catch (err) {
