@@ -79,6 +79,7 @@ function SanitaryRegister() {
         errorSubmittion = {dataSanitary.errorMessage}
         message = {dataSanitary.message}
         loading = {dataSanitary.loading}
+        isUser = "Soy cliente de la app"
       >
       </SanitaryRegisterForm>
     </Modal>

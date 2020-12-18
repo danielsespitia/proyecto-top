@@ -4,7 +4,8 @@ import ButtonPrimary from '../styled/ButtonPrimary';
 
 export const ContainerRegisterForm = styled(ContainerContent)`
   width: 280px;
-  padding: 30px;
+  padding: 15px 30px;
+  margin: 35px auto;
 `;
 
 export const Form = styled.form`
@@ -45,8 +46,8 @@ export const Checkbox = styled.input`
   border-radius: 2px;
 `;
 
-export const Temperature = styled.input`
-  margin: 15px 0;
+export const InputText = styled.input`
+  margin: 0 0 15px 0;
   padding: 9px;
   border-radius: 4px;
   border: 1px solid #CED4DA;

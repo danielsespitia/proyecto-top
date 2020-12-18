@@ -17,7 +17,6 @@ const ModalContainer = styled.div`
 
 const ButtonContainer = styled.div`
   position: relative;
-  top: 1rem;
   width: 400px;
 `;
 
