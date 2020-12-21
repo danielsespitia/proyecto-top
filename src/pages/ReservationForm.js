@@ -390,7 +390,7 @@ function ReservationForm (){
         <Span>
           <LinkSanitaryUpdate 
             type="button"
-            onClick={register.onOpenModal}
+            onClick={register.onOpenModalCompanion}
           >
             Agregar registro sanitario de mis compañeros
           </LinkSanitaryUpdate>

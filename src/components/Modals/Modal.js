@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, } from 'react'
 import ReactDom from 'react-dom'
 import { AuthContext } from '../../store/AuthContext'
 import {
@@ -8,7 +8,7 @@ import {
 } from './ModalStyles'
 
 function Modal(props) {
-  const { onCloseModal, modalIsOpen } = useContext(AuthContext)
+  const { onCloseModal, modalIsOpen, } = useContext(AuthContext)
 
   if(!modalIsOpen){
     return null

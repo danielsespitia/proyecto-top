@@ -1,15 +1,15 @@
-import Modal from '../components/Modals/Modal'
+import ModalCompanion from '../components/Modals/ModalCompanion'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm';
 
 function SanitaryRegisterCompanion() {
 
   return (
-    <Modal>
+    <ModalCompanion>
       <SanitaryRegisterForm
         isUser = {false}
       >
       </SanitaryRegisterForm>
-    </Modal>
+    </ModalCompanion>
   )
 }
 
