@@ -6,14 +6,20 @@ export function AuthProvider({ children }) {
   const [isToken, setIsToken] = useState(null)
   const [message, setMessage] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalCompanionIsOpen, setModalCompanionIsOpen] = useState(false)
   const [user, setUser] = useState('')
 
   const onCloseModal = () => {
     setModalIsOpen(false)
+    setModalCompanionIsOpen(false)
   };
 
   const onOpenModal = () => {
     setModalIsOpen(true)
+  };
+
+  const onOpenModalCompanion = () => {
+    setModalCompanionIsOpen(true)
   };
 
   const isAuthenticated = (token, pathUser) => {
@@ -45,8 +51,10 @@ export function AuthProvider({ children }) {
         isAuthenticated,
         logout,
         modalIsOpen,
+        modalCompanionIsOpen,
         onCloseModal,
         onOpenModal,
+        onOpenModalCompanion,
       }}
     >
       {children}
