@@ -18,6 +18,7 @@ from '../store/actions/Reservation.actions'
 import { AuthContext } from '../store/AuthContext'
 import { useContext } from 'react'
 import SanitaryRegister from './SanitaryRegister'
+import SanitaryRegisterCompanion from './SanitaryRegisterCompanion'
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
@@ -387,9 +388,13 @@ function ReservationForm (){
           <SanitaryRegister/>
         </Span>
         <Span>
-          <LinkSanitaryUpdate to="/sanitary-register">
+          <LinkSanitaryUpdate 
+            type="button"
+            onClick={register.onOpenModalCompanion}
+          >
             Agregar registro sanitario de mis compañeros
           </LinkSanitaryUpdate>
+          <SanitaryRegisterCompanion/>
         </Span>
       </ContainerList>
     </>

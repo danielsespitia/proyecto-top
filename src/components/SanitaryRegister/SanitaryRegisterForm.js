@@ -7,7 +7,7 @@ import {
   Span,
   Paragraph,
   Checkbox,
-  Temperature,
+  InputText,
   ContentButtons,
   ButtonCancel,
   ErrorSubmittion,
@@ -21,6 +21,8 @@ function SanitaryRegisterForm({
   question3InternationalTravel,
   question4HealthWorker,
   temperature,
+  isUser,
+  companionName,
   handleChange,
   submitDataSanitary,
   handleCancel,
@@ -91,7 +93,7 @@ function SanitaryRegisterForm({
             >
             </Checkbox>
           </Span>
-          <Temperature
+          <InputText
             className="Temperature"
             id="temperature"
             type="text"
@@ -101,7 +103,21 @@ function SanitaryRegisterForm({
             placeholder="Cual es mi temperatura"
             required
           >
-          </Temperature>
+          </InputText>
+          {isUser 
+            ? ( null )
+          : (
+            <InputText
+              className="Companion__name"
+              id="companionName"
+              type="text"
+              name="companionName"
+              value={companionName}
+              onChange={handleChange}
+              placeholder="Nombre de mi acompañante"
+            >
+            </InputText>
+          )}
           <ContentButtons>
             <ButtonPrimary
               className="ButtonUpdate"
