@@ -6,7 +6,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext'
 import Desktopstructure from '../components/styled/DesktopStructure';
-import RestProfile  from '../components/RestProfile';
+import RestaurantProfileForm from '../components/RestaurantProfileForm';
 import { 
   getName,
   getEmail,
@@ -124,7 +124,7 @@ function RestaurantProfile() {
     if(profile.loading) return <p>Loading...</p>
     if(profile.error) return <p>Something went wrong</p>
       if(update){
-        history.push('/restaurant-profile')
+        history.push('/restaurant-profile/view')
       }
 
   }
@@ -183,7 +183,7 @@ function RestaurantProfile() {
           <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
         </BodyLeft>
         <BodyRight>
-          <RestProfile
+          <RestaurantProfileForm
             name={profile.name}
             email={profile.email}
             address={profile.address}

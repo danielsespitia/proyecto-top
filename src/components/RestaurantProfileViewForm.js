@@ -27,7 +27,7 @@ const ContentButtons = styled.div`
 const ButtonUpdate = styled(ButtonPrimary)`
 `;
 
-function RestProfile ({ 
+function RestaurantProfileViewForm ({ 
   restaurantName, 
   address,
   email,
@@ -88,4 +88,4 @@ function RestProfile ({
     </Container>
   )
 }
-export default RestProfile
+export default RestaurantProfileViewForm
