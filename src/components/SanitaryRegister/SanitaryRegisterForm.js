@@ -17,12 +17,13 @@ import {
 
 function SanitaryRegisterForm({
   question1SymptomsCovid,
+  question1SymptomsCovidC,
   question2ContactWithPeople,
   question3InternationalTravel,
   question4HealthWorker,
   temperature,
   isUser,
-  companionName,
+  nameCompanion,
   handleChange,
   submitDataSanitary,
   handleCancel,
@@ -48,8 +49,8 @@ function SanitaryRegisterForm({
               id="question1SymptomsCovid"
               type="checkbox"
               name="question1SymptomsCovid"
-              value={question1SymptomsCovid}
-              checked={question1SymptomsCovid}
+              value={question1SymptomsCovid || question1SymptomsCovidC}
+              checked={question1SymptomsCovid || question1SymptomsCovidC}
               onChange={handleChange}
             >
             </Checkbox>
@@ -108,11 +109,11 @@ function SanitaryRegisterForm({
             ? ( null )
           : (
             <InputText
-              className="Companion__name"
-              id="companionName"
+              className="Name_Companion"
+              id="nameCompanion"
               type="text"
-              name="companionName"
-              value={companionName}
+              name="nameCompanion"
+              value={nameCompanion}
               onChange={handleChange}
               placeholder="Nombre de mi acompañante"
             >
