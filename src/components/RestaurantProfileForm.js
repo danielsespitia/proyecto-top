@@ -59,7 +59,7 @@ const ButtonCancel = styled(ButtonPrimary)`
   margin-left: 50px;
 `;
 
-function RestProfile ({ 
+function RestaurantProfileForm ({ 
   name, 
   address,
   email,
@@ -215,4 +215,4 @@ function RestProfile ({
     </Container>
   )
 }
-export default RestProfile
+export default RestaurantProfileForm

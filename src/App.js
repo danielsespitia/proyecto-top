@@ -13,7 +13,7 @@ import SignUp from './pages/SignUp'
 import SignIn from './pages/SignIn'
 import ClientProfile from './pages/ClientProfile'
 import RestaurantProfile from './pages/RestaurantProfile'
-import MyRestaurant from './pages/MyRestaurant'
+import RestaurantProfileView from './pages/RestaurantProfileView'
 import Restaurants from './pages/Restaurants'
 import Reservation from './pages/ReservationForm'
 import ReservationConfirm from './pages/ReservationConfirm'
@@ -30,7 +30,7 @@ function App () {
             <Route exact path="/sign-up" component={SignUp}/>
             <Route exact path="/sign-in" component={SignIn}/>
             <Route exact path="/client-profile" component={ClientProfile}/>
-            <Route exact path="/restaurant-profile" component={MyRestaurant}/>
+            <Route exact path="/restaurant-profile/view" component={RestaurantProfileView}/>
             <Route exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
             <Route exact path="/restaurants" component={Restaurants}/>
             <Route exact path="/restaurant-profile/reservations" component={RestaurantReservations}/>

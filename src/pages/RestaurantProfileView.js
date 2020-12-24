@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Desktopstructure from '../components/styled/DesktopStructure';
-import MyRest from '../components/MyRest';
+import RestaurantProfileViewForm from '../components/RestaurantProfileViewForm';
 import { Link } from 'react-router-dom'
 
 const RestLogo = styled.img `
@@ -61,7 +61,7 @@ const MyReservationAnchor = styled.a`
   text-decoration-line: underline;
 `;
 
-class RestaurantProfile extends Component {
+class RestaurantProfileView extends Component {
 
   state = {
     _id: '',
@@ -130,7 +130,7 @@ class RestaurantProfile extends Component {
           </Link>
         </BodyLeft>
         <BodyRight>
-          <MyRest
+          <RestaurantProfileViewForm
             key={_id}
             restaurantName={name}
             email={email}
@@ -149,4 +149,4 @@ class RestaurantProfile extends Component {
   }
 }
 
-export default RestaurantProfile
+export default RestaurantProfileView
