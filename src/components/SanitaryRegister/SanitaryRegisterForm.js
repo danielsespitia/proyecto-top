@@ -13,11 +13,10 @@ import {
   ErrorSubmittion,
   Message,
 } from './SanitaryRegisterStyles'
-
+import { useEffect } from 'react'
 
 function SanitaryRegisterForm({
   question1SymptomsCovid,
-  question1SymptomsCovidC,
   question2ContactWithPeople,
   question3InternationalTravel,
   question4HealthWorker,
@@ -32,6 +31,13 @@ function SanitaryRegisterForm({
   loading,
 })
 {
+
+  useEffect(() => {
+    return () => {
+      console.log('use effect')
+    }
+  })
+
   if(loading === true){
     return <h1>Cargando...</h1>
   }
@@ -49,8 +55,8 @@ function SanitaryRegisterForm({
               id="question1SymptomsCovid"
               type="checkbox"
               name="question1SymptomsCovid"
-              value={question1SymptomsCovid || question1SymptomsCovidC}
-              checked={question1SymptomsCovid || question1SymptomsCovidC}
+              value={question1SymptomsCovid}
+              checked={question1SymptomsCovid}
               onChange={handleChange}
             >
             </Checkbox>

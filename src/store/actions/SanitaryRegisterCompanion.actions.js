@@ -19,7 +19,7 @@ import {
   MESSAGE_TEMPERATURE,
 } from '../reducers/SanitaryRegisterCompanion.reducer'
 
-export function getQuestionOne( payload ) {
+export function getQuestionOneC( payload ) {
   return function( dispatch ) {
     dispatch({ type: QUESTION1, payload})
   }

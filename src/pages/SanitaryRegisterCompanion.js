@@ -1,7 +1,7 @@
 import ModalCompanion from '../components/Modals/ModalCompanion'
 import SanitaryRegisterForm from '../components/SanitaryRegister/SanitaryRegisterForm';
 import {
-  getQuestionOne,
+  getQuestionOneC,
   getQuestionTwo,
   getQuestionThree,
   getQuestionFour,
@@ -16,20 +16,19 @@ function SanitaryRegisterCompanion() {
 
   const dispatch = useDispatch()
 
-  const dataSanitaryCompanion = useSelector((
+  const data= useSelector((
     { sanitaryRegisterCompanionReducer: {
-      ...state
+      question1SymptomsCovidC,
     }}) => {
-      return { ...state }
+      return { question1SymptomsCovidC }
       
     })
-    console.log("🚀 ~ file: SanitaryRegisterCompanion.js ~ line 28 ~ SanitaryRegisterCompanion ~ dataSanitaryCompanion", dataSanitaryCompanion)
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     switch(name) {
       case 'question1SymptomsCovidC': 
-        dispatch(getQuestionOne(checked))
+        dispatch(getQuestionOneC(checked))
         break;
       case 'question2ContactWithPeople':
         dispatch(getQuestionTwo(checked))
@@ -50,10 +49,10 @@ function SanitaryRegisterCompanion() {
     }
   };
 
-  const submitDataSanitary = (e) => {
-    e.preventDefault()
-    dispatch(createSanitaryRegister( dataSanitaryCompanion ))
-  };
+  // const submitDataSanitary = (e) => {
+  //   e.preventDefault()
+  //   dispatch(createSanitaryRegister( dataSanitaryCompanion ))
+  // };
 
   const handleCancel = () => {
     dispatch(cancelSendForm())
@@ -62,18 +61,18 @@ function SanitaryRegisterCompanion() {
   return (
     <ModalCompanion>
       <SanitaryRegisterForm
-        question1SymptomsCovidC = {dataSanitaryCompanion.question1SymptomsCovidC} 
-        question2ContactWithPeople = {dataSanitaryCompanion.question2ContactWithPeople}
-        question3InternationalTravel  =  {dataSanitaryCompanion.question3InternationalTravel}
-        question4HealthWorker = {dataSanitaryCompanion.question4HealthWorker}
-        temperature = {dataSanitaryCompanion.temperature}
-        nameCompanion = {dataSanitaryCompanion.nameCompanion}
+        question1SymptomsCovid = {data.question1SymptomsCovidC} 
+        // question2ContactWithPeople = {dataSanitaryCompanion.question2ContactWithPeople}
+        // question3InternationalTravel  =  {dataSanitaryCompanion.question3InternationalTravel}
+        // question4HealthWorker = {dataSanitaryCompanion.question4HealthWorker}
+        // temperature = {dataSanitaryCompanion.temperature}
+        // nameCompanion = {dataSanitaryCompanion.nameCompanion}
         handleChange = {handleChange}
-        submitDataSanitary = {submitDataSanitary}
+        // submitDataSanitary = {submitDataSanitary}
         handleCancel = {handleCancel}
-        errorSubmittion = {dataSanitaryCompanion.errorMessage}
-        message = {dataSanitaryCompanion.message}
-        loading = {dataSanitaryCompanion.loading}
+        // errorSubmittion = {dataSanitaryCompanion.errorMessage}
+        // message = {dataSanitaryCompanion.message}
+        // loading = {dataSanitaryCompanion.loading}
         isUser = {false}
       >
       </SanitaryRegisterForm>
