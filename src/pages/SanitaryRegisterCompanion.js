@@ -11,6 +11,7 @@ import {
   cancelSendForm,
 } from '../store/actions/SanitaryRegisterCompanion.actions'
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
 
 function SanitaryRegisterCompanion() {
 
@@ -23,6 +24,10 @@ function SanitaryRegisterCompanion() {
       return { question1SymptomsCovidC }
       
     })
+
+  useEffect(() => {
+    console.log('companion')
+  }, [])
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -66,7 +71,7 @@ function SanitaryRegisterCompanion() {
         // question3InternationalTravel  =  {dataSanitaryCompanion.question3InternationalTravel}
         // question4HealthWorker = {dataSanitaryCompanion.question4HealthWorker}
         // temperature = {dataSanitaryCompanion.temperature}
-        // nameCompanion = {dataSanitaryCompanion.nameCompanion}
+        nameCompanion = {data.nameCompanion}
         handleChange = {handleChange}
         // submitDataSanitary = {submitDataSanitary}
         handleCancel = {handleCancel}
