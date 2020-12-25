@@ -1,51 +1,51 @@
 import axios from 'axios'
 import { 
-  CREATE_SANITARY_REGISTER,
-  FAILURED_SANITARY_REGISTER,
-  LOADING,
-  FINISHED_LOADING,
-  QUESTION1,
-  QUESTION2,
-  QUESTION3,
-  QUESTION4,
-  TEMPERATURE,
+  CREATE_SANITARY_REGISTERC,
+  FAILURED_SANITARY_REGISTERC,
+  LOADINGC,
+  FINISHED_LOADINGC,
+  QUESTION1C,
+  QUESTION2C,
+  QUESTION3C,
+  QUESTION4C,
+  TEMPERATUREC,
   NAME_COMPANION,
-  CANCEL_QUESTION1,
-  CANCEL_QUESTION2,
-  CANCEL_QUESTION3,
-  CANCEL_QUESTION4,
-  CANCEL_TEMPERATURE,
+  CANCEL_QUESTION1C,
+  CANCEL_QUESTION2C,
+  CANCEL_QUESTION3C,
+  CANCEL_QUESTION4C,
+  CANCEL_TEMPERATUREC,
   CANCEL_NAME_COMPANION,
-  MESSAGE_TEMPERATURE,
+  MESSAGE_TEMPERATUREC,
 } from '../reducers/SanitaryRegisterCompanion.reducer'
 
-export function getQuestionOneC( payload ) {
+export function getQuestionOne( payload ) {
   return function( dispatch ) {
-    dispatch({ type: QUESTION1, payload})
+    dispatch({ type: QUESTION1C, payload})
   }
 };
 
 export function getQuestionTwo( payload ) {
   return function( dispatch ) {
-    dispatch({ type: QUESTION2, payload})
+    dispatch({ type: QUESTION2C, payload})
   }
 };
 
 export function getQuestionThree( payload ) {
   return function( dispatch ) {
-    dispatch({ type: QUESTION3, payload})
+    dispatch({ type: QUESTION3C, payload})
   }
 };
 
 export function getQuestionFour( payload ) {
   return function( dispatch ) {
-    dispatch({ type: QUESTION4, payload})
+    dispatch({ type: QUESTION4C, payload})
   }
 };
 
 export function getTemperature( payload ) {
   return function( dispatch ) {
-    dispatch({ type: TEMPERATURE, payload})
+    dispatch({ type: TEMPERATUREC, payload})
   }
 };
 
@@ -57,16 +57,16 @@ export function getNameCompanion( payload ) {
 
 export function createSanitaryRegister(data) {
   const { 
-    question1SymptomsCovidC, 
+    question1SymptomsCovid, 
     question2ContactWithPeople, 
     question3InternationalTravel, 
     question4HealthWorker, 
     temperature, 
     nameCompanion, } = data
   return async function (dispatch) {
-    dispatch({ type: LOADING })
+    dispatch({ type: LOADINGC })
     dispatch({ 
-      type: FAILURED_SANITARY_REGISTER,
+      type: FAILURED_SANITARY_REGISTERC,
       payload: '',
     })
     try {
@@ -76,7 +76,7 @@ export function createSanitaryRegister(data) {
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/sanitary-register/companions',
         data: {
-          question1SymptomsCovidC,
+          question1SymptomsCovid,
           question2ContactWithPeople,
           question3InternationalTravel,
           question4HealthWorker,
@@ -88,30 +88,30 @@ export function createSanitaryRegister(data) {
         },
       });
       dispatch({
-        type: CREATE_SANITARY_REGISTER,
+        type: CREATE_SANITARY_REGISTERC,
         payload: 'Registro sanitario actualizado exitosamente',
       })
     } catch (err) {
       dispatch({
-        type: FAILURED_SANITARY_REGISTER,
+        type: FAILURED_SANITARY_REGISTERC,
         payload: 'Lo sentimos, no pudimos enviar tu información',
       })
     } finally {
-      dispatch({ type: FINISHED_LOADING })
+      dispatch({ type: FINISHED_LOADINGC })
     }
   }
 };
 
 export function cancelSendForm() {
   return function(dispatch) {
-    dispatch({ type: CANCEL_QUESTION1 })
-    dispatch({ type: CANCEL_QUESTION2 })
-    dispatch({ type: CANCEL_QUESTION3 })
-    dispatch({ type: CANCEL_QUESTION4 })
-    dispatch({ type: CANCEL_TEMPERATURE })
+    dispatch({ type: CANCEL_QUESTION1C })
+    dispatch({ type: CANCEL_QUESTION2C })
+    dispatch({ type: CANCEL_QUESTION3C })
+    dispatch({ type: CANCEL_QUESTION4C })
+    dispatch({ type: CANCEL_TEMPERATUREC })
     dispatch({ type: CANCEL_NAME_COMPANION })
     dispatch({ 
-      type: MESSAGE_TEMPERATURE, 
+      type: MESSAGE_TEMPERATUREC, 
       payload: 'Por favor diligencia por lo menos tu temperatura actual',
     })
   }

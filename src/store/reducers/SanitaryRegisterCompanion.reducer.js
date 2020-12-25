@@ -1,25 +1,25 @@
-export const CREATE_SANITARY_REGISTER = 'CREATE_SANITARY_REGISTER';
-export const FAILURED_SANITARY_REGISTER = 'FAILURED_SANITARY_REGISTER';
-export const LOADING = 'LOADING';
-export const FINISHED_LOADING = 'FINISHED_LOADING';
+export const CREATE_SANITARY_REGISTERC = 'CREATE_SANITARY_REGISTERC';
+export const FAILURED_SANITARY_REGISTERC = 'FAILURED_SANITARY_REGISTERC';
+export const LOADINGC = 'LOADINGC';
+export const FINISHED_LOADINGC = 'FINISHED_LOADINGC';
 
-export const QUESTION1 = 'QUESTION1';
-export const QUESTION2 = 'QUESTION2';
-export const QUESTION3 = 'QUESTION3';
-export const QUESTION4 = 'QUESTION4';
-export const TEMPERATURE = 'TEMPERATURE';
+export const QUESTION1C = 'QUESTION1C';
+export const QUESTION2C = 'QUESTION2C';
+export const QUESTION3C = 'QUESTION3C';
+export const QUESTION4C = 'QUESTION4C';
+export const TEMPERATUREC = 'TEMPERATUREC';
 export const NAME_COMPANION = 'NAME_COMPANION';
 
-export const CANCEL_QUESTION1 = 'CANCEL_QUESTION1';
-export const CANCEL_QUESTION2 = 'CANCEL_QUESTION2';
-export const CANCEL_QUESTION3 = 'CANCEL_QUESTION3';
-export const CANCEL_QUESTION4 = 'CANCEL_QUESTION4';
-export const CANCEL_TEMPERATURE = 'CANCEL_TEMPERATURE';
+export const CANCEL_QUESTION1C = 'CANCEL_QUESTION1C';
+export const CANCEL_QUESTION2C = 'CANCEL_QUESTION2C';
+export const CANCEL_QUESTION3C = 'CANCEL_QUESTION3C';
+export const CANCEL_QUESTION4C = 'CANCEL_QUESTION4C';
+export const CANCEL_TEMPERATUREC = 'CANCEL_TEMPERATUREC';
 export const CANCEL_NAME_COMPANION = 'CANCEL_NAME_COMPANION';
-export const MESSAGE_TEMPERATURE = 'MESSAGE_TEMPERATURE';
+export const MESSAGE_TEMPERATUREC = 'MESSAGE_TEMPERATUREC';
 
 export const initialState = {
-  question1SymptomsCovidC: false,
+  question1SymptomsCovid: false,
   question2ContactWithPeople: false,
   question3InternationalTravel: false,
   question4HealthWorker: false,
@@ -33,47 +33,47 @@ export const initialState = {
 
 export function sanitaryRegisterCompanionReducer( state = initialState, action) {
   switch (action.type) {
-    case LOADING: 
+    case LOADINGC: 
       return {
         ...state,
         loading: true,
       }
-    case FINISHED_LOADING:
+    case FINISHED_LOADINGC:
       return {
         ...state,
         loading: false,
       }
-    case CREATE_SANITARY_REGISTER:
+    case CREATE_SANITARY_REGISTERC:
       return {
         ...state,
         message: action.payload,
       };
-    case FAILURED_SANITARY_REGISTER:
+    case FAILURED_SANITARY_REGISTERC:
       return {
         ...state,
         errorMessage: action.payload,
       }
-    case QUESTION1:
+    case QUESTION1C:
       return {
         ...state,
-        question1SymptomsCovidC: action.payload,
+        question1SymptomsCovid: action.payload,
       };
-    case QUESTION2:
+    case QUESTION2C:
       return {
         ...state,
         question2ContactWithPeople: action.payload,
       };
-    case QUESTION3:
+    case QUESTION3C:
       return {
         ...state,
         question3InternationalTravel: action.payload,
       };
-    case QUESTION4:
+    case QUESTION4C:
       return {
         ...state,
         question4HealthWorker: action.payload,
       };
-    case TEMPERATURE:
+    case TEMPERATUREC:
       return {
         ...state,
         temperature: action.payload,
@@ -83,27 +83,27 @@ export function sanitaryRegisterCompanionReducer( state = initialState, action) 
         ...state,
         nameCompanion: action.payload,
       };
-    case CANCEL_QUESTION1:
+    case CANCEL_QUESTION1C:
       return {
         ...state,
-        question1SymptomsCovidC: false,
+        question1SymptomsCovid: false,
       }
-    case CANCEL_QUESTION2:
+    case CANCEL_QUESTION2C:
       return {
       ...state,
       question2ContactWithPeople: false,
     }
-    case CANCEL_QUESTION3:
+    case CANCEL_QUESTION3C:
       return {
       ...state,
       question3InternationalTravel: false,
     }
-    case CANCEL_QUESTION4:
+    case CANCEL_QUESTION4C:
       return {
       ...state,
       question4HealthWorker: false,
     }
-    case CANCEL_TEMPERATURE:
+    case CANCEL_TEMPERATUREC:
       return {
       ...state,
       temperature: '',
@@ -113,7 +113,7 @@ export function sanitaryRegisterCompanionReducer( state = initialState, action) 
         ...state,
         nameCompanion: '',
       }
-    case MESSAGE_TEMPERATURE:
+    case MESSAGE_TEMPERATUREC:
       return {
       ...state,
       message: action.payload,
