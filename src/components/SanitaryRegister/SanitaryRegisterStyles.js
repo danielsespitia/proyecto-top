@@ -47,7 +47,6 @@ export const Checkbox = styled.input`
 `;
 
 export const InputText = styled.input`
-  margin: 0 0 15px 0;
   padding: 9px;
   border-radius: 4px;
   border: 1px solid #CED4DA;
