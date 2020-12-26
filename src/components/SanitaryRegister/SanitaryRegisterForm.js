@@ -39,10 +39,10 @@ function SanitaryRegisterForm({
         <Message>{message}</Message>
         <ErrorSubmittion>{errorMessage}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
-        <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
+        <ParagraphInstruction>Selecciona los recuadros según tu/su estado:</ParagraphInstruction>
         <Form onSubmit={submitDataSanitary}>
           <Span className="ContentQuestion">
-            <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
+            <Paragraph>He presentado sintomas relacionados con COVID19</Paragraph>
             <Checkbox
               className="response"
               id="question1SymptomsCovid"
@@ -100,7 +100,7 @@ function SanitaryRegisterForm({
             name="temperature"
             value={temperature}
             onChange={handleChange}
-            placeholder="Cual es mi temperatura"
+            placeholder="¿Cuál es mi/su temperatura?"
             required
           >
           </InputText>
