@@ -11,7 +11,6 @@ import {
   cancelSendForm,
 } from '../store/actions/SanitaryRegisterCompanion.actions'
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from 'react';
 
 function SanitaryRegisterCompanion() {
 
@@ -24,10 +23,6 @@ function SanitaryRegisterCompanion() {
       return { ...state }
       
     })
-
-  useEffect(() => {
-    console.log('companion')
-  }, [])
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
