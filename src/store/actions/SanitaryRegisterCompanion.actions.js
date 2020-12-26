@@ -89,8 +89,14 @@ export function createSanitaryRegister(data) {
       });
       dispatch({
         type: CREATE_SANITARY_REGISTERC,
-        payload: 'Registro sanitario actualizado exitosamente',
+        payload: 'Registro sanitario actualizado exitosamente, ¿deseas agregar otro registro?',
       })
+      dispatch({ type: CANCEL_QUESTION1C })
+      dispatch({ type: CANCEL_QUESTION2C })
+      dispatch({ type: CANCEL_QUESTION3C })
+      dispatch({ type: CANCEL_QUESTION4C })
+      dispatch({ type: CANCEL_TEMPERATUREC })
+      dispatch({ type: CANCEL_NAME_COMPANION })
     } catch (err) {
       dispatch({
         type: FAILURED_SANITARY_REGISTERC,
@@ -112,7 +118,26 @@ export function cancelSendForm() {
     dispatch({ type: CANCEL_NAME_COMPANION })
     dispatch({ 
       type: MESSAGE_TEMPERATUREC, 
-      payload: 'Por favor diligencia por lo menos tu temperatura actual',
+      payload: 'Por favor diligencia por lo menos la temperatura actual y el nombre de tu acompañante',
+    })
+  }
+};
+
+export function getList() {
+  return function(dispatch) {
+    axios({
+      method: 'GET',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: '/companions/',
+    })
+    .then(({ data: { data } }) => {
+      dispatch({ type: CREATE_SANITARY_REGISTERC, payload: '¿Deseas modificar algún estado?', })
+    })
+    .catch(err => {
+      dispatch({ 
+        type: FAILURED_SANITARY_REGISTERC,
+        payload: 'Lo sentimos, vuelve a recargar la página para cargar la información'
+      })
     })
   }
 };
