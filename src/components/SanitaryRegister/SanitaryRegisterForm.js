@@ -14,7 +14,6 @@ import {
   Message,
 } from './SanitaryRegisterStyles'
 
-
 function SanitaryRegisterForm({
   question1SymptomsCovid,
   question2ContactWithPeople,
@@ -22,7 +21,7 @@ function SanitaryRegisterForm({
   question4HealthWorker,
   temperature,
   isUser,
-  companionName,
+  nameCompanion,
   handleChange,
   submitDataSanitary,
   handleCancel,
@@ -31,6 +30,7 @@ function SanitaryRegisterForm({
   loading,
 })
 {
+
   if(loading === true){
     return <h1>Cargando...</h1>
   }
@@ -39,10 +39,10 @@ function SanitaryRegisterForm({
         <Message>{message}</Message>
         <ErrorSubmittion>{errorMessage}</ErrorSubmittion>
         <H3>Autoevaluación para registro sanitario Covid19</H3>
-        <ParagraphInstruction>Selecciona los recuadros según tu estado:</ParagraphInstruction>
+        <ParagraphInstruction>Selecciona los recuadros según tu/su estado:</ParagraphInstruction>
         <Form onSubmit={submitDataSanitary}>
           <Span className="ContentQuestion">
-            <Paragraph>He presentado sintomas relacionados con Covid19</Paragraph>
+            <Paragraph>He presentado sintomas relacionados con COVID19</Paragraph>
             <Checkbox
               className="response"
               id="question1SymptomsCovid"
@@ -100,7 +100,7 @@ function SanitaryRegisterForm({
             name="temperature"
             value={temperature}
             onChange={handleChange}
-            placeholder="Cual es mi temperatura"
+            placeholder="¿Cuál es mi/su temperatura?"
             required
           >
           </InputText>
@@ -108,11 +108,11 @@ function SanitaryRegisterForm({
             ? ( null )
           : (
             <InputText
-              className="Companion__name"
-              id="companionName"
+              className="Name_Companion"
+              id="nameCompanion"
               type="text"
-              name="companionName"
-              value={companionName}
+              name="nameCompanion"
+              value={nameCompanion}
               onChange={handleChange}
               placeholder="Nombre de mi acompañante"
             >
