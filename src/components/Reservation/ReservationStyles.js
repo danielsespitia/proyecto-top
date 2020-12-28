@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import ContainerContent from '../../components/styled/ContainerContent'
+import ButtonPrimary from '../styled/ButtonPrimary'
 
 export const ContainerReserve = styled(ContainerContent)`
   display: flex;
@@ -59,3 +60,35 @@ export const TdTotalPrice = styled.td`
   text-align: right;
 `;
 
+export const Span = styled.span`
+display: block;
+text-align: center;
+margin: 15px;
+`;
+
+export const LinkSanitaryUpdate = styled.button`
+font-size: 16px;
+color: #2F80ED;
+border: 0px;
+text-decoration: underline;
+
+&:focus {
+  background-color: white;
+  border-radius: 4px;
+  padding: 7px;
+  outline: none;
+};
+`;
+
+export const ButtonSecundary = styled(ButtonPrimary)`
+  background-color: ${
+    props => props.theme.tertiaryColor
+  };
+  margin-left: 17px;
+  &:hover {
+    background-color: #E2DE5B;
+    border: 1px solid ${
+      props => props.theme.tertiaryColor
+    };
+  }
+`
