@@ -27,4 +27,12 @@ export const ButtonClose = styled.button`
   };
   padding: 0.5rem 1rem;
   border-radius: 4px;
-`; 
+`;
+
+export const ModalProfileContainer = styled.div`
+  background-color: transparent;
+  width: 320px;
+  right: 0;
+  left: auto;
+  position: absolute;
+`;
