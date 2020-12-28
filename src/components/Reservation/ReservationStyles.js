@@ -91,4 +91,4 @@ export const ButtonSecundary = styled(ButtonPrimary)`
       props => props.theme.tertiaryColor
     };
   }
-`
+`;
