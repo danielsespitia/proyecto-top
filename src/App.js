@@ -25,7 +25,7 @@ function PrivateRoute(props) {
   
   const token = localStorage.getItem('token')
 
-  if(!token) return <Redirect to="sign-in" />
+  if(!token) return <Redirect to="/sign-in" />
   
   return <Route {...props} />
 }
@@ -40,13 +40,13 @@ function App () {
             <Route exact path="/sign-up" component={SignUp}/>
             <Route exact path="/sign-in" component={SignIn}/>
             <PrivateRoute exact path="/client-profile" component={ClientProfile}/>
-            <Route exact path="/restaurant-profile/view" component={RestaurantProfileView}/>
-            <Route exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
+            <PrivateRoute exact path="/restaurant-profile/view" component={RestaurantProfileView}/>
+            <PrivateRoute exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
             <Route exact path="/restaurants" component={Restaurants}/>
             <Route exact path="/restaurant-profile/reservations" component={RestaurantReservations}/>
-            <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
-            <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
-            <Route exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
+            <PrivateRoute exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
+            <PrivateRoute exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
+            <PrivateRoute exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
             <Redirect exact path="/" />
           </Switch>
         <Footer></Footer>
