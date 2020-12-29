@@ -16,8 +16,8 @@ export const RESERVATION_PEOPLE = 'RESERVATION_PEOPLE'
 export const RESERVATION_AGREE = 'RESERVATION_AGREE' 
 
 export const initialState = {
-  id: '',
-  name: '',
+  idRestaurantReservation: '',
+  nameRestaurantReservation: '',
   deposit: 0,
   branch: '',
   date: '',
@@ -40,12 +40,12 @@ export function reservationReducer (state = initialState, action ) {
     case RESTAURANT_ID_RESERVATION:
       return {
         ...state,
-        id: action.payload 
+        idRestaurantReservation: action.payload 
       }
     case RESTAURANT_NAME_RESERVATION:
       return {
         ...state,
-        name: action.payload 
+        nameRestaurantReservation: action.payload 
       }
     case RESTAURANT_DEPOSIT_RESERVATION:
       return {

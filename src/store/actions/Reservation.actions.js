@@ -17,6 +17,21 @@ import {
   RESERVATION_AGREE
 } from '../reducers/Reservation.reducer'
 
+export function setRestaurantId( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_ID_RESERVATION, payload })
+  }
+}
+export function setRestaurantName( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_NAME_RESERVATION, payload })
+  }
+}
+export function setRestaurantDeposit( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_DEPOSIT_RESERVATION, payload })
+  }
+}
 export function setBranch( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESERVATION_BRANCH, payload })
@@ -93,7 +108,7 @@ export function getRestaurant() {
 } 
 
 export function createReservation(data) {
-  const { id, branch, date, time, range, people } = data
+  const { idRestaurantReservation, branch, date, time, range, people } = data
   return async function (dispatch) {
     const token = localStorage.getItem('token')
     dispatch({ type: RESERVATION_LOADING})
@@ -101,17 +116,15 @@ export function createReservation(data) {
       await axios ({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
-        url:`/reservations/${id}`, 
+        url:`/reservations/${idRestaurantReservation}`, 
         headers: {
           Authorization: `Bearer ${token}`
         },
         data: { branch, date, time, range, people }
       })
         dispatch({ type: RESERVATION_SUCCESS})
-        swal('Reserva creda exitosamente!', '', 'success')
     } catch(error){
         dispatch({ type: RESERVATION_FAILURE, payload: error})
-        swal('Hubo un error tu reserva no pudo ser creada', '', 'error')
     }finally{
       dispatch({ type: RESERVATION_FINISHED})
     }
