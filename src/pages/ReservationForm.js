@@ -15,29 +15,14 @@ import {
   setAgree
 }
 from '../store/actions/Reservation.actions'
-import { AuthContext } from '../store/AuthContext'
-import { useContext } from 'react'
-import SanitaryRegister from './SanitaryRegister'
-import SanitaryRegisterCompanion from './SanitaryRegisterCompanion'
+
 
 const ContainerList = styled(ContainerContent)`
   width: auto;
   margin: 20px;
   text-align: center;
 `;
-const LinkSanitaryUpdate = styled.button`
-  font-size: 16px;
-  color: #2F80ED;
-  border: 0px;
-  text-decoration: underline;
-  
-  &:focus {
-    background-color: white;
-    border-radius: 4px;
-    padding: 7px;
-    outline: none;
-  };
-`;
+
 const SectionHeader = styled.section`
   display: grid;
   justify-items: center;
@@ -192,9 +177,7 @@ function ReservationForm (){
   const handleSubmit = (e) => {
     e.preventDefault();
     history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
-  };
-
-  const register = useContext(AuthContext)
+  };  
 
   return (
     <>
@@ -378,24 +361,6 @@ function ReservationForm (){
             </Span>
           </ReservationContainer>
         </form>
-        <Span>
-          <LinkSanitaryUpdate 
-            type='button'
-            onClick={register.onOpenModal}
-          >
-            Actualizar registro sanitario
-          </LinkSanitaryUpdate>
-          <SanitaryRegister/>
-        </Span>
-        <Span>
-          <LinkSanitaryUpdate 
-            type="button"
-            onClick={register.onOpenModalCompanion}
-          >
-            Agregar registro sanitario de mis compañeros
-          </LinkSanitaryUpdate>
-          <SanitaryRegisterCompanion/>
-        </Span>
       </ContainerList>
     </>
   )
