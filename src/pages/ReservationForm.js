@@ -189,8 +189,6 @@ function ReservationForm (){
     }
   };
 
-  console.log(data)
-
   let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();
