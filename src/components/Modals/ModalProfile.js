@@ -4,7 +4,6 @@ import {
   ModalProfileContainer,
   MenuItemModal,
   MenuItemLink,
-
 } from './ModalStyles'
 
 export function ModalProfile(props) {

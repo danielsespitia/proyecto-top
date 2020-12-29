@@ -65,17 +65,14 @@ export const AnchorSignIn = styled(ButtonPrimary)`
   margin-right: 17px;
 
   &:hover {
-    background-color: ${props => props.theme.secundaryColorBlur
+    background-color: ${props => props.theme.secundaryColorBlur};
+    border: 1px solid ${props => props.theme.secundaryColor};
   };
-    border: 1px solid ${props => props.theme.secundaryColor
-  };
-  }
 `;
 
 export const AnchorSignUp = styled(ButtonPrimary)`
   background-color: ${props => props.theme.primaryColor
   };
-
   margin-right: 40px;
 `;
 
