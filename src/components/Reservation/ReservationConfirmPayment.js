@@ -14,8 +14,15 @@ import {
   TdRestaurantDetails,
   TdItemTotal,
   TdPrice,
-  TdTotalPrice
+  TdTotalPrice,
+  Span,
+  LinkSanitaryUpdate,
+  ButtonSecundary
 } from './ReservationStyles'
+import { AuthContext } from '../../store/AuthContext'
+import { useContext } from 'react'
+import SanitaryRegister from '../../pages/SanitaryRegister'
+import SanitaryRegisterCompanion from '../../pages/SanitaryRegisterCompanion'
 
 export function ReservationConfirmPayment({
   name,
@@ -41,6 +48,8 @@ export function ReservationConfirmPayment({
     e.preventDefault()
     history.push('/client-profile')
   }
+
+  const register = useContext(AuthContext)
 
   return (
     <>
@@ -100,6 +109,24 @@ export function ReservationConfirmPayment({
             </TdPrice>
           </tr>
         </SectionRestaurantDetails>
+        <Span>
+          <LinkSanitaryUpdate 
+            type='button'
+            onClick={register.onOpenModal}
+          >
+            Actualizar registro sanitario
+          </LinkSanitaryUpdate>
+          <SanitaryRegister/>
+        </Span>
+        <Span>
+          <LinkSanitaryUpdate 
+            type="button"
+            onClick={register.onOpenModalCompanion}
+          >
+            Agregar registro sanitario de mis compañeros
+          </LinkSanitaryUpdate>
+          <SanitaryRegisterCompanion/>
+        </Span>
       </ContainerReserve>
       <ContainerPaymentZone>
         <ContainerTotal>
@@ -113,6 +140,11 @@ export function ReservationConfirmPayment({
         <ButtonPrimary
           type='button'
           value='Confirmar y Pagar'
+          onClick={handleClick}
+        />
+        <ButtonSecundary
+          type='button'
+          value='Cancelar'
           onClick={handleClick}
         />
     </ContainerPaymentZone>
