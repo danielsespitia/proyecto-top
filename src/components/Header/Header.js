@@ -27,11 +27,9 @@ import {
 function Header() {
   const { isToken, logout, } = useContext(AuthContext);
   
-  // const [click, setClick] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
 
   const handleClick = () => setModalProfile(true);
-  // const closeModalProfile = () => setClick(false);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -77,8 +75,7 @@ function Header() {
                 >
                 <AnchorProfile 
                   as={Link} 
-                  // onClick={closeModalProfile}
-                  >
+                >
                     Profile
                   <HeaderHomeLogo className="header__home-logo">
                     <FontAwesomeIcon icon="user-circle" />
