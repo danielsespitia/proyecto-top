@@ -22,7 +22,8 @@ export const Img = styled.img`
 `;
 
 export const HeaderHomeLogo = styled.figure`
-  margin: 5px;
+  margin: 0 7px;
+  display: inline-block;
 `;
 
 export const HeaderHomeSlogan = styled.h2`
@@ -33,6 +34,7 @@ export const NavigationMenu = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-between;
+  padding: 0;
 `;
 
 export const NavigationMenuItem = styled.li`
@@ -77,13 +79,20 @@ export const AnchorSignUp = styled(ButtonPrimary)`
   margin-right: 40px;
 `;
 
-export const ContainerActions = styled.span`
+export const ContainerActions = styled(NavigationMenu)`
   display: flex;
   align-items: center;
 `;
 
 export const AnchorProfile = styled(Anchor)`
   margin-right: 17px;
+  &:hover {
+    background-color: ${
+      props => props.theme.secundaryColorBlur
+    };
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+  };
 `;
 
 export const AnchorLogout = styled(ButtonPrimary)`

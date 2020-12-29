@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom';
 
 export const ModalContainer = styled.div`
   position: fixed;
@@ -29,10 +30,31 @@ export const ButtonClose = styled.button`
   border-radius: 4px;
 `;
 
-export const ModalProfileContainer = styled.div`
-  background-color: transparent;
-  width: 320px;
-  right: 0;
-  left: auto;
+export const ModalProfileContainer = styled.ul`
+  display: flex;
+  flex-direction: column; 
+  width: 150px;
   position: absolute;
+  top: 45px;
+  right: 135px;
+  list-style: none;
+`;
+
+export const MenuItemModal = styled.li`
+  background: ${
+    props => props.theme.grayColorMore
+  };
+  &:hover {
+    background: #5cabff;
+  };
+`;
+
+export const MenuItemLink = styled(Link)`
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  padding: 16px;
 `;

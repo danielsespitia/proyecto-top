@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MenuItems } from '../MenuItems';
+import { useState, useContext, } from 'react';
+import { AuthContext } from '../../store/AuthContext'
 import {
   ModalProfileContainer,
-  ButtonContainer,
-  ButtonClose,
+  MenuItemModal,
+  MenuItemLink,
+
 } from './ModalStyles'
 
 export function ModalProfile(props) {
@@ -12,26 +12,29 @@ export function ModalProfile(props) {
 
   const handleClick = () => setClick(!click);
 
+  const { user } = useContext(AuthContext);
+
   return (
-    <ModalProfileContainer>
-      <ul
-        onClick={handleClick}
-        className={click ? 'modalProfile-menu clicked' : 'modalProfie-menu'}
-      >
-        {MenuItems.map((item, index) => {
-          return (
-            <li key={index}>
-              <Link 
-                className={item.cName} 
-                to={item.path}
-                onClick={() => setClick(false)}
-              >
-                {item.title}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
+    <ModalProfileContainer
+      onClick={handleClick}
+      className='modal-profile'
+    >
+      <MenuItemModal>
+        <MenuItemLink 
+          to='/reservas'
+          onClick={() => setClick(false)}
+        >
+          Mis reservas
+        </MenuItemLink>
+      </MenuItemModal>
+      <MenuItemModal>
+        <MenuItemLink 
+          to={user}
+          onClick={() => setClick(false)}
+        >
+          Mi perfil
+        </MenuItemLink>
+      </MenuItemModal>
     </ModalProfileContainer>
   )
 }

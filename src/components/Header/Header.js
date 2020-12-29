@@ -25,13 +25,29 @@ import {
 
 
 function Header() {
-  const { isToken, logout, user } = useContext(AuthContext);
+  const { isToken, logout, } = useContext(AuthContext);
   
-  const [click, setClick] = useState(false);
+  // const [click, setClick] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeModalProfile = () => setClick(false);
+  const handleClick = () => setModalProfile(true);
+  // const closeModalProfile = () => setClick(false);
+
+  const onMouseEnter = () => {
+    if (window.innerWidth < 960) {
+      setModalProfile(false);
+    } else {
+      setModalProfile(true);
+    }
+  };
+
+  const onMouseLeave = () => {
+    if (window.innerWidth < 960) {
+      setModalProfile(false);
+    } else {
+      setModalProfile(false);
+    }
+  };
 
   return (
     <ContainerHeader>
@@ -54,18 +70,25 @@ function Header() {
         {isToken ? (
           <>
             <ContainerActions>
-              <AnchorProfile 
-                as={Link} 
-                to='/more'
-                onClick={closeModalProfile}
+              <NavigationMenuItem
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                onClick={handleClick}
                 >
-                <HeaderHomeLogo className="header__home-logo">
-                  Profile
-                  <FontAwesomeIcon icon="user-circle" />
-                </HeaderHomeLogo>
-              </AnchorProfile>
-              {modalProfile && <ModalProfile/>}
-              <AnchorLogout as={Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
+                <AnchorProfile 
+                  as={Link} 
+                  // onClick={closeModalProfile}
+                  >
+                    Profile
+                  <HeaderHomeLogo className="header__home-logo">
+                    <FontAwesomeIcon icon="user-circle" />
+                  </HeaderHomeLogo>
+                </AnchorProfile>
+                {modalProfile && <ModalProfile/>}
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <AnchorLogout as={Link} to="/" onClick={logout}>Cerrar sesión</AnchorLogout>
+              </NavigationMenuItem>
             </ContainerActions>
           </>
         ) : (
