@@ -46,7 +46,6 @@ export function ReservationConfirmPayment({
 
   const handleClick = (e) => {
     e.preventDefault()
-    dispatch(createReservation(data))
     history.push('/client-profile')
   }
 

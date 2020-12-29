@@ -12,7 +12,8 @@ import {
   setTime,
   setRange,
   setPeople,
-  setAgree
+  setAgree,
+  createReservation
 }
 from '../store/actions/Reservation.actions'
 
@@ -176,15 +177,18 @@ function ReservationForm (){
   let history = useHistory()
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push(`/restaurants/${data.id}/reservation/shopping-cart`)
-  };  
-
+    dispatch(createReservation(data))
+    history.push(`/restaurants/${data.idRestaurantReservation}/reservation/shopping-cart`)
+  };
+  
+  const register = useContext(AuthContext)
+  
   return (
     <>
       <ContainerList>
         <SectionHeader>
           <RestaurantName>
-            {data.name}
+            {data.nameRestaurantReservation}
           </RestaurantName>
           <RestaurantLogo
             src={logo}

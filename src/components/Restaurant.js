@@ -2,10 +2,10 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import {
-  RESTAURANT_ID_RESERVATION,
-  RESTAURANT_NAME_RESERVATION,
-  RESTAURANT_DEPOSIT_RESERVATION,
-  } from '../store/reducers/Reservation.reducer'
+  setRestaurantId,
+  setRestaurantName,
+  setRestaurantDeposit,
+  } from '../store/actions/Reservation.actions'
 
 const Article = styled.article`
   margin: 5px;
@@ -42,9 +42,9 @@ function Restaurant ({ id, name, deposit, logo }) {
   const dispatch = useDispatch()
 
   const handleClick = () => {
-    dispatch({type: RESTAURANT_ID_RESERVATION , payload: id})
-    dispatch({type: RESTAURANT_NAME_RESERVATION , payload: name})
-    dispatch({type: RESTAURANT_DEPOSIT_RESERVATION , payload: deposit})
+    dispatch(setRestaurantId(id))
+    dispatch(setRestaurantName(name))
+    dispatch(setRestaurantDeposit(deposit))
   }
 
   return (
