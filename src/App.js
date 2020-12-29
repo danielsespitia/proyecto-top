@@ -2,6 +2,7 @@ import './App.css';
 import './components/fontAwesomeicons'
 import { 
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
 } 
@@ -20,6 +21,15 @@ import ReservationConfirm from './pages/ReservationConfirm'
 import ShoppingCart from './pages/ShoppingCart'
 import RestaurantReservations from './pages/RestaurantReservations'
 
+function PrivateRoute(props) {
+  
+  const token = localStorage.getItem('token')
+
+  if(!token) return <Redirect to="sign-in" />
+  
+  return <Route {...props} />
+}
+
 function App () {
   return (
     <div className='App'>
@@ -29,7 +39,7 @@ function App () {
             <Route exact path="/" component={Home}/>
             <Route exact path="/sign-up" component={SignUp}/>
             <Route exact path="/sign-in" component={SignIn}/>
-            <Route exact path="/client-profile" component={ClientProfile}/>
+            <PrivateRoute exact path="/client-profile" component={ClientProfile}/>
             <Route exact path="/restaurant-profile/view" component={RestaurantProfileView}/>
             <Route exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
             <Route exact path="/restaurants" component={Restaurants}/>
@@ -37,6 +47,7 @@ function App () {
             <Route exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
             <Route exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
             <Route exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
+            <Redirect exact path="/" />
           </Switch>
         <Footer></Footer>
         </Router>
