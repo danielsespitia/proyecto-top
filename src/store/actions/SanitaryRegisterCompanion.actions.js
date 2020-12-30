@@ -71,10 +71,11 @@ export function createSanitaryRegister(data) {
     })
     try {
       const token = localStorage.getItem('token');
+      const reservation = localStorage.getItem('reservation')
       await axios({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
-        url: '/sanitary-register/companions',
+        url: `/sanitary-register/companions/${reservation}`,
         data: {
           question1SymptomsCovid,
           question2ContactWithPeople,
