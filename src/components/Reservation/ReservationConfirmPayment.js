@@ -46,6 +46,7 @@ export function ReservationConfirmPayment({
 
   const handleClick = (e) => {
     e.preventDefault()
+    localStorage.removeItem('reservation')
     history.push('/client-profile')
   }
 
