@@ -113,7 +113,7 @@ export function createReservation(data) {
     const token = localStorage.getItem('token')
     dispatch({ type: RESERVATION_LOADING})
     try {
-      await axios ({
+      const { data: { _id }} = await axios ({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url:`/reservations/${idRestaurantReservation}`, 
@@ -123,7 +123,9 @@ export function createReservation(data) {
         data: { branch, date, time, range, people }
       })
         dispatch({ type: RESERVATION_SUCCESS})
+        localStorage.setItem('reservation', _id)
     } catch(error){
+        localStorage.removeItem('reservation')
         dispatch({ type: RESERVATION_FAILURE, payload: error})
     }finally{
       dispatch({ type: RESERVATION_FINISHED})
