@@ -8,7 +8,7 @@ function ReservationConfirm() {
   const date = `${ today.getDate() } de ${ month } de ${ today.getFullYear()}`
   const time = today.toLocaleString('es-CO', { timeStyle: 'short', hour12: 'true'})
 
-  const { name, deposit } = useSelector(
+  const { nameRestaurantReservation, deposit } = useSelector(
     ({reservationReducer: {
       ...state
     }}) => {
@@ -18,7 +18,7 @@ function ReservationConfirm() {
   return (
     <>
       <ReservationConfirmPayment
-        name={name}  
+        name={nameRestaurantReservation}  
         deposit={deposit}
         date={date}
         time={time}

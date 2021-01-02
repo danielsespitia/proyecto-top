@@ -1,7 +1,8 @@
 import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../styled/ButtonPrimary'
 import { useDispatch, useSelector } from 'react-redux'
-import { createReservation } from '../../store/actions/Reservation.actions'
+import { useEffect } from 'react'
+import { getClient } from '../../store/actions/Client.actions'
 import {
   ContainerReserve,
   ContainerPaymentZone,
@@ -25,7 +26,7 @@ import SanitaryRegister from '../../pages/SanitaryRegister'
 import SanitaryRegisterCompanion from '../../pages/SanitaryRegisterCompanion'
 
 export function ReservationConfirmPayment({
-  name,
+  nameRestaurantReservation,
   deposit,
   date,
   time
@@ -35,7 +36,11 @@ export function ReservationConfirmPayment({
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const data = useSelector(
+  useEffect(() => {
+    dispatch(getClient())
+  }, []) 
+
+  const ReservationData = useSelector(
     ({ reservationReducer: {
       ...state
     }}) => {
@@ -43,6 +48,17 @@ export function ReservationConfirmPayment({
         ...state
       }
   })
+
+  const {data} = useSelector(
+    ({ clientReducer: {
+      data
+    }}) => {
+      return {
+        data
+      }
+  })
+
+  const clientData = data
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -90,7 +106,7 @@ export function ReservationConfirmPayment({
               Tu Restaurante
             </TdRestaurantDetails>
             <TdPrice>
-              { name }
+              { nameRestaurantReservation }
             </TdPrice>
           </tr>
           <tr>
