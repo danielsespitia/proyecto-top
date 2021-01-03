@@ -20,7 +20,12 @@ import {
   ContainerActions,
   AnchorProfile,
   AnchorLogout,
+  ContainerSearch,
+  InputSearch,
+  ContainerInputSearch,
+  SearchBar,
 } from './HeaderStyles';
+
 
 
 
@@ -97,6 +102,20 @@ function Header() {
             </>
           )}
       </ContainerNavActions>
+      <ContainerSearch>
+        <ContainerInputSearch>
+          <InputSearch
+            type="text"
+            className="header__search"
+            placeholder="Buscar un restaurante"
+            // value={query}
+            // onChange={(e) => {
+            //   getSuggestedQuery(e.target.value)
+            // }}
+          />
+          <SearchBar icon="search"/>
+        </ContainerInputSearch>
+      </ContainerSearch>
     </ContainerHeader>
   );
 }
