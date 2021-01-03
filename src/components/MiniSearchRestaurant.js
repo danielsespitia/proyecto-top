@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const LinkToRestaurant = styled(Link)`
   font-size: 14px;
-  /* &:hover {
+  &:hover {
     color: rgba(58,60,63,0.8);
-  }; */
+  };
 `;
 
 function MiniSearchRestaurant({ id, name }) {

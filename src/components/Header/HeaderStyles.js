@@ -140,5 +140,5 @@ export const ContainerMiniSearch = styled.div`
   background-color: white;
   width: 190px;
   padding: 0 15px;
-  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22);
 `;
