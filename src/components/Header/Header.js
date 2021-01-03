@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo, } from 'react';
 import { useSelector } from 'react-redux';
 import Logo from '../../image/Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -66,9 +66,12 @@ function Header() {
     setSearch(e.target.value)
   };
 
-  const filteredRestaurants = data.restaurantList.filter((restaurant) => {
-    return restaurant.name.toLowerCase().includes(search.toLowerCase());
-  });
+  const filteredRestaurants = useMemo(() => 
+    data.restaurantList.filter((restaurant) => {
+      return restaurant.name.toLowerCase().includes(search.toLowerCase());
+    }),
+      [data, search]
+  );
 
   return (
     <ContainerHeader>
@@ -132,7 +135,7 @@ function Header() {
           <SearchBar icon="search"/>
         </ContainerInputSearch>
         <ContainerMiniSearch>
-          {filteredRestaurants.map(({ _id, name }) => {
+          {search.length > 0 ? filteredRestaurants.map(({ _id, name }) => {
             return (
               <MiniSearchRestaurant
                 key={_id}
@@ -140,7 +143,7 @@ function Header() {
                 name={name}
               />
             )
-          })}
+          }) : (null)}
         </ContainerMiniSearch>
       </ContainerSearch>
     </ContainerHeader>
