@@ -133,3 +133,12 @@ export const SearchBar = styled(FontAwesomeIcon)`
   opacity: .6;
   color: ${props => props.theme.secundaryColor};
 `;
+
+export const ContainerMiniSearch = styled.div`
+  position: absolute;
+  top: 52px;
+  background-color: white;
+  width: 190px;
+  padding: 0 15px;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22
+`;
