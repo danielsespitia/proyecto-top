@@ -12,7 +12,7 @@ export const ContainerHeader = styled.header`
 
 export const HeaderHome = styled(Link)`
   display: flex;
-  width: 40vw;
+  width: 17vw;
   margin: 0 40px;
   align-items: center;
   justify-content: flex-start;
