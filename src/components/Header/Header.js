@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useMemo, } from 'react';
+import { useSelector } from 'react-redux';
 import Logo from '../../image/Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../store/AuthContext';
@@ -20,7 +21,13 @@ import {
   ContainerActions,
   AnchorProfile,
   AnchorLogout,
+  ContainerSearch,
+  InputSearch,
+  ContainerInputSearch,
+  SearchBar,
+  ContainerMiniSearch,
 } from './HeaderStyles';
+import MiniSearchRestaurant from '../MiniSearchRestaurant';
 
 
 
@@ -28,6 +35,7 @@ function Header() {
   const { isToken, logout, } = useContext(AuthContext);
   
   const [modalProfile, setModalProfile] = useState(false);
+  const [search, setSearch] = useState('');
 
   const handleClick = () => setModalProfile(true);
 
@@ -46,6 +54,24 @@ function Header() {
       setModalProfile(false);
     }
   };
+
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+    });
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  };
+
+  const filteredRestaurants = useMemo(() => 
+    data.restaurantList.filter((restaurant) => {
+      return restaurant.name.toLowerCase().includes(search.toLowerCase());
+    }),
+      [data, search]
+  );
 
   return (
     <ContainerHeader>
@@ -97,6 +123,29 @@ function Header() {
             </>
           )}
       </ContainerNavActions>
+      <ContainerSearch>
+        <ContainerInputSearch>
+          <InputSearch
+            type="text"
+            className="header__search"
+            placeholder="Buscar un restaurante"
+            value={search}
+            onChange={handleSearch}
+          />
+          <SearchBar icon="search"/>
+        </ContainerInputSearch>
+        <ContainerMiniSearch>
+          {search.length > 0 ? filteredRestaurants.map(({ _id, name }) => {
+            return (
+              <MiniSearchRestaurant
+                key={_id}
+                id={_id}
+                name={name}
+              />
+            )
+          }) : (null)}
+        </ContainerMiniSearch>
+      </ContainerSearch>
     </ContainerHeader>
   );
 }

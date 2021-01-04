@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import ButtonPrimary from '../styled/ButtonPrimary';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ContainerHeader = styled.header`
   display: grid;
-  grid-template-columns: 20vw 80vw;
+  grid-template-columns: 20vw 60vw 20vw;
   box-shadow: 0px 0px 4px 4px #707070;
   background-color: #f8f8f8;
 `;
 
 export const HeaderHome = styled(Link)`
   display: flex;
-  width: 40vw;
+  width: 17vw;
   margin: 0 40px;
   align-items: center;
   justify-content: flex-start;
@@ -96,4 +97,48 @@ export const AnchorLogout = styled(ButtonPrimary)`
   background-color: ${props => props.theme.primaryColorBlur
   };
   margin-right: 40px;
+`;
+
+export const ContainerSearch = styled(ContainerNavActions)`
+  align-items: center;
+  margin-right: 24px;
+  justify-content: none;
+`;
+
+export const InputSearch = styled.input`
+  border: none;
+  border-radius: 5px;
+  width: 190px;
+  height: 24px;
+  padding: 6px 15px;
+  align-items: center;
+
+  &:focus {
+    border-color: ${props => props.theme.secundaryColorBlur};
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.0125), 0 0 8px rgba(34,139,230,0.5);
+    transition: all .1s ease-in-out;
+  };
+`;
+
+export const ContainerInputSearch = styled.div`
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+`;
+
+export const SearchBar = styled(FontAwesomeIcon)`
+  position: absolute;
+  right: 20px;
+  opacity: .6;
+  color: ${props => props.theme.secundaryColor};
+`;
+
+export const ContainerMiniSearch = styled.div`
+  position: absolute;
+  top: 52px;
+  background-color: white;
+  width: 190px;
+  padding: 0 15px;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,0.22);
 `;
