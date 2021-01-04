@@ -40,6 +40,8 @@ function ReservationConfirm() {
   const clientData = data
 
   const invoice = localStorage.getItem('reservation');
+
+  const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'
   
   const handleClick = () => {
     handler.open(
@@ -61,7 +63,7 @@ function ReservationConfirm() {
 
         //Atributos opcionales
         extra1: "descripción reserva",
-        response: `http://localhost:3000/response`,
+        response: `${URL}/response`,
 
         //Atributos cliente
         email_billing: `${clientData.email}`,
