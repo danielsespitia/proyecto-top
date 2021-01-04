@@ -20,6 +20,7 @@ import Reservation from './pages/ReservationForm'
 import ReservationConfirm from './pages/ReservationConfirm'
 import ShoppingCart from './pages/ShoppingCart'
 import RestaurantReservations from './pages/RestaurantReservations'
+import { Response } from './components/ResponseReservation'
 
 function PrivateRoute(props) {
   
@@ -47,6 +48,7 @@ function App () {
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation/shopping-cart" component={ShoppingCart}/>
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
+            <Route exact path="/response" component={Response}/>
             <Redirect exact path="/" />
           </Switch>
         <Footer></Footer>

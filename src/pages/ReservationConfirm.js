@@ -1,6 +1,5 @@
 import { ReservationConfirmPayment } from '../components/Reservation/ReservationConfirmPayment'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 import { useEffect } from 'react'
 import { getClient } from '../store/actions/Client.actions'
 
@@ -8,35 +7,6 @@ const handler = window.ePayco.checkout.configure({
   key: process.env.REACT_APP_EPAYCO_PUBLIC_KEY,
   test: true
 })
-
-function queryString(query) {
-  const res = {}
-  query
-    .replace('?', '')
-    .split('&')
-    .forEach(q => {
-      const [key, value] = q.split('=')
-      res[key] = value
-    })
-  return res
-}
-
-function Response({ location }) {
-  useEffect(() => {
-    const { ref_payco } = queryString(location.search)
-
-    axios({
-      method: 'GET',
-      baseURL: 'https://api.secure.payco.co',
-      url: `/validation/v1/reference/${ref_payco}`
-    })
-      .then(({ data }) => {
-        console.log(data)
-      })
-  }, [location])
-
-  return <p>Repuesta de la transacción</p>
-}
 
 function ReservationConfirm() {
 
@@ -91,12 +61,13 @@ function ReservationConfirm() {
 
         //Atributos opcionales
         extra1: "descripción reserva",
-        response: `${process.env.REACT_APP_BASE_URL}/response`,
+        response: `http://localhost:3000/response`,
 
         //Atributos cliente
+        email_billing: `${clientData.email}`,
         name_billing: `${clientData.name} ${clientData.lastName}`,
         address_billing: `${clientData.address}`,
-        type_doc_billing: "cc",
+        type_doc_billing: "CC",
         mobilephone_billing: `${clientData.phone}`,
         number_doc_billing: `${clientData.identification}`,
 
