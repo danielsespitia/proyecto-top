@@ -129,7 +129,7 @@ export function ReservationConfirmPayment({
         </SectionRestaurantDetails>
         <Span>
           <LinkSanitaryUpdate 
-            type='button'onClick
+            type='button'
             onClick={register.onOpenModal}
           >
             Actualizar registro sanitario
