@@ -1,7 +1,5 @@
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { useContext } from 'react'
-import { AuthContext } from '../store/AuthContext'
 import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -182,8 +180,6 @@ function ReservationForm (){
     dispatch(createReservation(data))
     history.push(`/restaurants/${data.idRestaurantReservation}/reservation/shopping-cart`)
   };
-  
-  const register = useContext(AuthContext)
   
   return (
     <>
