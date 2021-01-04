@@ -40,6 +40,7 @@ export const NavigationMenu = styled.ul`
 
 export const NavigationMenuItem = styled.li`
   margin-right: 0px;
+  position: relative;
 `;
 
 export const ContainerNavActions = styled.div` 

@@ -40,7 +40,7 @@ function Header() {
   const handleClick = () => setModalProfile(true);
 
   const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
+    if (window.innerWidth) {
       setModalProfile(false);
     } else {
       setModalProfile(true);
@@ -48,7 +48,7 @@ function Header() {
   };
 
   const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
+    if (window.innerWidth) {
       setModalProfile(false);
     } else {
       setModalProfile(false);

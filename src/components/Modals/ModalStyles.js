@@ -35,8 +35,8 @@ export const ModalProfileContainer = styled.ul`
   flex-direction: column; 
   width: 150px;
   position: absolute;
-  top: 45px;
-  right: 135px;
+  top: 23px;
+  left: -40px;
   list-style: none;
 `;
 
