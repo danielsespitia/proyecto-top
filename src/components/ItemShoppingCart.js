@@ -27,6 +27,13 @@ const TextStrongTotal = styled.td`
   font-weight: 800;
 `;
 
+export const Message = styled.span`
+  font-size: 12px;
+  color: #0f31dd;
+  font-style: italic;
+  font-weight: 800;
+`;
+
 export function ListShoppingCart ( { deposit } ) {
   
   const data = useSelector(
@@ -41,6 +48,7 @@ export function ListShoppingCart ( { deposit } ) {
   return(
     <section>
       <ContainerTitleShopping>
+        <Message>{data.messageReservation}</Message>
         <h2>Mi carrito</h2>
         <FontAwesomeIcon icon="shopping-cart"/>
       </ContainerTitleShopping>
