@@ -26,7 +26,7 @@ import SanitaryRegister from '../../pages/SanitaryRegister'
 import SanitaryRegisterCompanion from '../../pages/SanitaryRegisterCompanion'
 
 export function ReservationConfirmPayment({
-  nameRestaurantReservation,
+  name,
   deposit,
   date,
   time,
@@ -107,7 +107,7 @@ export function ReservationConfirmPayment({
               Tu Restaurante
             </TdRestaurantDetails>
             <TdPrice>
-              { nameRestaurantReservation }
+              { name }
             </TdPrice>
           </tr>
           <tr>
