@@ -65,7 +65,7 @@ export function ReservationConfirmPayment({
     e.preventDefault()
     localStorage.removeItem('reservation')
     history.push('/client-profile')
-  }*/
+  }
 
   const register = useContext(AuthContext)
 
