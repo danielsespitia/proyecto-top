@@ -122,7 +122,10 @@ export function createReservation(data) {
         },
         data: { branch, date, time, range, people }
       })
-        dispatch({ type: RESERVATION_SUCCESS})
+        dispatch({ 
+          type: RESERVATION_SUCCESS, 
+          payload: 'Hemos recibido tu reserva, estamos alistando tu mesa'
+        })
         localStorage.setItem('reservation', _id)
     } catch(error){
         localStorage.removeItem('reservation')

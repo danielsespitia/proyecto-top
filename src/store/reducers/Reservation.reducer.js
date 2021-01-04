@@ -27,6 +27,7 @@ export const initialState = {
   agree: '',
   loading: false,
   error: null,
+  messageReservation: '',
   restaurantList: []
 }
 
@@ -90,7 +91,7 @@ export function reservationReducer (state = initialState, action ) {
     case RESERVATION_SUCCESS:
       return {
         ...state,
-        loading: action.payload
+        messageReservation: action.payload
       }
     case RESERVATION_FAILURE:
       return {
