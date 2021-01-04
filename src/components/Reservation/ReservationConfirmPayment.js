@@ -29,7 +29,8 @@ export function ReservationConfirmPayment({
   nameRestaurantReservation,
   deposit,
   date,
-  time
+  time,
+  handlePayment
 })
 
 {
@@ -157,12 +158,12 @@ export function ReservationConfirmPayment({
         <ButtonPrimary
           type='button'
           value='Confirmar y Pagar'
-          onClick={handleClick}
+          onClick={handlePayment}
         />
         <ButtonSecundary
           type='button'
           value='Cancelar'
-          onClick={handleClick}
+          //onClick={handleClick}
         />
     </ContainerPaymentZone>
     </>
