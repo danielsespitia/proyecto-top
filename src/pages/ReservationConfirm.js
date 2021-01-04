@@ -50,12 +50,12 @@ function ReservationConfirm() {
     }}) => {
       return { ...state} 
     })
-
-  function handleClick () {
+  
+  const handleClick = () => {
     handler.open(
       {
         //Parametros compra (obligatorio)
-        name: "Vestido Mujer Primavera",
+        name: `${nameRestaurantReservation}`,
         description: "Pago Reserva alamesa",
         invoice: "#RESERVA ",
         currency: "cop",
@@ -94,7 +94,7 @@ function ReservationConfirm() {
         deposit={deposit}
         date={date}
         time={time}
-        handleClick={handleClick}
+        handlePayment={handleClick}
       />
     </>
   )

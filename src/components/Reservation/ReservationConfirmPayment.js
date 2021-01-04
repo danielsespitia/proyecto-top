@@ -30,7 +30,7 @@ export function ReservationConfirmPayment({
   deposit,
   date,
   time,
-  handleClick
+  handlePayment
 })
 
 {
@@ -129,7 +129,7 @@ export function ReservationConfirmPayment({
         </SectionRestaurantDetails>
         <Span>
           <LinkSanitaryUpdate 
-            type='button'
+            type='button'onClick
             onClick={register.onOpenModal}
           >
             Actualizar registro sanitario
@@ -158,7 +158,7 @@ export function ReservationConfirmPayment({
         <ButtonPrimary
           type='button'
           value='Confirmar y Pagar'
-          onClick={handleClick}
+          onClick={handlePayment}
         />
         <ButtonSecundary
           type='button'
