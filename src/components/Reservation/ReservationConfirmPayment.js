@@ -29,7 +29,8 @@ export function ReservationConfirmPayment({
   nameRestaurantReservation,
   deposit,
   date,
-  time
+  time,
+  handleClick
 })
 
 {
@@ -64,7 +65,7 @@ export function ReservationConfirmPayment({
     e.preventDefault()
     localStorage.removeItem('reservation')
     history.push('/client-profile')
-  }
+  }*/
 
   const register = useContext(AuthContext)
 
@@ -162,7 +163,7 @@ export function ReservationConfirmPayment({
         <ButtonSecundary
           type='button'
           value='Cancelar'
-          onClick={handleClick}
+          //onClick={handleClick}
         />
     </ContainerPaymentZone>
     </>
