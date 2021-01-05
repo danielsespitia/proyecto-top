@@ -1,12 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { 
+  RestLogo,
+  BodyLeft,
+  BodyRight,
+  MyLinkToMore,
+} from './RestaurantProfileStyles';
 import { useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { AuthContext } from '../store/AuthContext'
-import Desktopstructure from '../components/styled/DesktopStructure';
-import RestaurantProfileForm from '../components/RestaurantProfileForm';
+import { AuthContext } from '../../store/AuthContext'
+import Desktopstructure from '../../components/styled/DesktopStructure';
+import RestaurantProfileForm from '../../components/RestaurantProfileForm/RestaurantProfileForm';
 import { 
   getName,
   getEmail,
@@ -18,53 +23,7 @@ import {
   getDeposit,
   getProfile,
   postRestaurantProfile,
-} from '../store/actions/Restaurant.actions';
- 
-const RestLogo = styled.img `
-  width: 100px;
-  border-radius: 100%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const BodyLeft = styled.div ` 
-  grid-area: bodyLeft;
-  display: grid;
-  grid-row-gap: 25px; 
-  padding: 50px 0;
-  background-color: ${
-    props => props.theme.grayColorOverlay
-  };
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-const BodyRight = styled.div ` 
-  grid-area: bodyRight;
-  text-align: center;
-  padding: 50px 60px;
-  background-color: ${
-    props => props.theme.grayColorOverlay
-  };
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
-
-const H3 = styled.h3`
-  margin-block-start: 0;
-  margin-block-end: 0;
-  text-align: center;
-`;
-
-const MyOfficesAnchor = styled.a`
-  margin-block-start: 0;
-  margin-block-end: 0;
-  text-align: center;
-  font-size: 16px;
-  color: #2F80ED;
-  text-decoration-line: underline;
-`;
+} from '../../store/actions/Restaurant.actions';
   
 function RestaurantProfile() {
 
@@ -175,12 +134,16 @@ function RestaurantProfile() {
       <>
       <Desktopstructure>
         <BodyLeft>
-          <H3>Tu Perfil</H3>
           <RestLogo 
             src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
             alt="logo"
           />
-          <MyOfficesAnchor>Sucursales</MyOfficesAnchor>
+          <MyLinkToMore>Sucursales</MyLinkToMore>
+          <MyLinkToMore
+            to='/restaurant-profile/mi-carta'
+          >
+            Mi carta
+          </MyLinkToMore>
         </BodyLeft>
         <BodyRight>
           <RestaurantProfileForm
