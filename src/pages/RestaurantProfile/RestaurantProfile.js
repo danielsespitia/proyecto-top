@@ -140,7 +140,7 @@ function RestaurantProfile() {
           />
           <MyLinkToMore>Sucursales</MyLinkToMore>
           <MyLinkToMore
-            to='/restaurant-profile/mi-carta'
+            to='/restaurant-profile/my-menu'
           >
             Mi carta
           </MyLinkToMore>
