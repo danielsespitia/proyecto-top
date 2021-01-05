@@ -6,7 +6,8 @@ import {
   faShoppingCart,
   faUserCircle,
   faSearch,
+  faPlus,
 } 
 from '@fortawesome/free-solid-svg-icons'
 
-library.add(faCalendarAlt, faClock, faUser, faShoppingCart, faUserCircle, faSearch)
+library.add(faCalendarAlt, faClock, faUser, faShoppingCart, faUserCircle, faSearch, faPlus)
