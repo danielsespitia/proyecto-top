@@ -1,5 +1,5 @@
-import { useContext, useState, useMemo, } from 'react';
-import { useSelector } from 'react-redux';
+import { useContext, useState, useMemo, useEffect, } from 'react';
+import { useSelector, useDispatch, } from 'react-redux';
 import Logo from '../../image/Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../store/AuthContext';
@@ -28,12 +28,15 @@ import {
   ContainerMiniSearch,
 } from './HeaderStyles';
 import MiniSearchRestaurant from '../MiniSearchRestaurant';
+import { getListRestaurants } from '../../store/actions/Reservation.actions';
 
 
 
 function Header() {
   const { isToken, logout, } = useContext(AuthContext);
   
+  const dispatch = useDispatch();
+
   const [modalProfile, setModalProfile] = useState(false);
   const [search, setSearch] = useState('');
 
@@ -54,6 +57,10 @@ function Header() {
       setModalProfile(false);
     }
   };
+
+  useEffect(() => {
+    dispatch(getListRestaurants())
+  }, [getListRestaurants]);
 
   const data = useSelector(
     ({reservationReducer: {
@@ -135,12 +142,13 @@ function Header() {
           <SearchBar icon="search"/>
         </ContainerInputSearch>
         <ContainerMiniSearch>
-          {search.length > 0 ? filteredRestaurants.map(({ _id, name }) => {
+          {search.length > 0 ? filteredRestaurants.map(({ _id, name, deposit, }) => {
             return (
               <MiniSearchRestaurant
                 key={_id}
                 id={_id}
                 name={name}
+                deposit={deposit}
               />
             )
           }) : (null)}
