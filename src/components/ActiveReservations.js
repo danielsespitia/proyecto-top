@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import ButtonPrimary from '../components/styled/ButtonPrimary';
+import SanitaryRegister from '../pages/SanitaryRegister'
+import { AuthContext } from '../store/AuthContext'
+import { useContext } from 'react'
 
 const ReservationContainer = styled.div `
   height: 15rem;
@@ -56,8 +59,14 @@ const SecondColorButton = styled(ButtonPrimary) `
 const ThirdColorButton = styled(ButtonPrimary) `
   margin-left: 0.5rem;
 `;
+export const Span = styled.span`
+display: block;
+text-align: center;
+margin: 15px;
+`;
 
 function ActiveReservations ( { id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp } ) {
+  const register = useContext(AuthContext)
   return (
     <ReservationContainer>
       <InfoContainer>
@@ -81,10 +90,12 @@ function ActiveReservations ( { id, clientProfilePicture, clientName, phone, res
           type="button"
           value='Ver Orden'
         />
-        <FirstColorButton
-          type="button"
-          value="Registro Sanitario"
-        />
+          <FirstColorButton
+            type="button"
+            onClick={register.onOpenModal}
+            value="Registro Sanitario"
+          />
+          <SanitaryRegister/>
         <SecondColorButton
           type="button"
           value="Cancelar"
