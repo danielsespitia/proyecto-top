@@ -19,10 +19,9 @@ export function Response({ location }) {
 
   useEffect(() => {
     const { ref_payco } = queryString(location.search)
-    console.dir()
     axios({
       method: 'GET',
-      baseURL: 'https://api.secure.payco.co',
+      baseURL: process.env.REACT_APP_PAYMENT_URL,
       url: `/validation/v1/reference/${ref_payco}`
     })
       .then(({ data }) => {
