@@ -59,11 +59,6 @@ const SecondColorButton = styled(ButtonPrimary) `
 const ThirdColorButton = styled(ButtonPrimary) `
   margin-left: 0.5rem;
 `;
-export const Span = styled.span`
-display: block;
-text-align: center;
-margin: 15px;
-`;
 
 function ActiveReservations ( { id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp } ) {
   const register = useContext(AuthContext)
