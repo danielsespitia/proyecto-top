@@ -5,7 +5,7 @@ const DesktopStructure = styled.div `
   padding: 40px 30px;
   grid-gap: 60px;
   grid-template-areas:
-    "bodyLeft bodyRight bodyRight bodyRight"
+    "bodyLeft bodyRight"
 `;
 
 export default DesktopStructure
