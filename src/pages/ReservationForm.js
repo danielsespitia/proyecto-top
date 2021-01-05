@@ -99,34 +99,6 @@ const Span = styled.span`
   grid-column: 1/5;
   margin: 15px;
 `;
-const branchOption = [
-  {
-    id:uuidv4(),
-    name: 'chapinero',
-  },
-  {
-    id:uuidv4(),
-    name: 'centro',
-  },
-  {
-    id:uuidv4(),
-    name: 'norte',
-  },
-]
-const rangeOption = [
-  {
-    id:uuidv4(),
-    range: '1 hora',
-  },
-  {
-    id:uuidv4(),
-    range: '2 horas',
-  },
-  {
-    id:uuidv4(),
-    range: '3 horas',
-  },
-]
 
 function ReservationForm (){
 
@@ -220,19 +192,16 @@ function ReservationForm (){
                   autoFocus
                   required
                 > 
-                  <option
-                    value="" disabled selected
-                  >
-                    Seleccionar Sucursal
-                  </option>
-                  {!!branchOption && branchOption.length > 0 && branchOption.map(({id, name})=>{
-                    return (
-                      <option key={id}>
-                        {name}
-                      </option>
-                    )
-                  })
-                  }
+                <option
+                  value="" disabled selected
+                >
+                  Selecciona sucursal
+                </option>
+                <option
+                  value='Principal'
+                >
+                  Principal
+                </option>
                 </SelectForm>
               </Article>
             </InputContainer>
@@ -300,16 +269,23 @@ function ReservationForm (){
                 <option
                   value="" disabled selected
                 >
-                  Tiempo de Reserva
+                  Selecciona rango
                 </option>
-                {!!rangeOption && rangeOption.length > 0 && rangeOption.map(({id, range})=>{
-                  return (
-                    <option key={id}>
-                      {range}
-                    </option>
-                  )
-                })
-                }
+                <option
+                  value='1'
+                >
+                  1 Hora
+                </option>
+                <option
+                  value='2'
+                >
+                  2 Horas
+                </option>
+                <option
+                  value='3'
+                >
+                  3 Horas
+                </option>
               </SelectForm>
             </Article>
             </InputContainer>
