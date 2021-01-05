@@ -1,8 +1,5 @@
 import { useHistory } from 'react-router-dom'
 import ButtonPrimary from '../styled/ButtonPrimary'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getClient } from '../../store/actions/Client.actions'
 import {
   ContainerReserve,
   ContainerPaymentZone,
@@ -34,32 +31,9 @@ export function ReservationConfirmPayment({
 })
 
 {
-  const dispatch = useDispatch()
+  
   const history = useHistory()
 
-  useEffect(() => {
-    dispatch(getClient())
-  }, []) 
-
-  const ReservationData = useSelector(
-    ({ reservationReducer: {
-      ...state
-    }}) => {
-      return {
-        ...state
-      }
-  })
-
-  const {data} = useSelector(
-    ({ clientReducer: {
-      data
-    }}) => {
-      return {
-        data
-      }
-  })
-
-  const clientData = data
 
   const handleClick = (e) => {
     e.preventDefault()
