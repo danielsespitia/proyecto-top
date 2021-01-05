@@ -14,19 +14,19 @@ import { useHistory } from 'react-router-dom';
 function RestaurantProfileView() {
 
   const dispatch = useDispatch()
-  const history = useHistory()
-
+  
   const dataRestaurant = useSelector((
     { restaurantReducer: {
       ...state
     }}) => {
       return { ...state }
     })
-
-  useEffect(() => {
-    dispatch(getProfile())
-  })
-
+    
+    useEffect(() => {
+      dispatch(getProfile())
+    })
+    
+  let history = useHistory()
   const handleClick = e => {
     e.preventDefault();
     history.push('/restaurant-profile/edit')
