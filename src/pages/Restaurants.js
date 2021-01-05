@@ -1,11 +1,8 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Restaurant  from '../components/Restaurant'
-import styled from 'styled-components'
-import ContainerContent from '../components/styled/ContainerContent'  
-import logo from '../image/RestaurantLogo.png'
-import {getListRestaurants} from '../store/actions/Reservation.actions'
-import { reservationReducer } from '../store/reducers/Reservation.reducer'
+import { useSelector } from 'react-redux';
+import Restaurant  from '../components/Restaurant';
+import styled from 'styled-components';
+import ContainerContent from '../components/styled/ContainerContent';
+import logo from '../image/RestaurantLogo.png';
 
 const Container = styled.div`
   display: grid;
@@ -25,12 +22,6 @@ const Section = styled.section`
 `;
 
 function Restaurants () {
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getListRestaurants())
-  }, []) 
 
   const data = useSelector(
     ({reservationReducer: {
