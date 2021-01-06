@@ -21,6 +21,7 @@ import ReservationConfirm from './pages/ReservationConfirm'
 import ShoppingCart from './pages/ShoppingCart'
 import RestaurantReservations from './pages/RestaurantReservations'
 import { Response } from './components/ResponseReservation'
+import MenuRestaurant from './pages/MenuRestaurant'
 
 function PrivateRoute(props) {
   
@@ -43,6 +44,7 @@ function App () {
             <PrivateRoute exact path="/client-profile" component={ClientProfile}/>
             <PrivateRoute exact path="/restaurant-profile/view" component={RestaurantProfileView}/>
             <PrivateRoute exact path="/restaurant-profile/edit" component={RestaurantProfile}/>
+            <PrivateRoute exact path="/restaurant-profile/my-menu" component={MenuRestaurant}/>
             <Route exact path="/restaurants" component={Restaurants}/>
             <Route exact path="/restaurant-profile/reservations" component={RestaurantReservations}/>
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation" component={Reservation}/>
