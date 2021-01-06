@@ -24,7 +24,7 @@ export function ClientReservationJSX () {
       <Desktopstructure>
         <BodyLeft>
          <ImageDecor
-          src="../../image/imageReservation.jpg"
+          src="../../image/coverPcAlamesa.png"
           alt="Imagen decoración"
         />
         </BodyLeft>
