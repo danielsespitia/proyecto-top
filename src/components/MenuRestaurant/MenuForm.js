@@ -1,20 +1,38 @@
+import { useState } from 'react'
 import DesktopStructure from '../styled/DesktopStructure';
 import {
   ContainerAbout,
   BodyRight,
   BodyLeft,
+  ButtonAddDish,
+  AddIcon,
 } from './MenuStyles';
+import BadgeMenu from '../BadgeMenu/BadgeMenu';
+import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
 
 function MenuForm() {
+
+  const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
+
+  const handleClick = () => setModalBadgeMenu(true);
+
+  const handleClose = () => setModalBadgeMenu(false);
+
   return (
     <>
       <ContainerAbout className="Container__About">
         <h3>Mi carta</h3>
         <p>A continuacion podras ver y editar el menu de tu carta, recuerda que esta sera vista por tus clientes cuando entren a tu perfil para hacer una reserva</p>
       </ContainerAbout>
-      <button className="Button__Add-dish">
+      <ButtonAddDish 
+        as={"button"} 
+        className="Button__Add-dish"
+        onClick={handleClick}
+      >
+        <AddIcon icon="plus"/>
         Añadir nuevo plato
-      </button>
+      </ButtonAddDish>
+      {modalBadgeMenu ? ( <ModalBadgeMenu handleClose={handleClose}/> ) : (null)}
       <DesktopStructure className="Container__Main-content">
         <BodyLeft className="Container__Left">
           <figure className="Container__left-figure">
@@ -26,25 +44,7 @@ function MenuForm() {
           </figure>
         </BodyLeft>
         <BodyRight className="Container__right">
-          <article>
-            <figure>
-              <img
-                src="https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"
-                alt="Imagen del plato"
-              />
-            </figure>
-            <span>
-              <h4>Nombre del plato</h4>
-              <p>Descripción del plato</p>
-            </span>
-            <span>
-              <span>
-                <p>Categoria</p>
-                <p>Precio</p>
-              </span>
-              <button>Editar</button>
-            </span>
-          </article>
+          <BadgeMenu/>
         </BodyRight>
       </DesktopStructure>
     </>
