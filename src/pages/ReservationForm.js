@@ -113,11 +113,6 @@ function ReservationForm (){
       }
   })
 
-  const toNumber = (range) => {
-    let splited = range.split(' ')
-    return Number(splited[0])
-  }
-
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
     switch (name) {
@@ -131,7 +126,7 @@ function ReservationForm (){
         dispatch(setTime(value))
         break;
       case 'range':
-        dispatch(setRange(toNumber(value)))
+        dispatch(setRange(value))
         break;
       case 'people':
         dispatch(setPeople(value))
