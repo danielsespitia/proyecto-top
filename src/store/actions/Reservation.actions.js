@@ -154,6 +154,7 @@ export function removeReservation() {
         type: RESERVATION_SUCCESS,
         payload: 'La reserva fue cancelada'
       })
+      swal('Tu reserva fue cancelada', '', 'info')
     } catch(error){
         dispatch({ type: RESERVATION_FAILURE, payload: error})
     } finally {
