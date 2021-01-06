@@ -22,6 +22,7 @@ import ShoppingCart from './pages/ShoppingCart'
 import RestaurantReservations from './pages/RestaurantReservations'
 import { Response } from './components/ResponseReservation'
 import MenuRestaurant from './pages/MenuRestaurant'
+import ClientReservation from './pages/ClientReservation'
 
 function PrivateRoute(props) {
   
