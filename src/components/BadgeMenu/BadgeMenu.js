@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ContainerDetails,
   DetailsImage,
@@ -9,8 +10,16 @@ import {
   PricingCategory,
   ButtonEdit,
 } from './BadgeStyles';
+import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
 
 function BadgeMenu() {
+
+  const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
+
+  const handleClick = () => setModalBadgeMenu(true);
+
+  const handleClose = () => setModalBadgeMenu(false);
+
   return (
     <>
       <ContainerDetails className="Container__details">
@@ -36,7 +45,14 @@ function BadgeMenu() {
         </PricingCategory>
       </DetailsPricing>
       <DetailsEdit className="Details__Type-Edit">
-        <ButtonEdit as={"button"} className="Details__Type-Edit">Editar</ButtonEdit>
+        <ButtonEdit 
+          as={"button"} 
+          className="Details__Type-Edit"
+          onClick={handleClick}
+        >
+          Editar
+        </ButtonEdit>
+        {modalBadgeMenu ? ( <ModalBadgeMenu handleClose={handleClose}/> ) : (null)}
       </DetailsEdit>
     </ContainerDetails>
   </>
