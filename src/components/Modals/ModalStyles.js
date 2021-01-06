@@ -63,6 +63,8 @@ export const MenuItemLink = styled(Link)`
 
 export const ModalBadgeMenuContainer = styled.div`
   position: fixed;
+  top: 0;
+  right: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
