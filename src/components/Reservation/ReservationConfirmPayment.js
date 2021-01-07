@@ -21,6 +21,8 @@ import { AuthContext } from '../../store/AuthContext'
 import { useContext } from 'react'
 import SanitaryRegister from '../../pages/SanitaryRegister'
 import SanitaryRegisterCompanion from '../../pages/SanitaryRegisterCompanion'
+import { removeReservation } from '../../store/actions/Reservation.actions'
+import { useDispatch } from 'react-redux'
 
 export function ReservationConfirmPayment({
   name,
@@ -33,11 +35,11 @@ export function ReservationConfirmPayment({
 {
   
   const history = useHistory()
-
+  const dispatch = useDispatch()
 
   const handleClick = (e) => {
     e.preventDefault()
-    localStorage.removeItem('reservation')
+    dispatch(removeReservation())
     history.push('/client-profile')
   }
 
@@ -137,7 +139,7 @@ export function ReservationConfirmPayment({
         <ButtonSecundary
           type='button'
           value='Cancelar'
-          //onClick={handleClick}
+          onClick={handleClick}
         />
     </ContainerPaymentZone>
     </>

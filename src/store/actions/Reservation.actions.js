@@ -135,3 +135,31 @@ export function createReservation(data) {
     }
   }
 }
+
+export function removeReservation() {
+  return async function (dispatch) {
+    const token = localStorage.getItem(('token'))
+    const idReservation = localStorage.getItem('reservation')
+    dispatch ({ type: RESERVATION_LOADING})
+    try {
+      await axios ({
+        method: 'DELETE', 
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/reservations/${idReservation}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
+      dispatch({ 
+        type: RESERVATION_SUCCESS,
+        payload: 'La reserva fue cancelada'
+      })
+      swal('Tu reserva fue cancelada', '', 'info')
+    } catch(error){
+        dispatch({ type: RESERVATION_FAILURE, payload: error})
+    } finally {
+      dispatch({ type: RESERVATION_FINISHED})
+      localStorage.removeItem('reservation')
+    }
+  }
+}
