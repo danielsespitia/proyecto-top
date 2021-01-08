@@ -16,7 +16,7 @@ export const initialState= {
   price: '',
   description: '',
   category: '',
-  image: '',
+  image: null,
   dishesList: [],
   loading: false,
   message: '',

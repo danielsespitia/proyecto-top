@@ -22,11 +22,78 @@ import {
   LabelCategory,
   ButtonSave,
   DetailsCategoryEdit,
+  Message,
 } from './ModalStyles';
+import { useDispatch, useSelector, } from 'react-redux';
+import { useState } from 'react';
+import { 
+  getCategory, 
+  getDescription, 
+  getImage, 
+  getNameDish, 
+  getPrice, 
+  createDish 
+} from '../../store/actions/Menu.action';
 
 
 
 function ModalBadgeMenu({handleClose}) {
+
+  const [imageRender, setImageRender] = useState(null);
+
+  const dispatch = useDispatch();
+  
+  const data = useSelector((
+    { menuReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+    })
+  
+  const { nameDish, description, price, category, image, message } = data;
+
+  const readFile = (file) => {
+    const reader = new FileReader();
+
+    reader.onload = e => setImageRender(e.target.result)
+
+    reader.readAsDataURL(file) 
+  };
+
+  const handleChange = (e)  => {
+    const { name, value, files} = e.target;
+    switch(name) {
+      case 'file':
+        dispatch(getImage(files[0]))
+        break;
+      case 'nameDish':
+        dispatch(getNameDish(value))
+        break;
+      case 'description':
+        dispatch(getDescription(value))
+        break;
+      case 'price':
+        dispatch(getPrice(value))
+        break;
+      case 'category':
+        dispatch(getCategory(value))
+        break;
+      default: break;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const dataSend = new FormData();
+    dataSend.append('nameDish', nameDish)
+    dataSend.append('description', description)
+    dataSend.append('price', price)
+    dataSend.append('category', category)
+    if(image) dataSend.append('file', image)
+
+    dispatch(createDish(dataSend))
+  };
 
   return (
     <ModalBadgeMenuContainer>
@@ -34,26 +101,27 @@ function ModalBadgeMenu({handleClose}) {
         <ButtonCloseDish onClick={handleClose}>
           cerrar
         </ButtonCloseDish>
-        <DetailsImageRender className="Container__details-image">
-          <Image
+          <DetailsImageRender className="Container__details-image">
+          {!!imageRender && (
+            <Image
             className="Details__image"
-            src="https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"
-            alt="Imagen del plato"
-          />
+            src={imageRender}
+              alt="Imagen del plato"
+              />
+          )}
           </DetailsImageRender>
         <ContainerDetailsEdit 
-          as={"form"}
-          onSubmit={"handleSubmit"}
+          onSubmit={handleSubmit}
           className="Container__details">
             <input
               hidden
               type="file"
               accept="image/*"
-              name="image"
-              id="image"
-              onChange={"handleChange"}
+              name="file"
+              id="file"
+              onChange={handleChange}
             />
-            <LabelForImage htmlFor="image">Sube tu plato</LabelForImage>
+            <LabelForImage htmlFor="file">Sube tu plato</LabelForImage>
           <DetailsDishEdit className="Container__Details-dish">
             <NameDish 
               className="Details__Name-dish"
@@ -61,9 +129,9 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="nameDish"
               id="nameDish"
-              value={"nameDish"}
-              onChange={"handleChange"}
-            />
+              value={nameDish}
+              onChange={handleChange}
+              />
             <LabelDish htmlFor="nameDish">
               <EditIconName icon="pen"/>
             </LabelDish>
@@ -72,8 +140,8 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="description"
               id="description"
-              value={"description"}
-              onChange={"handleChange"}
+              value={description}
+              onChange={handleChange}
             />
             <LabelDescription htmlFor="description">
               <EditIconDescription icon="pen"/>
@@ -85,8 +153,8 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="category"
               id="category"
-              value={"category"}
-              onChange={"handleChange"}
+              value={category}
+              onChange={handleChange}
             />
             <LabelCategory htmlFor="category">
               <EditIconPricing icon="pen"/>
@@ -95,14 +163,15 @@ function ModalBadgeMenu({handleClose}) {
           <DetailsPricingEdit>
             <PricingEdit className="Type__Pricing-Price"
               placeholder="Precio"
-              type="number"
+              type="text"
               name="price"
               id="price"
-              value={"price"}
-              onChange={"handleChange"}
-            />
+              value={price}
+              onChange={handleChange}
+              />
           </DetailsPricingEdit>
-          <ButtonSave as={"button"} className="Details__Type-Edit">Guardar</ButtonSave>
+          <Message>{message}</Message>
+          <ButtonSave as={"button"} type="submit" className="Details__Type-Edit">Guardar</ButtonSave>
           <ButtonDelete as={"button"} className="Details__Type-Edit">Eliminar</ButtonDelete>
         </ContainerDetailsEdit>
       </ContainerModalActions>
