@@ -14,7 +14,6 @@ function MenuRestaurant() {
     dispatch(getData(menuId))
   }, [])
 
-  console.log('here is the dish from component', dishesList)
   return (
     <>
     {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, image}) => {
