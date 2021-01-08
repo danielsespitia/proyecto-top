@@ -87,6 +87,7 @@ export function createDish(data) {
           'Content-Type': 'multipart/form-data'
         },
       });
+      console.log('here created dish')
       dispatch({ 
         type: CREATE_DISH,
         payload: 'Tu plato se ha creado exitosamente'

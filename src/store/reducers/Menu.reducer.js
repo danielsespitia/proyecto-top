@@ -20,6 +20,7 @@ export const initialState= {
   dishesList: [],
   loading: false,
   message: '',
+  errorMessage: '',
 };
 
 export function menuReducer ( state = initialState, action ) {
@@ -37,7 +38,7 @@ export function menuReducer ( state = initialState, action ) {
     case FAILURED_MENU:
       return {
         ...state,
-        message: action.payload,
+        errorMessage: action.payload,
       }
     case NAME_DISH:
       return {
