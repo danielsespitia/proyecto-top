@@ -188,13 +188,20 @@ export const DetailsActionsEdit = styled(DetailsEdit)`
   place-self: revert;
 `;
 
-export const ContainerDetailsEdit = styled(ContainerDetails)`
+export const ContainerDetailsEdit = styled.form`
   padding: 15px;
   grid-template-areas:
     "image dish dish"
     "image category category"
     "file pricing pricing"
     "file save delete";
+  background-color: ${
+    props => props.theme.grayColorOverlay
+  };
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 50vw;
+  display: grid;
 `;
 
 export const LabelForImage = styled.label`
