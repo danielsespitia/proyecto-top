@@ -9,6 +9,7 @@ export const CATEGORY_DISH = 'CATEGORY_DISH';
 export const IMAGE_DISH = 'IMAGE_DISH';
 
 export const DISHES_LIST = 'DISHES_LIST';
+export const CREATE_DISH = 'CREATE_DISH';
 
 export const initialState= {
   nameDish: '',
@@ -67,6 +68,11 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         dishesList: action.payload,
+      }
+    case CREATE_DISH:
+      return {
+        ...state,
+        message: action.payload,
       }
     default: 
       return state;
