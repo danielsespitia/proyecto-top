@@ -12,7 +12,7 @@ import {
 } from './BadgeStyles';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
 
-function BadgeMenu() {
+function BadgeMenu({ nameDish, price, description, category, image }) {
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
@@ -26,22 +26,22 @@ function BadgeMenu() {
       <DetailsImage className="Container__details-image">
         <Image
           className="Details__image"
-          src="https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"
+          src={image || "https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"}
           alt="Imagen del plato"
         />
       </DetailsImage>
       <DetailsDish className="Container__Details-dish">
-        <h4 className="Details__Name-dish">Nombre del plato</h4>
+        <h4 className="Details__Name-dish">{nameDish}</h4>
         <DescriptionDish className="Details__Description-dish">
-          Descripción del plato
+          {description}
         </DescriptionDish>
       </DetailsDish>
       <DetailsPricing className="Container__Details-Pricing">
         <PricingCategory className="Type__Pricing-Category">
-          Categoria
+          {category}
         </PricingCategory>
         <PricingCategory className="Type__Pricing-Price">
-          Precio
+          ${price}
         </PricingCategory>
       </DetailsPricing>
       <DetailsEdit className="Details__Type-Edit">
