@@ -52,7 +52,14 @@ function BadgeMenu({ nameDish, price, description, category, image }) {
         >
           Editar
         </ButtonEdit>
-        {modalBadgeMenu ? ( <ModalBadgeMenu handleClose={handleClose}/> ) : (null)}
+        {modalBadgeMenu ? ( 
+          <ModalBadgeMenu 
+            handleClose={handleClose}
+            nameDish={nameDish}
+            price={price}
+            description={description}
+            category={category}
+          /> ) : (null)}
       </DetailsEdit>
     </ContainerDetails>
   </>
