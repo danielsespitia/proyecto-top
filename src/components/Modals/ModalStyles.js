@@ -4,7 +4,6 @@ import {
   DetailsPricing, 
   DetailsDish,
   DetailsEdit,
-  ContainerDetails,
   DetailsImage,
 } from '../BadgeMenu/BadgeStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -237,5 +236,11 @@ export const ButtonDelete = styled(ButtonEdit)`
     border: 1px solid ${
       props => props.theme.tertiaryColor
     };
+  };
+`;
+
+export const Message = styled.span`
+  color: ${
+    props => props.theme.primaryColor
   };
 `;
