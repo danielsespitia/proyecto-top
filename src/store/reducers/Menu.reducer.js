@@ -16,7 +16,7 @@ export const initialState= {
   price: '',
   description: '',
   category: '',
-  image: null,
+  file: null,
   dishesList: [],
   loading: false,
   message: '',
@@ -63,7 +63,7 @@ export function menuReducer ( state = initialState, action ) {
     case IMAGE_DISH:
       return {
         ...state,
-        image: action.payload,
+        file: action.payload,
       }
     case DISHES_LIST:
       return {

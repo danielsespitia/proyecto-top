@@ -66,7 +66,6 @@ export function getImage( payload ) {
 };
 
 export function createDish(data) {
-  const { nameDish, description, category, price, image } = data
   return async function (dispatch) {
     dispatch({ type: LOADING })
     try {
@@ -75,24 +74,48 @@ export function createDish(data) {
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/dishes/',
-        data: {
-          nameDish,
-          description,
-          category, 
-          price,
-          image,
-        },
+        data,
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
-      console.log('here created dish')
       dispatch({ 
         type: CREATE_DISH,
         payload: 'Tu plato se ha creado exitosamente'
       })
     } catch (err) {
+      dispatch({
+        type: FAILURED_MENU,
+        payload: 'Lo sentimos, no pudimos enviar tu información',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+};
+
+export function updateData(data) {
+  return async function(dispatch) {
+    dispatch({ type: LOADING})
+    try {
+      const token = localStorage.getItem('token')
+      await axios({
+        method: 'PUT',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url:'/dishes/',
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data; boundary=something'
+        },
+      });
+      dispatch({
+        type: CREATE_DISH,
+        payload: 'Tu plato se ha actualizado exitosamente'
+      })
+    }
+    catch (err) {
       dispatch({
         type: FAILURED_MENU,
         payload: 'Lo sentimos, no pudimos enviar tu información',
