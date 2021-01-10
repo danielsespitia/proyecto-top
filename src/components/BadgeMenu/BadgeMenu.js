@@ -12,7 +12,7 @@ import {
 } from './BadgeStyles';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
 
-function BadgeMenu({ nameDish, price, description, category, image }) {
+function BadgeMenu({ nameDish, price, description, category, file }) {
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
@@ -26,7 +26,7 @@ function BadgeMenu({ nameDish, price, description, category, image }) {
       <DetailsImage className="Container__details-image">
         <Image
           className="Details__image"
-          src={image || "https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"}
+          src={file}
           alt="Imagen del plato"
         />
       </DetailsImage>
