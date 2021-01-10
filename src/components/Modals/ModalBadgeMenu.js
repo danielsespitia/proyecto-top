@@ -50,14 +50,14 @@ function ModalBadgeMenu({handleClose}) {
       return { ...state }
     })
   
-  const { nameDish, description, price, category, image, message } = data;
+  const { nameDish, description, price, category, file, message } = data;
 
-  const readFile = (file) => {
+  const readFile = (image) => {
     const reader = new FileReader();
 
     reader.onload = e => setImageRender(e.target.result)
 
-    reader.readAsDataURL(file) 
+    reader.readAsDataURL(image) 
   };
 
   const handleChange = (e)  => {
@@ -65,6 +65,7 @@ function ModalBadgeMenu({handleClose}) {
     switch(name) {
       case 'file':
         dispatch(getImage(files[0]))
+        readFile(files[0])
         break;
       case 'nameDish':
         dispatch(getNameDish(value))
@@ -90,8 +91,7 @@ function ModalBadgeMenu({handleClose}) {
     dataSend.append('description', description)
     dataSend.append('price', price)
     dataSend.append('category', category)
-    if(image) dataSend.append('file', image)
-
+    if(file) dataSend.append('file', file)
     dispatch(createDish(dataSend))
   };
 
