@@ -10,6 +10,12 @@ import {
   CATEGORY_DISH,
   IMAGE_DISH,
   CREATE_DISH,
+  CANCEL_DESCRIPTION_DISH,
+  CANCEL_PRICE_DISH,
+  CANCEL_CATEGORY_DISH,
+  CANCEL_IMAGE_DISH,
+  CANCEL_NAME_DISH,
+  SET_DISH_ID,
 } from '../reducers/Menu.reducer';
 
 export function getData(menuId) {
@@ -65,6 +71,12 @@ export function getImage( payload ) {
   }
 };
 
+export function setDishId( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: SET_DISH_ID, payload })
+  }
+}
+
 export function createDish(data) {
   return async function (dispatch) {
     dispatch({ type: LOADING })
@@ -84,6 +96,11 @@ export function createDish(data) {
         type: CREATE_DISH,
         payload: 'Tu plato se ha creado exitosamente'
       })
+      dispatch({ type: CANCEL_NAME_DISH })
+      dispatch({ type: CANCEL_DESCRIPTION_DISH})
+      dispatch({ type: CANCEL_PRICE_DISH })
+      dispatch({ type: CANCEL_CATEGORY_DISH })
+      dispatch({ type: CANCEL_IMAGE_DISH })
     } catch (err) {
       dispatch({
         type: FAILURED_MENU,
@@ -95,7 +112,35 @@ export function createDish(data) {
   }
 };
 
-export function updateData(data) {
+export function getDataDish(dishId) {
+  return async function(dispatch) {
+    dispatch({ type: LOADING })
+    axios({
+      method: 'GET',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: `/dishes/${dishId}`,
+    })
+    .then(( { data } ) => {
+      dispatch({ type: NAME_DISH, payload: data.nameDish })
+      dispatch({ type: PRICE_DISH, payload: data.price })
+      dispatch({ type: DESCRIPTION_DISH, payload: data.description })
+      dispatch({ type: CATEGORY_DISH, payload: data.category })
+      dispatch({ type: IMAGE_DISH, payload: data.file })
+      console.log('here en el action', data)
+    })
+    .catch(err => {
+      dispatch({
+        type: FAILURED_MENU,
+        payload: 'Lo sentimos, vuelve a recargar la página para cargar la información'
+      })
+    })
+    .finally(() => {
+      dispatch({ type: FINISHED_LOADING })
+    })
+  }
+}
+
+export function updateData(data, dishId) {
   return async function(dispatch) {
     dispatch({ type: LOADING})
     try {
@@ -103,7 +148,7 @@ export function updateData(data) {
       await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
-        url:'/dishes/',
+        url:`/dishes/${dishId}`,
         data,
         headers: {
           Authorization: `Bearer ${token}`,

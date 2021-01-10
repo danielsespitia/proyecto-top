@@ -51,6 +51,7 @@ function MenuView() {
           return (
             <BadgeMenu
               key={_id}
+              id={_id}
               nameDish={nameDish}
               price={price}
               description={description}

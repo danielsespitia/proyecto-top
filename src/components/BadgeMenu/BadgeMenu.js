@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   ContainerDetails,
   DetailsImage,
@@ -11,12 +12,19 @@ import {
   ButtonEdit,
 } from './BadgeStyles';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
+import { setDishId } from '../../store/actions/Menu.action';
 
-function BadgeMenu({ nameDish, price, description, category, file }) {
+function BadgeMenu({ nameDish, price, description, category, file, id }) {
+
+  const dispatch = useDispatch();
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
-  const handleClick = () => setModalBadgeMenu(true);
+  const handleClick = () => {
+    setModalBadgeMenu(true);
+    dispatch(setDishId(id))
+    console.log(id)
+  }
 
   const handleClose = () => setModalBadgeMenu(false);
 

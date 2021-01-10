@@ -25,14 +25,15 @@ import {
   Message,
 } from './ModalStyles';
 import { useDispatch, useSelector, } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { 
   getCategory, 
   getDescription, 
   getImage, 
   getNameDish, 
   getPrice, 
-  createDish 
+  createDish, 
+  getDataDish
 } from '../../store/actions/Menu.action';
 
 
@@ -49,10 +50,14 @@ function ModalBadgeMenu({handleClose}) {
     }}) => {
       return { ...state }
     })
-  
-  const { nameDish, description, price, category, file, message } = data;
+    
+    const { nameDish, description, price, category, file, message, dishId } = data;
+    
+    useEffect(() => {
+      getDataDish(dishId)
+    })
 
-  const readFile = (image) => {
+    const readFile = (image) => {
     const reader = new FileReader();
 
     reader.onload = e => setImageRender(e.target.result)
