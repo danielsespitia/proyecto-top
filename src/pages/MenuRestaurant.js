@@ -8,26 +8,14 @@ function MenuRestaurant() {
   const dispatch = useDispatch();
 
   const { menuId } = useSelector(({ restaurantReducer: { menuId }}) => ({ menuId }))
-  const { dishesList } = useSelector(({ menuReducer: { dishesList}}) => ({ dishesList }))
-
+ 
   useEffect(() => {
     dispatch(getData(menuId))
   }, [])
 
   return (
     <>
-    {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, image}) => {
-      return ( 
-        <MenuView
-          key={_id}
-          nameDish={nameDish}
-          price={price}
-          description={description}
-          category={category}
-          image={image}
-        />
-      )
-    })}
+      <MenuView/>
     </>
   )
 }
