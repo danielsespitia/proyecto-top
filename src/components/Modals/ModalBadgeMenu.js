@@ -51,20 +51,24 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
       ...state
     }}) => {
       return { ...state }
-    })
+  })
     
-    const { nameDish, description, price, category, file, message, dishId, dataDishExist } = data;
-    
-    useEffect(() => {
-      getDataDish(dishId)
-    })
-    
-    const readFile = (image) => {
-    const reader = new FileReader();
+  const { nameDish, description, price, category, file, message, dishId, dataDishExist } = data;
+  
+  useEffect(() => {
+    getDataDish(dishId)
 
-    reader.onload = e => setImageRender(e.target.result)
+    return () => {
+      handleClose()
+    }
+  }, [dishId])
+    
+  const readFile = (image) => {
+  const reader = new FileReader();
 
-    reader.readAsDataURL(image) 
+  reader.onload = e => setImageRender(e.target.result)
+
+  reader.readAsDataURL(image) 
   };
 
   const handleChange = (e)  => {
@@ -98,14 +102,24 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
     dataSend.append('description', description)
     dataSend.append('price', price)
     dataSend.append('category', category)
-    if(file) dataSend.append('file', file)
-    if(!dataDishExist) dispatch(createDish(dataSend))
-    dispatch(updateData(dataSend, dishId))
+    if(file) {
+      dataSend.append('file', file)
+      console.log('here add file')
+    }
+    console.log('here add others')
+    if(!dataDishExist) { 
+      dispatch(createDish(dataSend))
+      console.log('here dispatch new')
+    }
+    else { 
+      dispatch(updateData(dataSend, dishId))
+      console.log('here dispatch update')
+    }
   };
 
   const handleDelete = (e) => {
     e.preventDefault()
-    
+
     dispatch(deleteData(dishId))
   };
 

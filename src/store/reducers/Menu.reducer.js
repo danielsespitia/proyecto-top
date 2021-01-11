@@ -17,6 +17,7 @@ export const CANCEL_IMAGE_DISH = 'CANCEL_IMAGE_DISH';
 export const DISHES_LIST = 'DISHES_LIST';
 export const CREATE_DISH = 'CREATE_DISH';
 export const SET_DISH_ID = 'SET_DISH_ID';
+export const DATA_DISH_EXIST = 'DATA_DISH_EXIST';
 
 export const initialState= {
   dishId: '',
@@ -29,6 +30,7 @@ export const initialState= {
   loading: false,
   message: '',
   errorMessage: '',
+  dataDishExist: false,
 };
 
 export function menuReducer ( state = initialState, action ) {
@@ -112,6 +114,11 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         dishId: action.payload,
+      }
+    case DATA_DISH_EXIST:
+      return {
+        ...state,
+        dataDishExist: action.payload,
       }
     default: 
       return state;

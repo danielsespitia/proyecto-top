@@ -16,6 +16,7 @@ import {
   CANCEL_IMAGE_DISH,
   CANCEL_NAME_DISH,
   SET_DISH_ID,
+  DATA_DISH_EXIST,
 } from '../reducers/Menu.reducer';
 
 export function getData(menuId) {
@@ -74,8 +75,15 @@ export function getImage( payload ) {
 export function setDishId( payload ) {
   return function ( dispatch ) {
     dispatch({ type: SET_DISH_ID, payload })
+    dispatch({ type: DATA_DISH_EXIST, payload: true })
   }
-}
+};
+
+export function resetDataExist() {
+  return function ( dispatch ) {
+    dispatch({ type: DATA_DISH_EXIST, payload: false})
+  }
+};
 
 export function createDish(data) {
   return async function (dispatch) {
@@ -113,32 +121,32 @@ export function createDish(data) {
 };
 
 export function getDataDish(dishId) {
-  return async function(dispatch) {
-    dispatch({ type: LOADING })
-    axios({
-      method: 'GET',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: `/dishes/${dishId}`,
-    })
-    .then(( { data } ) => {
+  return async function (dispatch) {
+    const token = localStorage.getItem('token')
+    dispatch({ type: LOADING})
+    try {
+      const { response: { data }} = await axios({
+        method: 'GET',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/dishes/${dishId}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      })
       dispatch({ type: NAME_DISH, payload: data.nameDish })
-      dispatch({ type: PRICE_DISH, payload: data.price })
       dispatch({ type: DESCRIPTION_DISH, payload: data.description })
       dispatch({ type: CATEGORY_DISH, payload: data.category })
+      dispatch({ type: PRICE_DISH, payload: data.price })
       dispatch({ type: IMAGE_DISH, payload: data.file })
-      console.log('here en el action', data)
-    })
-    .catch(err => {
-      dispatch({
-        type: FAILURED_MENU,
-        payload: 'Lo sentimos, vuelve a recargar la página para cargar la información'
-      })
-    })
-    .finally(() => {
-      dispatch({ type: FINISHED_LOADING })
-    })
+    } catch(error) {
+      dispatch({ 
+        type: FAILURED_MENU, 
+        payload: error})
+    } finally {
+      dispatch({ type: FINISHED_LOADING})
+    }
   }
-}
+};
 
 export function updateData(data, dishId) {
   return async function(dispatch) {
@@ -164,6 +172,35 @@ export function updateData(data, dishId) {
       dispatch({
         type: FAILURED_MENU,
         payload: 'Lo sentimos, no pudimos enviar tu información',
+      })
+    } finally {
+      dispatch({ type: FINISHED_LOADING })
+    }
+  }
+};
+
+export function deleteData(dishId) {
+  return async function(dispatch) {
+    dispatch({ type: LOADING })
+    try {
+      const token = localStorage.getItem('token')
+      await axios({
+        method: 'DELETE',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/dishes/${dishId}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+      dispatch({
+        type: CREATE_DISH,
+        payload: 'Tu plato se ha eliminado existosamente'
+      })
+    }
+    catch(err) {
+      dispatch({
+        type: FAILURED_MENU,
+        payload: 'Lo sentimos, no pudimos realizar está operación'
       })
     } finally {
       dispatch({ type: FINISHED_LOADING })
