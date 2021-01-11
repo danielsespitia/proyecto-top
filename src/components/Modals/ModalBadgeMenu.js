@@ -33,12 +33,14 @@ import {
   getNameDish, 
   getPrice, 
   createDish, 
-  getDataDish
+  getDataDish,
+  updateData,
+  deleteData,
 } from '../../store/actions/Menu.action';
 
 
 
-function ModalBadgeMenu({handleClose}) {
+function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, categoryRender, fileRender}) {
 
   const [imageRender, setImageRender] = useState(null);
 
@@ -51,12 +53,12 @@ function ModalBadgeMenu({handleClose}) {
       return { ...state }
     })
     
-    const { nameDish, description, price, category, file, message, dishId } = data;
+    const { nameDish, description, price, category, file, message, dishId, dataDishExist } = data;
     
     useEffect(() => {
       getDataDish(dishId)
     })
-
+    
     const readFile = (image) => {
     const reader = new FileReader();
 
@@ -97,7 +99,14 @@ function ModalBadgeMenu({handleClose}) {
     dataSend.append('price', price)
     dataSend.append('category', category)
     if(file) dataSend.append('file', file)
-    dispatch(createDish(dataSend))
+    if(!dataDishExist) dispatch(createDish(dataSend))
+    dispatch(updateData(dataSend, dishId))
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    
+    dispatch(deleteData(dishId))
   };
 
   return (
@@ -110,7 +119,7 @@ function ModalBadgeMenu({handleClose}) {
           {!!imageRender && (
             <Image
             className="Details__image"
-            src={imageRender}
+            src={imageRender || fileRender}
               alt="Imagen del plato"
               />
           )}
@@ -134,7 +143,7 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="nameDish"
               id="nameDish"
-              value={nameDish}
+              value={nameDish || dishName}
               onChange={handleChange}
               />
             <LabelDish htmlFor="nameDish">
@@ -145,7 +154,7 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="description"
               id="description"
-              value={description}
+              value={description || descriptionRender}
               onChange={handleChange}
             />
             <LabelDescription htmlFor="description">
@@ -158,7 +167,7 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="category"
               id="category"
-              value={category}
+              value={category || categoryRender}
               onChange={handleChange}
             />
             <LabelCategory htmlFor="category">
@@ -171,13 +180,13 @@ function ModalBadgeMenu({handleClose}) {
               type="text"
               name="price"
               id="price"
-              value={price}
+              value={price || priceRender}
               onChange={handleChange}
               />
           </DetailsPricingEdit>
           <Message>{message}</Message>
           <ButtonSave as={"button"} type="submit" className="Details__Type-Edit">Guardar</ButtonSave>
-          <ButtonDelete as={"button"} className="Details__Type-Edit">Eliminar</ButtonDelete>
+          <ButtonDelete as={"button"} onClick={handleDelete} className="Details__Type-Edit">Eliminar</ButtonDelete>
         </ContainerDetailsEdit>
       </ContainerModalActions>
     </ModalBadgeMenuContainer>

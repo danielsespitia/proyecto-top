@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import DesktopStructure from '../styled/DesktopStructure';
 import {
   ContainerAbout,
@@ -10,14 +10,20 @@ import {
 } from './MenuStyles';
 import BadgeMenu from '../BadgeMenu/BadgeMenu';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
+import { resetDataExist } from '../../store/actions/Menu.action';
 
 function MenuView() {
 
+  const dispatch = useDispatch()
+  
   const { dishesList } = useSelector(({ menuReducer: { dishesList}}) => ({ dishesList }))
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
-  const handleClick = () => setModalBadgeMenu(true);
+  const handleClick = () => {
+    setModalBadgeMenu(true);
+    dispatch(resetDataExist())
+  }
 
   const handleClose = () => setModalBadgeMenu(false);
 

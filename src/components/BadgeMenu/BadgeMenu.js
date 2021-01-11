@@ -23,7 +23,6 @@ function BadgeMenu({ nameDish, price, description, category, file, id }) {
   const handleClick = () => {
     setModalBadgeMenu(true);
     dispatch(setDishId(id))
-    console.log(id)
   }
 
   const handleClose = () => setModalBadgeMenu(false);
@@ -63,10 +62,11 @@ function BadgeMenu({ nameDish, price, description, category, file, id }) {
         {modalBadgeMenu ? ( 
           <ModalBadgeMenu 
             handleClose={handleClose}
-            nameDish={nameDish}
-            price={price}
-            description={description}
-            category={category}
+            dishName={nameDish}
+            priceRender={price}
+            descriptionRender={description}
+            categoryRender={category}
+            fileRender={file}
           /> ) : (null)}
       </DetailsEdit>
     </ContainerDetails>
