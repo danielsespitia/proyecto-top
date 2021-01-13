@@ -20,7 +20,7 @@ export function ModalProfile(props) {
     >
       <MenuItemModal>
         <MenuItemLink 
-          to='/reservas'
+          to='/client-reservation'
           onClick={() => setClick(false)}
         >
           Mis reservas
