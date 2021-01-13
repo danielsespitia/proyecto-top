@@ -7,12 +7,14 @@ export const PRICE_DISH = 'PRICE_DISH';
 export const DESCRIPTION_DISH = 'DESCRIPTION_DISH';
 export const CATEGORY_DISH = 'CATEGORY_DISH';
 export const IMAGE_DISH = 'IMAGE_DISH';
+export const PUSH_DATA_DISH = 'PUSH_DATA_DISH';
 
 export const CANCEL_NAME_DISH = 'CANCEL_NAME_DISH';
 export const CANCEL_PRICE_DISH = 'CANCEL_PRICE_DISH';
 export const CANCEL_DESCRIPTION_DISH = 'CANCEL_DESCRIPTION_DISH';
 export const CANCEL_CATEGORY_DISH = 'CANCEL_CATEGORY_DISH';
 export const CANCEL_IMAGE_DISH = 'CANCEL_IMAGE_DISH';
+export const CANCEL_MESSAGE = 'CANCEL_MESSAGE';
 
 export const DISHES_LIST = 'DISHES_LIST';
 export const CREATE_DISH = 'CREATE_DISH';
@@ -85,6 +87,11 @@ export function menuReducer ( state = initialState, action ) {
         ...state,
         message: action.payload,
       }
+    case PUSH_DATA_DISH:
+      return {
+        ...state,
+        dishesList: action.payload,
+      }
     case CANCEL_NAME_DISH:
       return {
         ...state,
@@ -109,6 +116,12 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         file: null,
+      }
+    case CANCEL_MESSAGE:
+      return {
+        ...state,
+        message: '',
+        errorMessage: '',
       }
     case SET_DISH_ID:
       return {
