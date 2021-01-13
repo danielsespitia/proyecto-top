@@ -49,17 +49,7 @@ export const Booking = styled.div `
   display:grid;
   width: 40rem;
   height: 5rem;
-  grid-template-areas:
-    'button1
-     button2
-     info info info info info info info
-     info info info info info info info 
-     info info info info info info info
-     info info info info info info info
-     info info info info info info info 
-     info info info info info info info
-     button3
-     button4';
+  grid-template-columns: 1fr 1fr 4fr 1fr 1fr;
   background: #FBF8F8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -67,7 +57,6 @@ export const Booking = styled.div `
 
 export const ButtonTracker = styled.button `
   font-weight: bold;
-  grid-area: button1;
   background: rgba(119, 65, 255, 0.5);
   border: 3px solid #7741FF;
   box-sizing: border-box;
@@ -76,16 +65,14 @@ export const ButtonTracker = styled.button `
 
 export const ButtonChat = styled.button `
   font-weight: bold;
-  grid-area: button2;
   background: rgba(119, 65, 255, 0.5);
   border: 3px solid #7741FF;
   box-sizing: border-box;
 `;
 
 export const InfoBooking = styled.div `
-  grid-area: info;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
   padding: 1rem;
 
@@ -93,14 +80,12 @@ export const InfoBooking = styled.div `
 
 export const ShowBooking = styled.button `
   font-weight: bold;
-  grid-area: button3;
   background: #7741FF;
   border: none;
 `;
 
 export const ButtonCancel = styled.button `
   font-weight: bold;
-  grid-area: button4;
   background: #ECC30D;
   border-radius: 0px 10px 10px 0px;
   border: none;
@@ -112,8 +97,7 @@ export const ImgRestaurant = styled.img `
   object-fit: cover;
   border-radius: 100%;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin-right: 1rem;
 `;
 
 export const DataRestaurant = styled.div `
@@ -121,17 +105,17 @@ export const DataRestaurant = styled.div `
 `;
 
 export const Name = styled.p `
-  margin: 0 0 0 0.3rem;
+  margin: 0;
   height: 1rem;
   font-weight: bold;
 `;
 
 export const Address = styled.p `
-  margin: 0 0 0 0.3rem;
+  margin: 0;
   height: 1rem;
 `;
 
 export const Date = styled.p `
-  margin: 0 0 0 0.3rem;
+  margin: 0;
   height: 1rem;
 `;
