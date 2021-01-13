@@ -12,7 +12,7 @@ import {
   ButtonEdit,
 } from './BadgeStyles';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
-import { setDishId } from '../../store/actions/Menu.action';
+import { setDishId, cleanForm, } from '../../store/actions/Menu.action';
 
 function BadgeMenu({ nameDish, price, description, category, file, id }) {
 
@@ -25,8 +25,10 @@ function BadgeMenu({ nameDish, price, description, category, file, id }) {
     dispatch(setDishId(id))
   }
 
-  const handleClose = () => setModalBadgeMenu(false);
-
+  const handleClose = () => {
+    setModalBadgeMenu(false);
+    dispatch(cleanForm())
+  }
   return (
     <>
       <ContainerDetails className="Container__details">
