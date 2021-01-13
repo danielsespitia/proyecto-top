@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
@@ -16,6 +15,7 @@ import {
   createReservation
 }
 from '../store/actions/Reservation.actions'
+import BadgeDish from '../components/BadgeDishReservation/BadgeDish'
 
 
 const ContainerList = styled(ContainerContent)`
@@ -100,6 +100,10 @@ const Span = styled.span`
   margin: 15px;
 `;
 
+const ContainerDishes = styled.div`
+  grid-column: 1/5;
+`;
+
 function ReservationForm (){
 
   const dispatch = useDispatch()
@@ -169,6 +173,11 @@ function ReservationForm (){
             <TitleParagraph>
               puedes seleccionar tu menu antes de llegar si deseas 
             </TitleParagraph>
+            <ContainerDishes>
+              <section>
+                <BadgeDish/>
+              </section>
+            </ContainerDishes>
             <InputContainer>
               <Label
                 className="Form__reservation-branch-label"
