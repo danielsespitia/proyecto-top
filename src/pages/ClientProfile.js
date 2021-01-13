@@ -116,7 +116,7 @@ function ClientProfile () {
     .then ((value) => {
       switch (value) {
         case "cancel":
-          swal("Nos alegra que sigas con nosotros");
+          swal("Nos alegra useCque sigas con nosotros");
           break;
 
           case "destroy":
