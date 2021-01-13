@@ -10,11 +10,13 @@ import {
   CATEGORY_DISH,
   IMAGE_DISH,
   CREATE_DISH,
+  PUSH_DATA_DISH,
   CANCEL_DESCRIPTION_DISH,
   CANCEL_PRICE_DISH,
   CANCEL_CATEGORY_DISH,
   CANCEL_IMAGE_DISH,
   CANCEL_NAME_DISH,
+  CANCEL_MESSAGE,
   SET_DISH_ID,
   DATA_DISH_EXIST,
 } from '../reducers/Menu.reducer';
@@ -42,31 +44,31 @@ export function getData(menuId) {
   }
 };
 
-export function getNameDish( payload ) {
+export function setNameDish( payload ) {
   return function ( dispatch ) {
     dispatch({ type: NAME_DISH, payload })
   }
 };
 
-export function getDescription( payload ) {
+export function setDescription( payload ) {
   return function ( dispatch ) {
     dispatch({ type: DESCRIPTION_DISH, payload })
   }
 };
 
-export function getPrice( payload ) {
+export function setPrice( payload ) {
   return function ( dispatch ) {
     dispatch({ type: PRICE_DISH, payload })
   }
 };
 
-export function getCategory( payload ) {
+export function setCategory( payload ) {
   return function ( dispatch ) {
     dispatch({ type: CATEGORY_DISH, payload })
   }
 };
 
-export function getImage( payload ) {
+export function setImage( payload ) {
   return function ( dispatch ) {
     dispatch({ type: IMAGE_DISH, payload })
   }
@@ -109,6 +111,7 @@ export function createDish(data) {
       dispatch({ type: CANCEL_PRICE_DISH })
       dispatch({ type: CANCEL_CATEGORY_DISH })
       dispatch({ type: CANCEL_IMAGE_DISH })
+      dispatch({ type: PUSH_DATA_DISH, payload: data})
     } catch (err) {
       dispatch({
         type: FAILURED_MENU,
@@ -125,7 +128,7 @@ export function getDataDish(dishId) {
     const token = localStorage.getItem('token')
     dispatch({ type: LOADING})
     try {
-      const { response: { data }} = await axios({
+      const { data : { data } } = await axios({
         method: 'GET',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/dishes/${dishId}`,
@@ -205,5 +208,16 @@ export function deleteData(dishId) {
     } finally {
       dispatch({ type: FINISHED_LOADING })
     }
+  }
+};
+
+export function cleanForm() {
+  return function(dispatch) {
+    dispatch({ type: CANCEL_NAME_DISH })
+    dispatch({ type: CANCEL_DESCRIPTION_DISH })
+    dispatch({ type: CANCEL_CATEGORY_DISH })
+    dispatch({ type: CANCEL_PRICE_DISH })
+    dispatch({ type: CANCEL_IMAGE_DISH })
+    dispatch({ type: CANCEL_MESSAGE })
   }
 };
