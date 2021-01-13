@@ -24,7 +24,7 @@ function RestaurantProfileView() {
     
     useEffect(() => {
       dispatch(getProfile())
-    })
+    }, [])
     
   let history = useHistory()
   const handleClick = e => {
