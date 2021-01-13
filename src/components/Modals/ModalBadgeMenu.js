@@ -27,20 +27,21 @@ import {
 import { useDispatch, useSelector, } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { 
-  getCategory, 
-  getDescription, 
-  getImage, 
-  getNameDish, 
-  getPrice, 
+  setCategory, 
+  setDescription, 
+  setImage, 
+  setNameDish, 
+  setPrice, 
   createDish, 
   getDataDish,
   updateData,
   deleteData,
+  cleanForm,
 } from '../../store/actions/Menu.action';
 
 
 
-function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, categoryRender, fileRender}) {
+function ModalBadgeMenu({handleClose}) {
 
   const [imageRender, setImageRender] = useState(null);
 
@@ -53,13 +54,15 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
       return { ...state }
   })
     
-  const { nameDish, description, price, category, file, message, dishId, dataDishExist } = data;
-  
-  useEffect(() => {
-    getDataDish(dishId)
+  const { nameDish, description, price, category, file, message, dishId, dataDishExist, loading, errorMessage } = data;
 
-    return () => {
-      handleClose()
+  useEffect(() => {
+    if(dataDishExist) { 
+      dispatch(getDataDish(dishId))
+      setImageRender(file)
+    }
+      return()  => {
+      dispatch(cleanForm())
     }
   }, [dishId])
     
@@ -75,20 +78,20 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
     const { name, value, files} = e.target;
     switch(name) {
       case 'file':
-        dispatch(getImage(files[0]))
+        dispatch(setImage(files[0]))
         readFile(files[0])
         break;
       case 'nameDish':
-        dispatch(getNameDish(value))
+        dispatch(setNameDish(value))
         break;
       case 'description':
-        dispatch(getDescription(value))
+        dispatch(setDescription(value))
         break;
       case 'price':
-        dispatch(getPrice(value))
+        dispatch(setPrice(value))
         break;
       case 'category':
-        dispatch(getCategory(value))
+        dispatch(setCategory(value))
         break;
       default: break;
     }
@@ -96,7 +99,6 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     const dataSend = new FormData();
     dataSend.append('nameDish', nameDish)
     dataSend.append('description', description)
@@ -104,16 +106,12 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
     dataSend.append('category', category)
     if(file) {
       dataSend.append('file', file)
-      console.log('here add file')
     }
-    console.log('here add others')
     if(!dataDishExist) { 
       dispatch(createDish(dataSend))
-      console.log('here dispatch new')
     }
     else { 
       dispatch(updateData(dataSend, dishId))
-      console.log('here dispatch update')
     }
   };
 
@@ -122,6 +120,8 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
 
     dispatch(deleteData(dishId))
   };
+
+  if(loading) return ( <p>Loading...</p>)
 
   return (
     <ModalBadgeMenuContainer>
@@ -133,9 +133,9 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
           {!!imageRender && (
             <Image
             className="Details__image"
-            src={imageRender || fileRender}
+            src={imageRender}
               alt="Imagen del plato"
-              />
+            />
           )}
           </DetailsImageRender>
         <ContainerDetailsEdit 
@@ -157,7 +157,7 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
               type="text"
               name="nameDish"
               id="nameDish"
-              value={nameDish || dishName}
+              value={nameDish}
               onChange={handleChange}
               />
             <LabelDish htmlFor="nameDish">
@@ -168,7 +168,7 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
               type="text"
               name="description"
               id="description"
-              value={description || descriptionRender}
+              value={description}
               onChange={handleChange}
             />
             <LabelDescription htmlFor="description">
@@ -181,7 +181,7 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
               type="text"
               name="category"
               id="category"
-              value={category || categoryRender}
+              value={category}
               onChange={handleChange}
             />
             <LabelCategory htmlFor="category">
@@ -194,11 +194,11 @@ function ModalBadgeMenu({handleClose, dishName, priceRender, descriptionRender, 
               type="text"
               name="price"
               id="price"
-              value={price || priceRender}
+              value={price}
               onChange={handleChange}
               />
           </DetailsPricingEdit>
-          <Message>{message}</Message>
+          <Message>{message || errorMessage}</Message>
           <ButtonSave as={"button"} type="submit" className="Details__Type-Edit">Guardar</ButtonSave>
           <ButtonDelete as={"button"} onClick={handleDelete} className="Details__Type-Edit">Eliminar</ButtonDelete>
         </ContainerDetailsEdit>
