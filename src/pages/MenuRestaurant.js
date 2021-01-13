@@ -8,10 +8,12 @@ function MenuRestaurant() {
   const dispatch = useDispatch();
 
   const { menuId } = useSelector(({ restaurantReducer: { menuId }}) => ({ menuId }))
- 
+  
+  const { dishesList } = useSelector(({ menuReducer: { dishesList}}) => ({ dishesList }))
+
   useEffect(() => {
     dispatch(getData(menuId))
-  }, [])
+  }, [dishesList.length])
 
   return (
     <>
