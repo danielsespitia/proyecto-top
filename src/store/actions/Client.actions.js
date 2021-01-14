@@ -12,7 +12,7 @@ CLIENT_EMAIL,
 CLIENT_ADDRESS,
 CLIENT_PHONE,
 CLIENT_BIRTHDAY,
-CLIENT_PAYMENT_TYPE,
+CLIENT_ID_TYPE,
 CLIENT_DATA
 } from '../reducers/Client.reducer'
 
@@ -53,7 +53,7 @@ export function setClientBirthday( payload ) {
 }
 export function setClientPaymentType( payload ) {
   return function ( dispatch ){
-    dispatch({ type: CLIENT_PAYMENT_TYPE, payload })
+    dispatch({ type: CLIENT_ID_TYPE, payload })
   }
 }
 

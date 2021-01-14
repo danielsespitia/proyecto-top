@@ -26,7 +26,7 @@ export function ClientProfileForm({
   phone,
   identification,
   birthday,
-  payType,
+  idType,
   handleChange,
   handleSubmit,
   handleDeleteClient,
@@ -121,19 +121,6 @@ export function ClientProfileForm({
             />
           </FormItem>
           <FormItem>
-            <label>Número de identificación</label>
-            <Input
-              className="Form__identification-input"
-              id="identification"
-              type="text"
-              name="identification"
-              value={identification}
-              autoComplete="on"
-              onChange={handleChange}
-              placeholder="Número de identificación"
-            />
-          </FormItem>
-          <FormItem>
             <label>Fecha de Nacimiento:</label>
             <Input
               className="Form__birthday-input"
@@ -146,21 +133,43 @@ export function ClientProfileForm({
             />
           </FormItem>
           <FormItem>
-            <label>Metodo de pago</label>
+            <label>Tipo de documento</label>
             <Select
-              id="payType"
-              name="payType"
-              value={payType}
+              id="idType"
+              name="idType"
+              value={idType}
               onChange={handleChange}
               required
             >   
-              <option value="cash">
-                Efectivo
+              <option value="CC">
+                Cédula de ciudadania CC
               </option>
-              <option value="payU">
-                PayU
+              <option value="CE">
+                Cédula de extranjería CE
+              </option>
+              <option value="PPN">
+                Pasaporte PPN
+              </option>
+              <option value="NIT">
+                Identificación Tributaría NIT
+              </option>
+              <option value="TI">
+                Tarjeta de identidad TI
               </option>
             </Select>
+          </FormItem>
+          <FormItem>
+            <label>Número de identificación</label>
+            <Input
+              className="Form__identification-input"
+              id="identification"
+              type="text"
+              name="identification"
+              value={identification}
+              autoComplete="on"
+              onChange={handleChange}
+              placeholder="Número de identificación"
+            />
           </FormItem>
           <ContentButtons>
             <ButtonUpdate
