@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
@@ -16,6 +17,7 @@ import {
 }
 from '../store/actions/Reservation.actions'
 import BadgeDish from '../components/BadgeDishReservation/BadgeDish'
+import { getData } from '../store/actions/Menu.action'
 
 
 const ContainerList = styled(ContainerContent)`
@@ -124,6 +126,13 @@ function ReservationForm (){
       }
   })
 
+  useEffect(() => {
+    dispatch(getData(data.menuRestaurantId))
+  }, [])
+
+  const { dishesList } = useSelector(
+    ({ menuReducer: { dishesList}}) => ({ dishesList }))
+
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
     switch (name) {
@@ -182,7 +191,19 @@ function ReservationForm (){
             </TitleParagraph>
             <ContainerDishes>
               <ContainerSectionDishes>
-                <BadgeDish/>
+              {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, file}) => {
+                return (
+                  <BadgeDish
+                    key={_id}
+                    id={_id}
+                    nameDish={nameDish}
+                    price={price}
+                    description={description}
+                    category={category}
+                    file={file}
+                  />    
+                )
+              })}
               </ContainerSectionDishes>
             </ContainerDishes>
             <InputContainer>
