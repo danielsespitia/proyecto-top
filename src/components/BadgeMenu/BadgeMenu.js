@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   ContainerDetails,
   DetailsImage,
@@ -11,37 +12,45 @@ import {
   ButtonEdit,
 } from './BadgeStyles';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
+import { setDishId, cleanForm, } from '../../store/actions/Menu.action';
 
-function BadgeMenu() {
+function BadgeMenu({ nameDish, price, description, category, file, id }) {
+
+  const dispatch = useDispatch();
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
-  const handleClick = () => setModalBadgeMenu(true);
+  const handleClick = () => {
+    setModalBadgeMenu(true);
+    dispatch(setDishId(id))
+  }
 
-  const handleClose = () => setModalBadgeMenu(false);
-
+  const handleClose = () => {
+    setModalBadgeMenu(false);
+    dispatch(cleanForm())
+  }
   return (
     <>
       <ContainerDetails className="Container__details">
       <DetailsImage className="Container__details-image">
         <Image
           className="Details__image"
-          src="https://res.cloudinary.com/dkcbxnhg0/image/upload/v1609867365/alamesa/The_Munchies_Dish_bmmydo.svg"
+          src={file}
           alt="Imagen del plato"
         />
       </DetailsImage>
       <DetailsDish className="Container__Details-dish">
-        <h4 className="Details__Name-dish">Nombre del plato</h4>
+        <h4 className="Details__Name-dish">{nameDish}</h4>
         <DescriptionDish className="Details__Description-dish">
-          Descripción del plato
+          {description}
         </DescriptionDish>
       </DetailsDish>
       <DetailsPricing className="Container__Details-Pricing">
         <PricingCategory className="Type__Pricing-Category">
-          Categoria
+          {category}
         </PricingCategory>
         <PricingCategory className="Type__Pricing-Price">
-          Precio
+          ${price}
         </PricingCategory>
       </DetailsPricing>
       <DetailsEdit className="Details__Type-Edit">
@@ -52,7 +61,15 @@ function BadgeMenu() {
         >
           Editar
         </ButtonEdit>
-        {modalBadgeMenu ? ( <ModalBadgeMenu handleClose={handleClose}/> ) : (null)}
+        {modalBadgeMenu ? ( 
+          <ModalBadgeMenu 
+            handleClose={handleClose}
+            dishName={nameDish}
+            priceRender={price}
+            descriptionRender={description}
+            categoryRender={category}
+            fileRender={file}
+          /> ) : (null)}
       </DetailsEdit>
     </ContainerDetails>
   </>

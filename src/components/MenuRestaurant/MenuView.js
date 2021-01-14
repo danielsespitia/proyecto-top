@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import DesktopStructure from '../styled/DesktopStructure';
 import {
   ContainerAbout,
@@ -9,12 +10,20 @@ import {
 } from './MenuStyles';
 import BadgeMenu from '../BadgeMenu/BadgeMenu';
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
+import { resetDataExist } from '../../store/actions/Menu.action';
 
-function MenuForm() {
+function MenuView() {
+
+  const dispatch = useDispatch()
+  
+  const { dishesList } = useSelector(({ menuReducer: { dishesList}}) => ({ dishesList }))
 
   const [modalBadgeMenu, setModalBadgeMenu] = useState(false);
 
-  const handleClick = () => setModalBadgeMenu(true);
+  const handleClick = () => {
+    setModalBadgeMenu(true);
+    dispatch(resetDataExist())
+  }
 
   const handleClose = () => setModalBadgeMenu(false);
 
@@ -44,11 +53,22 @@ function MenuForm() {
           </figure>
         </BodyLeft>
         <BodyRight className="Container__right">
-          <BadgeMenu/>
+        {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, file}) => {
+          return (
+            <BadgeMenu
+              key={_id}
+              id={_id}
+              nameDish={nameDish}
+              price={price}
+              description={description}
+              category={category}
+              file={file}
+            />
+          )})}
         </BodyRight>
       </DesktopStructure>
     </>
   )
 }
 
-export default MenuForm
+export default MenuView

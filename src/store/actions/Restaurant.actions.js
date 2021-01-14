@@ -12,7 +12,8 @@ import {
   RESTAURANT_SCHEDULE_FROM,
   RESTAURANT_SCHEDULE_TO,
   RESTAURANT_NIT,
-  RESTAURANT_DEPOSIT
+  RESTAURANT_DEPOSIT,
+  MENU_ID,
 } from '../reducers/Restaurant.reducer'
 
 export function getName( payload ) {
@@ -77,6 +78,7 @@ export function getProfile() {
       dispatch({ type: RESTAURANT_SCHEDULE_TO, payload: data.scheduleTo})
       dispatch({ type: RESTAURANT_NIT, payload: data.nit})
       dispatch({ type: RESTAURANT_DEPOSIT, payload: data.deposit})
+      dispatch({ type: MENU_ID, payload: data.menu })
     }catch(error) {
     dispatch({ type: RESTAURANT_FAILURE, payload: error})
   }finally {

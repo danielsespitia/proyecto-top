@@ -10,6 +10,7 @@ export const RESTAURANT_SCHEDULE_FROM = 'RESTAURANT_SCHEDULE_FROM'
 export const RESTAURANT_SCHEDULE_TO = 'RESTAURANT_SCHEDULE_TO'
 export const RESTAURANT_NIT = 'RESTAURANT_NIT'
 export const RESTAURANT_DEPOSIT = 'RESTAURANT_DEPOSIT'
+export const MENU_ID = 'MENU_ID'
 
 export const initialState = {
   name: '',
@@ -20,6 +21,7 @@ export const initialState = {
   scheduleTo:'',
   nit: '',
   deposit: '',
+  menuId: '',
   loading: false,
   error: '',
 }
@@ -66,6 +68,11 @@ export function restaurantReducer (state = initialState, action ) {
       return {
         ...state, 
         deposit: action.payload
+      }
+    case MENU_ID:
+      return {
+        ...state,
+        menuId: action.payload
       }
     case RESTAURANT_LOADING:
       return {

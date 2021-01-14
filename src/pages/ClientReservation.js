@@ -25,11 +25,6 @@ function ClientReservation () {
   const [ reservationDate, setReservationDate ] = useState('27/Dic/2020')
   const [ reservationHour, setReservationHour ] = useState('7:00 pm') 
 
-  /*setRestaurantName('Pollito D.C.')
-  setRestaurantAddress('calle 14 # 48 - 56')
-  setReservationDate('27/11/2020')
-  setReservationHour('7:00 p.m.')*/
- 
   return(
     <ClientReservationJSX
       name = {restaurantName}
@@ -42,3 +37,4 @@ function ClientReservation () {
 }
 
 export default ClientReservation
+
