@@ -10,7 +10,7 @@ export const CLIENT_EMAIL = 'CLIENT_EMAIL'
 export const CLIENT_ADDRESS = 'CLIENT_ADDRESS'
 export const CLIENT_PHONE = 'CLIENT_PHONE'
 export const CLIENT_BIRTHDAY = 'CLIENT_BIRTHDAY'
-export const CLIENT_PAYMENT_TYPE = 'CLIENT_PAYMENT_TYPE'
+export const CLIENT_ID_TYPE = 'CLIENT_ID_TYPE'
 export const CLIENT_DATA = 'CLIENT_DATA'
 
 export const initialState = {
@@ -21,7 +21,7 @@ export const initialState = {
   address: '',
   phone: '',
   birthday: '',
-  paymentType: '',
+  idType: '',
   loading: 'false',
   error: 'null',
   data: {}
@@ -64,7 +64,7 @@ export function clientReducer ( state = initialState, action ) {
         ...state,
         birthday: action.payload
       }
-    case CLIENT_PAYMENT_TYPE:
+    case CLIENT_ID_TYPE:
       return {
         ...state,
         paymentType: action.payload

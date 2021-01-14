@@ -16,7 +16,7 @@ function ClientProfile () {
   const [phone, setPhone] = useState('');
   const [identification, setIdentification] = useState('');
   const [birthday, setBirthday] = useState('');
-  const [payType, setPayType] = useState('payU');
+  const [idType, setIdType] = useState('Cédula de ciudadania CC');
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -37,7 +37,7 @@ function ClientProfile () {
       setPhone(data.phone);
       setIdentification(data.identification);
       setBirthday(data.birthday);
-      setPayType(data.payType);
+      setIdType(data.idType);
     })
     .catch(err => {
     localStorage.removeItem('token');
@@ -69,6 +69,9 @@ function ClientProfile () {
       case 'birthday':
         setBirthday(value)
         break;
+      case 'idType':
+        setIdType(value)
+        break;
       default: break;
     }
   };
@@ -89,7 +92,7 @@ function ClientProfile () {
           phone,
           identification,
           birthday, 
-          payType,
+          idType,
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -153,7 +156,7 @@ function ClientProfile () {
       phone = {phone}
       identification = {identification}
       birthday = {birthday}
-      payType = {payType}
+      idType = {idType}
       handleChange = {handleChange}
       handleSubmit = {handleSubmit}
       handleDeleteClient = {handleDeleteClient}
