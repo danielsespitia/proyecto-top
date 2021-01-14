@@ -104,6 +104,13 @@ const ContainerDishes = styled.div`
   grid-column: 1/5;
 `;
 
+const ContainerSectionDishes = styled.section`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px 300px));
+  grid-template-rows: 75px;
+  justify-content: space-around;
+`;
+
 function ReservationForm (){
 
   const dispatch = useDispatch()
@@ -174,9 +181,9 @@ function ReservationForm (){
               puedes seleccionar tu menu antes de llegar si deseas 
             </TitleParagraph>
             <ContainerDishes>
-              <section>
+              <ContainerSectionDishes>
                 <BadgeDish/>
-              </section>
+              </ContainerSectionDishes>
             </ContainerDishes>
             <InputContainer>
               <Label
