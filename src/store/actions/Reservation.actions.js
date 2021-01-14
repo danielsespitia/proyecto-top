@@ -9,6 +9,7 @@ import {
   RESTAURANT_ID_RESERVATION,
   RESTAURANT_NAME_RESERVATION,
   RESTAURANT_DEPOSIT_RESERVATION,
+  RESTAURANT_MENU_ID,
   RESERVATION_BRANCH,
   RESERVATION_DATE,
   RESERVATION_TIME,
@@ -30,6 +31,11 @@ export function setRestaurantName( payload ) {
 export function setRestaurantDeposit( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_DEPOSIT_RESERVATION, payload })
+  }
+}
+export function setRestaurantMenuId( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_MENU_ID, payload })
   }
 }
 export function setBranch( payload ) {
