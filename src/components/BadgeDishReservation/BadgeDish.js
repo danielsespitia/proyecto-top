@@ -1,5 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
+import { 
+  ContainerDish,
+  ContainerButtons,
+  IconDish, 
+  ButtonAction,
+  ButtonActionUp,
+  ParragraphPrice,
+  ParragraphQuantity,
+  ParragraphNumber,
+} from './BadgeStyles';
 
 function BadgeDish() {
 
@@ -12,7 +22,7 @@ function BadgeDish() {
 
     const { nameDish, description, price, category, file, message } = data
   return(
-    <article>
+    <ContainerDish>
       <div>
         <input 
           type="checkbox"
@@ -26,22 +36,22 @@ function BadgeDish() {
       </figure>
       <div>
         <p>Brownie</p>
-        <p>$8000</p>
+        <ParragraphPrice>$8000</ParragraphPrice>
       </div>
-      <div>
-        <button>
+      <ContainerButtons>
+        <ButtonActionUp>
           <FontAwesomeIcon icon={"arrow-circle-up"}/>
-        </button>
-        <button>
+        </ButtonActionUp>
+        <ButtonAction>
           <FontAwesomeIcon icon={"arrow-circle-down"}/>
-        </button>
-      </div>
+        </ButtonAction>
+      </ContainerButtons>
       <div>
-        <p>Cantidad</p>
-        <p>0</p>
+        <ParragraphQuantity>Cantidad</ParragraphQuantity>
+        <ParragraphNumber>0</ParragraphNumber>
       </div>
-      <FontAwesomeIcon icon={"utensils"}/>
-    </article>
+      <IconDish icon={"utensils"}/>
+    </ContainerDish>
   )
 }
 
