@@ -11,16 +11,8 @@ import {
   ParragraphNumber,
 } from './BadgeStyles';
 
-function BadgeDish() {
+function BadgeDish({_id, nameDish, price, description, category, file}) {
 
-  const data = useSelector((
-    { menuReducer: {
-      ...state
-    }}) => {
-      return { ...state }
-    })
-
-    const { nameDish, description, price, category, file, message } = data
   return(
     <ContainerDish>
       <div>
@@ -35,8 +27,8 @@ function BadgeDish() {
         />
       </figure>
       <div>
-        <p>Brownie</p>
-        <ParragraphPrice>$8000</ParragraphPrice>
+        <p>{nameDish || "Brownie"}</p>
+        <ParragraphPrice>{price || "$8000"}</ParragraphPrice>
       </div>
       <ContainerButtons>
         <ButtonActionUp>
