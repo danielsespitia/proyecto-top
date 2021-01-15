@@ -15,6 +15,7 @@ export const CANCEL_DESCRIPTION_DISH = 'CANCEL_DESCRIPTION_DISH';
 export const CANCEL_CATEGORY_DISH = 'CANCEL_CATEGORY_DISH';
 export const CANCEL_IMAGE_DISH = 'CANCEL_IMAGE_DISH';
 export const CANCEL_MESSAGE = 'CANCEL_MESSAGE';
+export const CLEAN_DISH_LIST = 'CLEAN_DISH_LIST';
 
 export const DISHES_LIST = 'DISHES_LIST';
 export const CREATE_DISH = 'CREATE_DISH';
@@ -122,6 +123,11 @@ export function menuReducer ( state = initialState, action ) {
         ...state,
         message: '',
         errorMessage: '',
+      }
+    case CLEAN_DISH_LIST:
+      return {
+        ...state,
+        dishesList: [],
       }
     case SET_DISH_ID:
       return {
