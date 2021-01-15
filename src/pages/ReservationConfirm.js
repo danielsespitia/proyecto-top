@@ -39,6 +39,8 @@ function ReservationConfirm() {
 
   const clientData = data
 
+  const amount = deposit ? deposit : '20000'
+
   const invoice = localStorage.getItem('reservation');
 
   const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'
@@ -51,7 +53,7 @@ function ReservationConfirm() {
         description: "Pago Reserva alamesa",
         invoice: `${invoice}`,
         currency: "cop",
-        amount: `${deposit}`,
+        amount: `${amount}`,
         tax_base: "0",
         tax: "0",
         country: "co",

@@ -106,8 +106,8 @@ function Header() {
                 onMouseLeave={onMouseLeave}
                 onClick={handleClick}
                 >
-                <AnchorProfile 
-                  as={Link} 
+                <AnchorProfile
+                  as="a"
                 >
                     Profile
                   <HeaderHomeLogo className="header__home-logo">

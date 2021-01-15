@@ -108,7 +108,7 @@ const ContainerDishes = styled.div`
 
 const ContainerSectionDishes = styled.section`
   display: grid;
-  grid-template-columns: repeat(3, 425px);
+  grid-template-columns: repeat(3, [col-start] minmax(100px, 1fr) [col-end]);
   grid-template-rows: 75px;
   grid-gap: 18px;
   justify-content: space-around;

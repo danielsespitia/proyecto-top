@@ -34,21 +34,17 @@ export const Message = styled.span`
   font-weight: 800;
 `;
 
-export function ListShoppingCart ( { deposit } ) {
+export function ListShoppingCart ( { deposit, message, id } ) {
   
-  const data = useSelector(
-    ({reservationReducer: {
-      ...state 
-    }}) => {
-    return { ...state }
-  })
+  
+  const total = deposit;
 
-  const paymentConfirm = `/restaurants/${data.id}/reservation/confirm`;
+  const paymentConfirm = `/restaurants/${id}/reservation/confirm`;
 
   return(
     <section>
       <ContainerTitleShopping>
-        <Message>{data.messageReservation}</Message>
+        <Message>{message}</Message>
         <h2>Mi carrito</h2>
         <FontAwesomeIcon icon="shopping-cart"/>
       </ContainerTitleShopping>
@@ -56,11 +52,11 @@ export function ListShoppingCart ( { deposit } ) {
         <LabelTable>
           <tr>
             <td>Pago minimo</td>
-            <td>{data.deposit}</td>
+            <td>{deposit}</td>
           </tr>
           <tr>
             <TextStrongTotal>Total</TextStrongTotal>
-            <td>{data.deposit}</td>
+            <td>{total}</td>
           </tr>
           </LabelTable>
         <ButtonPrimary as={Link} to={paymentConfirm}>Finalizar tu orden</ButtonPrimary>

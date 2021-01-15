@@ -3,14 +3,20 @@ import { ListShoppingCart } from '../components/ItemShoppingCart'
 
 function ShoppingCart () {
   
-  const restaurantId = useSelector(state => state.restaurantId)
-  const reservationDeposit = useSelector(state => state.reservationDeposit)
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state 
+    }}) => {
+    return { ...state }
+  })
 
   return(
     <>
     <ListShoppingCart
-      key={restaurantId}
-      deposit={reservationDeposit}
+      key={data.idRestaurantReservation}
+      deposit={data.deposit}
+      message={data.messageReservation}
+      id={data.idRestaurantReservation}
     />
     </>
   )

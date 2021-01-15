@@ -53,7 +53,7 @@ function App () {
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
             <Route exact path="/client-reservation" component={ClientReservation}/>
             <Route exact path="/response" component={Response}/>
-            <Redirect exact path="/" />
+            <Redirect exact to="/"/>
           </Switch>
         <Footer></Footer>
         </Router>
