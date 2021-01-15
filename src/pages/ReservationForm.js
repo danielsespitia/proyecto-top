@@ -17,7 +17,7 @@ import {
 }
 from '../store/actions/Reservation.actions'
 import BadgeDish from '../components/BadgeDishReservation/BadgeDish'
-import { getData } from '../store/actions/Menu.action'
+import { getData, cleanDish } from '../store/actions/Menu.action'
 
 
 const ContainerList = styled(ContainerContent)`
@@ -108,8 +108,9 @@ const ContainerDishes = styled.div`
 
 const ContainerSectionDishes = styled.section`
   display: grid;
-  grid-template-columns: repeat(3, minmax(100px 300px));
+  grid-template-columns: repeat(3, 425px);
   grid-template-rows: 75px;
+  grid-gap: 18px;
   justify-content: space-around;
 `;
 
@@ -127,7 +128,12 @@ function ReservationForm (){
   })
 
   useEffect(() => {
-    dispatch(getData(data.menuRestaurantId))
+    if(data.menuRestaurantId) {
+      dispatch(getData(data.menuRestaurantId))
+    }
+    return () => {
+      dispatch(cleanDish())
+    }
   }, [])
 
   const { dishesList } = useSelector(
@@ -191,7 +197,7 @@ function ReservationForm (){
             </TitleParagraph>
             <ContainerDishes>
               <ContainerSectionDishes>
-              {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, file}) => {
+              {!!dishesList && dishesList.length > 0 ? dishesList.map(({_id, nameDish, price, description, category, file}) => {
                 return (
                   <BadgeDish
                     key={_id}
@@ -203,7 +209,9 @@ function ReservationForm (){
                     file={file}
                   />    
                 )
-              })}
+              }) : (
+                <p>Este restaurante aún no tiene un menu disponible</p>
+              )}
               </ContainerSectionDishes>
             </ContainerDishes>
             <InputContainer>
