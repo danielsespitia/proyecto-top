@@ -9,6 +9,7 @@ import {
   ParragraphPrice,
   ParragraphQuantity,
   ParragraphNumber,
+  Image,
 } from './BadgeStyles';
 
 function BadgeDish({_id, nameDish, price, description, category, file}) {
@@ -21,14 +22,14 @@ function BadgeDish({_id, nameDish, price, description, category, file}) {
         />
       </div>
       <figure>
-        <img 
-          src={file || "https://res.cloudinary.com/alamesa/image/upload/v1610557814/UI/The_Munchies_Desserts_lhtlwx.svg"}
-          alt="Imagen de previsualización del plato"
+        <Image 
+          src={file}
+          alt="Imagen del plato"
         />
       </figure>
       <div>
-        <p>{nameDish || "Brownie"}</p>
-        <ParragraphPrice>{price || "$8000"}</ParragraphPrice>
+        <p>{nameDish}</p>
+        <ParragraphPrice>{price}</ParragraphPrice>
       </div>
       <ContainerButtons>
         <ButtonActionUp>

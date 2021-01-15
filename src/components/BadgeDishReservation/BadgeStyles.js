@@ -61,3 +61,10 @@ export const ParragraphNumber = styled.p`
   border-radius: 4px;
   background-color: white;
 `;
+
+export const Image = styled.img`
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
