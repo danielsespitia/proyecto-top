@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
@@ -16,6 +16,8 @@ import {
   createReservation
 }
 from '../store/actions/Reservation.actions'
+import BadgeDish from '../components/BadgeDishReservation/BadgeDish'
+import { getData, cleanDish } from '../store/actions/Menu.action'
 
 
 const ContainerList = styled(ContainerContent)`
@@ -100,6 +102,18 @@ const Span = styled.span`
   margin: 15px;
 `;
 
+const ContainerDishes = styled.div`
+  grid-column: 1/5;
+`;
+
+const ContainerSectionDishes = styled.section`
+  display: grid;
+  grid-template-columns: repeat(3, 425px);
+  grid-template-rows: 75px;
+  grid-gap: 18px;
+  justify-content: space-around;
+`;
+
 function ReservationForm (){
 
   const dispatch = useDispatch()
@@ -112,6 +126,18 @@ function ReservationForm (){
         ...state
       }
   })
+
+  useEffect(() => {
+    if(data.menuRestaurantId) {
+      dispatch(getData(data.menuRestaurantId))
+    }
+    return () => {
+      dispatch(cleanDish())
+    }
+  }, [])
+
+  const { dishesList } = useSelector(
+    ({ menuReducer: { dishesList}}) => ({ dishesList }))
 
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
@@ -169,6 +195,25 @@ function ReservationForm (){
             <TitleParagraph>
               puedes seleccionar tu menu antes de llegar si deseas 
             </TitleParagraph>
+            <ContainerDishes>
+              <ContainerSectionDishes>
+              {!!dishesList && dishesList.length > 0 ? dishesList.map(({_id, nameDish, price, description, category, file}) => {
+                return (
+                  <BadgeDish
+                    key={_id}
+                    id={_id}
+                    nameDish={nameDish}
+                    price={price}
+                    description={description}
+                    category={category}
+                    file={file}
+                  />    
+                )
+              }) : (
+                <p>Este restaurante aún no tiene un menu disponible</p>
+              )}
+              </ContainerSectionDishes>
+            </ContainerDishes>
             <InputContainer>
               <Label
                 className="Form__reservation-branch-label"

@@ -17,6 +17,7 @@ import {
   CANCEL_IMAGE_DISH,
   CANCEL_NAME_DISH,
   CANCEL_MESSAGE,
+  CLEAN_DISH_LIST,
   SET_DISH_ID,
   DATA_DISH_EXIST,
 } from '../reducers/Menu.reducer';
@@ -221,3 +222,9 @@ export function cleanForm() {
     dispatch({ type: CANCEL_MESSAGE })
   }
 };
+
+export function cleanDish() {
+  return function(dispatch) {
+    dispatch({ type: CLEAN_DISH_LIST })
+  }
+}

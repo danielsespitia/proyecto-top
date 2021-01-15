@@ -5,6 +5,7 @@ import {
   setRestaurantId,
   setRestaurantName,
   setRestaurantDeposit,
+  setRestaurantMenuId,
   } from '../store/actions/Reservation.actions'
 
 const Article = styled.article`
@@ -37,7 +38,7 @@ const Button = styled.button`
 `;
 
 
-function Restaurant ({ id, name, deposit, logo }) {
+function Restaurant ({ id, name, deposit, logo, menu }) {
 
   const dispatch = useDispatch()
 
@@ -45,6 +46,7 @@ function Restaurant ({ id, name, deposit, logo }) {
     dispatch(setRestaurantId(id))
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
+    dispatch(setRestaurantMenuId(menu))
   }
 
   return (
