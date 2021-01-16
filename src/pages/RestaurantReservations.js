@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import ActiveReservations  from '../components/ActiveReservations';
+import { useSelector } from 'react-redux';
+import ActiveReservations from '../components/ActiveReservations';
 import PendingReservations from '../components/PendingReservations';
-import profilePicture from '../image/ProfilePicture.png';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import DesktopStructure from '../components/styled/DesktopStructure';
 
 const BodyLeft = styled.div ` 
@@ -50,52 +48,14 @@ const PendingP = styled.p `
   color: #E1B5E8;
 `;
 
-const activeReservationData = [
-  {
-    id: uuidv4(),
-    clientProfilePicture: profilePicture,
-    clientName: 'Pedro Perez',
-    phone: '3235640231',
-    reservationDate: '27/11/2020',
-    timeFrom: '17:00',
-    timeTo: '17:45',
-    timestamp: '25/11/2020',
-  },
-  {
-    id: uuidv4(),
-    clientProfilePicture: profilePicture,
-    clientName: 'Maria Lopez',
-    phone: '3245674321',
-    reservationDate: '30/11/2020',
-    timeFrom: '15:00',
-    timeTo: '17:30',
-    timestamp: '28/11/2020',
-  },
-];
+function RestaurantReservations () {
 
-const pendingReservationData = [
-  {
-    id: uuidv4(),
-    clientProfilePicture: profilePicture,
-    clientName: 'Jessi Uribe',
-    phone: '3253472131',
-    reservationDate: '02/12/2020',
-    timeFrom: '12:00',
-    timeTo: '17:00',
-    timestamp: '30/11/2020',
-  }
-]
-
-class RestaurantReservations extends Component {
-
-state = {
-  activeData: activeReservationData,
-  pendingData: pendingReservationData
-}
-
-render () {
-  const { activeData } = this.state
-  const { pendingData } = this.state
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+    })
 
   return (
     <DesktopStructure>
@@ -109,24 +69,24 @@ render () {
         <ReservationsContainer>
           <H1>Mis Reservas</H1>
           <ActiveP><strong>Activas</strong></ActiveP>
-          {!!activeData && activeData.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
+          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
             return (
               <>
                 <ActiveReservations 
-                  key={id}
-                  clientProfilePicture={clientProfilePicture}
-                  clientName={clientName}
-                  phone={phone}
-                  reservationDate={reservationDate}
-                  timeFrom={timeFrom}
-                  timeTo={timeTo}
-                  timestamp={timestamp}
+                  key={_id}
+                  clientProfilePicture={logo}
+                  clientName={name}
+                  phone={deposit}
+                  reservationDate={name}
+                  timeFrom={deposit}
+                  timeTo={name}
+                  timestamp={deposit}
                 />
               </>
               )
             })}
             <PendingP><strong>Pendientes</strong></PendingP>
-            {!!pendingData && pendingData.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
+            {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
             return (
               <>
                 <PendingReservations 
@@ -146,7 +106,6 @@ render () {
       </BodyRight>
     </DesktopStructure>
   )
-}
-}
+} 
 
 export default RestaurantReservations
