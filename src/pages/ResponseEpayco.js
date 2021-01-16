@@ -43,6 +43,10 @@ export function Response({ location }) {
     <DesktopStructure>
       <BodyLeft>
         <h4>Ubicación</h4>
+        <img
+          src="https://res.cloudinary.com/alamesa/image/upload/v1610834913/UI/mapsvg_y2isgv.svg"
+          alt="Here put the map"
+        />
       </BodyLeft>
       <BodyResponse>
         <ResponseComponent/>
