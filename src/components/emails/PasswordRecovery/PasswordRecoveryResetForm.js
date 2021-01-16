@@ -59,7 +59,7 @@ export function PasswordRecoveryResetForm ({
           type="email"
           onChange={handleChange}
           value={email}
-          placeholder="Correo electronico"
+          placeholder="Nueva constraseña"
           required
         />
         <label
@@ -73,7 +73,7 @@ export function PasswordRecoveryResetForm ({
           type="emailConfirm"
           onChange={handleChange}
           value={emailConfirm}
-          placeholder="Confirma tu correo electronico"
+          placeholder="Confirma tu constraseña"
           required
         />
         <ContainerContentLabel>
