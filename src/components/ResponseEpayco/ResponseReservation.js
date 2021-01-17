@@ -12,15 +12,18 @@ import {
   ContainerResumeDate,
   ContainerTextSafe,
   ContainerDate,
+  ContainerSuccesfullyStatus,
 } from './ResponseStyles';
 
-export function ResponseComponent() {
+export function ResponseComponent({amount, response, billing, nameRestaurant, time, date}) {
   return (
     <ContainerResponse>
-      <span>
+      <ContainerSuccesfullyStatus>
         <IconCheck icon={"check-circle"}/>
         <TitleResponse>!Gracias por confiar en nosotros, esperamos que disfrutes del restaurante</TitleResponse>
-      </span>
+      </ContainerSuccesfullyStatus>
+      <p>Numero de factura: <strong>{billing}</strong></p>
+      <p>Proceso de la transacción <strong>{response}</strong></p>
       <span>
         <TableResume className="table_resume">
           <RowColorPrimary className="row_names">
@@ -41,14 +44,14 @@ export function ResponseComponent() {
                 alt="Logo para representar la reunión"
               />
               <TextConcept>
-                Reserva en el restaurante <strong>Pollito</strong>
+                Reserva en el restaurante <strong>{nameRestaurant}</strong>
               </TextConcept>
             </RowConcept>
             <ColumnCell className="column_quantity-render">
               <p>1</p>
             </ColumnCell>
             <ColumnCell className="column_price-render">
-              <p>$50000</p>
+              <p>${amount}</p>
             </ColumnCell>
           </RowColorWhite>
           <RowColorPrimary>
@@ -87,12 +90,12 @@ export function ResponseComponent() {
         <ContainerDate>
           <span>
             <p>Te esperamos el día:</p>
-            <p><strong>Viernes 25 oct</strong></p>
+            <p><strong>{date}</strong></p>
           </span>
           <hr></hr>
           <span>
             <p>A las:</p>
-            <p><strong>2:00pm</strong></p>
+            <p><strong>{time}</strong></p>
           </span>
         </ContainerDate>
       </ContainerResumeDate>
