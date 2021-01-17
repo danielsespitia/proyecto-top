@@ -11,6 +11,7 @@ import {
   faUtensils,
   faArrowCircleDown,
   faArrowCircleUp,
+  faCheckCircle,
 } 
 from '@fortawesome/free-solid-svg-icons'
 
@@ -26,4 +27,5 @@ library.add(
   faUtensils,
   faArrowCircleUp,
   faArrowCircleDown,
+  faCheckCircle,
 )
