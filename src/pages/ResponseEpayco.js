@@ -5,6 +5,8 @@ import DesktopStructure from '../components/styled/DesktopStructure';
 import { BodyLeft } from '../components/MenuRestaurant/MenuStyles';
 import ContainerContent from '../components/styled/ContainerContent';
 import { ResponseComponent } from '../components/ResponseEpayco/ResponseReservation';
+import Map from '../components/Map';
+import useGoogleAddress from '../hooks/useGoogleAddress';
 
 function queryString(query) {
   const res = {}
@@ -26,6 +28,9 @@ const BodyResponse = styled(ContainerContent)`
 export function Response({ location }) {
 
   const [responseEpayco, setResponseEpayco] = useState({});
+  const locationClient = useGoogleAddress('parkway')
+
+  console.log(locationClient)
 
   useEffect(() => {
     const { ref_payco } = queryString(location.search)
@@ -48,10 +53,7 @@ export function Response({ location }) {
     <DesktopStructure>
       <BodyLeft>
         <h4>Ubicación</h4>
-        <img
-          src="https://res.cloudinary.com/alamesa/image/upload/v1610834913/UI/mapsvg_y2isgv.svg"
-          alt="Here put the map"
-        />
+        <Map data={locationClient}/>
       </BodyLeft>
       <BodyResponse>
         <ResponseComponent
