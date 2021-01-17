@@ -22,8 +22,6 @@ function ReservationConfirm() {
       return { ...state} 
     })
     
-    const timeNew = time.toLocaleString('es-CO', { timeStyle: 'short', hour12: 'true'})
-    
   useEffect(() => {
     dispatch(getClient())
   }, [])

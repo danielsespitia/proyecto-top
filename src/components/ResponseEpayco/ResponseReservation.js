@@ -13,9 +13,16 @@ import {
   ContainerTextSafe,
   ContainerDate,
   ContainerSuccesfullyStatus,
+  TextImportant,
+  TextSuccesfully,
 } from './ResponseStyles';
 
 export function ResponseComponent({amount, response, billing, nameRestaurant, time, date}) {
+
+  const subTotal = amount
+
+  const total = subTotal
+
   return (
     <ContainerResponse>
       <ContainerSuccesfullyStatus>
@@ -23,7 +30,7 @@ export function ResponseComponent({amount, response, billing, nameRestaurant, ti
         <TitleResponse>!Gracias por confiar en nosotros, esperamos que disfrutes del restaurante</TitleResponse>
       </ContainerSuccesfullyStatus>
       <p>Numero de factura: <strong>{billing}</strong></p>
-      <p>Proceso de la transacción <strong>{response}</strong></p>
+      <p>Proceso de la transacción <TextSuccesfully>{response}</TextSuccesfully></p>
       <span>
         <TableResume className="table_resume">
           <RowColorPrimary className="row_names">
@@ -44,7 +51,7 @@ export function ResponseComponent({amount, response, billing, nameRestaurant, ti
                 alt="Logo para representar la reunión"
               />
               <TextConcept>
-                Reserva en el restaurante <strong>{nameRestaurant}</strong>
+                Reserva en el restaurante <TextImportant>{nameRestaurant}</TextImportant>
               </TextConcept>
             </RowConcept>
             <ColumnCell className="column_quantity-render">
@@ -60,7 +67,7 @@ export function ResponseComponent({amount, response, billing, nameRestaurant, ti
               Subtotal
             </ColumnCell>
             <ColumnCell>
-              $50000
+              ${subTotal}
             </ColumnCell>
           </RowColorPrimary>
           <RowColorWhite>
@@ -78,7 +85,7 @@ export function ResponseComponent({amount, response, billing, nameRestaurant, ti
               Total
             </ColumnCell>
             <ColumnCell>
-              $50000
+              ${total}
             </ColumnCell>
           </RowColorPrimary>
         </TableResume>
@@ -90,12 +97,12 @@ export function ResponseComponent({amount, response, billing, nameRestaurant, ti
         <ContainerDate>
           <span>
             <p>Te esperamos el día:</p>
-            <p><strong>{date}</strong></p>
+            <p><TextImportant>{date}</TextImportant></p>
           </span>
           <hr></hr>
           <span>
             <p>A las:</p>
-            <p><strong>{time}</strong></p>
+            <p><TextImportant>{time}</TextImportant></p>
           </span>
         </ContainerDate>
       </ContainerResumeDate>
