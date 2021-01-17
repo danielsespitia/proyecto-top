@@ -34,10 +34,15 @@ export function Response({ location }) {
       baseURL: process.env.REACT_APP_PAYMENT_URL,
       url: `/validation/v1/reference/${ref_payco}`
     })
-      .then(({ data }) => {
+      .then(({ data: {data} }) => {
         setResponseEpayco(data)
       })
   }, [location])
+
+  const { x_amount, x_response, x_id_factura } = responseEpayco
+
+  const dataRestaurantJson = localStorage.getItem('ReservationData');
+  var dataRestaurant = JSON.parse(dataRestaurantJson);
 
   return (
     <DesktopStructure>
@@ -49,7 +54,14 @@ export function Response({ location }) {
         />
       </BodyLeft>
       <BodyResponse>
-        <ResponseComponent/>
+        <ResponseComponent
+          amount={x_amount}
+          response={x_response}
+          billing={x_id_factura}
+          nameRestaurant={dataRestaurant.name}
+          time={dataRestaurant.time}
+          date={dataRestaurant.date}
+        />
       </BodyResponse>
     </DesktopStructure>
   )

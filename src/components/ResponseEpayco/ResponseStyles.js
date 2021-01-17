@@ -68,3 +68,8 @@ export const ContainerDate = styled.div`
   border-radius: 7px;
   width: 40%;
 `;
+
+export const ContainerSuccesfullyStatus = styled.span`
+  display: flex;
+  align-items: center;
+`;
