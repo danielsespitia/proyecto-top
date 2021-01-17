@@ -25,12 +25,21 @@ const BodyResponse = styled(ContainerContent)`
   margin: 0;
 `;
 
+const TextLocation = styled.h4`
+  font-size: 24px;
+  text-align: center;
+`;
+
+const BodyLocation = styled(BodyLeft)`
+  padding: 17px;
+  margin: auto;
+`;
+
 export function Response({ location }) {
 
   const [responseEpayco, setResponseEpayco] = useState({});
   const locationClient = useGoogleAddress('parkway')
 
-  console.log(locationClient)
 
   useEffect(() => {
     const { ref_payco } = queryString(location.search)
@@ -51,10 +60,10 @@ export function Response({ location }) {
 
   return (
     <DesktopStructure>
-      <BodyLeft>
-        <h4>Ubicación</h4>
+      <BodyLocation>
+        <TextLocation>Ubicación</TextLocation>
         <Map data={locationClient}/>
-      </BodyLeft>
+      </BodyLocation>
       <BodyResponse>
         <ResponseComponent
           amount={x_amount}

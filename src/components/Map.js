@@ -4,7 +4,7 @@ const Map = ({ data }) => {
   
   const MapStyles = {
     height: "40vh",
-    width: "250px"
+    width: "250px",
   }
 
   const defaultCenter = {
