@@ -11,6 +11,7 @@ import {
 export function PasswordRecoveryResetForm ({
   password, 
   newPassword,
+  message,
   handleSubmit,
   handleChange,
 }) 
@@ -18,6 +19,7 @@ export function PasswordRecoveryResetForm ({
 
   return(
     <ContainerContentExtend>
+      <Message>{message}</Message>
       <Form onSubmit={handleSubmit}>
         <label
           htmlFor="password"

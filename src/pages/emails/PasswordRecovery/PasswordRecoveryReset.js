@@ -28,28 +28,41 @@ function PasswordRecoveryReset() {
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{ 
-      await axios ({
-        method: 'PUT',
-        baseURL: process.env.REACT_APP_SERVER_URL,
-        url: `/email/recovery-reset`,
-        data: { newPassword },
-        headers: {
-          Authorization: `Bearer ${ token }`
-        }
-      });
-      swal('Contraseña reestablecida correcamente!','','success')
-      history.push('/sign-in')
-    }catch(error){
-      setMessage(error)
-      swal('No se logro reestablecer la constraseña','','error')
+    if(validate()){
+      try{ 
+        await axios ({
+          method: 'PUT',
+          baseURL: process.env.REACT_APP_SERVER_URL,
+          url: `/email/recovery-reset`,
+          data: { newPassword },
+          headers: {
+            Authorization: `Bearer ${ token }`
+          }
+        });
+        swal('Contraseña reestablecida correcamente!','','success')
+        history.push('/sign-in')
+      }catch(error){
+        setMessage(error)
+        swal('No se logro reestablecer la constraseña','','error')
+      }
     }
+  };
+
+  const validate = () => {
+    const arePasswordEqual = !!password && !!newPassword && password === newPassword;
+
+    if (!arePasswordEqual) {
+      setMessage({password: 'La contraseña no coincide'})
+      return false
+    }
+    return true
   };
 
   return(
     <PasswordRecoveryResetForm
       password={password}
       newPassword={newPassword}
+      message={message.password}
       handleSubmit={handleSubmit} 
       handleChange={handleChange} />
   )

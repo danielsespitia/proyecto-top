@@ -31,7 +31,7 @@ export const ContainerContentLabel = styled(ContainerButton)`
 `;
 
 export const Message = styled.span `
-  font-size: 13px;
-  color: #0f31dd;
+  font-size: 12px;
+  color: red;
   font-style: italic;
 `;
