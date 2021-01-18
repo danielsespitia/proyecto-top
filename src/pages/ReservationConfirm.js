@@ -2,6 +2,8 @@ import { ReservationConfirmPayment } from '../components/Reservation/Reservation
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { getClient } from '../store/actions/Client.actions'
+import moment from 'moment'
+import 'moment/locale/es';
 
 const handler = window.ePayco.checkout.configure({
   key: process.env.REACT_APP_EPAYCO_PUBLIC_KEY,
@@ -12,18 +14,14 @@ function ReservationConfirm() {
 
   const dispatch = useDispatch()
 
-  const today = new Date()
-  const month = today.toLocaleString('es-CO', { month: 'long'}) 
-  const date = `${ today.getDate() } de ${ month } de ${ today.getFullYear()}`
-  const time = today.toLocaleString('es-CO', { timeStyle: 'short', hour12: 'true'})
-
-  const { nameRestaurantReservation, deposit } = useSelector(
+  
+  const { nameRestaurantReservation, deposit, date, time } = useSelector(
     ({reservationReducer: {
       ...state
     }}) => {
       return { ...state} 
     })
-
+    
   useEffect(() => {
     dispatch(getClient())
   }, [])
@@ -36,6 +34,17 @@ function ReservationConfirm() {
         data
       }
   })
+  
+  moment.locale('es');
+  const dateNew = moment(date).format('LL');
+  
+  const reservation = {
+    'name': `${nameRestaurantReservation}`,
+    'time': `${time}`,
+    'date': `${dateNew}`,
+  };
+
+  const jsonReservation = JSON.stringify(reservation)
 
   const clientData = data
 
@@ -79,6 +88,7 @@ function ReservationConfirm() {
         methodsDisable: ["SP","CASH"]
       }
     )
+    localStorage.setItem('ReservationData', jsonReservation)
   }
 
   return (
@@ -86,7 +96,7 @@ function ReservationConfirm() {
       <ReservationConfirmPayment
         name={nameRestaurantReservation}  
         deposit={deposit}
-        date={date}
+        date={dateNew}
         time={time}
         handlePayment={handleClick}
       />

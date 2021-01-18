@@ -68,3 +68,18 @@ export const ContainerDate = styled.div`
   border-radius: 7px;
   width: 40%;
 `;
+
+export const ContainerSuccesfullyStatus = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+export const TextImportant = styled.strong`
+  color: ${
+    props => props.theme.primaryColor
+  };
+`;
+
+export const TextSuccesfully = styled.strong`
+  color: #159A09;
+`;

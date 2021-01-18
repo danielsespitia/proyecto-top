@@ -5,6 +5,8 @@ import DesktopStructure from '../components/styled/DesktopStructure';
 import { BodyLeft } from '../components/MenuRestaurant/MenuStyles';
 import ContainerContent from '../components/styled/ContainerContent';
 import { ResponseComponent } from '../components/ResponseEpayco/ResponseReservation';
+import Map from '../components/Map';
+import useGoogleAddress from '../hooks/useGoogleAddress';
 
 function queryString(query) {
   const res = {}
@@ -23,9 +25,21 @@ const BodyResponse = styled(ContainerContent)`
   margin: 0;
 `;
 
+const TextLocation = styled.h4`
+  font-size: 24px;
+  text-align: center;
+`;
+
+const BodyLocation = styled(BodyLeft)`
+  padding: 17px;
+  margin: auto;
+`;
+
 export function Response({ location }) {
 
   const [responseEpayco, setResponseEpayco] = useState({});
+  const locationClient = useGoogleAddress('parkway')
+
 
   useEffect(() => {
     const { ref_payco } = queryString(location.search)
@@ -34,22 +48,31 @@ export function Response({ location }) {
       baseURL: process.env.REACT_APP_PAYMENT_URL,
       url: `/validation/v1/reference/${ref_payco}`
     })
-      .then(({ data }) => {
+      .then(({ data: {data} }) => {
         setResponseEpayco(data)
       })
   }, [location])
 
+  const { x_amount, x_response, x_id_factura } = responseEpayco
+
+  const dataRestaurantJson = localStorage.getItem('ReservationData');
+  var dataRestaurant = JSON.parse(dataRestaurantJson);
+
   return (
     <DesktopStructure>
-      <BodyLeft>
-        <h4>Ubicación</h4>
-        <img
-          src="https://res.cloudinary.com/alamesa/image/upload/v1610834913/UI/mapsvg_y2isgv.svg"
-          alt="Here put the map"
-        />
-      </BodyLeft>
+      <BodyLocation>
+        <TextLocation>Ubicación</TextLocation>
+        <Map data={locationClient}/>
+      </BodyLocation>
       <BodyResponse>
-        <ResponseComponent/>
+        <ResponseComponent
+          amount={x_amount}
+          response={x_response}
+          billing={x_id_factura}
+          nameRestaurant={dataRestaurant.name}
+          time={dataRestaurant.time}
+          date={dataRestaurant.date}
+        />
       </BodyResponse>
     </DesktopStructure>
   )

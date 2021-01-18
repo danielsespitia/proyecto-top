@@ -12,15 +12,25 @@ import {
   ContainerResumeDate,
   ContainerTextSafe,
   ContainerDate,
+  ContainerSuccesfullyStatus,
+  TextImportant,
+  TextSuccesfully,
 } from './ResponseStyles';
 
-export function ResponseComponent() {
+export function ResponseComponent({amount, response, billing, nameRestaurant, time, date}) {
+
+  const subTotal = amount
+
+  const total = subTotal
+
   return (
     <ContainerResponse>
-      <span>
+      <ContainerSuccesfullyStatus>
         <IconCheck icon={"check-circle"}/>
         <TitleResponse>!Gracias por confiar en nosotros, esperamos que disfrutes del restaurante</TitleResponse>
-      </span>
+      </ContainerSuccesfullyStatus>
+      <p>Numero de factura: <strong>{billing}</strong></p>
+      <p>Proceso de la transacción <TextSuccesfully>{response}</TextSuccesfully></p>
       <span>
         <TableResume className="table_resume">
           <RowColorPrimary className="row_names">
@@ -41,14 +51,14 @@ export function ResponseComponent() {
                 alt="Logo para representar la reunión"
               />
               <TextConcept>
-                Reserva en el restaurante <strong>Pollito</strong>
+                Reserva en el restaurante <TextImportant>{nameRestaurant}</TextImportant>
               </TextConcept>
             </RowConcept>
             <ColumnCell className="column_quantity-render">
               <p>1</p>
             </ColumnCell>
             <ColumnCell className="column_price-render">
-              <p>$50000</p>
+              <p>${amount}</p>
             </ColumnCell>
           </RowColorWhite>
           <RowColorPrimary>
@@ -57,7 +67,7 @@ export function ResponseComponent() {
               Subtotal
             </ColumnCell>
             <ColumnCell>
-              $50000
+              ${subTotal}
             </ColumnCell>
           </RowColorPrimary>
           <RowColorWhite>
@@ -75,7 +85,7 @@ export function ResponseComponent() {
               Total
             </ColumnCell>
             <ColumnCell>
-              $50000
+              ${total}
             </ColumnCell>
           </RowColorPrimary>
         </TableResume>
@@ -87,12 +97,12 @@ export function ResponseComponent() {
         <ContainerDate>
           <span>
             <p>Te esperamos el día:</p>
-            <p><strong>Viernes 25 oct</strong></p>
+            <p><TextImportant>{date}</TextImportant></p>
           </span>
           <hr></hr>
           <span>
             <p>A las:</p>
-            <p><strong>2:00pm</strong></p>
+            <p><TextImportant>{time}</TextImportant></p>
           </span>
         </ContainerDate>
       </ContainerResumeDate>
