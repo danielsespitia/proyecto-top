@@ -69,18 +69,18 @@ function RestaurantReservations () {
         <ReservationsContainer>
           <H1>Mis Reservas</H1>
           <ActiveP><strong>Activas</strong></ActiveP>
-          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
+          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit, menu }) => {
             return (
               <>
                 <ActiveReservations 
                   key={_id}
-                  clientProfilePicture={logo}
+                  clientProfilePicture={name}
                   clientName={name}
-                  phone={deposit}
+                  phone={name}
                   reservationDate={name}
-                  timeFrom={deposit}
+                  timeFrom={name}
                   timeTo={name}
-                  timestamp={deposit}
+                  timestamp={name}
                 />
               </>
               )
