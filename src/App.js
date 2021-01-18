@@ -61,6 +61,7 @@ function App () {
             <Route exact path="/password-reset/:token" component={PasswordRecoveryReset}/>
             <Route component={PageNotFound}/>
             <Redirect exact to="/"/>
+            <Route component={PageNotFound}/>
           </Switch>
         <Footer></Footer>
         </Router>
