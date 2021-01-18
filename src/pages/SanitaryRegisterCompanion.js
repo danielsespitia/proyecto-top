@@ -11,6 +11,7 @@ import {
   cancelSendForm,
 } from '../store/actions/SanitaryRegisterCompanion.actions'
 import { useDispatch, useSelector } from "react-redux";
+import MiniLoading from '../components/MiniLoading';
 
 function SanitaryRegisterCompanion() {
 

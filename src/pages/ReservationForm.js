@@ -18,6 +18,7 @@ import {
 from '../store/actions/Reservation.actions'
 import BadgeDish from '../components/BadgeDishReservation/BadgeDish'
 import { getData, cleanDish } from '../store/actions/Menu.action'
+import PageLoading from '../components/PageLoading'
 
 
 const ContainerList = styled(ContainerContent)`
@@ -136,8 +137,8 @@ function ReservationForm (){
     }
   }, [])
 
-  const { dishesList } = useSelector(
-    ({ menuReducer: { dishesList}}) => ({ dishesList }))
+  const { dishesList, loading } = useSelector(
+    ({ menuReducer: { dishesList, loading }}) => ({ dishesList, loading }))
 
   const handleChange = (e) => {
     const { name, value, type, checked} = e.target;
@@ -173,6 +174,8 @@ function ReservationForm (){
     dispatch(createReservation(data))
     history.push(`/restaurants/${data.idRestaurantReservation}/reservation/shopping-cart`)
   };
+
+  if(loading) return <PageLoading/>
   
   return (
     <>

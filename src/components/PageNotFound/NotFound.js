@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ContainerError, Image, ContainerText, RedirectText } from './NotFoundStyles';
 
 function PageNotFound(props) {

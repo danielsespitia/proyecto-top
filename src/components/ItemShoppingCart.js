@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
 import { Link } from 'react-router-dom'
+import PageLoading from './PageLoading'
 
 const ContainerTitleShopping = styled.span`
   display: flex;
@@ -34,12 +35,14 @@ export const Message = styled.span`
   font-weight: 800;
 `;
 
-export function ListShoppingCart ( { deposit, message, id } ) {
+export function ListShoppingCart ( { deposit, message, id, loading } ) {
   
   
   const total = deposit;
 
   const paymentConfirm = `/restaurants/${id}/reservation/confirm`;
+
+  if(loading) return <PageLoading/>
 
   return(
     <section>

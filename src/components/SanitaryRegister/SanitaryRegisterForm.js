@@ -1,3 +1,4 @@
+import MiniLoading from '../MiniLoading';
 import ButtonPrimary from '../styled/ButtonPrimary';
 import { 
   ContainerRegisterForm,  
@@ -31,8 +32,8 @@ function SanitaryRegisterForm({
 })
 {
 
-  if(loading === true){
-    return <h1>Cargando...</h1>
+  if(loading){
+    return <MiniLoading/>
   }
   return(
     <ContainerRegisterForm>

@@ -38,6 +38,7 @@ import {
   deleteData,
   cleanForm,
 } from '../../store/actions/Menu.action';
+import PageLoading from '../PageLoading';
 
 
 
@@ -121,7 +122,7 @@ function ModalBadgeMenu({handleClose}) {
     dispatch(deleteData(dishId))
   };
 
-  if(loading) return ( <p>Loading...</p>)
+  if(loading) return <PageLoading/>
 
   return (
     <ModalBadgeMenuContainer>

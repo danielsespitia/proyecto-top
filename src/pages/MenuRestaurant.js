@@ -2,6 +2,7 @@ import MenuView from '../components/MenuRestaurant/MenuView';
 import { getData } from '../store/actions/Menu.action';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import PageLoading from '../components/PageLoading';
 
 function MenuRestaurant() {
 
@@ -9,16 +10,16 @@ function MenuRestaurant() {
 
   const { menuId } = useSelector(({ restaurantReducer: { menuId }}) => ({ menuId }))
   
-  const { dishesList } = useSelector(({ menuReducer: { dishesList}}) => ({ dishesList }))
+  const { dishesList, loading } = useSelector(({ menuReducer: { dishesList, loading}}) => ({ dishesList, loading }))
 
   useEffect(() => {
     dispatch(getData(menuId))
   }, [dishesList.length])
 
+  if(loading) return <PageLoading/>
+
   return (
-    <>
       <MenuView/>
-    </>
   )
 }
 
