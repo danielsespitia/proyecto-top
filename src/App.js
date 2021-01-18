@@ -56,7 +56,6 @@ function App () {
             <Route exact path="/client-reservation" component={ClientReservation}/>
             <Route exact path="/response" component={Response}/>
             <Route exact path="/password-recovery" component={PasswordRecovery}/>
-            <Route exact path="/password-reset" component={PasswordRecoveryReset}/>
             <Route exact path="/password-reset/:token" component={PasswordRecoveryReset}/>
             <Redirect exact to="/"/>
           </Switch>
