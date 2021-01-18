@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import ButtonPrimary from '../../components/styled/ButtonPrimary'
-import ContainerContent from '../../components/styled/ContainerContent'
+import ButtonPrimary from '../../../components/styled/ButtonPrimary'
+import ContainerContent from '../../../components/styled/ContainerContent'
 
 const ContainerContentExtend = styled(ContainerContent)` 
   display: grid;

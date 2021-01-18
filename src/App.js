@@ -23,7 +23,8 @@ import RestaurantReservations from './pages/RestaurantReservations'
 import { Response } from './pages/ResponseEpayco'
 import MenuRestaurant from './pages/MenuRestaurant'
 import ClientReservation from './pages/ClientReservation'
-import PasswordRecovery from './pages/PasswordRecovery'
+import PasswordRecovery from './pages/emails/PasswordRecovery/PasswordRecovery'
+import PasswordRecoveryReset from './pages/emails/PasswordRecovery/PasswordRecoveryReset'
 
 function PrivateRoute(props) {
   
@@ -55,6 +56,7 @@ function App () {
             <Route exact path="/client-reservation" component={ClientReservation}/>
             <Route exact path="/response" component={Response}/>
             <Route exact path="/password-recovery" component={PasswordRecovery}/>
+            <Route exact path="/password-reset" component={PasswordRecoveryReset}/>
             <Redirect exact to="/"/>
           </Switch>
         <Footer></Footer>
