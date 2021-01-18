@@ -18,7 +18,9 @@ function PageNotFound(props) {
             src="https://res.cloudinary.com/alamesa/image/upload/c_scale,w_1000/v1610980517/UI/2668387_hj0hds.jpg"
             alt="Imagen render error"
           />
-          <a href="https://www.freepik.com/vectors/business">Business vector created by pikisuperstar - www.freepik.com</a>
+          <figcaption>
+            <a href="https://www.freepik.com/vectors/business">Business vector created by pikisuperstar - www.freepik.com</a>
+          </figcaption>
         </ContainerImage>
       </ContainerError>
     </>
