@@ -55,7 +55,6 @@ function App () {
             <Route exact path="/client-reservation" component={ClientReservation}/>
             <Route exact path="/response" component={Response}/>
             <Route component={PageNotFound}/>
-            {/* <Redirect exact to="/"/> */}
           </Switch>
         <Footer></Footer>
         </Router>
