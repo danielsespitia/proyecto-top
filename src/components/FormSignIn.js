@@ -151,6 +151,11 @@ export function FormSignIn ({
           Crear cuenta
         </ButtonPrimary>
       </ContainerContentLabel>
+      <ContainerContentLabel>
+        <ButtonPrimary as= {Link} to="/password-recovery">
+          Recuperar Contraseña
+        </ButtonPrimary>
+      </ContainerContentLabel>
       <Message>{message}</Message>
     </ContainerContentExtend>
   )
