@@ -1,42 +1,14 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import ButtonPrimary from '../../../components/styled/ButtonPrimary'
-import ContainerContent from '../../../components/styled/ContainerContent'
+import {
+  ContainerContentExtend,
+  Form,
+  Input,
+  ContainerContentLabel,
+  Message
+}
 
-const ContainerContentExtend = styled(ContainerContent)` 
-  display: grid;
-  grid-row-gap: 12px;
-`;
+from './Styles/PasswordRecoveryFormStyles'
+import ButtonPrimary from '../../styled/ButtonPrimary'
 
-const Form = styled.form ` 
-  display: grid;
-  grid-row-gap: 12px;
-  margin-top: 12px;
-`;
-const ContainerButton = styled.span `
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-`;
-
-const Input = styled.input ` 
-  padding: 10.5px;
-  border-radius: 4px;
-  border: 1px solid #CED4DA;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.5);
-`;
-
-const ContainerContentLabel = styled(ContainerButton)`
-  display: block;
-  margin-bottom: 12px;
-`;
-
-const Message = styled.span `
-  font-size: 13px;
-  color: #0f31dd;
-  font-style: italic;
-`;
 
 export function PasswordRecoveryForm ({
   email, 

@@ -1,21 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import { PasswordRecoveryResetForm } from '../../../components/emails/PasswordRecovery/PasswordRecoveryResetForm'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 function PasswordRecoveryReset() {
 
-  const [email, setEmail] = useState('')
-  const [confirmEmail, setConfirmEmail] = useState('')
+  const { token } = useParams()
+  const history = useHistory()
+
+  const [password, setPassword] = useState('')
+  const [newPassword, setPasswordConfirm] = useState('')
   const [message, setMessage] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch(name) {
-      case 'email':
-        setEmail(value)
+      case 'password':
+        setPassword(value)
         break;
-      case 'confirmEmail':
-        setConfirmEmail(value)
+      case 'newPassword':
+        setPasswordConfirm(value)
         break;
       default: break;
     }
@@ -25,28 +30,28 @@ function PasswordRecoveryReset() {
     e.preventDefault();
     try{ 
       await axios ({
-        method: 'POST',
+        method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
-        url: `/email/recovery-pass`,
-        data: { email }
+        url: `/email/recovery-reset`,
+        data: { newPassword },
+        headers: {
+          Authorization: `Bearer ${ token }`
+        }
       });
-      //localStorage.setItem( 'token', token )
-      //localStorage.setItem( 'pathUser', pathUser )
-      //this.context.isAuthenticated(token, pathUser)
-      setMessage( 'Correo de recuperacion de contraseña enviado correctamente' )
+      swal('Contraseña reestablecida correcamente!','','success')
+      history.push('/sign-in')
     }catch(error){
-      setMessage( 'Correo no existe en alamesa' )
+      setMessage(error)
+      swal('No se logro reestablecer la constraseña','','error')
     }
   };
 
   return(
     <PasswordRecoveryResetForm
-      message={message}
-      email={email}
-      confirmEmail={confirmEmail}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
+      password={password}
+      newPassword={newPassword}
+      handleSubmit={handleSubmit} 
+      handleChange={handleChange} />
   )
 }
 

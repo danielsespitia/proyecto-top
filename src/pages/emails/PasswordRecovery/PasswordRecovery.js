@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { PasswordRecoveryForm } from '../../../components/emails/PasswordRecovery/PasswordRecoveryForm'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 function PasswordRecovery() {
 
@@ -24,12 +25,9 @@ function PasswordRecovery() {
         url: `/email/recovery-pass`,
         data: { email }
       });
-      //localStorage.setItem( 'token', token )
-      //localStorage.setItem( 'pathUser', pathUser )
-      //this.context.isAuthenticated(token, pathUser)
-      setMessage( 'Correo de recuperacion de contraseña enviado correctamente' )
+      swal('Te hemos enviado un correo de recuperacion de contraseña, por favor revisa tu correo','','success')
     }catch(error){
-      setMessage( 'Correo no existe en alamesa' )
+      swal('El email que ingresaste no existe en alamesa','','error')
     }
   };
 
