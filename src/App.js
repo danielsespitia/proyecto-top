@@ -23,6 +23,7 @@ import RestaurantReservations from './pages/RestaurantReservations'
 import { Response } from './pages/ResponseEpayco'
 import MenuRestaurant from './pages/MenuRestaurant'
 import ClientReservation from './pages/ClientReservation'
+import PageNotFound from './components/PageNotFound/NotFound'
 
 function PrivateRoute(props) {
   
@@ -53,7 +54,8 @@ function App () {
             <PrivateRoute exact path="/restaurants/:restaurantId/reservation/confirm" component={ReservationConfirm}/>
             <Route exact path="/client-reservation" component={ClientReservation}/>
             <Route exact path="/response" component={Response}/>
-            <Redirect exact to="/"/>
+            <Route component={PageNotFound}/>
+            {/* <Redirect exact to="/"/> */}
           </Switch>
         <Footer></Footer>
         </Router>
