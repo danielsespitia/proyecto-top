@@ -1,6 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ActiveReservations from '../components/ActiveReservations';
 import PendingReservations from '../components/PendingReservations';
+import { getReservationsList } from '../store/actions/RestaurantReservation.actions';
 import styled from 'styled-components';
 import DesktopStructure from '../components/styled/DesktopStructure';
 
@@ -49,9 +51,14 @@ const PendingP = styled.p `
 `;
 
 function RestaurantReservations () {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getReservationsList())
+  }, [getReservationsList]);
 
   const data = useSelector(
-    ({reservationReducer: {
+    ({ restaurantReservationReducer: {
       ...state
     }}) => {
       return { ...state }
@@ -69,39 +76,9 @@ function RestaurantReservations () {
         <ReservationsContainer>
           <H1>Mis Reservas</H1>
           <ActiveP><strong>Activas</strong></ActiveP>
-          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit, menu }) => {
-            return (
-              <>
-                <ActiveReservations 
-                  key={_id}
-                  clientProfilePicture={name}
-                  clientName={name}
-                  phone={name}
-                  reservationDate={name}
-                  timeFrom={name}
-                  timeTo={name}
-                  timestamp={name}
-                />
-              </>
-              )
-            })}
-            <PendingP><strong>Pendientes</strong></PendingP>
-            {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp }) => {
-            return (
-              <>
-                <PendingReservations 
-                  key={id}
-                  clientProfilePicture={clientProfilePicture}
-                  clientName={clientName}
-                  phone={phone}
-                  reservationDate={reservationDate}
-                  timeFrom={timeFrom}
-                  timeTo={timeTo}
-                  timestamp={timestamp}
-                />
-              </>
-              )
-            })}
+          <ActiveReservations 
+            data = { data }
+          />
         </ReservationsContainer>
       </BodyRight>
     </DesktopStructure>

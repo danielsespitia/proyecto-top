@@ -6,6 +6,7 @@ import { sanitaryRegisterReducer } from './reducers/SanitaryRegister.reducers'
 import { sanitaryRegisterCompanionReducer } from './reducers/SanitaryRegisterCompanion.reducer'
 import { menuReducer } from './reducers/Menu.reducer';
 import { clientReservationReducer } from './reducers/ClientReservation.reducer'
+import { restaurantReservationReducer } from './reducers/RestaurantReservation.reducer';
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({ 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   sanitaryRegisterCompanionReducer,
   menuReducer,
   clientReservationReducer,
+  restaurantReservationReducer,
 })
 const middlewares = applyMiddleware(thunk)
 
