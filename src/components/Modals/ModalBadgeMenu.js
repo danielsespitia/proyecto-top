@@ -42,7 +42,7 @@ import MiniLoading from '../MiniLoading';
 
 
 
-function ModalBadgeMenu({handleClose}) {
+function ModalBadgeMenu({handleClose, index}) {
 
   const [imageRender, setImageRender] = useState(null);
 
@@ -55,7 +55,7 @@ function ModalBadgeMenu({handleClose}) {
       return { ...state }
   })
     
-  const { nameDish, description, price, category, file, message, dishId, dataDishExist, loading, errorMessage } = data;
+  const { nameDish, description, price, category, file, message, dishId, dataDishExist, miniLoading, errorMessage } = data;
 
   useEffect(() => {
     if(dataDishExist) { 
@@ -122,7 +122,7 @@ function ModalBadgeMenu({handleClose}) {
     dispatch(deleteData(dishId))
   };
 
-  if(loading) return <MiniLoading/>
+  if(miniLoading) return <MiniLoading/>
 
   return (
     <ModalBadgeMenuContainer>

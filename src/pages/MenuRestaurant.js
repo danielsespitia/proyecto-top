@@ -13,11 +13,11 @@ function MenuRestaurant() {
   useEffect(() => {
     dispatch(getData())
   }, [dishesList.length])
-
+  
   if(loading) return <PageLoading/>
 
   return (
-      <MenuView/>
+    <MenuView/>
   )
 }
 
