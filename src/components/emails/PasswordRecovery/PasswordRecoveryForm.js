@@ -78,7 +78,7 @@ export function PasswordRecoveryForm ({
         <ContainerContentLabel>
           <ButtonPrimary
             type="submit"
-            value='Recuperar constraseña'
+            value='Recuperar contraseña'
           />
         </ContainerContentLabel>
       </Form>
