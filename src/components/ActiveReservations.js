@@ -60,47 +60,55 @@ const ThirdColorButton = styled(ButtonPrimary) `
   margin-left: 0.5rem;
 `;
 
-function ActiveReservations ( { id, clientProfilePicture, clientName, phone, reservationDate, timeFrom, timeTo, timestamp } ) {
+function ActiveReservations ( { data } ) {
   const register = useContext(AuthContext)
   return (
-    <ReservationContainer>
-      <InfoContainer>
-        <PhotoContainer>
-          <ProfilePicture 
-            src={clientProfilePicture} 
-            alt="restaurantProfilePicture" 
-          />
-        </PhotoContainer>
-        <TextContainer>
-          <TextItem><strong>{clientName}</strong></TextItem>
-          <TextItem><strong>Teléfono: </strong> {phone}</TextItem>
-          <TextItem><strong>Fecha: </strong> {reservationDate}</TextItem>
-          <TextItem><strong>Desde: </strong> {timeFrom}</TextItem>
-          <TextItem><strong>Hasta: </strong> {timeTo}</TextItem>
-          <TextItem><strong>Solicitado En: </strong> {timestamp}</TextItem> 
-        </TextContainer>
-      </InfoContainer>
-      <ButtonContainer>
-        <FirstColorButton
-          type="button"
-          value='Ver Orden'
-        />
-          <FirstColorButton
-            type="button"
-            onClick={register.onOpenModal}
-            value="Registro Sanitario"
-          />
-          <SanitaryRegister/>
-        <SecondColorButton
-          type="button"
-          value="Cancelar"
-        />
-        <ThirdColorButton
-          type="button"
-          value="Ir al Chat"
-        />
-      </ButtonContainer>
-    </ReservationContainer>
+    <>
+      {!!data.reservationData && 
+      data.reservationData.reservations &&
+      data.reservationData.reservations.length > 0 &&
+      data.reservationData.reservations.map((reservation) => {
+        return (
+          <ReservationContainer>
+            <InfoContainer>
+              <PhotoContainer>
+                <ProfilePicture
+                  src="https://i.pinimg.com/236x/ce/2a/95/ce2a95e99faceaf7af19c273b10ebcc1.jpg"
+                  alt="Foto perfil cliente" 
+                />
+              </PhotoContainer>
+              <TextContainer>
+                <TextItem><strong>{`${reservation.user.name} ${reservation.user.lastName}`}</strong></TextItem>
+                <TextItem><strong>Teléfono: </strong> {reservation.user.phone}</TextItem>
+                <TextItem><strong>Fecha: </strong> {reservation.date}</TextItem>
+                <TextItem><strong>Hora: </strong> {reservation.time}</TextItem>
+                <TextItem><strong>Número de Asistentes: </strong> {reservation.range}</TextItem> 
+              </TextContainer>
+            </InfoContainer>
+            <ButtonContainer>
+              <FirstColorButton
+                type="button"
+                value='Ver Orden'
+              />
+              <FirstColorButton
+                type="button"
+                onClick={register.onOpenModal}
+                value="Registro Sanitario"
+              />
+              <SanitaryRegister/>
+              <SecondColorButton
+                type="button"
+                value="Cancelar"
+              />
+              <ThirdColorButton
+                type="button"
+                value="Ir al Chat"
+              />
+            </ButtonContainer>
+          </ReservationContainer>
+        )
+      })}
+    </>
   )
 }
 export default ActiveReservations
