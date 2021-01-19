@@ -29,6 +29,7 @@ function BadgeMenu({ nameDish, price, description, category, file, id }) {
     setModalBadgeMenu(false);
     dispatch(cleanForm())
   }
+
   return (
     <>
       <ContainerDetails className="Container__details">

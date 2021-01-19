@@ -24,6 +24,8 @@ import {
   getProfile,
   postRestaurantProfile,
 } from '../../store/actions/Restaurant.actions';
+import PageLoading from '../../components/PageLoading';
+import PageNotFound from '../../components/PageNotFound/NotFound';
   
 function RestaurantProfile() {
 
@@ -80,12 +82,11 @@ function RestaurantProfile() {
   function handleSubmit() {
 
     const update = dispatch( postRestaurantProfile ( profile ))
-    if(profile.loading) return <p>Loading...</p>
-    if(profile.error) return <p>Something went wrong</p>
+    if(profile.loading) return <PageLoading/>
+    if(profile.error) return <PageNotFound/>
       if(update){
         history.push('/restaurant-profile/view')
       }
-
   }
 
   const handleDeleteRestaurant = async (e) => {

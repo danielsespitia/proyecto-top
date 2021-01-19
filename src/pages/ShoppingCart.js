@@ -17,6 +17,7 @@ function ShoppingCart () {
       deposit={data.deposit}
       message={data.messageReservation}
       id={data.idRestaurantReservation}
+      loading={data.loading}
     />
     </>
   )

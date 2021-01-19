@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from '../store/actions/Restaurant.actions';
 import { useHistory } from 'react-router-dom';
+import PageLoading from '../components/PageLoading';
 
 function RestaurantProfileView() {
 
@@ -43,6 +44,12 @@ function RestaurantProfileView() {
     deposit,
     nit,
   } = dataRestaurant
+
+  if(dataRestaurant.loading) {
+    return(
+      <PageLoading/>
+    )
+  }
 
   return (
     <>

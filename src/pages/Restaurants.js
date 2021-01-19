@@ -3,6 +3,7 @@ import Restaurant  from '../components/Restaurant';
 import styled from 'styled-components';
 import ContainerContent from '../components/styled/ContainerContent';
 import logo from '../image/RestaurantLogo.png';
+import PageLoading from '../components/PageLoading';
 
 const Container = styled.div`
   display: grid;
@@ -29,6 +30,12 @@ function Restaurants () {
   }}) => {
     return { ...state } 
   })
+
+  if(data.loading) {
+    return(
+      <PageLoading/>
+    )
+  }
 
   return (
     <Container>

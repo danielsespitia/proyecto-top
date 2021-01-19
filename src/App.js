@@ -27,7 +27,6 @@ import PasswordRecovery from './pages/emails/PasswordRecovery/PasswordRecovery'
 import PasswordRecoveryReset from './pages/emails/PasswordRecovery/PasswordRecoveryReset'
 import PageNotFound from './components/PageNotFound/NotFound'
 
-
 function PrivateRoute(props) {
   
   const token = localStorage.getItem('token')
@@ -60,7 +59,6 @@ function App () {
             <Route exact path="/password-recovery" component={PasswordRecovery}/>
             <Route exact path="/password-reset/:token" component={PasswordRecoveryReset}/>
             <Route component={PageNotFound}/>
-            <Redirect exact to="/"/>
           </Switch>
         <Footer></Footer>
         </Router>
