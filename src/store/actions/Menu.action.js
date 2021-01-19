@@ -2,6 +2,8 @@ import axios from 'axios';
 import {
   LOADING,
   FINISHED_LOADING,
+  MINI_LOADING,
+  FINISHED_MINI_LOADING,
   FAILURED_MENU,
   DISHES_LIST,
   NAME_DISH,
@@ -128,7 +130,7 @@ export function createDish(data) {
 export function getDataDish(dishId) {
   return async function (dispatch) {
     const token = localStorage.getItem('token')
-    dispatch({ type: LOADING})
+    dispatch({ type: MINI_LOADING})
     try {
       const { data : { data } } = await axios({
         method: 'GET',
@@ -148,14 +150,14 @@ export function getDataDish(dishId) {
         type: FAILURED_MENU, 
         payload: error})
     } finally {
-      dispatch({ type: FINISHED_LOADING})
+      dispatch({ type: FINISHED_MINI_LOADING})
     }
   }
 };
 
 export function updateData(data, dishId) {
   return async function(dispatch) {
-    dispatch({ type: LOADING})
+    dispatch({ type: MINI_LOADING})
     try {
       const token = localStorage.getItem('token')
       await axios({
@@ -179,14 +181,14 @@ export function updateData(data, dishId) {
         payload: 'Lo sentimos, no pudimos enviar tu información',
       })
     } finally {
-      dispatch({ type: FINISHED_LOADING })
+      dispatch({ type: FINISHED_MINI_LOADING })
     }
   }
 };
 
 export function deleteData(dishId) {
   return async function(dispatch) {
-    dispatch({ type: LOADING })
+    dispatch({ type: MINI_LOADING })
     try {
       const token = localStorage.getItem('token')
       await axios({
@@ -208,7 +210,7 @@ export function deleteData(dishId) {
         payload: 'Lo sentimos, no pudimos realizar está operación'
       })
     } finally {
-      dispatch({ type: FINISHED_LOADING })
+      dispatch({ type: FINISHED_MINI_LOADING })
     }
   }
 };

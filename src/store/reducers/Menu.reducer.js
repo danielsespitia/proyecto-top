@@ -1,5 +1,7 @@
 export const LOADING = 'LOADING';
 export const FINISHED_LOADING = 'FINISHED_LOADING';
+export const MINI_LOADING = 'MINI_LOADING';
+export const FINISHED_MINI_LOADING = 'FINISHED_MINI_LOADING';
 export const FAILURED_MENU = 'FAILURED_MENU';
 
 export const NAME_DISH = 'NAME_DISH';
@@ -31,6 +33,7 @@ export const initialState= {
   file: null,
   dishesList: [],
   loading: false,
+  miniLoading: false,
   message: '',
   errorMessage: '',
   dataDishExist: false,
@@ -47,6 +50,16 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         loading: false,
+      }
+    case MINI_LOADING:
+      return {
+        ...state,
+        miniLoading: true,
+      }
+    case FINISHED_MINI_LOADING: 
+      return {
+        ...state,
+        miniLoading: false,
       }
     case FAILURED_MENU:
       return {
