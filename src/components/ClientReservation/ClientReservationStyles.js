@@ -16,7 +16,8 @@ export const BodyRight = styled.div `
   grid-area: bodyRight;
   padding: 0px;
   height: 25rem;
-  width: 40rem
+  width: 41rem;
+  overflow: auto;
 `;
 
 export const Select = styled.select ` 
@@ -53,6 +54,7 @@ export const Booking = styled.div `
   background: #FBF8F8;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  margin-bottom: 1rem;
 `;
 
 export const ButtonTracker = styled.button `

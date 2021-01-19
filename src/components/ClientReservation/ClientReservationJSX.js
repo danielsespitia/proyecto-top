@@ -19,7 +19,7 @@ import {
   Date
 } from './ClientReservationStyles'
 
-export function ClientReservationJSX ({ name, address, date, hour }) {
+export function ClientReservationJSX ({ data }) {
   return(
     <>
       <H1> Mis Reservas  </H1>
@@ -42,23 +42,31 @@ export function ClientReservationJSX ({ name, address, date, hour }) {
         />
         </BodyLeft>
         <BodyRight>
-          <Booking>
-            <ButtonTracker>Ver <br/> ubicación</ButtonTracker>
-            <ButtonChat>Chatiemos</ButtonChat>
-            <InfoBooking>
-              <ImgRestaurant
-                src= "https://png.pngtree.com/png-clipart/20190515/original/pngtree-winner-winner-chicken-dinner-badge-for-pubg-game-png-image_3724929.jpg"
-                alt= "restaurante"
-              />
-              <DataRestaurant>
-                <Name>{name}</Name>
-                <Address>{address}</Address>
-                <Date>{date}{hour}</Date>
-              </DataRestaurant>
-            </InfoBooking>
-            <ShowBooking>Ver reserva</ShowBooking>
-            <ButtonCancel>Cancelar</ButtonCancel>
-          </Booking>
+          {!!data &&
+          !!data.reservationData &&
+          !!data.reservationData.reservations &&
+          data.reservationData.reservations.length > 0 &&
+          data.reservationData.reservations.map((reservation) => {
+            return(
+              <Booking>
+                <ButtonTracker>Ver <br/> ubicación</ButtonTracker>
+                <ButtonChat>Chatiemos</ButtonChat>
+                <InfoBooking>
+                  <ImgRestaurant
+                    src= "https://png.pngtree.com/png-clipart/20190515/original/pngtree-winner-winner-chicken-dinner-badge-for-pubg-game-png-image_3724929.jpg"
+                    alt= "restaurante"
+                  />
+                  <DataRestaurant>
+                    <Name>{reservation.provider.name}</Name>
+                    <Address>{reservation.provider.address}</Address>
+                    <Date>{reservation.date};  {reservation.time}</Date>
+                  </DataRestaurant>
+                </InfoBooking>
+                <ShowBooking>Ver reserva</ShowBooking>
+                <ButtonCancel>Cancelar</ButtonCancel>
+              </Booking>
+            )
+          })}
         </BodyRight>
       </Desktopstructure>
     </>
