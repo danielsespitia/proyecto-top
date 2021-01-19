@@ -4,6 +4,7 @@ import {
   RESERVATION_LOADING,
   RESERVATION_FAILURE,
   RESERVATION_DATA,
+  RESERVATION_FINISHED,
 } from '../reducers/ClientReservation.reducer'
 
 export function getReservationData ( payload ) {
@@ -27,6 +28,8 @@ export function getListReservation() {
       dispatch({ type: RESERVATION_DATA, payload: data })
     }catch(error) {
       dispatch({ type: RESERVATION_FAILURE, payload: error })
+    }finally{
+      dispatch({ type: RESERVATION_FINISHED })
     }
   }
 }

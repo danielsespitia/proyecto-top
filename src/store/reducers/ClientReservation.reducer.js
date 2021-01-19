@@ -1,6 +1,7 @@
 export const RESERVATION_LOADING = 'RESERVATION_LOADING';
 export const RESERVATION_FAILURE = 'RESERVATION_FAILURE';
 export const RESERVATION_DATA = 'RESTAURANT_DATA';
+export const RESERVATION_FINISHED = 'RESERVATION_FINISHED';
 
 export const initialState = {
   reservationData: [],
@@ -24,6 +25,11 @@ export function clientReservationReducer (state = initialState, action){
       return {
         ...state,
         error: action.payload
+      }
+    case RESERVATION_FINISHED:
+      return{
+        ...state,
+        loading: false
       }
     default:
       return state

@@ -14,7 +14,6 @@ function ClientReservation () {
     ({ clientReservationReducer: { ...state } } ) => {
       return { ...state }
     })
-  console.log(data);
 
   return(
       <ClientReservationJSX
