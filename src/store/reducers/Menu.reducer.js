@@ -21,6 +21,9 @@ export const CLEAN_DISH_LIST = 'CLEAN_DISH_LIST';
 
 export const DISHES_LIST = 'DISHES_LIST';
 export const CREATE_DISH = 'CREATE_DISH';
+export const DELETE_DISH = 'DELETE_DISH';
+export const UPDATE_DISH = 'UPDATE_DISH';
+export const MESSAGE_DELETE_DISH = 'MESSAGE_DELETE_DISH';
 export const SET_DISH_ID = 'SET_DISH_ID';
 export const DATA_DISH_EXIST = 'DATA_DISH_EXIST';
 
@@ -38,6 +41,19 @@ export const initialState= {
   errorMessage: '',
   dataDishExist: false,
 };
+
+function removeItemSplice(array, action) {
+  let newArray = array.slice()
+  newArray.splice(action.index, 1)
+  return newArray
+}
+
+function updateItemSplice(array, action) {
+  let newArray = array.slice()
+  newArray.splice(action.index, 1, action.payload)
+  console.log(action.payload)
+  return newArray
+}
 
 export function menuReducer ( state = initialState, action ) {
   switch (action.type) {
@@ -105,6 +121,21 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         dishesList: action.payload,
+      }
+    case DELETE_DISH: 
+      return {
+        ...state,
+        dishesList: removeItemSplice(state.dishesList, action.payload)
+      }
+    case MESSAGE_DELETE_DISH:
+      return {
+        ...state,
+        message: 'Tu plato se ha eliminado exitosamente'
+      }
+    case UPDATE_DISH: 
+      return {
+        ...state,
+        dishesList: updateItemSplice(state.dishesList, action.index, action.payload)
       }
     case CANCEL_NAME_DISH:
       return {

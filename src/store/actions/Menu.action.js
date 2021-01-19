@@ -12,6 +12,9 @@ import {
   CATEGORY_DISH,
   IMAGE_DISH,
   CREATE_DISH,
+  DELETE_DISH,
+  UPDATE_DISH,
+  MESSAGE_DELETE_DISH,
   PUSH_DATA_DISH,
   CANCEL_DESCRIPTION_DISH,
   CANCEL_PRICE_DISH,
@@ -155,12 +158,12 @@ export function getDataDish(dishId) {
   }
 };
 
-export function updateData(data, dishId) {
+export function updateData(data, dishId, index) {
   return async function(dispatch) {
     dispatch({ type: MINI_LOADING})
     try {
       const token = localStorage.getItem('token')
-      await axios({
+      const response = await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url:`/dishes/${dishId}`,
@@ -170,6 +173,12 @@ export function updateData(data, dishId) {
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
+      console.log('here dispatch in http', response.data.data)
+      dispatch({
+        type: UPDATE_DISH,
+        index: index,
+        payload: response.data.data
+      })
       dispatch({
         type: CREATE_DISH,
         payload: 'Tu plato se ha actualizado exitosamente'
@@ -186,7 +195,7 @@ export function updateData(data, dishId) {
   }
 };
 
-export function deleteData(dishId) {
+export function deleteData(dishId, index) {
   return async function(dispatch) {
     dispatch({ type: MINI_LOADING })
     try {
@@ -199,10 +208,8 @@ export function deleteData(dishId) {
           Authorization: `Bearer ${token}`
         },
       });
-      dispatch({
-        type: CREATE_DISH,
-        payload: 'Tu plato se ha eliminado existosamente'
-      })
+      dispatch({ type: DELETE_DISH, payload: index})
+      dispatch({ type: MESSAGE_DELETE_DISH })
     }
     catch(err) {
       dispatch({

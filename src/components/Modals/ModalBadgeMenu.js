@@ -112,14 +112,14 @@ function ModalBadgeMenu({handleClose, index}) {
       dispatch(createDish(dataSend))
     }
     else { 
-      dispatch(updateData(dataSend, dishId))
+      dispatch(updateData(dataSend, dishId, index))
     }
   };
 
   const handleDelete = (e) => {
     e.preventDefault()
 
-    dispatch(deleteData(dishId))
+    dispatch(deleteData(dishId, index))
   };
 
   if(miniLoading) return <MiniLoading/>
