@@ -1,38 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { ClientReservationJSX } from '../components/ClientReservation/ClientReservationJSX';
-
-const reservationData = [
-  {
-    id: '100123',
-    restaurantName: 'Pollito D.C.',
-    restaurantAddress: 'Av 19 # 5N-12 local 2',
-    reservationDate: '27/11/2020',
-    reservationHour: '7:00 p.m.'
-  },
-  {
-    id: '100124',
-    restaurantName: 'Sushisito',
-    restaurantAddress: 'Av siempre viva 1 2 3',
-    reservationDate: '28/11/2020',
-    reservationHour: '6:00 p.m.'
-  },
-];
+import { getListReservation } from '../store/actions/ClientReservation.actions';
 
 function ClientReservation () {
+  const dispatch = useDispatch();
 
-  const [ restaurantName, setRestaurantName ] = useState(reservationData[0].restaurantName)
-  const [ restaurantAddress, setRestaurantAddress ] = useState('calle 14 # 25 *89')
-  const [ reservationDate, setReservationDate ] = useState('27/Dic/2020')
-  const [ reservationHour, setReservationHour ] = useState('7:00 pm') 
+  useEffect(() => {
+    dispatch(getListReservation())
+  }, [getListReservation]);
+
+  const data = useSelector(
+    ({ clientReservationReducer: { ...state } } ) => {
+      return { ...state }
+    })
+  console.log(data);
 
   return(
-    <ClientReservationJSX
-      name = {restaurantName}
-      address = {restaurantAddress}
-      date = {reservationDate}
-      hour = {reservationHour}
-    >
-    </ClientReservationJSX>
+      <ClientReservationJSX
+          data = {data}
+      >
+      </ClientReservationJSX>
   )
 }
 
