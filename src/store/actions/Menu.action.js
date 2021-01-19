@@ -22,9 +22,10 @@ import {
   DATA_DISH_EXIST,
 } from '../reducers/Menu.reducer';
 
-export function getData(menuId) {
+export function getData() {
   return function(dispatch) {
     dispatch({ type: LOADING })
+    const menuId = localStorage.getItem('menu')
     axios({
       method: 'GET',
       baseURL: process.env.REACT_APP_SERVER_URL,
