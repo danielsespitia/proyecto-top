@@ -164,11 +164,12 @@ function ModalBadgeMenu({handleClose, index}) {
             <LabelDish htmlFor="nameDish">
               <EditIconName icon="pen"/>
             </LabelDish>
-            <DescriptionDish className="Details__Description-dish"
+            <DescriptionDish className="Details__Description-dish" as="textarea"
               placeholder="Descripción del plato"
-              type="text"
               name="description"
               id="description"
+              rows="4"
+              cols="5"
               value={description}
               onChange={handleChange}
             />
