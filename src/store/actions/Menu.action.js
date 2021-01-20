@@ -126,6 +126,7 @@ export function createDish(dataSend) {
       })
     } finally {
       dispatch({ type: FINISHED_LOADING })
+      dispatch({ type: CANCEL_MESSAGE })
     }
   }
 };
@@ -217,6 +218,7 @@ export function deleteData(dishId, index) {
       })
     } finally {
       dispatch({ type: FINISHED_MINI_LOADING })
+      dispatch({ type: CANCEL_MESSAGE })
     }
   }
 };
