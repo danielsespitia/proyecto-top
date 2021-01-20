@@ -30,8 +30,22 @@ export const ContainerContentLabel = styled(ContainerButton)`
   margin-bottom: 12px;
 `;
 
-export const Message = styled.span `
-  font-size: 13px;
-  color: #0f31dd;
-  font-style: italic;
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Article = styled.article`
+  display: block;  
+`;
+
+export const SelectForm = styled.select`
+  display: inline;
+`;
+
+export const Label = styled.label`
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 15px;
 `;
