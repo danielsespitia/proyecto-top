@@ -116,7 +116,6 @@ export function createDish(dataSend) {
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
-      console.log(data)
       dispatch({ type: PUSH_DATA_DISH, payload: data})
       dispatch({ 
         type: CREATE_DISH,
