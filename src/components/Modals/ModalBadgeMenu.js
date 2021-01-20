@@ -107,7 +107,6 @@ function ModalBadgeMenu({handleClose, index}) {
     dataSend.append('category', category)
     if(file) {
       dataSend.append('file', file)
-      console.log('here save image', file)
     }
     if(!dataDishExist) { 
       dispatch(createDish(dataSend))
