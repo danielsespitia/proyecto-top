@@ -173,6 +173,7 @@ export function updateData(dataSend, dishId, index) {
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
+      console.log('here in action', data)
       dispatch({
         type: UPDATE_DISH,
         index: index,
