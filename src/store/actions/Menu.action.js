@@ -94,21 +94,22 @@ export function resetDataExist() {
   }
 };
 
-export function createDish(data) {
+export function createDish(dataSend) {
   return async function (dispatch) {
     dispatch({ type: LOADING })
     try {
       const token = localStorage.getItem('token');
-      await axios({
+      const { data } = await axios({
         method: 'POST',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: '/dishes/',
-        data,
+        data: dataSend,
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
+      dispatch({ type: PUSH_DATA_DISH, payload: data})
       dispatch({ 
         type: CREATE_DISH,
         payload: 'Tu plato se ha creado exitosamente'
@@ -118,7 +119,6 @@ export function createDish(data) {
       dispatch({ type: CANCEL_PRICE_DISH })
       dispatch({ type: CANCEL_CATEGORY_DISH })
       dispatch({ type: CANCEL_IMAGE_DISH })
-      dispatch({ type: PUSH_DATA_DISH, payload: data})
     } catch (err) {
       dispatch({
         type: FAILURED_MENU,
@@ -173,7 +173,6 @@ export function updateData(dataSend, dishId, index) {
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
-      console.log('here dispatch in http', data)
       dispatch({
         type: UPDATE_DISH,
         index: index,

@@ -119,7 +119,7 @@ export function menuReducer ( state = initialState, action ) {
     case PUSH_DATA_DISH:
       return {
         ...state,
-        dishesList: action.payload,
+        dishesList: state.dishesList.concat(action.payload),
       }
     case DELETE_DISH: 
       return {
