@@ -44,8 +44,8 @@ function RestaurantProfile() {
       return { ...state }
     })
 
-  if(profile.loading) return <p>Loading...</p>
-  if(profile.error) return <p>Something went wrong</p>
+  if(profile.loading) return <PageLoading/>
+  if(profile.error) return <PageNotFound/>
 
 
   const handleChange = (e) => {
