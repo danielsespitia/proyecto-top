@@ -44,8 +44,8 @@ function RestaurantProfile() {
       return { ...state }
     })
 
-  if(profile.loading) return <p>Loading...</p>
-  if(profile.error) return <p>Something went wrong</p>
+  if(profile.loading) return <PageLoading/>
+  if(profile.error) return <PageNotFound/>
 
 
   const handleChange = (e) => {
@@ -139,7 +139,6 @@ function RestaurantProfile() {
             src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
             alt="logo"
           />
-          <MyLinkToMore>Sucursales</MyLinkToMore>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
           >
