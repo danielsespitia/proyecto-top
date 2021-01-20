@@ -11,6 +11,7 @@ import {
   PRICE_DISH,
   CATEGORY_DISH,
   IMAGE_DISH,
+  IMAGE_RENDER_DISH,
   CREATE_DISH,
   DELETE_DISH,
   UPDATE_DISH,
@@ -81,6 +82,12 @@ export function setImage( payload ) {
   }
 };
 
+export function setImageRender( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: IMAGE_RENDER_DISH, payload })
+  }
+};
+
 export function setDishId( payload ) {
   return function ( dispatch ) {
     dispatch({ type: SET_DISH_ID, payload })
@@ -109,6 +116,7 @@ export function createDish(dataSend) {
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
+      console.log(data)
       dispatch({ type: PUSH_DATA_DISH, payload: data})
       dispatch({ 
         type: CREATE_DISH,
@@ -149,6 +157,7 @@ export function getDataDish(dishId) {
       dispatch({ type: CATEGORY_DISH, payload: data.category })
       dispatch({ type: PRICE_DISH, payload: data.price })
       dispatch({ type: IMAGE_DISH, payload: data.file })
+      dispatch({ type: IMAGE_RENDER_DISH, payload: data.file })
     } catch(error) {
       dispatch({ 
         type: FAILURED_MENU, 

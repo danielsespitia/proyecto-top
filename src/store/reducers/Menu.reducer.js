@@ -9,6 +9,7 @@ export const PRICE_DISH = 'PRICE_DISH';
 export const DESCRIPTION_DISH = 'DESCRIPTION_DISH';
 export const CATEGORY_DISH = 'CATEGORY_DISH';
 export const IMAGE_DISH = 'IMAGE_DISH';
+export const IMAGE_RENDER_DISH = 'IMAGE_RENDER_DISH';
 export const PUSH_DATA_DISH = 'PUSH_DATA_DISH';
 
 export const CANCEL_NAME_DISH = 'CANCEL_NAME_DISH';
@@ -34,6 +35,7 @@ export const initialState= {
   description: '',
   category: '',
   file: null,
+  imageRender:null,
   dishesList: [],
   loading: false,
   miniLoading: false,
@@ -105,6 +107,11 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         file: action.payload,
+      }
+    case IMAGE_RENDER_DISH:
+      return {
+        ...state,
+        imageRender: action.payload,
       }
     case DISHES_LIST:
       return {
