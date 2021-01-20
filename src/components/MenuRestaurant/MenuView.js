@@ -53,7 +53,7 @@ function MenuView() {
           </figure>
         </BodyLeft>
         <BodyRight className="Container__right">
-        {!!dishesList && dishesList.length > 0 && dishesList.map(({_id, nameDish, price, description, category, file}, index) => {
+        {!!dishesList && dishesList.length > 0 ? dishesList.map(({_id, nameDish, price, description, category, file}, index) => {
           return (
             <BadgeMenu
               key={_id}
@@ -65,7 +65,7 @@ function MenuView() {
               file={file}
               index={index}
             />
-          )})}
+          )}) : ( <p>Agrega un nuevo plato para que puedas ofrecerle a nuestros clientes más opciones</p>)}
         </BodyRight>
       </DesktopStructure>
     </>

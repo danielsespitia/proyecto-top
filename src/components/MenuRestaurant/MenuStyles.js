@@ -39,4 +39,6 @@ export const BodyRight = styled(ContainerContent)`
   background-color: revert;
   border-radius: revert;
   box-shadow: revert;
+  overflow-y: scroll;
+  height: 100vh;
 `;
