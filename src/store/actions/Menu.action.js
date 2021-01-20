@@ -158,26 +158,26 @@ export function getDataDish(dishId) {
   }
 };
 
-export function updateData(data, dishId, index) {
+export function updateData(dataSend, dishId, index) {
   return async function(dispatch) {
     dispatch({ type: MINI_LOADING})
     try {
       const token = localStorage.getItem('token')
-      const response = await axios({
+      const {data : { data }} = await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url:`/dishes/${dishId}`,
-        data,
+        data: dataSend,
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data; boundary=something'
         },
       });
-      console.log('here dispatch in http', response.data.data)
+      console.log('here dispatch in http', data)
       dispatch({
         type: UPDATE_DISH,
         index: index,
-        payload: response.data.data
+        payload: data
       })
       dispatch({
         type: CREATE_DISH,

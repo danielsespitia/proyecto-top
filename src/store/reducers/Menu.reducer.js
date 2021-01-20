@@ -48,10 +48,9 @@ function removeItemSplice(array, action) {
   return newArray
 }
 
-function updateItemSplice(array, action) {
+function updateItemSplice(array, index, payload) {
   let newArray = array.slice()
-  newArray.splice(action.index, 1, action.payload)
-  console.log(action.payload)
+  newArray.splice(index, 1, payload)
   return newArray
 }
 
