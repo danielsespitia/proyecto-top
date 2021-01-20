@@ -14,7 +14,7 @@ import {
 import ModalBadgeMenu from '../Modals/ModalBadgeMenu';
 import { setDishId, cleanForm, } from '../../store/actions/Menu.action';
 
-function BadgeMenu({ nameDish, price, description, category, file, id }) {
+function BadgeMenu({ nameDish, price, description, category, file, id, index }) {
 
   const dispatch = useDispatch();
 
@@ -70,6 +70,7 @@ function BadgeMenu({ nameDish, price, description, category, file, id }) {
             descriptionRender={description}
             categoryRender={category}
             fileRender={file}
+            index={index}
           /> ) : (null)}
       </DetailsEdit>
     </ContainerDetails>

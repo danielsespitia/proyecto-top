@@ -7,19 +7,17 @@ import PageLoading from '../components/PageLoading';
 function MenuRestaurant() {
 
   const dispatch = useDispatch();
-
-  const { menuId } = useSelector(({ restaurantReducer: { menuId }}) => ({ menuId }))
   
   const { dishesList, loading } = useSelector(({ menuReducer: { dishesList, loading}}) => ({ dishesList, loading }))
 
   useEffect(() => {
-    dispatch(getData(menuId))
+    dispatch(getData())
   }, [dishesList.length])
-
+  
   if(loading) return <PageLoading/>
 
   return (
-      <MenuView/>
+    <MenuView/>
   )
 }
 

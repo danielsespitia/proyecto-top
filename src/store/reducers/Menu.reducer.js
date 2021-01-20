@@ -1,5 +1,7 @@
 export const LOADING = 'LOADING';
 export const FINISHED_LOADING = 'FINISHED_LOADING';
+export const MINI_LOADING = 'MINI_LOADING';
+export const FINISHED_MINI_LOADING = 'FINISHED_MINI_LOADING';
 export const FAILURED_MENU = 'FAILURED_MENU';
 
 export const NAME_DISH = 'NAME_DISH';
@@ -7,6 +9,7 @@ export const PRICE_DISH = 'PRICE_DISH';
 export const DESCRIPTION_DISH = 'DESCRIPTION_DISH';
 export const CATEGORY_DISH = 'CATEGORY_DISH';
 export const IMAGE_DISH = 'IMAGE_DISH';
+export const IMAGE_RENDER_DISH = 'IMAGE_RENDER_DISH';
 export const PUSH_DATA_DISH = 'PUSH_DATA_DISH';
 
 export const CANCEL_NAME_DISH = 'CANCEL_NAME_DISH';
@@ -19,6 +22,9 @@ export const CLEAN_DISH_LIST = 'CLEAN_DISH_LIST';
 
 export const DISHES_LIST = 'DISHES_LIST';
 export const CREATE_DISH = 'CREATE_DISH';
+export const DELETE_DISH = 'DELETE_DISH';
+export const UPDATE_DISH = 'UPDATE_DISH';
+export const MESSAGE_DELETE_DISH = 'MESSAGE_DELETE_DISH';
 export const SET_DISH_ID = 'SET_DISH_ID';
 export const DATA_DISH_EXIST = 'DATA_DISH_EXIST';
 
@@ -29,12 +35,26 @@ export const initialState= {
   description: '',
   category: '',
   file: null,
+  imageRender:null,
   dishesList: [],
   loading: false,
+  miniLoading: false,
   message: '',
   errorMessage: '',
   dataDishExist: false,
 };
+
+function removeItemSplice(array, action) {
+  let newArray = array.slice()
+  newArray.splice(action.index, 1)
+  return newArray
+}
+
+function updateItemSplice(array, index, payload) {
+  let newArray = array.slice()
+  newArray.splice(index, 1, payload)
+  return newArray
+}
 
 export function menuReducer ( state = initialState, action ) {
   switch (action.type) {
@@ -47,6 +67,16 @@ export function menuReducer ( state = initialState, action ) {
       return {
         ...state,
         loading: false,
+      }
+    case MINI_LOADING:
+      return {
+        ...state,
+        miniLoading: true,
+      }
+    case FINISHED_MINI_LOADING: 
+      return {
+        ...state,
+        miniLoading: false,
       }
     case FAILURED_MENU:
       return {
@@ -78,6 +108,11 @@ export function menuReducer ( state = initialState, action ) {
         ...state,
         file: action.payload,
       }
+    case IMAGE_RENDER_DISH:
+      return {
+        ...state,
+        imageRender: action.payload,
+      }
     case DISHES_LIST:
       return {
         ...state,
@@ -91,7 +126,22 @@ export function menuReducer ( state = initialState, action ) {
     case PUSH_DATA_DISH:
       return {
         ...state,
-        dishesList: action.payload,
+        dishesList: state.dishesList.concat(action.payload),
+      }
+    case DELETE_DISH: 
+      return {
+        ...state,
+        dishesList: removeItemSplice(state.dishesList, action.payload)
+      }
+    case MESSAGE_DELETE_DISH:
+      return {
+        ...state,
+        message: 'Tu plato se ha eliminado exitosamente'
+      }
+    case UPDATE_DISH: 
+      return {
+        ...state,
+        dishesList: updateItemSplice(state.dishesList, action.index, action.payload)
       }
     case CANCEL_NAME_DISH:
       return {

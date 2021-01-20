@@ -79,6 +79,7 @@ export function getProfile() {
       dispatch({ type: RESTAURANT_NIT, payload: data.nit})
       dispatch({ type: RESTAURANT_DEPOSIT, payload: data.deposit})
       dispatch({ type: MENU_ID, payload: data.menu })
+      localStorage.setItem('menu', data.menu)
     }catch(error) {
     dispatch({ type: RESTAURANT_FAILURE, payload: error})
   }finally {

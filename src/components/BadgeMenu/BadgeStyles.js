@@ -28,6 +28,8 @@ export const DetailsImage = styled.figure`
 export const Image = styled.img`
   width: inherit;
   height: inherit;
+  border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const DetailsDish = styled.span`

@@ -25,11 +25,12 @@ import {
   Message,
 } from './ModalStyles';
 import { useDispatch, useSelector, } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { 
   setCategory, 
   setDescription, 
-  setImage, 
+  setImage,
+  setImageRender, 
   setNameDish, 
   setPrice, 
   createDish, 
@@ -42,9 +43,7 @@ import MiniLoading from '../MiniLoading';
 
 
 
-function ModalBadgeMenu({handleClose}) {
-
-  const [imageRender, setImageRender] = useState(null);
+function ModalBadgeMenu({handleClose, index, fileRender}) {
 
   const dispatch = useDispatch();
   
@@ -55,12 +54,11 @@ function ModalBadgeMenu({handleClose}) {
       return { ...state }
   })
     
-  const { nameDish, description, price, category, file, message, dishId, dataDishExist, loading, errorMessage } = data;
+  const { nameDish, description, price, category, file, imageRender, message, dishId, dataDishExist, miniLoading, errorMessage } = data;
 
   useEffect(() => {
     if(dataDishExist) { 
       dispatch(getDataDish(dishId))
-      setImageRender(file)
     }
       return()  => {
       dispatch(cleanForm())
@@ -70,7 +68,7 @@ function ModalBadgeMenu({handleClose}) {
   const readFile = (image) => {
   const reader = new FileReader();
 
-  reader.onload = e => setImageRender(e.target.result)
+  reader.onload = e => dispatch(setImageRender(e.target.result))
 
   reader.readAsDataURL(image) 
   };
@@ -112,17 +110,17 @@ function ModalBadgeMenu({handleClose}) {
       dispatch(createDish(dataSend))
     }
     else { 
-      dispatch(updateData(dataSend, dishId))
+      dispatch(updateData(dataSend, dishId, index))
     }
   };
 
   const handleDelete = (e) => {
     e.preventDefault()
 
-    dispatch(deleteData(dishId))
+    dispatch(deleteData(dishId, index))
   };
 
-  if(loading) return <MiniLoading/>
+  if(miniLoading) return <MiniLoading/>
 
   return (
     <ModalBadgeMenuContainer>
@@ -133,8 +131,8 @@ function ModalBadgeMenu({handleClose}) {
           <DetailsImageRender className="Container__details-image">
           {!!imageRender && (
             <Image
-            className="Details__image"
-            src={imageRender}
+              className="Details__image"
+              src={imageRender}
               alt="Imagen del plato"
             />
           )}
@@ -164,11 +162,12 @@ function ModalBadgeMenu({handleClose}) {
             <LabelDish htmlFor="nameDish">
               <EditIconName icon="pen"/>
             </LabelDish>
-            <DescriptionDish className="Details__Description-dish"
+            <DescriptionDish className="Details__Description-dish" as="textarea"
               placeholder="Descripción del plato"
-              type="text"
               name="description"
               id="description"
+              rows="4"
+              cols="5"
               value={description}
               onChange={handleChange}
             />
