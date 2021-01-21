@@ -135,7 +135,10 @@ function RestaurantProfile() {
 
   const readFile = (file) => {
     const reader = new FileReader()
-    reader.onload = e => setImage(e.target.result)
+    reader.onload = e => {
+      setImage(e.target.result)
+
+    }
     reader.readAsDataURL(file)
   }
 
@@ -149,12 +152,14 @@ function RestaurantProfile() {
     data.append('file', file)
       
     try {
+      const token = localStorage.getItem('token')
       await axios({
-        method: 'POST',
-        baseURL: 'REACT_APP_SERVER_URL',
-        url: '/logo',
+        method: 'PUT',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/restaurants',
         data,
         headers: {
+          Authorization: `Bearer ${token}`, 
           'Content-type': 'multipart/form-data'
         }
       })
