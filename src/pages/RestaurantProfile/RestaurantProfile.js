@@ -5,7 +5,7 @@ import {
   BodyRight,
   MyLinkToMore,
 } from './RestaurantProfileStyles';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -29,6 +29,8 @@ import PageNotFound from '../../components/PageNotFound/NotFound';
   
 function RestaurantProfile() {
 
+  const [image, setImage] = useState(null)
+  const [file, setFile] = useState(null)
   const { logout } = useContext(AuthContext)
   const dispatch = useDispatch();
   const history = useHistory();
@@ -131,14 +133,57 @@ function RestaurantProfile() {
     });
   };
 
+  const readFile = (file) => {
+    const reader = new FileReader()
+    reader.onload = e => setImage(e.target.result)
+    reader.readAsDataURL(file)
+  }
+
+  async function handleChangeLogo(e) {
+    e.preventDefault()
+    readFile(e.target.files[0])
+    setFile(e.target.files[0])
+
+    const data = new FormData()
+    data.append('image', image)
+    data.append('file', file)
+      
+    try {
+      await axios({
+        method: 'POST',
+        baseURL: 'REACT_APP_SERVER_URL',
+        url: '/logo',
+        data,
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      })
+    }catch(error) {
+      setImage(null)
+      swal('Tu imagen no pudo ser cargada','','error')
+    }
+  }
+
     return (
       <>
       <Desktopstructure>
         <BodyLeft>
           <RestLogo 
-            src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
+            src={image}
             alt="logo"
           />
+          <form >
+            <label htmlfor="file">
+              Logo
+            </label>
+            <input 
+              type="file"
+              accept="image/*"
+              name="file"
+              id="file"
+              onChange={handleChangeLogo}
+            />
+          </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
           >
