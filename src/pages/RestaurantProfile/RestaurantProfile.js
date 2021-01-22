@@ -189,20 +189,22 @@ function RestaurantProfile() {
                 alt="logo"
               />
             </label>
-            <input 
-              hidden
-              type="file"
-              accept="image/*"
-              name="file"
-              id="file"
-              onChange={handleChangeLogo}
-            />
-            <LogoButton
-              hidden={hiddenButton}
-              type="submit"
-              value="Confirmar logo w"
-            >
-            </LogoButton>
+            <div>
+              <input 
+                hidden
+                type="file"
+                accept="image/*"
+                name="file"
+                id="file"
+                onChange={handleChangeLogo}
+              />
+              <LogoButton
+                hidden={hiddenButton}
+                type="submit"
+                value="Confirmar logo"
+              >
+              </LogoButton>
+            </div>
           </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
