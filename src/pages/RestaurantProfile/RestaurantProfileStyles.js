@@ -41,12 +41,3 @@ export const MyLinkToMore = styled(Link)`
   color: #2F80ED;
   text-decoration-line: underline;
 `;
-export const LabelForLogo = styled.label`
-  background-color: indigo;
-  color: white;
-  padding: 6px;
-  border-radius: 7px;
-  cursor: pointer;
-  grid-area: file;
-  place-self: baseline;
-`;

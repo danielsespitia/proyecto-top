@@ -33,6 +33,7 @@ function RestaurantProfile() {
 
   const [logo, setLogo] = useState(null)
   const [file, setFile] = useState(null)
+  const [disabledLogoButton, setDisabledLogoButton] = useState('disabled')
   const { logout } = useContext(AuthContext)
   const dispatch = useDispatch();
   const history = useHistory();
@@ -142,6 +143,7 @@ function RestaurantProfile() {
 
     }
     reader.readAsDataURL(file)
+    setDisabledLogoButton('')
   }
 
   async function handleChangeLogo(e) {
@@ -181,22 +183,22 @@ function RestaurantProfile() {
       <>
       <Desktopstructure>
         <BodyLeft>
-          <RestLogo 
-            src={profile.logo}
-            alt="logo"
-          />
           <form onSubmit={handleSubmitLogo}>
+            <label htmlFor="file">
+              <RestLogo 
+                src={profile.logo}
+                alt="logo"
+              />
+            </label>
             <input 
-              //hidden
+              hidden
               type="file"
               accept="image/*"
               name="file"
               id="file"
               onChange={handleChangeLogo}
             />
-            <LabelForLogo htmlfor="file">
-              logo
-            </LabelForLogo>
+            <button disabled={disabledLogoButton}>Confirmar cambio</button>
           </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
