@@ -4,6 +4,7 @@ import {
   BodyLeft,
   BodyRight,
   MyLinkToMore,
+  LabelForLogo,
 } from './RestaurantProfileStyles';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -154,8 +155,9 @@ function RestaurantProfile() {
   async function handleSubmitLogo(e){
     e.preventDefault()
     const data = new FormData()
-    data.append('logo', logo)
+    data.append('logo', profile.logo)
     data.append('file', file)
+    data.append('imageType', 'Restaurant_logo')
     try {
       const token = localStorage.getItem('token')
       await axios({
@@ -184,17 +186,17 @@ function RestaurantProfile() {
             alt="logo"
           />
           <form onSubmit={handleSubmitLogo}>
-            <label htmlfor="file">
-              Logo
-            </label>
             <input 
+              //hidden
               type="file"
               accept="image/*"
               name="file"
               id="file"
               onChange={handleChangeLogo}
             />
-            <button>cargar imagen</button>
+            <LabelForLogo htmlfor="file">
+              logo
+            </LabelForLogo>
           </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'

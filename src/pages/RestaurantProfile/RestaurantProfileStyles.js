@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const RestLogo = styled.img `
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   display: block;
   margin-left: auto;
@@ -40,4 +40,13 @@ export const MyLinkToMore = styled(Link)`
   font-size: 16px;
   color: #2F80ED;
   text-decoration-line: underline;
+`;
+export const LabelForLogo = styled.label`
+  background-color: indigo;
+  color: white;
+  padding: 6px;
+  border-radius: 7px;
+  cursor: pointer;
+  grid-area: file;
+  place-self: baseline;
 `;
