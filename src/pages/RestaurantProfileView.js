@@ -28,7 +28,6 @@ function RestaurantProfileView() {
       return { ...state }
     })
     
-  console.log('datlogo::',dataRestaurant.logo)
     if(!dataRestaurant.logo){
       dataRestaurant.logo = 'https://res.cloudinary.com/alamesa/image/upload/v1611345897/Restaurant-Logo/hdkeeircptebxsvdqgdt.png'
     }
