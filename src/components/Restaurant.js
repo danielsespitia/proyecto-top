@@ -1,5 +1,12 @@
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import {
+  setRestaurantId,
+  setRestaurantName,
+  setRestaurantDeposit,
+  setRestaurantMenuId,
+  } from '../store/actions/Reservation.actions'
 
 const Article = styled.article`
   margin: 5px;
@@ -31,7 +38,17 @@ const Button = styled.button`
 `;
 
 
-function Restaurant ( { id, name, logo } ) {
+function Restaurant ({ id, name, deposit, logo, menu }) {
+
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(setRestaurantId(id))
+    dispatch(setRestaurantName(name))
+    dispatch(setRestaurantDeposit(deposit))
+    dispatch(setRestaurantMenuId(menu))
+  }
+
   return (
     <Article>
       <Img 
@@ -45,6 +62,7 @@ function Restaurant ( { id, name, logo } ) {
           }}>
           <Button
             type='button'
+            onClick={handleClick}
           >
             Reservar Ahora
           </Button>
@@ -53,4 +71,5 @@ function Restaurant ( { id, name, logo } ) {
     </Article>
   )
 }
+
 export default Restaurant

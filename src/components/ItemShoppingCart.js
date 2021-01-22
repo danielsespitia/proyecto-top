@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import ContainerContent from './styled/ContainerContent'
 import ButtonPrimary from './styled/ButtonPrimary'
+import { Link } from 'react-router-dom'
+import PageLoading from './PageLoading'
 
 const ContainerTitleShopping = styled.span`
   display: flex;
@@ -26,12 +28,28 @@ const TextStrongTotal = styled.td`
   font-weight: 800;
 `;
 
-export function ListShoppingCart ( { deposit } ) {
+export const Message = styled.span`
+  font-size: 12px;
+  color: #0f31dd;
+  font-style: italic;
+  font-weight: 800;
+`;
+
+export function ListShoppingCart ( { deposit, message, id, loading } ) {
+  
+  
+  const total = deposit;
+
+  const paymentConfirm = `/restaurants/${id}/reservation/confirm`;
+
+  if(loading) return <PageLoading/>
+
   return(
     <section>
       <ContainerTitleShopping>
+        <Message>{message}</Message>
         <h2>Mi carrito</h2>
-        <FontAwesomeIcon icon={faShoppingCart}/>
+        <FontAwesomeIcon icon="shopping-cart"/>
       </ContainerTitleShopping>
       <ContainerContentShoppingList>
         <LabelTable>
@@ -41,10 +59,10 @@ export function ListShoppingCart ( { deposit } ) {
           </tr>
           <tr>
             <TextStrongTotal>Total</TextStrongTotal>
-            <td>{deposit}</td>
+            <td>{total}</td>
           </tr>
           </LabelTable>
-        <ButtonPrimary as="button">Finalizar tu orden</ButtonPrimary>
+        <ButtonPrimary as={Link} to={paymentConfirm}>Finalizar tu orden</ButtonPrimary>
       </ContainerContentShoppingList>
     </section>
   )

@@ -17,6 +17,8 @@ a {
   color: black;
 }
 
-input {
+input,
+textarea,
+button {
   font-family: "Montserrat Alternates", sans-serif;
 }

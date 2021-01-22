@@ -1,6 +1,16 @@
+import coverPcAlamesa from '../image/coverPcAlamesa.png'
+import styled from 'styled-components'
+
+const ContainerFigure = styled.figure`
+  display: flex;
+  justify-content: center;
+`;
+
 function Home () {
   return (
-    <h1>Home</h1>
+      <ContainerFigure>
+        <img src={coverPcAlamesa} alt='Cover de Alamesa reservas'/>
+      </ContainerFigure>
   )
 }
 

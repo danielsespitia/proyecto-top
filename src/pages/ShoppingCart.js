@@ -1,23 +1,25 @@
-import React from 'react'
+import { useSelector } from 'react-redux'
 import { ListShoppingCart } from '../components/ItemShoppingCart'
-import { data } from '../Data'
 
-const getRandomRestaurant = Math.round(Math.random()*(5-0) + 0)
+function ShoppingCart () {
+  
+  const data = useSelector(
+    ({reservationReducer: {
+      ...state 
+    }}) => {
+    return { ...state }
+  })
 
-const idRandomRestaurant = data[getRandomRestaurant]
-class ShoppingCart extends React.Component {
-  state = {
-    restaurants: data,
-  }
-  render() {
-    return(
-      <>
-      <ListShoppingCart
-        key={idRandomRestaurant.id}
-        deposit={idRandomRestaurant.deposit}
-      />
-      </>
-    )
-  }
+  return(
+    <>
+    <ListShoppingCart
+      key={data.idRestaurantReservation}
+      deposit={data.deposit}
+      message={data.messageReservation}
+      id={data.idRestaurantReservation}
+      loading={data.loading}
+    />
+    </>
+  )
 }
 export default ShoppingCart

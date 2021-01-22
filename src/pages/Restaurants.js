@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import Restaurant  from '../components/Restaurant'
-import styled from 'styled-components'
-import { data } from '../Data'
-import ContainerContent from '../components/styled/ContainerContent'  
+import { useSelector } from 'react-redux';
+import Restaurant  from '../components/Restaurant';
+import styled from 'styled-components';
+import ContainerContent from '../components/styled/ContainerContent';
+import logo from '../image/RestaurantLogo.png';
+import PageLoading from '../components/PageLoading';
 
 const Container = styled.div`
   display: grid;
@@ -21,32 +22,41 @@ const Section = styled.section`
   grid-gap: 10px;
 `;
 
-class Restaurants extends Component {
+function Restaurants () {
 
-  state = {
-    restaurants: data
-  }
-  render () {
-    const { restaurants } = this.state
-    return (
-      <Container>
-        <ContainerList>
-          <Section>
-            {!!restaurants && restaurants.length > 0 && restaurants.map(({id, name, logo}) => {
-              return (
-                <Restaurant 
-                  key={id}
-                  id={id}
-                  name={name}
-                  logo={logo}
-                />
-              )
-            })}
-          </Section>
-        </ContainerList>
-      </Container>
+  const data = useSelector(
+    ({reservationReducer: {
+    ...state
+  }}) => {
+    return { ...state } 
+  })
+
+  if(data.loading) {
+    return(
+      <PageLoading/>
     )
   }
+
+  return (
+    <Container>
+      <ContainerList>
+        <Section>
+          {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit, menu }) => {
+            return (
+              <Restaurant 
+                key={_id}
+                id={_id}
+                name={name}
+                deposit={deposit}
+                menu={menu}
+                logo={logo}
+              />
+            )
+          })}
+        </Section>
+      </ContainerList>
+    </Container>
+  )
 }
 
 export default Restaurants
