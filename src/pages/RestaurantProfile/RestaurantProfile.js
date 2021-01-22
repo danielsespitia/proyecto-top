@@ -15,6 +15,7 @@ import RestaurantProfileForm from '../../components/RestaurantProfileForm/Restau
 import { 
   getName,
   getEmail,
+  getLogo,
   getAddress,
   getPhone,
   getScheduleFrom,
@@ -136,7 +137,7 @@ function RestaurantProfile() {
   const readFile = (file) => {
     const reader = new FileReader()
     reader.onload = e => {
-      setLogo(e.target.result)
+      dispatch(getLogo(e.target.result))
 
     }
     reader.readAsDataURL(file)
@@ -179,7 +180,7 @@ function RestaurantProfile() {
       <Desktopstructure>
         <BodyLeft>
           <RestLogo 
-            src={logo}
+            src={profile.logo}
             alt="logo"
           />
           <form onSubmit={handleSubmitLogo}>
