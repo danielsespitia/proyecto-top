@@ -170,7 +170,7 @@ function RestaurantProfile() {
           'Content-type': 'multipart/form-data'
         }
       })
-      swal('Logo actualizado correctamente', '', 'info')
+      swal('Logo actualizado correctamente', '', 'success')
       setHiddenButton('disabled')
 
     }catch(error) {
