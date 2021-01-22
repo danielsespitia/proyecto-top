@@ -29,7 +29,7 @@ import PageNotFound from '../../components/PageNotFound/NotFound';
   
 function RestaurantProfile() {
 
-  const [image, setImage] = useState(null)
+  const [logo, setLogo] = useState(null)
   const [file, setFile] = useState(null)
   const { logout } = useContext(AuthContext)
   const dispatch = useDispatch();
@@ -136,7 +136,7 @@ function RestaurantProfile() {
   const readFile = (file) => {
     const reader = new FileReader()
     reader.onload = e => {
-      setImage(e.target.result)
+      setLogo(e.target.result)
 
     }
     reader.readAsDataURL(file)
@@ -147,16 +147,20 @@ function RestaurantProfile() {
     readFile(e.target.files[0])
     setFile(e.target.files[0])
 
-    const data = new FormData()
-    data.append('image', image)
-    data.append('file', file)
       
+  }
+
+  async function handleSubmitLogo(e){
+    e.preventDefault()
+    const data = new FormData()
+    data.append('logo', logo)
+    data.append('file', file)
     try {
       const token = localStorage.getItem('token')
       await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
-        url: '/restaurants',
+        url: '/restaurants/update-logo',
         data,
         headers: {
           Authorization: `Bearer ${token}`, 
@@ -164,9 +168,10 @@ function RestaurantProfile() {
         }
       })
     }catch(error) {
-      setImage(null)
+      setLogo(null)
       swal('Tu imagen no pudo ser cargada','','error')
     }
+
   }
 
     return (
@@ -174,10 +179,10 @@ function RestaurantProfile() {
       <Desktopstructure>
         <BodyLeft>
           <RestLogo 
-            src={image}
+            src={logo}
             alt="logo"
           />
-          <form >
+          <form onSubmit={handleSubmitLogo}>
             <label htmlfor="file">
               Logo
             </label>
@@ -188,6 +193,7 @@ function RestaurantProfile() {
               id="file"
               onChange={handleChangeLogo}
             />
+            <button>cargar imagen</button>
           </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
