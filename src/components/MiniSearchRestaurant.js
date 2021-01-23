@@ -5,7 +5,9 @@ import {
   setRestaurantId,
   setRestaurantName,
   setRestaurantDeposit,
+  setRestaurantMenuId,
 } from '../store/actions/Reservation.actions';
+import { setSearch } from '../store/actions/Restaurant.actions';
 
 const LinkToRestaurant = styled(Link)`
   font-size: 14px;
@@ -14,7 +16,7 @@ const LinkToRestaurant = styled(Link)`
   };
 `;
 
-function MiniSearchRestaurant({ id, name, deposit, }) {
+function MiniSearchRestaurant({ id, name, deposit, menu }) {
 
   const dispatch = useDispatch();
 
@@ -22,6 +24,8 @@ function MiniSearchRestaurant({ id, name, deposit, }) {
     dispatch(setRestaurantId(id))
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
+    dispatch(setRestaurantMenuId(menu))
+    dispatch(setSearch(''))
   };
 
   return (
