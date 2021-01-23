@@ -1,3 +1,6 @@
+import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { getDeleteReservation } from '../../store/actions/ClientReservation.actions';
 import Desktopstructure from '../styled/DesktopStructure'
 import {
   BodyLeft,
@@ -20,6 +23,13 @@ import {
 } from './ClientReservationStyles'
 
 export function ClientReservationJSX ({ data }) {
+  const dispatch = useDispatch();
+
+  const handleDeleteReservation = (e, idReservation, index) => {
+    e.preventDefault();
+    dispatch(getDeleteReservation(idReservation, index))
+  };
+
   return(
     <>
       <H1> Mis Reservas  </H1>
@@ -46,9 +56,11 @@ export function ClientReservationJSX ({ data }) {
           !!data.reservationData &&
           !!data.reservationData.reservations &&
           data.reservationData.reservations.length > 0 &&
-          data.reservationData.reservations.map((reservation) => {
+          data.reservationData.reservations.map((reservation, index) => {
             return(
-              <Booking>
+              <Booking
+                key= {reservation._id}
+              >
                 <ButtonTracker>Ver <br/> ubicación</ButtonTracker>
                 <ButtonChat>Chatiemos</ButtonChat>
                 <InfoBooking>
@@ -63,7 +75,9 @@ export function ClientReservationJSX ({ data }) {
                   </DataRestaurant>
                 </InfoBooking>
                 <ShowBooking>Ver reserva</ShowBooking>
-                <ButtonCancel>Cancelar</ButtonCancel>
+                <ButtonCancel
+                  onClick = { e => handleDeleteReservation(e, reservation._id, index)}
+                >Cancelar</ButtonCancel>
               </Booking>
             )
           })}
