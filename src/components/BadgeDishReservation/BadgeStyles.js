@@ -68,3 +68,7 @@ export const Image = styled.img`
   object-fit: cover;
   border-radius: 10px;
 `;
+
+export const ContainerDescription = styled.div`
+  width: 100px;
+`;
