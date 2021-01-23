@@ -6,7 +6,6 @@ import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext';
 import { ClientProfileForm } from '../components/ClientProfileForm/ClientProfileForm';
 import { 
-  setClientId,
   setClientName,
   setClientLastName,
   setClientEmail,
@@ -30,7 +29,6 @@ function ClientProfile () {
   const [hiddenButton, setHiddenButton] = useState('disabled')
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(getClient())
     setHiddenButton('disabled')
@@ -49,7 +47,6 @@ function ClientProfile () {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     switch(name) {
       case 'name':
         dispatch(setClientName(value))
@@ -61,14 +58,12 @@ function ClientProfile () {
         dispatch(setClientEmail(value))
         break;
       case 'address':
-        console.log('addres chenage')
         dispatch(setClientAddress(value))
         break;
       case 'phone':
         dispatch(setClientPhone(value))
         break;
       case 'identification':
-        console.log('entre a identification hac=ndle w')
         dispatch(setClientIdentification(value))
         break;
       case 'birthday':

@@ -142,9 +142,6 @@ function RestaurantProfile() {
     const reader = new FileReader()
     reader.onload = e => {
       dispatch(getLogo(e.target.result))
-     console.log('result', e.target.result) 
-      
-      console.log('file',file)
     }
     reader.readAsDataURL(file)
     setHiddenButton('')
