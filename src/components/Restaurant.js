@@ -7,6 +7,7 @@ import {
   setRestaurantDeposit,
   setRestaurantMenuId,
   } from '../store/actions/Reservation.actions'
+import { useState } from 'react' 
 
 const Article = styled.article`
   margin: 5px;
@@ -42,7 +43,14 @@ function Restaurant ({ id, name, deposit, logo, menu }) {
 
   const dispatch = useDispatch()
 
+  const [dataRestaurantReservation, setDataRestaurantReservation] = useState({})
+
   const handleClick = () => {
+    setDataRestaurantReservation({
+      id: id
+    })
+    localStorage.setItem('restaurant', dataRestaurantReservation)
+    console.log(dataRestaurantReservation)
     dispatch(setRestaurantId(id))
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
