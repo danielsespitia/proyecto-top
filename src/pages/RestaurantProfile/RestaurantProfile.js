@@ -4,8 +4,9 @@ import {
   BodyLeft,
   BodyRight,
   MyLinkToMore,
+  LogoButton,
 } from './RestaurantProfileStyles';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -15,6 +16,7 @@ import RestaurantProfileForm from '../../components/RestaurantProfileForm/Restau
 import { 
   getName,
   getEmail,
+  getLogo,
   getAddress,
   getPhone,
   getScheduleFrom,
@@ -29,12 +31,15 @@ import PageNotFound from '../../components/PageNotFound/NotFound';
   
 function RestaurantProfile() {
 
+  const [file, setFile] = useState(null)
+  const [hiddenButton, setHiddenButton] = useState('disabled')
   const { logout } = useContext(AuthContext)
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => { 
     dispatch(getProfile())
+    setHiddenButton('disabled')
   },[])
 
   const profile = useSelector(
@@ -43,6 +48,10 @@ function RestaurantProfile() {
     }}) => {
       return { ...state }
     })
+
+    if(!profile.logo){
+      profile.logo = 'https://res.cloudinary.com/alamesa/image/upload/v1611345897/Restaurant-Logo/hdkeeircptebxsvdqgdt.png'
+    }
 
   if(profile.loading) return <PageLoading/>
   if(profile.error) return <PageNotFound/>
@@ -80,7 +89,6 @@ function RestaurantProfile() {
   };
 
   function handleSubmit() {
-
     const update = dispatch( postRestaurantProfile ( profile ))
     if(profile.loading) return <PageLoading/>
     if(profile.error) return <PageNotFound/>
@@ -91,7 +99,6 @@ function RestaurantProfile() {
 
   const handleDeleteRestaurant = async (e) => {
     e.preventDefault();
-
     await swal("¿Estás seguro que quieres eliminar tu cuenta?", {
       buttons: {
         regret: "No, quiero quedarme otro rato",
@@ -131,14 +138,74 @@ function RestaurantProfile() {
     });
   };
 
+  const readFile = (file) => {
+    const reader = new FileReader()
+    reader.onload = e => {
+      dispatch(getLogo(e.target.result))
+    }
+    reader.readAsDataURL(file)
+    setHiddenButton('')
+  }
+
+  async function handleChangeLogo(e) {
+    e.preventDefault()
+    readFile(e.target.files[0])
+    setFile(e.target.files[0])
+  }
+
+  async function handleSubmitLogo(e){
+    e.preventDefault()
+    const data = new FormData()
+    data.append('logo', profile.logo)
+    data.append('file', file)
+    try {
+      const token = localStorage.getItem('token')
+      await axios({
+        method: 'PUT',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/restaurants/update-logo',
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`, 
+          'Content-type': 'multipart/form-data'
+        }
+      })
+      swal('Logo actualizado correctamente', '', 'success')
+      setHiddenButton('disabled')
+
+    }catch(error) {
+      swal('Tu imagen no pudo ser cargada','','error')
+    }
+  }
+
     return (
       <>
       <Desktopstructure>
         <BodyLeft>
-          <RestLogo 
-            src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
-            alt="logo"
-          />
+          <form onSubmit={handleSubmitLogo}>
+            <label htmlFor="file">
+              <RestLogo 
+                src={profile.logo}
+                alt="logo"
+              />
+            </label>
+            <div>
+              <input 
+                hidden
+                type="file"
+                accept="image/*"
+                name="file"
+                id="file"
+                onChange={handleChangeLogo}
+              />
+              <LogoButton
+                hidden={hiddenButton}
+                type="submit"
+                value="Confirmar logo"
+              >
+              </LogoButton>
+            </div>
+          </form>
           <MyLinkToMore
             to='/restaurant-profile/my-menu'
           >
