@@ -129,8 +129,9 @@ function ReservationForm (){
   })
 
   useEffect(() => {
-    if(data.menuRestaurantId) {
-      dispatch(getData(data.menuRestaurantId))
+    const menuId = localStorage.getItem('menu')
+    if(menuId) {
+      dispatch(getData())
     }
     return () => {
       dispatch(cleanDish())
