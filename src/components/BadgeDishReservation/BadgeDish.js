@@ -9,6 +9,7 @@ import {
   ParragraphQuantity,
   ParragraphNumber,
   Image,
+  ContainerDescription,
 } from './BadgeStyles';
 
 function BadgeDish({_id, nameDish, price, description, category, file}) {
@@ -26,10 +27,10 @@ function BadgeDish({_id, nameDish, price, description, category, file}) {
           alt="Imagen del plato"
         />
       </figure>
-      <div>
+      <ContainerDescription>
         <p>{nameDish}</p>
-        <ParragraphPrice>{price}</ParragraphPrice>
-      </div>
+        <ParragraphPrice>${price}</ParragraphPrice>
+      </ContainerDescription>
       <ContainerButtons>
         <ButtonActionUp>
           <FontAwesomeIcon icon={"arrow-circle-up"}/>
