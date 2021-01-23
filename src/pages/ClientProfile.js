@@ -7,6 +7,8 @@ import { ClientProfileForm } from '../components/ClientProfileForm/ClientProfile
 
 function ClientProfile () {
 
+  console.log('prueba git pull')
+
   const history = useHistory();
   const {logout} = useContext(AuthContext);
   const [name, setName] = useState('');
