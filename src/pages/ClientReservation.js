@@ -21,7 +21,6 @@ function ClientReservation () {
   return(
       <ClientReservationJSX
           data = {data}
-          // handleDeleteReservation = {handleDeleteReservation}
       >
       </ClientReservationJSX>
   )

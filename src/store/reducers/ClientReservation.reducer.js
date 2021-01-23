@@ -10,7 +10,7 @@ export const initialState = {
   error: '',
 }
 
-function removeItemSplice(reservationData, index) {
+function removeItemToState(reservationData, index) {
   let reservations = reservationData.reservations.filter(( r, i ) => i !== index)
   return { ...reservationData, reservations }
 }
@@ -40,7 +40,7 @@ export function clientReservationReducer (state = initialState, action){
     case RESERVATION_DELETE:
       return{
         ...state,
-        reservationData: removeItemSplice(state.reservationData, action.payload)
+        reservationData: removeItemToState(state.reservationData, action.payload)
       }
     default:
       return state
