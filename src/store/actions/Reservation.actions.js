@@ -36,6 +36,7 @@ export function setRestaurantDeposit( payload ) {
 export function setRestaurantMenuId( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_MENU_ID, payload })
+    localStorage.setItem('menu', payload)
   }
 }
 export function setBranch( payload ) {
