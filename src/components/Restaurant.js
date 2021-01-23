@@ -7,7 +7,6 @@ import {
   setRestaurantDeposit,
   setRestaurantMenuId,
   } from '../store/actions/Reservation.actions'
-import { useState } from 'react' 
 
 const Article = styled.article`
   margin: 5px;
