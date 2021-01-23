@@ -51,11 +51,8 @@ const PendingP = styled.p `
 `;
 
 function RestaurantReservations () {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getReservationsList())
-  }, [getReservationsList]);
+  const dispatch = useDispatch();
 
   const data = useSelector(
     ({ restaurantReservationReducer: {
@@ -63,6 +60,10 @@ function RestaurantReservations () {
     }}) => {
       return { ...state }
     })
+    
+    useEffect(() => {
+      dispatch(getReservationsList())
+    }, [data.reservationData.length]);
 
   return (
     <DesktopStructure>

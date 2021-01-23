@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import ButtonPrimary from '../components/styled/ButtonPrimary';
-import SanitaryRegister from '../pages/SanitaryRegister'
-import { AuthContext } from '../store/AuthContext'
-import { useContext } from 'react'
+import SanitaryRegister from '../pages/SanitaryRegister';
+import { useDispatch } from 'react-redux';
+import { deleteReservation } from '../store/actions/RestaurantReservation.actions';
+import { AuthContext } from '../store/AuthContext';
+import { useContext } from 'react';
 
 const ReservationContainer = styled.div `
   height: 15rem;
@@ -60,16 +62,24 @@ const ThirdColorButton = styled(ButtonPrimary) `
   margin-left: 0.5rem;
 `;
 
-function ActiveReservations ( { data } ) {
+function ActiveReservations ({ data }) {
+
+  const dispatch = useDispatch();
   const register = useContext(AuthContext)
+
+  const handleDeleteReservation = (e, reservationId, index) => {
+    e.preventDefault();
+    dispatch(deleteReservation(reservationId, index))
+  };
+
   return (
     <>
       {!!data.reservationData && 
       data.reservationData.reservations &&
       data.reservationData.reservations.length > 0 &&
-      data.reservationData.reservations.map((reservation) => {
+      data.reservationData.reservations.map((reservation, index) => {
         return (
-          <ReservationContainer>
+          <ReservationContainer key = {reservation._id}>
             <InfoContainer>
               <PhotoContainer>
                 <ProfilePicture
@@ -97,8 +107,11 @@ function ActiveReservations ( { data } ) {
               />
               <SanitaryRegister/>
               <SecondColorButton
+                className="ButtonCancel"
+                id="ButtonCancel"
                 type="button"
                 value="Cancelar"
+                onClick={e => handleDeleteReservation(e, reservation._id, index)}
               />
               <ThirdColorButton
                 type="button"
