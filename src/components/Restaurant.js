@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+import RestaurantLogo from '../image/RestaurantLogo.png' 
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import {
@@ -65,6 +66,10 @@ function Restaurant ({ id, name, deposit, logo, menu }) {
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
     dispatch(setRestaurantMenuId(menu))
+  }
+
+  if(!logo) {
+    logo = RestaurantLogo
   }
 
   return (
