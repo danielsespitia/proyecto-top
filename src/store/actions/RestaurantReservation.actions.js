@@ -38,41 +38,42 @@ export function getReservationsList() {
 }
 
 export function deleteReservation(reservationId, index) {
-    return async function (dispatch) {
-        await swal("¿Estás seguro que quieres cancelar esta reserva?", {
-            buttons: {
-              regret: "No, no quiero cancelarla",
-              destroy: {
-                text: "Sí",
-                value: "destroy",
-              },
+  return async function (dispatch) {
+    const value = await swal("¿Estás seguro que quieres cancelar esta reserva?", {
+      buttons: {
+        regret: "No, no quiero cancelarla",
+        destroy: {
+          text: "Sí",
+          value: "destroy",
+        },
+      },
+    })
+    switch (value) {
+      case "cancel":
+        swal("La reserva sigue en pie");
+        break;
+      case "regret":
+        swal("La reserva no fue cancelada");
+        break;
+      case "destroy":
+        try { 
+          const token = localStorage.getItem('token')
+          await axios({
+            method: 'DELETE',
+            baseURL: process.env.REACT_APP_SERVER_URL,
+            url: `reservations/${reservationId}`,
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-          })
-          .then(async (value) => {
-            switch (value) {
-              case "regret":
-                swal("La reserva no fue cancelada");
-                break;
-              case "destroy":
-                try{
-                const token = localStorage.getItem('token')
-                await axios({
-                method: 'DELETE',
-                baseURL: process.env.REACT_APP_SERVER_URL,
-                url: `reservations/${reservationId}`,
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-                });
-                swal("Reserva cancelada", "", "success");
-                dispatch({ type: RESERVATION_DELETE, payload: index})
-                } catch(err){
-                  swal("La reserva no pudo ser cancelada", "", "error");
-                }
-                break;
-              default:
-                swal("La reserva sigue en pie");
-            }
+          });
+          swal("Reserva cancelada", "", "success");
+          dispatch({ type: RESERVATION_DELETE, payload: index})
+        } catch(err) {
+            swal("La reserva no pudo ser cancelada", "", "error");
         }
-    )};
+        break;
+      default:
+        swal("La reserva sigue en pie");
     }
+  };
+};
