@@ -6,6 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f5f7f9;
+  background: url("https://res.cloudinary.com/alamesa/image/upload/v1611511032/UI/background_z19wum.jpg");
+  background-repeat: repeat;
 }
 
 code {

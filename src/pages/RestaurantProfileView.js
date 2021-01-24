@@ -63,11 +63,11 @@ function RestaurantProfileView() {
           src={dataRestaurant.logo}
           alt="logo"
         />
-        <MyLinkToMore 
-          to='/restaurant-profile/reservations'
-        >
-          Mis reservas
-        </MyLinkToMore>
+      <MyLinkToMore
+        to='/restaurant-profile/my-menu'
+      >
+        Mi carta
+      </MyLinkToMore>
       </BodyLeft>
       <BodyRight>
         <RestaurantProfileViewForm

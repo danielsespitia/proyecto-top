@@ -3,7 +3,6 @@ import {
   RestLogo,
   BodyLeft,
   BodyRight,
-  MyLinkToMore,
   LogoButton,
 } from './RestaurantProfileStyles';
 import { useContext, useEffect, useState } from 'react';
@@ -206,11 +205,6 @@ function RestaurantProfile() {
               </LogoButton>
             </div>
           </form>
-          <MyLinkToMore
-            to='/restaurant-profile/my-menu'
-          >
-            Mi carta
-          </MyLinkToMore>
         </BodyLeft>
         <BodyRight>
           <RestaurantProfileForm
