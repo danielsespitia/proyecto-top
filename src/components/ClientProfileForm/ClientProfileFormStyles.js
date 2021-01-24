@@ -11,6 +11,7 @@ export const BodyLeft = styled.div `
   };
   border-radius: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
 `;
 
 export const BodyRight = styled.div ` 
@@ -50,11 +51,11 @@ export const LinkToSanitaryRegister = styled.button`
 `;
 
 export const PhotoClient = styled.img `
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   object-fit: cover;
   border-radius: 100%;
-  display: block;
+  display: line;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -108,4 +109,8 @@ export const ButtonCancel = styled(ButtonPrimary)`
     };
   }
   margin-left: 50px;
+`;
+export const ImageButton = styled(ButtonPrimary)`
+  margin-top: 20px;
+  padding: 6px 7px;
 `;

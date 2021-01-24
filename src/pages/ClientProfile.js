@@ -1,76 +1,76 @@
 import { useState, useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios';
 import swal from 'sweetalert';
 import { AuthContext } from '../store/AuthContext';
 import { ClientProfileForm } from '../components/ClientProfileForm/ClientProfileForm';
+import { 
+  setClientName,
+  setClientLastName,
+  setClientEmail,
+  setClientImage,
+  setClientAddress,
+  setClientPhone,
+  setClientIdentification,
+  setClientBirthday,
+  setClientIdType,
+  getClient,
+  updateClient,
+} from '../store/actions/Client.actions';
+import PageLoading from '../components/PageLoading';
+import PageNotFound from '../components/PageNotFound/NotFound';
 
 function ClientProfile () {
 
   const history = useHistory();
   const {logout} = useContext(AuthContext);
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
-  const [identification, setIdentification] = useState('');
-  const [birthday, setBirthday] = useState('');
-  const [idType, setIdType] = useState('Cédula de ciudadania CC');
+  const [file, setFile] = useState(null)
+  const [hiddenButton, setHiddenButton] = useState('disabled')
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    axios({
-      method: 'GET',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: '/clients/profile',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      }
-    })
-    .then(( {data: {data} }) => {
-      const date = !data.birthday ? '' : data.birthday.split('T')[0];
-      setName(data.name);
-      setLastName(data.lastName);
-      setEmail(data.email);
-      setAddress(data.address);
-      setPhone(data.phone);
-      setIdentification(data.identification);
-      setBirthday(data.birthday);
-      setIdType(data.idType);
-    })
-    .catch(err => {
-    localStorage.removeItem('token');
-    history.push('/');
-    })
+    dispatch(getClient())
+    setHiddenButton('disabled')
   },[])
+
+  const profile = useSelector(
+    ({clientReducer: {
+      ...state
+    }}) => {
+      return { ...state }
+  })
+
+  if(!profile.image){
+    profile.image = 'https://res.cloudinary.com/alamesa/image/upload/v1611345897/Restaurant-Logo/hdkeeircptebxsvdqgdt.png'
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch(name) {
       case 'name':
-        setName(value)
+        dispatch(setClientName(value))
         break;
       case 'lastName':
-        setLastName(value)
+        dispatch(setClientLastName(value))
         break;
       case 'email':
-        setEmail(value)
+        dispatch(setClientEmail(value))
         break;
       case 'address':
-        setAddress(value)
+        dispatch(setClientAddress(value))
         break;
       case 'phone':
-        setPhone(value)
+        dispatch(setClientPhone(value))
         break;
       case 'identification':
-        setIdentification(value)
+        dispatch(setClientIdentification(value))
         break;
       case 'birthday':
-        setBirthday(value)
+        dispatch(setClientBirthday(value))
         break;
       case 'idType':
-        setIdType(value)
+        dispatch(setClientIdType(value))
         break;
       default: break;
     }
@@ -78,35 +78,13 @@ function ClientProfile () {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const token = localStorage.getItem('token')
-      const resp = await axios({
-        method: 'PUT',
-        baseURL: process.env.REACT_APP_SERVER_URL,
-        url: `/clients`,
-        data: {
-          name,
-          lastName,
-          email,
-          address,
-          phone,
-          identification,
-          birthday, 
-          idType,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      swal("Perfil actualizado exitosamente", "", "success");
-    }catch(err) {
-      swal("Tu perfil no pudo ser actualizado", "", "error");
-    }
+    dispatch(updateClient(profile))
+    if(profile.loading) return <PageLoading/>
+    if(profile.error) return <PageNotFound/>
   };
 
   const handleDeleteClient = async (e) => {
     e.preventDefault();
-
     await swal("Estas seguro que quieres eliminar tu cuenta?", {
       buttons: {
         regret: "No, quiero quedamer otro rato",
@@ -147,19 +125,55 @@ function ClientProfile () {
     });
   };
 
+  const readFile = (file) => {
+    const reader = new FileReader()
+    reader.onload = e => {
+      dispatch(setClientImage(e.target.result))
+    }
+    reader.readAsDataURL(file)
+    setHiddenButton('')
+  }
+
+  async function handleChangeImage(e) {
+    e.preventDefault()
+    readFile(e.target.files[0])
+    setFile(e.target.files[0])
+  }
+
+  async function handleSubmitImage(e){
+    e.preventDefault()
+    const data = new FormData()
+    data.append('image', profile.image)
+    data.append('file', file)
+    try {
+      const token = localStorage.getItem('token')
+      await axios({
+        method: 'PUT',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: '/clients/update-image',
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`, 
+          'Content-type': 'multipart/form-data'
+        }
+      })
+      swal('Imagen actualizada correctamente', '', 'success')
+      setHiddenButton('disabled')
+
+    }catch(error) {
+      swal('Tu imagen no pudo ser cargada','','error')
+    }
+  }
+
     return(
     <ClientProfileForm
-      name = {name}
-      lastName = {lastName}
-      email = {email}
-      address = {address}
-      phone = {phone}
-      identification = {identification}
-      birthday = {birthday}
-      idType = {idType}
       handleChange = {handleChange}
       handleSubmit = {handleSubmit}
       handleDeleteClient = {handleDeleteClient}
+      handleChangeImage = {handleChangeImage}
+      handleSubmitImage = {handleSubmitImage}
+      image = {profile.image}
+      hiddenButton = {hiddenButton}
       >
     </ClientProfileForm>
     )
