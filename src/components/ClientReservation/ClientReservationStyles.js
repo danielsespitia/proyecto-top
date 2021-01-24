@@ -59,17 +59,35 @@ export const Booking = styled.div `
 
 export const ButtonTracker = styled.button `
   font-weight: bold;
-  background: rgba(119, 65, 255, 0.5);
+  color: white;
+  font-size: 2rem;
+  background: rgba(119, 65, 255, 0.8);
   border: 3px solid #7741FF;
   box-sizing: border-box;
   border-radius: 10px 0px 0px 10px;
+
+  &:hover{
+    background: #7741FF;
+    transform: scale(1.05);
+    transform-origin: center;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(119, 65, 255, 0.5);
+  }
 `;
 
 export const ButtonChat = styled.button `
   font-weight: bold;
-  background: rgba(119, 65, 255, 0.5);
+  color: white;
+  font-size: 2rem;
+  background: rgba(119, 65, 255, 0.8);
   border: 3px solid #7741FF;
   box-sizing: border-box;
+
+  &:hover{
+    background: #7741FF;
+    transform: scale(1.05);
+    transform-origin: center;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(119, 65, 255, 0.5);
+  }
 `;
 
 export const InfoBooking = styled.div `
@@ -82,15 +100,29 @@ export const InfoBooking = styled.div `
 
 export const ShowBooking = styled.button `
   font-weight: bold;
-  background: #7741FF;
-  border: none;
+  background: rgba(119, 65, 255, 0.8);
+  border: 3px solid #7741FF;
+
+  &:hover{
+    background: #7741FF;
+    transform: scale(1.05);
+    transform-origin: center;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(119, 65, 255, 0.5);
+  }
 `;
 
 export const ButtonCancel = styled.button `
   font-weight: bold;
-  background: #ECC30D;
+  background: rgba(236, 195, 13, 0.8);
   border-radius: 0px 10px 10px 0px;
-  border: none;
+  border: 3px solid #ECC30D;
+
+  &:hover{
+    background: #ECC30D;
+    transform: scale(1.05);
+    transform-origin: center;
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(236, 195, 13, 0.8);
+  }
 `;
 
 export const ImgRestaurant = styled.img `
