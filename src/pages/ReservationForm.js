@@ -186,7 +186,7 @@ function ReservationForm (){
             {data.nameRestaurantReservation}
           </RestaurantName>
           <RestaurantLogo
-            src={logo}
+            src={data.restaurantLogo}
           />
         </SectionHeader>
       </ContainerList>

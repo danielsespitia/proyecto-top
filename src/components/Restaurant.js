@@ -7,6 +7,7 @@ import {
   setRestaurantName,
   setRestaurantDeposit,
   setRestaurantMenuId,
+  setRestaurantLogo,
   } from '../store/actions/Reservation.actions'
 
 const Article = styled.article`
@@ -66,6 +67,7 @@ function Restaurant ({ id, name, deposit, logo, menu }) {
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
     dispatch(setRestaurantMenuId(menu))
+    dispatch( setRestaurantLogo(logo))
   }
 
   if(!logo) {
