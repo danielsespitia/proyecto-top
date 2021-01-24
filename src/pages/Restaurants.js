@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import Restaurant  from '../components/Restaurant';
 import styled from 'styled-components';
 import ContainerContent from '../components/styled/ContainerContent';
-import logo from '../image/RestaurantLogo.png';
 import PageLoading from '../components/PageLoading';
 import DesktopStructure from '../components/styled/DesktopStructure';
 
@@ -85,7 +84,7 @@ function Restaurants () {
         <div>
           <ContainerList>
             <Section>
-              {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit, menu }) => {
+              {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, deposit, menu, logo}) => {
                 return (
                   <Restaurant 
                     key={_id}

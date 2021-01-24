@@ -8,6 +8,7 @@ import {
   RESERVATION_DATA,
   RESTAURANT_ID_RESERVATION,
   RESTAURANT_NAME_RESERVATION,
+  RESTAURANT_LOGO_RESERVATION,
   RESTAURANT_DEPOSIT_RESERVATION,
   RESTAURANT_MENU_ID,
   RESERVATION_BRANCH,
@@ -26,6 +27,11 @@ export function setRestaurantId( payload ) {
 export function setRestaurantName( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_NAME_RESERVATION, payload })
+  }
+}
+export function setRestaurantLogo( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_LOGO_RESERVATION, payload })
   }
 }
 export function setRestaurantDeposit( payload ) {
