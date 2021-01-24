@@ -18,16 +18,17 @@ const Article = styled.article`
 `;
 const Img = styled.img`
   float: left;
-  width:  120px;
-  height: 120px;
+  width:  100px;
+  height: 100px;
   padding: 0px 5px;
   margin: 6px;
   background-size: cover;
+  border-radius: 10px;
 `;
 const RestaurantName = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: baseline;
   padding: 20px 5px;
   margin: 0px 10px;
 `;
@@ -35,6 +36,23 @@ const Button = styled.button`
   background-color: #2F80ED;
   color: #F8F8F8;
   border-radius: 10px;
+  border: none;
+  padding: 3px 10px;
+  cursor: pointer;
+    &:hover {
+      background-color: ${
+        props => props.theme.secundaryColorBlur
+      };
+    };
+`;
+const Category = styled.p`
+  font-size: 12px;
+  color: #9E9FA5;
+  margin: 5px 0 20px;
+`;
+const NameRestaurant = styled.h4`
+  font-size: 14px;
+  margin: 5px 0;
 `;
 
 
@@ -56,7 +74,8 @@ function Restaurant ({ id, name, deposit, logo, menu }) {
         alt={name +' logo'}
       />
       <RestaurantName>
-        <h1>{name}</h1>
+        <NameRestaurant>{name}</NameRestaurant>
+        <Category>Varios</Category>
         <Link to={{
           pathname: `/restaurants/${id}/reservation`,
           }}>
