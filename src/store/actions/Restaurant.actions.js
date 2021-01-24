@@ -15,6 +15,7 @@ import {
   RESTAURANT_NIT,
   RESTAURANT_DEPOSIT,
   MENU_ID,
+  SET_SEARCH,
 } from '../reducers/Restaurant.reducer'
 
 export function getName( payload ) {
@@ -60,6 +61,11 @@ export function getNit( payload ) {
 export function getDeposit( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_DEPOSIT, payload})
+  }
+}
+export function setSearch( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: SET_SEARCH, payload})
   }
 }
 

@@ -12,6 +12,7 @@ export const RESTAURANT_SCHEDULE_TO = 'RESTAURANT_SCHEDULE_TO'
 export const RESTAURANT_NIT = 'RESTAURANT_NIT'
 export const RESTAURANT_DEPOSIT = 'RESTAURANT_DEPOSIT'
 export const MENU_ID = 'MENU_ID'
+export const SET_SEARCH = 'SET_SEARCH'
 
 export const initialState = {
   name: '',
@@ -26,6 +27,7 @@ export const initialState = {
   menuId: '',
   loading: false,
   error: '',
+  search:''
 }
 
 
@@ -100,6 +102,11 @@ export function restaurantReducer (state = initialState, action ) {
       return {
         ...state,
         loading: false
+      }
+    case SET_SEARCH:
+      return {
+        ...state,
+        search: action.payload
       }
     default:
       return state
