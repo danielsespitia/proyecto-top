@@ -8,8 +8,9 @@ const Map = ({ data }) => {
   }
 
   const defaultCenter = {
-    lat: 4.639432364013056, lng: -74.08183585260386
+    lat: data.lat, lng: data.lng
   }
+  console.log(data)
   
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY_GOOGLE_MAPS}>

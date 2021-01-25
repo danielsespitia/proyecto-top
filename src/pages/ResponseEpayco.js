@@ -38,7 +38,7 @@ const BodyLocation = styled(BodyLeft)`
 export function Response({ location }) {
 
   const [responseEpayco, setResponseEpayco] = useState({});
-  const locationClient = useGoogleAddress('parkway')
+  const locationClient = useGoogleAddress('carrera26#49-49')
 
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export function Response({ location }) {
 
   const dataRestaurantJson = localStorage.getItem('ReservationData');
   var dataRestaurant = JSON.parse(dataRestaurantJson);
-
+  
   return (
     <DesktopStructure>
       <BodyLocation>
