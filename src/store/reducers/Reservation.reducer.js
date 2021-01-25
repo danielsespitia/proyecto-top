@@ -6,6 +6,7 @@ export const RESERVATION_DATA = 'RESERVATION_DATA'
 
 export const RESTAURANT_ID_RESERVATION = 'RESTAURANT_ID_RESERVATION'
 export const RESTAURANT_NAME_RESERVATION = 'RESTAURANT_NAME_RESERVATION'
+export const RESTAURANT_LOGO_RESERVATION = 'RESTAURANT_LOGO_RESERVATION'
 export const RESTAURANT_DEPOSIT_RESERVATION = 'RESTAURANT_DEPOSIT_RESERVATION'
 export const RESTAURANT_MENU_ID = 'RESTAURANT_MENU_ID'
 
@@ -20,6 +21,7 @@ export const initialState = {
   idRestaurantReservation: '',
   nameRestaurantReservation: '',
   menuRestaurantId: '',
+  restaurantLogo: '',
   deposit: 0,
   branch: '',
   date: '',
@@ -49,6 +51,11 @@ export function reservationReducer (state = initialState, action ) {
       return {
         ...state,
         nameRestaurantReservation: action.payload 
+      }
+    case RESTAURANT_LOGO_RESERVATION:
+      return {
+        ...state,
+        restaurantLogo: action.payload
       }
     case RESTAURANT_MENU_ID:
       return {

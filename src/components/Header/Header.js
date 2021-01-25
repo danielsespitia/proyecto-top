@@ -1,6 +1,5 @@
 import { useContext, useState, useMemo, useEffect, } from 'react';
 import { useSelector, useDispatch, } from 'react-redux';
-import Logo from '../../image/Logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AuthContext } from '../../store/AuthContext';
 import { Link } from 'react-router-dom';
@@ -29,7 +28,7 @@ import {
 } from './HeaderStyles';
 import MiniSearchRestaurant from '../MiniSearchRestaurant';
 import { getListRestaurants } from '../../store/actions/Reservation.actions';
-
+import { setSearch } from '../../store/actions/Restaurant.actions';
 
 
 function Header() {
@@ -38,7 +37,7 @@ function Header() {
   const dispatch = useDispatch();
 
   const [modalProfile, setModalProfile] = useState(false);
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
 
   const handleClick = () => setModalProfile(true);
 
@@ -67,10 +66,12 @@ function Header() {
       ...state
     }}) => {
       return { ...state }
-    });
+  });
+
+  const { search } = useSelector(({ restaurantReducer: { search }}) => ({ search }))
 
   const handleSearch = (e) => {
-    setSearch(e.target.value)
+    dispatch(setSearch(e.target.value))
   };
 
   const filteredRestaurants = useMemo(() => 
@@ -84,7 +85,10 @@ function Header() {
     <ContainerHeader>
       <HeaderHome to="/">
         <HeaderHomeLogo className="header__home-logo">
-          <Img src={Logo} alt="Logo" />
+          <Img 
+          src="https://res.cloudinary.com/alamesa/image/upload/v1610557862/UI/logoalamesa_myz3ff.svg" 
+          alt="Logo" 
+          />
         </HeaderHomeLogo>
         <HeaderHomeSlogan className="header__home-slogan">
           # Alamesa
@@ -142,13 +146,14 @@ function Header() {
           <SearchBar icon="search"/>
         </ContainerInputSearch>
         <ContainerMiniSearch>
-          {search.length > 0 ? filteredRestaurants.map(({ _id, name, deposit, }) => {
+          {search.length > 0 ? filteredRestaurants.map(({ _id, name, deposit, menu }) => {
             return (
               <MiniSearchRestaurant
                 key={_id}
                 id={_id}
                 name={name}
                 deposit={deposit}
+                menu={menu}
               />
             )
           }) : (null)}

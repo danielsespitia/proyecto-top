@@ -1,4 +1,8 @@
-import Desktopstructure from '../styled/DesktopStructure'
+import { useDispatch } from 'react-redux';
+import { getDeleteReservation } from '../../store/actions/ClientReservation.actions';
+import Desktopstructure from '../styled/DesktopStructure';
+import { faCommentDots, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import PageLoading from '../PageLoading';
 import {
   BodyLeft,
   BodyRight,
@@ -9,6 +13,7 @@ import {
   Booking,
   ButtonTracker,
   ButtonChat,
+  Anchor,
   InfoBooking,
   ShowBooking,
   ButtonCancel,
@@ -18,8 +23,22 @@ import {
   Address,
   Date
 } from './ClientReservationStyles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function ClientReservationJSX ({ data }) {
+  const dispatch = useDispatch();
+
+  const handleDeleteReservation = (e, idReservation, index) => {
+    e.preventDefault();
+    dispatch(getDeleteReservation(idReservation, index))
+  };
+
+  if(data.loading) {
+    return(
+      <PageLoading/>
+    )
+  };
+
   return(
     <>
       <H1> Mis Reservas  </H1>
@@ -46,16 +65,33 @@ export function ClientReservationJSX ({ data }) {
           !!data.reservationData &&
           !!data.reservationData.reservations &&
           data.reservationData.reservations.length > 0 &&
-          data.reservationData.reservations.map((reservation) => {
+          data.reservationData.reservations.map((reservation, index) => {
             return(
-              <Booking>
-                <ButtonTracker>Ver <br/> ubicación</ButtonTracker>
-                <ButtonChat>Chatiemos</ButtonChat>
+              <Booking
+                key= {reservation._id}
+              >
+                <ButtonTracker>
+                  <FontAwesomeIcon icon={faMapMarkedAlt}/>
+                </ButtonTracker>
+                <ButtonChat >
+                  <Anchor 
+                    href="https://wa.link/x05ku4"
+                    target="_blank">
+                      <FontAwesomeIcon icon={faCommentDots}/>
+                  </Anchor>
+                </ButtonChat>
                 <InfoBooking>
+                  {!reservation.provider.logo ? (
                   <ImgRestaurant
-                    src= "https://png.pngtree.com/png-clipart/20190515/original/pngtree-winner-winner-chicken-dinner-badge-for-pubg-game-png-image_3724929.jpg"
-                    alt= "restaurante"
-                  />
+                  src= "https://image.freepik.com/vector-gratis/compre-nosotros-somos-senal-abierta_52683-38092.jpg"
+                  alt= "restaurante"
+                  />                    
+                  ) : (
+                    <ImgRestaurant
+                      src= {reservation.provider.logo}
+                      alt= "restaurante"
+                    />       
+                  )}
                   <DataRestaurant>
                     <Name>{reservation.provider.name}</Name>
                     <Address>{reservation.provider.address}</Address>
@@ -63,7 +99,9 @@ export function ClientReservationJSX ({ data }) {
                   </DataRestaurant>
                 </InfoBooking>
                 <ShowBooking>Ver reserva</ShowBooking>
-                <ButtonCancel>Cancelar</ButtonCancel>
+                <ButtonCancel
+                  onClick = { e => handleDeleteReservation(e, reservation._id, index)}
+                >Cancelar</ButtonCancel>
               </Booking>
             )
           })}

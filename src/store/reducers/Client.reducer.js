@@ -7,24 +7,26 @@ export const CLIENT_ID = 'CLIENT_ID'
 export const CLIENT_NAME = 'CLIENT_NAME'
 export const CLIENT_LASTNAME = 'CLIENT_LASTNAME'
 export const CLIENT_EMAIL = 'CLIENT_EMAIL'
+export const CLIENT_IMAGE = 'CLIENT_IMAGE'
 export const CLIENT_ADDRESS = 'CLIENT_ADDRESS'
 export const CLIENT_PHONE = 'CLIENT_PHONE'
+export const CLIENT_IDENTIFICATION = 'CLIENT_IDENTIFICATION'
 export const CLIENT_BIRTHDAY = 'CLIENT_BIRTHDAY'
 export const CLIENT_ID_TYPE = 'CLIENT_ID_TYPE'
-export const CLIENT_DATA = 'CLIENT_DATA'
 
 export const initialState = {
   id: '',
   name: '',
   lastName: '',
   email: '',
+  image: '',
   address: '',
   phone: '',
+  identification: '',
   birthday: '',
   idType: '',
   loading: 'false',
   error: 'null',
-  data: {}
 }
 
 export function clientReducer ( state = initialState, action ) {
@@ -34,8 +36,7 @@ export function clientReducer ( state = initialState, action ) {
         ...state,
         id: action.payload
       }
-    case CLIENT_NAME:
-      return {
+    case CLIENT_NAME: return {
         ...state,
         name: action.payload
       }
@@ -49,6 +50,11 @@ export function clientReducer ( state = initialState, action ) {
         ...state,
         email: action.payload
       }
+    case CLIENT_IMAGE:
+      return {
+        ...state,
+        image: action.payload
+      }
     case CLIENT_ADDRESS:
       return {
         ...state,
@@ -59,6 +65,11 @@ export function clientReducer ( state = initialState, action ) {
         ...state,
         phone: action.payload
       }
+    case CLIENT_IDENTIFICATION:
+      return {
+        ...state,
+        identification: action.payload
+      }
     case CLIENT_BIRTHDAY:
       return {
         ...state,
@@ -67,12 +78,7 @@ export function clientReducer ( state = initialState, action ) {
     case CLIENT_ID_TYPE:
       return {
         ...state,
-        paymentType: action.payload
-      }
-    case CLIENT_DATA:
-      return {
-        ...state,
-        data: action.payload
+        idType: action.payload
       }
     case CLIENT_LOADING:
       return {

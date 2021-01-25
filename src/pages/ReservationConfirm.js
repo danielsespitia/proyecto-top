@@ -52,7 +52,7 @@ function ReservationConfirm() {
 
   const invoice = localStorage.getItem('reservation');
 
-  const URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3000'
+  const URL = process.env.REACT_APP_BASE_URL 
   
   const handleClick = () => {
     handler.open(

@@ -12,6 +12,7 @@ export function ModalProfile(props) {
   const handleClick = () => setClick(!click);
 
   const { user } = useContext(AuthContext);
+  const pathUser = localStorage.getItem('pathUser');
 
   return (
     <ModalProfileContainer
@@ -19,12 +20,21 @@ export function ModalProfile(props) {
       className='modal-profile'
     >
       <MenuItemModal>
+      { (pathUser === "/client-profile") ? (
         <MenuItemLink 
           to='/client-reservation'
           onClick={() => setClick(false)}
         >
           Mis reservas
         </MenuItemLink>
+          ) : (
+        <MenuItemLink 
+          to='/restaurant-profile/reservations'
+          onClick={() => setClick(false)}
+        >
+          Mis reservas
+        </MenuItemLink>
+      )}
       </MenuItemModal>
       <MenuItemModal>
         <MenuItemLink 

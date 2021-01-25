@@ -36,7 +36,7 @@ function BadgeMenu({ nameDish, price, description, category, file, id, index }) 
       <DetailsImage className="Container__details-image">
         <Image
           className="Details__image"
-          src={file}
+          src={file || "https://res.cloudinary.com/alamesa/image/upload/v1610557840/UI/The_Munchies_Dish_bg041q.svg"}
           alt="Imagen del plato"
         />
       </DetailsImage>

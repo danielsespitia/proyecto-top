@@ -7,6 +7,7 @@ import {
   RESTAURANT_FINISHED,
   RESTAURANT_NAME,
   RESTAURANT_EMAIL,
+  RESTAURANT_LOGO,
   RESTAURANT_ADDRESS,
   RESTAURANT_PHONE,
   RESTAURANT_SCHEDULE_FROM,
@@ -14,6 +15,7 @@ import {
   RESTAURANT_NIT,
   RESTAURANT_DEPOSIT,
   MENU_ID,
+  SET_SEARCH,
 } from '../reducers/Restaurant.reducer'
 
 export function getName( payload ) {
@@ -24,6 +26,11 @@ export function getName( payload ) {
 export function getEmail( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_EMAIL, payload})
+  }
+}
+export function getLogo( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_LOGO, payload})
   }
 }
 export function getAddress( payload ) {
@@ -56,6 +63,11 @@ export function getDeposit( payload ) {
     dispatch({ type: RESTAURANT_DEPOSIT, payload})
   }
 }
+export function setSearch( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: SET_SEARCH, payload})
+  }
+}
 
 export function getProfile() {
   return async function (dispatch) {
@@ -72,6 +84,7 @@ export function getProfile() {
       })
       dispatch({ type: RESTAURANT_NAME, payload: data.name})
       dispatch({ type: RESTAURANT_EMAIL, payload: data.email})
+      dispatch({ type: RESTAURANT_LOGO, payload: data.logo})
       dispatch({ type: RESTAURANT_ADDRESS, payload: data.address})
       dispatch({ type: RESTAURANT_PHONE, payload: data.phone})
       dispatch({ type: RESTAURANT_SCHEDULE_FROM, payload: data.scheduleFrom})

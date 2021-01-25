@@ -14,7 +14,12 @@ import PageLoading from '../components/PageLoading';
 
 function RestaurantProfileView() {
 
+  let history = useHistory()
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getProfile())
+  }, [])
   
   const dataRestaurant = useSelector((
     { restaurantReducer: {
@@ -23,11 +28,10 @@ function RestaurantProfileView() {
       return { ...state }
     })
     
-    useEffect(() => {
-      dispatch(getProfile())
-    }, [])
+    if(!dataRestaurant.logo){
+      dataRestaurant.logo = 'https://res.cloudinary.com/alamesa/image/upload/v1611345897/Restaurant-Logo/hdkeeircptebxsvdqgdt.png'
+    }
     
-  let history = useHistory()
   const handleClick = e => {
     e.preventDefault();
     history.push('/restaurant-profile/edit')
@@ -56,14 +60,14 @@ function RestaurantProfileView() {
     <Desktopstructure>
       <BodyLeft>
         <RestLogo 
-          src="https://dcassetcdn.com/design_img/3714052/132070/22421534/g6w956bcvm8q74y7q6r2g5nvx1_image.jpg"
+          src={dataRestaurant.logo}
           alt="logo"
         />
-        <MyLinkToMore 
-          to='/restaurant-profile/reservations'
-        >
-          Mis reservas
-        </MyLinkToMore>
+      <MyLinkToMore
+        to='/restaurant-profile/my-menu'
+      >
+        Mi carta
+      </MyLinkToMore>
       </BodyLeft>
       <BodyRight>
         <RestaurantProfileViewForm
