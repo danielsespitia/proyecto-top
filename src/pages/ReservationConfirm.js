@@ -26,13 +26,11 @@ function ReservationConfirm() {
     dispatch(getClient())
   }, [])
 
-  const {data} = useSelector(
-    ({ clientReducer: {
-      data
+  const clientData = useSelector(
+    ({clientReducer: {
+      ...state
     }}) => {
-      return {
-        data
-      }
+      return { ...state }
   })
   
   moment.locale('es');
@@ -45,8 +43,6 @@ function ReservationConfirm() {
   };
 
   const jsonReservation = JSON.stringify(reservation)
-
-  const clientData = data
 
   const amount = deposit ? deposit : '20000'
 
