@@ -1,7 +1,8 @@
-import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
 import { getDeleteReservation } from '../../store/actions/ClientReservation.actions';
-import Desktopstructure from '../styled/DesktopStructure'
+import Desktopstructure from '../styled/DesktopStructure';
+import { faCommentDots, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import PageLoading from '../PageLoading';
 import {
   BodyLeft,
   BodyRight,
@@ -12,6 +13,7 @@ import {
   Booking,
   ButtonTracker,
   ButtonChat,
+  Anchor,
   InfoBooking,
   ShowBooking,
   ButtonCancel,
@@ -21,6 +23,7 @@ import {
   Address,
   Date
 } from './ClientReservationStyles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function ClientReservationJSX ({ data }) {
   const dispatch = useDispatch();
@@ -28,6 +31,12 @@ export function ClientReservationJSX ({ data }) {
   const handleDeleteReservation = (e, idReservation, index) => {
     e.preventDefault();
     dispatch(getDeleteReservation(idReservation, index))
+  };
+
+  if(data.loading) {
+    return(
+      <PageLoading/>
+    )
   };
 
   return(
@@ -61,13 +70,28 @@ export function ClientReservationJSX ({ data }) {
               <Booking
                 key= {reservation._id}
               >
-                <ButtonTracker>Ver <br/> ubicación</ButtonTracker>
-                <ButtonChat>Chatiemos</ButtonChat>
+                <ButtonTracker>
+                  <FontAwesomeIcon icon={faMapMarkedAlt}/>
+                </ButtonTracker>
+                <ButtonChat >
+                  <Anchor 
+                    href="https://wa.link/x05ku4"
+                    target="_blank">
+                      <FontAwesomeIcon icon={faCommentDots}/>
+                  </Anchor>
+                </ButtonChat>
                 <InfoBooking>
+                  {!reservation.provider.logo ? (
                   <ImgRestaurant
-                    src= "https://png.pngtree.com/png-clipart/20190515/original/pngtree-winner-winner-chicken-dinner-badge-for-pubg-game-png-image_3724929.jpg"
-                    alt= "restaurante"
-                  />
+                  src= "https://image.freepik.com/vector-gratis/compre-nosotros-somos-senal-abierta_52683-38092.jpg"
+                  alt= "restaurante"
+                  />                    
+                  ) : (
+                    <ImgRestaurant
+                      src= {reservation.provider.logo}
+                      alt= "restaurante"
+                    />       
+                  )}
                   <DataRestaurant>
                     <Name>{reservation.provider.name}</Name>
                     <Address>{reservation.provider.address}</Address>
