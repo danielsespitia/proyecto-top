@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const ContainerFather = styled.div`
   margin: auto;
-  max-width: 90vw;
+  max-width: 80vw;
   margin-bottom: 4rem;
+  border-top: 2px solid rgba(182, 26, 237, 0.1);
 `;
 
 export const TitleCarousel = styled.div`
@@ -24,7 +25,7 @@ export const MainContainer = styled.div`
   height: 13rem;
   padding: 1rem 0;
   margin: auto;
-  max-width: 90vw;
+  max-width: 80vw;
   overflow: hidden;
 `;
 
@@ -78,14 +79,6 @@ export const CarouselContainer = styled.div`
   scroll-behavior: smooth;
 `;
 
-export const Carousel = styled.div`
-  /* transform: translateX(-${props => props.translate}px);
-  transition: transform ease-out ${props => props.transition}s;
-  width: ${props => props.width}px; */
-  display: flex;
-  flex-wrap: nowrap;
-`;
-
 export const Item = styled.div`
   display: grid;
   margin: 0 1rem;
@@ -104,16 +97,19 @@ export const Item = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 8rem;
+  width: 9.5rem;
   height: 8rem;
   object-fit: cover;
-  border-radius: 100%;
+  border-radius: 1rem;
   display: block;
-  margin-right: 1rem;
+  margin: auto;
 `;
 
 export const Name = styled.div`
-  display: inline;
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
 `;
 
 export const ButtonVisit = styled.button`
