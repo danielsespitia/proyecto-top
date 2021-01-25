@@ -13,6 +13,7 @@ import {
   Booking,
   ButtonTracker,
   ButtonChat,
+  Anchor,
   InfoBooking,
   ShowBooking,
   ButtonCancel,
@@ -72,17 +73,25 @@ export function ClientReservationJSX ({ data }) {
                 <ButtonTracker>
                   <FontAwesomeIcon icon={faMapMarkedAlt}/>
                 </ButtonTracker>
-                <ButtonChat 
-                  href="https://wa.link/x05ku4"
-                  target="_blank"
-                >
-                    <FontAwesomeIcon icon={faCommentDots}/>
+                <ButtonChat >
+                  <Anchor 
+                    href="https://wa.link/x05ku4"
+                    target="_blank">
+                      <FontAwesomeIcon icon={faCommentDots}/>
+                  </Anchor>
                 </ButtonChat>
                 <InfoBooking>
+                  {!reservation.provider.logo ? (
                   <ImgRestaurant
-                    src= "https://png.pngtree.com/png-clipart/20190515/original/pngtree-winner-winner-chicken-dinner-badge-for-pubg-game-png-image_3724929.jpg"
-                    alt= "restaurante"
-                  />
+                  src= "https://image.freepik.com/vector-gratis/compre-nosotros-somos-senal-abierta_52683-38092.jpg"
+                  alt= "restaurante"
+                  />                    
+                  ) : (
+                    <ImgRestaurant
+                      src= {reservation.provider.logo}
+                      alt= "restaurante"
+                    />       
+                  )}
                   <DataRestaurant>
                     <Name>{reservation.provider.name}</Name>
                     <Address>{reservation.provider.address}</Address>

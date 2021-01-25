@@ -76,7 +76,6 @@ export const ButtonTracker = styled.button `
 
 export const ButtonChat = styled.button `
   font-weight: bold;
-  color: white;
   font-size: 2rem;
   background: rgba(119, 65, 255, 0.8);
   border: 3px solid #7741FF;
@@ -88,6 +87,10 @@ export const ButtonChat = styled.button `
     transform-origin: center;
     box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgba(119, 65, 255, 0.5);
   }
+`;
+
+export const Anchor = styled.a `
+  color: white;
 `;
 
 export const InfoBooking = styled.div `
