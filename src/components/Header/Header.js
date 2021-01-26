@@ -38,7 +38,7 @@ function Header() {
   const dispatch = useDispatch();
 
   const [modalProfile, setModalProfile] = useState(false);
-  const [width, height] = useWindowWidthAndHeight();
+  const [width] = useWindowWidthAndHeight();
 
   const handleClick = () => setModalProfile(true);
 
