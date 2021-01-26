@@ -8,6 +8,7 @@ import {
   setRestaurantDeposit,
   setRestaurantMenuId,
   setRestaurantLogo,
+  setAddress,
   } from '../store/actions/Reservation.actions'
 
 const Article = styled.article`
@@ -58,7 +59,7 @@ const NameRestaurant = styled.h4`
 `;
 
 
-function Restaurant ({ id, name, deposit, logo, menu }) {
+function Restaurant ({ id, name, deposit, logo, menu, address }) {
 
   const dispatch = useDispatch()
 
@@ -67,7 +68,8 @@ function Restaurant ({ id, name, deposit, logo, menu }) {
     dispatch(setRestaurantName(name))
     dispatch(setRestaurantDeposit(deposit))
     dispatch(setRestaurantMenuId(menu))
-    dispatch( setRestaurantLogo(logo))
+    dispatch(setRestaurantLogo(logo))
+    dispatch(setAddress(address))
   }
 
   if(!logo) {

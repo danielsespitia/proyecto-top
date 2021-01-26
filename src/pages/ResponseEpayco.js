@@ -7,6 +7,7 @@ import ContainerContent from '../components/styled/ContainerContent';
 import { ResponseComponent } from '../components/ResponseEpayco/ResponseReservation';
 import Map from '../components/Map';
 import useGoogleAddress from '../hooks/useGoogleAddress';
+import PageLoading from '../components/PageLoading';
 
 function queryString(query) {
   const res = {}
@@ -38,8 +39,11 @@ const BodyLocation = styled(BodyLeft)`
 export function Response({ location }) {
 
   const [responseEpayco, setResponseEpayco] = useState({});
-  const locationClient = useGoogleAddress('parkway')
-
+  const dataRestaurantJson = localStorage.getItem('ReservationData');
+  var dataRestaurant = JSON.parse(dataRestaurantJson);
+  
+  const addressString = dataRestaurant.address.replace(/[ #-]/g, "")
+  const locationClient = useGoogleAddress(addressString)
 
   useEffect(() => {
     const { ref_payco } = queryString(location.search)
@@ -55,8 +59,10 @@ export function Response({ location }) {
 
   const { x_amount, x_response, x_id_factura } = responseEpayco
 
-  const dataRestaurantJson = localStorage.getItem('ReservationData');
-  var dataRestaurant = JSON.parse(dataRestaurantJson);
+  
+  if(locationClient === null) {
+    return (<PageLoading/>)
+  }
 
   return (
     <DesktopStructure>

@@ -6,16 +6,18 @@ const Map = ({ data }) => {
     height: "40vh",
     width: "250px",
   }
+  const latitud = parseFloat(data.lat)
+  const longitud = parseFloat(data.lng)
 
   const defaultCenter = {
-    lat: 4.639432364013056, lng: -74.08183585260386
+    lat: Number(latitud), lng: Number(longitud)
   }
   
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY_GOOGLE_MAPS}>
       <GoogleMap
         mapContainerStyle={MapStyles}
-        zoom={9}
+        zoom={15}
         center={defaultCenter}
       >
         <Marker position={defaultCenter} />
