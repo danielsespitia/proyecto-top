@@ -68,6 +68,13 @@ const Message = styled.span `
   font-style: italic;
 `;
 
+const LinkRecoveryPassword = styled(Link)`
+  text-decoration: underline;
+  color: ${
+    props => props.theme.secundaryColor
+  };
+`;
+
 export function FormSignIn ({
   email, 
   password,
@@ -144,16 +151,16 @@ export function FormSignIn ({
         <hr></hr>
       </ContainerText>
       <ContainerContentLabel>
+        <LinkRecoveryPassword as= {Link} to="/password-recovery">
+          Recuperar Contraseña
+        </LinkRecoveryPassword>
+      </ContainerContentLabel>
+      <ContainerContentLabel>
         <ContainerText>Ó</ContainerText>
       </ContainerContentLabel>
       <ContainerContentLabel>
         <ButtonPrimary as= {Link} to="/sign-up">
           Crear cuenta
-        </ButtonPrimary>
-      </ContainerContentLabel>
-      <ContainerContentLabel>
-        <ButtonPrimary as= {Link} to="/password-recovery">
-          Recuperar Contraseña
         </ButtonPrimary>
       </ContainerContentLabel>
       <Message>{message}</Message>
