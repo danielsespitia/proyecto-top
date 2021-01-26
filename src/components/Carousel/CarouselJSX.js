@@ -94,7 +94,7 @@ export function CarouselJSX () {
                     {!logo ? 
                     (
                     <Logo
-                      src= "https://image.freepik.com/vector-gratis/compre-nosotros-somos-senal-abierta_52683-38092.jpg"
+                      src= "https://res.cloudinary.com/alamesa/image/upload/v1611677267/Restaurant-Logo/tqtd8kiu9jvylmx3aiph.png"
                       alt= "Logo restaurante"
                     />
                     ) : (

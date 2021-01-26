@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
-import logo from '../image/RestaurantLogo.png'
 import { 
   setBranch, 
   setDate,
@@ -185,9 +184,15 @@ function ReservationForm (){
           <RestaurantName>
             {data.nameRestaurantReservation}
           </RestaurantName>
-          <RestaurantLogo
-            src={data.restaurantLogo}
-          />
+          { !data.restaurantLogo ? (
+            <RestaurantLogo
+              src= "https://res.cloudinary.com/alamesa/image/upload/v1611677267/Restaurant-Logo/tqtd8kiu9jvylmx3aiph.png"
+            />
+          ) : (
+            <RestaurantLogo
+            src= {data.restaurantLogo}
+            />
+          )}
         </SectionHeader>
       </ContainerList>
       <ContainerList>
