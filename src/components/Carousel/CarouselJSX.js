@@ -40,7 +40,7 @@ export function CarouselJSX () {
   const { translate, activeIndex } = state
 
   const toRight = () => {
-    if ( translate >= getWidth() ) {
+    if ( activeIndex === data.restaurantList.length - 1 ) {
       return setState ({
         ...state,
         translate: 0,
