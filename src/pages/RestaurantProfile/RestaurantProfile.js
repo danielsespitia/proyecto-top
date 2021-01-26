@@ -39,7 +39,7 @@ function RestaurantProfile() {
   useEffect(() => { 
     dispatch(getProfile())
     setHiddenButton('disabled')
-  },[])
+  },[dispatch])
 
   const profile = useSelector(
     ({restaurantReducer: { 

@@ -1,7 +1,5 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import swal from 'sweetalert';
 import { ClientReservationJSX } from '../components/ClientReservation/ClientReservationJSX';
 import { getListReservation } from '../store/actions/ClientReservation.actions';
 
@@ -15,7 +13,7 @@ function ClientReservation () {
 
   useEffect(() => {
     dispatch(getListReservation())
-  }, [data.reservationData.length]);
+  }, [data.reservationData.length, dispatch]);
 
 
   return(

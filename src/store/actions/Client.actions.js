@@ -15,7 +15,6 @@ CLIENT_PHONE,
 CLIENT_IDENTIFICATION,
 CLIENT_BIRTHDAY,
 CLIENT_ID_TYPE,
-CLIENT_DATA
 } from '../reducers/Client.reducer'
 
 export function setClientId( payload ) {

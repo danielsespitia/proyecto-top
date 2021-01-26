@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ActiveReservations from '../components/ActiveReservations';
-import PendingReservations from '../components/PendingReservations';
 import { getReservationsList } from '../store/actions/RestaurantReservation.actions';
 import styled from 'styled-components';
 import DesktopStructure from '../components/styled/DesktopStructure';
@@ -45,11 +44,6 @@ const ActiveP = styled.p `
   color: #D373D0;
 `;
 
-const PendingP = styled.p `
-  font-size: 28px;
-  color: #E1B5E8;
-`;
-
 function RestaurantReservations () {
 
   const dispatch = useDispatch();
@@ -63,7 +57,7 @@ function RestaurantReservations () {
     
     useEffect(() => {
       dispatch(getReservationsList())
-    }, [data.reservationData.length]);
+    }, [data.reservationData.length, dispatch]);
 
   return (
     <DesktopStructure>
