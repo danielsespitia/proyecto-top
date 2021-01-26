@@ -29,7 +29,8 @@ import {
 import MiniSearchRestaurant from '../MiniSearchRestaurant';
 import { getListRestaurants } from '../../store/actions/Reservation.actions';
 import { setSearch } from '../../store/actions/Restaurant.actions';
-
+import { useWindowWidthAndHeight } from '../../hooks/useWindowWidthAndHeight';
+import SmallScreensNavbar from './SmallScreensNavBar';
 
 function Header() {
   const { isToken, logout, } = useContext(AuthContext);
@@ -37,7 +38,7 @@ function Header() {
   const dispatch = useDispatch();
 
   const [modalProfile, setModalProfile] = useState(false);
-  // const [search, setSearch] = useState('');
+  const [width, height] = useWindowWidthAndHeight();
 
   const handleClick = () => setModalProfile(true);
 
@@ -94,6 +95,8 @@ function Header() {
           # Alamesa
         </HeaderHomeSlogan>
       </HeaderHome>
+      { width > 1000 ? 
+      <>
       <ContainerNavActions>
         <Navigation className="navigation">
           <NavigationMenu>
@@ -159,6 +162,9 @@ function Header() {
           }) : (null)}
         </ContainerMiniSearch>
       </ContainerSearch>
+      </>
+        : <SmallScreensNavbar/>
+      }
     </ContainerHeader>
   );
 }
