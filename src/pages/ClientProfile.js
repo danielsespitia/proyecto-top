@@ -32,7 +32,7 @@ function ClientProfile () {
   useEffect(() => {
     dispatch(getClient())
     setHiddenButton('disabled')
-  },[])
+  },[dispatch])
 
   const profile = useSelector(
     ({clientReducer: {

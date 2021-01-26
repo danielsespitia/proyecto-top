@@ -12,7 +12,7 @@ function MenuRestaurant() {
 
   useEffect(() => {
     dispatch(getData())
-  }, [dishesList.length])
+  }, [dishesList.length, dispatch])
   
   if(loading) return <PageLoading/>
 

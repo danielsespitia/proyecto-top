@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import ButtonPrimary from '../components/styled/ButtonPrimary';
-import SanitaryRegister from '../pages/SanitaryRegister'
 import { AuthContext } from '../store/AuthContext'
 import { useContext } from 'react'
 

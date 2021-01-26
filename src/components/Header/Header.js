@@ -59,7 +59,7 @@ function Header() {
 
   useEffect(() => {
     dispatch(getListRestaurants())
-  }, [getListRestaurants]);
+  }, [dispatch]);
 
   const data = useSelector(
     ({reservationReducer: {

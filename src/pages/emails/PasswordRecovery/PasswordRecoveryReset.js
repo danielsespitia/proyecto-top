@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import { PasswordRecoveryResetForm } from '../../../components/emails/PasswordRecovery/PasswordRecoveryResetForm'
 import axios from 'axios'

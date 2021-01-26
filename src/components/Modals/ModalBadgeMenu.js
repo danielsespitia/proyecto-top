@@ -63,7 +63,7 @@ function ModalBadgeMenu({handleClose, index, fileRender}) {
       return()  => {
       dispatch(cleanForm())
     }
-  }, [dishId])
+  }, [dataDishExist, dishId, dispatch])
     
   const readFile = (image) => {
   const reader = new FileReader();

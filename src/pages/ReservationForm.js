@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContainerContent from '../components/styled/ContainerContent'
 import ButtonPrimary from '../components/styled/ButtonPrimary'
-import logo from '../image/RestaurantLogo.png'
 import { 
   setBranch, 
   setDate,
@@ -136,7 +135,7 @@ function ReservationForm (){
     return () => {
       dispatch(cleanDish())
     }
-  }, [])
+  }, [dispatch])
 
   const { dishesList, loading } = useSelector(
     ({ menuReducer: { dishesList, loading }}) => ({ dishesList, loading }))

@@ -19,7 +19,7 @@ function RestaurantProfileView() {
 
   useEffect(() => {
     dispatch(getProfile())
-  }, [])
+  }, [dispatch])
   
   const dataRestaurant = useSelector((
     { restaurantReducer: {
