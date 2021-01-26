@@ -184,9 +184,15 @@ function ReservationForm (){
           <RestaurantName>
             {data.nameRestaurantReservation}
           </RestaurantName>
-          <RestaurantLogo
-            src={data.restaurantLogo}
-          />
+          { !data.restaurantLogo ? (
+            <RestaurantLogo
+              src= "https://res.cloudinary.com/alamesa/image/upload/v1611677267/Restaurant-Logo/tqtd8kiu9jvylmx3aiph.png"
+            />
+          ) : (
+            <RestaurantLogo
+            src= {data.restaurantLogo}
+            />
+          )}
         </SectionHeader>
       </ContainerList>
       <ContainerList>
