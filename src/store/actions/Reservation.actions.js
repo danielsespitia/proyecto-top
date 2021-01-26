@@ -16,7 +16,8 @@ import {
   RESERVATION_TIME,
   RESERVATION_RANGE,
   RESERVATION_PEOPLE,
-  RESERVATION_AGREE
+  RESERVATION_AGREE,
+  RESTAURANT_ADDRESS
 } from '../reducers/Reservation.reducer'
 
 export function setRestaurantId( payload ) {
@@ -27,6 +28,11 @@ export function setRestaurantId( payload ) {
 export function setRestaurantName( payload ) {
   return function ( dispatch ) {
     dispatch({ type: RESTAURANT_NAME_RESERVATION, payload })
+  }
+}
+export function setAddress( payload ) {
+  return function ( dispatch ) {
+    dispatch({ type: RESTAURANT_ADDRESS, payload })
   }
 }
 export function setRestaurantLogo( payload ) {

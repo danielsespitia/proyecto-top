@@ -6,11 +6,12 @@ const Map = ({ data }) => {
     height: "40vh",
     width: "250px",
   }
+  const latitud = parseFloat(data.lat)
+  const longitud = parseFloat(data.lng)
 
   const defaultCenter = {
-    lat: data.lat, lng: data.lng
+    lat: Number(latitud), lng: Number(longitud)
   }
-  console.log(data)
   
   return (
     <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY_GOOGLE_MAPS}>

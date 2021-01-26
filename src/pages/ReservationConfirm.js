@@ -15,7 +15,7 @@ function ReservationConfirm() {
   const dispatch = useDispatch()
 
   
-  const { nameRestaurantReservation, deposit, date, time } = useSelector(
+  const { nameRestaurantReservation, deposit, date, time, address } = useSelector(
     ({reservationReducer: {
       ...state
     }}) => {
@@ -40,6 +40,7 @@ function ReservationConfirm() {
     'name': `${nameRestaurantReservation}`,
     'time': `${time}`,
     'date': `${dateNew}`,
+    'address': `${address}`
   };
 
   const jsonReservation = JSON.stringify(reservation)
