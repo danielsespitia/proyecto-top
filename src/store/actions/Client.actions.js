@@ -15,7 +15,6 @@ CLIENT_PHONE,
 CLIENT_IDENTIFICATION,
 CLIENT_BIRTHDAY,
 CLIENT_ID_TYPE,
-CLIENT_DATA
 } from '../reducers/Client.reducer'
 
 export function setClientId( payload ) {
@@ -105,7 +104,7 @@ export function updateClient( data ) {
     const token = localStorage.getItem('token')
     dispatch({ type: CLIENT_LOADING})
     try {
-      const resp = await axios({
+      await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/clients`,

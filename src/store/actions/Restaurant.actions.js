@@ -2,7 +2,6 @@ import  axios from 'axios'
 import swal from 'sweetalert'
 import {
   RESTAURANT_LOADING,
-  RESTAURANT_SUCCESS,
   RESTAURANT_FAILURE,
   RESTAURANT_FINISHED,
   RESTAURANT_NAME,

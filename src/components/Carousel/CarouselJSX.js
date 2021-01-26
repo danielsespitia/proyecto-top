@@ -37,7 +37,7 @@ export function CarouselJSX () {
     transition: `transform ease-out ${state.transition}s`,
     display: 'flex',
   }
-  const { translate, activeIndex } = state
+  const { activeIndex } = state
 
   const toRight = () => {
     if ( activeIndex === data.restaurantList.length - 1 ) {

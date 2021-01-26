@@ -24,7 +24,7 @@ function ReservationConfirm() {
     
   useEffect(() => {
     dispatch(getClient())
-  }, [])
+  }, [dispatch])
 
   const clientData = useSelector(
     ({clientReducer: {

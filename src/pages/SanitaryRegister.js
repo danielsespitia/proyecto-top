@@ -28,7 +28,7 @@ function SanitaryRegister() {
 
   useEffect(() => {
     dispatch(getData())
-  }, [getData])
+  }, [dispatch])
     
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
