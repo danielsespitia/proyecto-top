@@ -104,7 +104,7 @@ export function updateClient( data ) {
     const token = localStorage.getItem('token')
     dispatch({ type: CLIENT_LOADING})
     try {
-      const resp = await axios({
+      await axios({
         method: 'PUT',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/clients`,

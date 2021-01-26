@@ -109,7 +109,7 @@ export function getRestaurant() {
     const token = localStorage.getItem('token')
     dispatch({ type: RESERVATION_LOADING })
     try {
-      const restaurant = await axios ({
+      await axios ({
         method: 'GET',
         baseURL: process.env.REACT_APP_SERVER_URL,
         url: `/restaurant/profile`,
