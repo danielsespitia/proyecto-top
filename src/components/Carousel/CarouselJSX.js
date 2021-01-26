@@ -90,7 +90,9 @@ export function CarouselJSX () {
             >
               {!!data.restaurantList && data.restaurantList.length > 0 && data.restaurantList.map(({ _id, name, logo }) => {
                 return (
-                  <Item>
+                  <Item
+                    key = { _id }
+                  >
                     {!logo ? 
                     (
                     <Logo
