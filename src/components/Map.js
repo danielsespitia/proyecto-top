@@ -17,7 +17,7 @@ const Map = ({ data }) => {
     <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY_GOOGLE_MAPS}>
       <GoogleMap
         mapContainerStyle={MapStyles}
-        zoom={9}
+        zoom={15}
         center={defaultCenter}
       >
         <Marker position={defaultCenter} />
