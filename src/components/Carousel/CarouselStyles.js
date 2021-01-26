@@ -110,6 +110,13 @@ export const Name = styled.div`
   justify-content: center;
   font-size: 1.2rem;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  &:hover {
+    overflow: visible;
+  }
 `;
 
 export const ButtonVisit = styled.button`
