@@ -18,7 +18,6 @@ function removeItemReservation(reservationData, index) {
 export function restaurantReservationReducer (state = initialState, action) {
     switch (action.type) {
         case RESERVATION_DATA:
-            console.log(action.payload)
             return {
                 ...state,
                 reservationData: action.payload
@@ -39,7 +38,6 @@ export function restaurantReservationReducer (state = initialState, action) {
                 loading: false
             }
         case RESERVATION_DELETE:
-            console.log(state.reservationData, 'statereservdata')
             return {
                 ...state,
                 reservationData: removeItemReservation(state.reservationData, action.payload)

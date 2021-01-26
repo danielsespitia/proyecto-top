@@ -41,8 +41,8 @@ export function Response({ location }) {
   const [responseEpayco, setResponseEpayco] = useState({});
   const dataRestaurantJson = localStorage.getItem('ReservationData');
   var dataRestaurant = JSON.parse(dataRestaurantJson);
+  
   const addressString = dataRestaurant.address.replace(/[ #-]/g, "")
-  console.log(addressString)
   const locationClient = useGoogleAddress(addressString)
 
   useEffect(() => {
