@@ -20,6 +20,8 @@ import {
 } from '../store/actions/Client.actions';
 import PageLoading from '../components/PageLoading';
 import PageNotFound from '../components/PageNotFound/NotFound';
+import { CLIENT_LOADING, CLIENT_FINISHED, CLIENT_FAILURE } from '../store/reducers/Client.reducer';
+import MiniLoading from '../components/MiniLoading';
 
 function ClientProfile () {
 
@@ -140,11 +142,14 @@ function ClientProfile () {
     setFile(e.target.files[0])
   }
 
+  if(profile.loading) return <MiniLoading/>
+
   async function handleSubmitImage(e){
     e.preventDefault()
     const data = new FormData()
     data.append('image', profile.image)
     data.append('file', file)
+    dispatch({ type: CLIENT_LOADING })
     try {
       const token = localStorage.getItem('token')
       await axios({
@@ -162,6 +167,9 @@ function ClientProfile () {
 
     }catch(error) {
       swal('Tu imagen no pudo ser cargada','','error')
+      dispatch({ type: CLIENT_FAILURE, payload: error})
+    }finally {
+      dispatch({ type: CLIENT_FINISHED})
     }
   }
 
