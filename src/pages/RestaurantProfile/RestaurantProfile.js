@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { 
   RestLogo,
   BodyLeft,
-  BodyRight, LogoButton, } from './RestaurantProfileStyles'; import { useContext, useEffect, useState } from 'react';
+  BodyRight,
+  LogoButton,
+} 
+from './RestaurantProfileStyles'; import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
