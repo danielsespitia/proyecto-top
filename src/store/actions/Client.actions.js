@@ -125,7 +125,8 @@ export function updateClient( data ) {
       swal("Perfil actualizado exitosamente", "", "success");
     }catch(err) {
       swal("Tu perfil no pudo ser actualizado", "", "error");
+    }finally {
+      dispatch({ type: CLIENT_FINISHED})
     }
-
   }
 }
