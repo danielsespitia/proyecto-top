@@ -4,7 +4,8 @@ import {
   BodyLeft,
   BodyRight,
   LogoButton,
-} from './RestaurantProfileStyles';
+} 
+from './RestaurantProfileStyles';
 import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -27,6 +28,8 @@ import {
 } from '../../store/actions/Restaurant.actions';
 import PageLoading from '../../components/PageLoading';
 import PageNotFound from '../../components/PageNotFound/NotFound';
+import {RESTAURANT_FINISHED, RESTAURANT_LOADING, RESTAURANT_FAILURE } from '../../store/reducers/Restaurant.reducer';
+import MiniLoading from '../../components/MiniLoading';
   
 function RestaurantProfile() {
 
@@ -152,11 +155,14 @@ function RestaurantProfile() {
     setFile(e.target.files[0])
   }
 
+  if(profile.loading) return <MiniLoading/>
+
   async function handleSubmitLogo(e){
     e.preventDefault()
     const data = new FormData()
     data.append('logo', profile.logo)
     data.append('file', file)
+    dispatch({ type: RESTAURANT_LOADING })
     try {
       const token = localStorage.getItem('token')
       await axios({
@@ -174,6 +180,9 @@ function RestaurantProfile() {
 
     }catch(error) {
       swal('Tu imagen no pudo ser cargada','','error')
+      dispatch({ type: RESTAURANT_FAILURE, payload: error})
+    }finally {
+      dispatch({ type: RESTAURANT_FINISHED })
     }
   }
 
