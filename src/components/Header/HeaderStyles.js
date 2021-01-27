@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ContainerHeader = styled.header`
-  display: grid;
-  grid-template-columns: 20vw 60vw 20vw;
+  display: flex;
+  justify-content: inherit;
   box-shadow: 0px 0px 4px 4px #707070;
   background-color: #f8f8f8;
 `;
 
 export const HeaderHome = styled(Link)`
   display: flex;
-  width: 17vw;
   margin: 0 40px;
   align-items: center;
   justify-content: flex-start;
